@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Medical Reminder</string>
+    <string name="btnAddDose">Add Dose</string>
+    <string name="DrugPhoto">DrugPhoto</string>
+    <string name="backPhoto">Back Photo</string>
+    <string name="deletePhoto">Delete Photo</string>
+    <string name="editPhoto">Edit Photo</string>
+    <string name="txtReminder">Reminders</string>
+    <string name="btnSuspend">Suspend</string>
+    <string name="txtPrescriptionRefill">Prescription Refill</string>
+    <string name="btnRefill">Refill</string>
+    <string name="txtHowToUser">How To Use ?</string>
+    <string name="done">Done</string>
+    <string name="MedicationName">Medication Name</string>
+    <string name="Reminders_Time">Reminders Time</string>
+    <string name="Schedule">Schedule</string>
+    <string name="Strength">Strength</string>
+    <string name="Instructions">Instructions</string>
 </resources>
