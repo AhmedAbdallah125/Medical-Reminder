@@ -2,6 +2,7 @@ package com.team_three.medicalreminder.medicationdrug.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.team_three.medicalreminder.databinding.ActivityMedicationDrugDisplayBinding;
@@ -16,5 +17,9 @@ public class MedicationDrugDisplay extends AppCompatActivity {
         binding = ActivityMedicationDrugDisplayBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Objects.requireNonNull(getSupportActionBar()).hide();
+        binding.imageEdit.setOnClickListener(view->{
+            Intent intent = new Intent(this,MedicationDrugEdit.class);
+            startActivity(intent);
+        });
     }
 }
