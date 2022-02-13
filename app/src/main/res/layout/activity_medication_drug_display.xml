@@ -17,14 +17,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_90sdp"
-            android:background="@color/teal_200">
+            android:background="@color/primaryColor">
 
             <ImageView
                 android:id="@+id/imageDrug"
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginBottom="@dimen/_17sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
                 android:contentDescription="@string/DrugPhoto"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
-                android:textColor="#004D40"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toEndOf="@+id/imageDrug"
                 app:layout_constraintTop_toTopOf="@+id/imageDrug"
                 tools:text="adol" />
@@ -44,45 +44,43 @@
                 android:id="@+id/txtDrugDose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#004D40"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/imageDrug"
                 app:layout_constraintStart_toStartOf="@+id/txtDrugName"
                 tools:text="50 g" />
 
             <ImageView
                 android:id="@+id/imageBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_width="@dimen/iconWidth"
+                android:layout_height="@dimen/iconHeight"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:contentDescription="@string/backPhoto"
                 android:src="@android:drawable/ic_menu_close_clear_cancel"
                 app:layout_constraintStart_toStartOf="@+id/imageDrug"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="?attr/actionModeCloseDrawable" />
+                app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
             <ImageView
                 android:id="@+id/imageDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/iconWidth"
+                android:layout_height="@dimen/iconHeight"
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:contentDescription="@string/deletePhoto"
-                app:layout_constraintBottom_toBottomOf="@+id/imageBack"
                 app:layout_constraintEnd_toStartOf="@+id/imageEdit"
                 app:layout_constraintTop_toTopOf="@+id/imageBack"
-                app:srcCompat="@android:drawable/ic_menu_delete"
+                app:srcCompat="@drawable/ic_baseline_delete_forever_24"
                 tools:ignore="ImageContrastCheck" />
 
             <ImageView
                 android:id="@+id/imageEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/iconWidth"
+                android:layout_height="@dimen/iconHeight"
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:contentDescription="@string/editPhoto"
                 android:src="@android:drawable/ic_menu_edit"
-                app:layout_constraintBottom_toBottomOf="@+id/imageDelete"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageDelete"
-                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/ic_baseline_edit_24"
                 tools:ignore="ImageContrastCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -90,13 +88,15 @@
 
     <Button
         android:id="@+id/btnAddDose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/buttonWidth"
+        android:layout_height="@dimen/buttonHeight"
         android:layout_marginBottom="@dimen/_20sdp"
-        android:backgroundTint="@color/teal_200"
+        android:backgroundTint="@color/primaryColor"
         android:backgroundTintMode="add"
         android:text="@string/btnAddDose"
-        android:textColor="#000000"
+        android:textColor="@color/white"
+        android:textSize="@dimen/buttonFontSize"
+        app:cornerRadius="@dimen/buttonCornerRadius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -107,9 +107,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_12sdp"
-        android:backgroundTint="@color/teal_200"
+        android:backgroundTint="@color/primaryColor"
         android:text="@string/btnSuspend"
-        android:textColor="#000000"
+        android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -121,9 +121,9 @@
         android:id="@+id/btnRefill"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/teal_200"
+        android:backgroundTint="@color/primaryColor"
         android:text="@string/btnRefill"
-        android:textColor="#000000"
+        android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="@+id/btnSuspend"
@@ -150,6 +150,7 @@
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:text="@string/txtReminder"
+        android:textColor="@color/primaryText"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
@@ -160,7 +161,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:text="@string/txtPrescriptionRefill"
-        android:textColor="#000000"
+        android:textColor="@color/primaryText"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/txtReminderDoseTime"
         app:layout_constraintTop_toBottomOf="@+id/txtReminderDoseTime" />
@@ -171,7 +172,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:text="@string/txtHowToUser"
-        android:textColor="#000000"
+        android:textColor="@color/primaryText"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/txtPrescriptionRefill"
         app:layout_constraintTop_toBottomOf="@+id/txtPrescriptionRefill" />
