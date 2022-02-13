@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Medical Reminder</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="activeMeds">Active meds</string>
+    <string name="inactiveTxt">Inactive Meds</string>
+    <string name="btnAddMed">add med</string>
+    <string name="txtLeft">left</string>
 </resources>
