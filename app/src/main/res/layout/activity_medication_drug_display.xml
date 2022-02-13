@@ -28,6 +28,7 @@
                 android:contentDescription="@string/DrugPhoto"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="ImageContrastCheck"
                 tools:src="@tools:sample/avatars" />
 
             <TextView
@@ -38,6 +39,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintStart_toEndOf="@+id/imageDrug"
                 app:layout_constraintTop_toTopOf="@+id/imageDrug"
+                tools:ignore="TextContrastCheck"
                 tools:text="adol" />
 
             <TextView
@@ -47,6 +49,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/imageDrug"
                 app:layout_constraintStart_toStartOf="@+id/txtDrugName"
+                tools:ignore="TextContrastCheck"
                 tools:text="50 g" />
 
             <ImageView
@@ -58,7 +61,8 @@
                 android:src="@android:drawable/ic_menu_close_clear_cancel"
                 app:layout_constraintStart_toStartOf="@+id/imageDrug"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+                app:srcCompat="@drawable/ic_baseline_arrow_back_24"
+                tools:ignore="ImageContrastCheck" />
 
             <ImageView
                 android:id="@+id/imageDelete"
@@ -100,7 +104,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/btnSuspend"
@@ -115,7 +120,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView1"
         app:layout_constraintVertical_bias="0.5"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     <Button
         android:id="@+id/btnRefill"
@@ -129,7 +134,7 @@
         app:layout_constraintEnd_toEndOf="@+id/btnSuspend"
         app:layout_constraintTop_toTopOf="@+id/textView3"
         app:layout_constraintVertical_bias="0.5"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     <TextView
         android:id="@+id/textView1"
