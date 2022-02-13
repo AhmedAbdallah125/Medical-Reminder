@@ -43,7 +43,7 @@
                         android:layout_marginStart="@dimen/_8sdp"
                         android:layout_marginTop="@dimen/_4sdp"
                         android:text="@string/MedicationName"
-                        android:textColor="#009688"
+                        android:textColor="@color/primaryText"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -97,8 +97,7 @@
                         android:id="@+id/txtReminderPills2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_3sdp"
-                        app:layout_constraintStart_toEndOf="@+id/txtReminderDoseTime2"
+                        app:layout_constraintEnd_toEndOf="@+id/TimerSwitch"
                         app:layout_constraintTop_toTopOf="@+id/txtReminderDoseTime2"
                         tools:text="take (1) pills" />
 
@@ -119,7 +118,7 @@
                         android:layout_marginStart="@dimen/_8sdp"
                         android:layout_marginTop="@dimen/_4sdp"
                         android:text="@string/Reminders_Time"
-                        android:textColor="#009688"
+                        android:textColor="@color/primaryText"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -160,7 +159,7 @@
                         android:layout_marginStart="@dimen/_8sdp"
                         android:layout_marginTop="@dimen/_4sdp"
                         android:text="@string/Schedule"
-                        android:textColor="#009688"
+                        android:textColor="@color/primaryText"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -199,7 +198,7 @@
                         android:layout_marginStart="@dimen/_8sdp"
                         android:layout_marginTop="@dimen/_4sdp"
                         android:text="@string/Strength"
-                        android:textColor="#009688"
+                        android:textColor="@color/primaryText"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -237,7 +236,7 @@
                         android:layout_marginStart="@dimen/_8sdp"
                         android:layout_marginTop="@dimen/_4sdp"
                         android:text="@string/Instructions"
-                        android:textColor="#009688"
+                        android:textColor="@color/primaryText"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
