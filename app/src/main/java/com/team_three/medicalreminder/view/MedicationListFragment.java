@@ -1,4 +1,4 @@
-package com.team_three.medicationList.view;
+package com.team_three.medicalreminder.view;
 
 import android.os.Bundle;
 
