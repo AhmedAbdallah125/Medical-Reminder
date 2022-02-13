@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:circularflow_radiusInDP="30dp"
-    tools:context=".view.MedicationListFragment">
+    tools:context=".medicationList.view.MedicationListFragment">
 
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView3"
-        android:name="com.team_three.medicalreminder.view.AcrtiveMedsFragment"
+        android:name="com.team_three.medicalreminder.medicationList.view.AcrtiveMedsFragment"
         android:layout_width="386dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -23,7 +23,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView4"
-        android:name="com.team_three.medicalreminder.view.InactiveMedsFragment"
+        android:name="com.team_three.medicalreminder.medicationList.view.InactiveMedsFragment"
         android:layout_width="385dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
