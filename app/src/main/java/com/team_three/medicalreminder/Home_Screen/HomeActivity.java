@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding homeBinding;
-
+    Fragment selectFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +26,22 @@ public class HomeActivity extends AppCompatActivity {
         homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(homeBinding.getRoot());
         handleToolBar();
+        selectFragment = new HomeFragment();
+        getSupportFragmentManager().beginTransaction().replace(
+                R.id.HomeDyanmicFragmentContainer, selectFragment)
+                .commit();
         homeBinding.navigatorViewHome.setOnItemSelectedListener(itemSelectedListener);
 
     }
 
     private NavigationBarView.OnItemSelectedListener itemSelectedListener
             = item -> {
-        Fragment selectFragment = null;
+
         switch (item.getItemId()) {
             case R.id.nav_menu_home:
                 selectFragment = new HomeFragment();
                 break;
+
         }
         getSupportFragmentManager().beginTransaction().replace(
                 R.id.HomeDyanmicFragmentContainer, selectFragment)

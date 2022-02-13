@@ -7,16 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".Home_Screen.HomeFragment" >
 
-    <com.kizitonwose.calendarview.CalendarView
-        android:id="@+id/calendarView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragmnt_home_screen_recycle_vie"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="48dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="48dp"
-        android:contentDescription="@string/Calender"
-        app:cv_dayViewResource="@layout/calendar_day_layout"
+        android:layout_height="657dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="2dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_fab_addMedication"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,4 +31,5 @@
         android:src="@drawable/ic_baseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
