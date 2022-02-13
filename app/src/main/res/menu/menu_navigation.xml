@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_menu_home"
+        android:title="@string/Home"
+        android:icon="@drawable/ic_baseline_home_24"/>
+    <item
+        android:id="@+id/nav_menu_updates"
+        android:title="@string/Updates"
+        android:icon="@drawable/ic_baseline_update_24"/>
+    <item
+        android:id="@+id/nav_menu_medication"
+        android:title="@string/Medications"
+        android:icon="@drawable/ic_baseline_vpn_key_24"/>
+    <item
+        android:id="@+id/nav_menu_more"
+        android:title="@string/more"
+        android:icon="@drawable/ic_baseline_more_horiz_24"/>
+    />
+</menu>
