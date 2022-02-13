@@ -1,17 +1,14 @@
-package com.team_three.medicalreminder.Home_Screen;
+package com.team_three.medicalreminder.Home_Screen.view;
 
 
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.ActivityHomeBinding;
-import com.team_three.medicalreminder.databinding.FragmentHomeBinding;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 

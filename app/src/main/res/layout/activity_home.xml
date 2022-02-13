@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_centerVertical="true"
     android:textAlignment="textEnd"
-    tools:context=".Home_Screen.HomeActivity">
+    tools:context=".Home_Screen.view.HomeActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

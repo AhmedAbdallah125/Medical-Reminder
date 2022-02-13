@@ -1,4 +1,4 @@
-package com.team_three.medicalreminder.Home_Screen;
+package com.team_three.medicalreminder.Home_Screen.view;
 
 import android.os.Bundle;
 

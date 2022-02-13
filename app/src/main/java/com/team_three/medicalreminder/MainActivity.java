@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.team_three.medicalreminder.Home_Screen.HomeActivity;
+import com.team_three.medicalreminder.Home_Screen.view.HomeActivity;
 import com.team_three.medicalreminder.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

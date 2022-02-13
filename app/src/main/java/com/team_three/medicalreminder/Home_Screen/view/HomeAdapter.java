@@ -1,14 +1,11 @@
-package com.team_three.medicalreminder.Home_Screen;
+package com.team_three.medicalreminder.Home_Screen.view;
 
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.team_three.medicalreminder.Home_Screen.model.MedicineDetails;
-import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.HomeScreenRecycleViewLayoutBinding;
 
 import java.util.List;

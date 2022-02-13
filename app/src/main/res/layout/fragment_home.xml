@@ -5,7 +5,7 @@
     android:id="@+id/fragment_home_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home_Screen.HomeFragment" >
+    tools:context=".Home_Screen.view.HomeFragment" >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragmnt_home_screen_recycle_vie"
