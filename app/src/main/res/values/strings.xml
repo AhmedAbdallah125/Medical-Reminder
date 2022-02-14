@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Medical Reminder</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="activeMeds">Active meds</string>
     <string name="inactiveTxt">Inactive Meds</string>
     <string name="btnAddMed">add med</string>
@@ -28,8 +26,45 @@
     <string name="Updates">Updates</string>
     <string name="Medications">Medications</string>
     <string name="more">More</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="FAB_add">add_new_medication</string>
     <string name="Calender">Calender</string>
+    <string name="Date_Format">dd/mm/yyyy</string>
+    <string name="end_date">End Date</string>
+    <string name="start_date">Start Date</string>
+    <string name="medication_type">Medication Type</string>
+    <string name="pills_left">Pills Left</string>
+    <string name="reminder_daily">Reminder Daily</string>
+    <string name="reminder_fill">Reminder Fill</string>
+    <string name="how_often_do_you_take_it">How often do you take it?</string>
+    <string name="btnAdd">Add</string>
+    <string name="no_of_pills">Pills per time</string>
+    <string name="btnChooseTime">Choose Time</string>
+    <string-array name="Medication_Type">
+        <item>Pill</item>
+        <item>Solution</item>
+        <item>Injection</item>
+        <item>Powder</item>
+        <item>Drops</item>
+        <item>Inhaler</item>
+    </string-array>
+    <string-array name="Medication_Strength">
+        <item>g</item>
+        <item>IU</item>
+        <item>mcg</item>
+        <item>m</item>
+    </string-array>
+    <string-array name="Medication_Instructions">
+        <item>Before Eating</item>
+        <item>While Eating</item>
+        <item>After Eating</item>
+        <item>Doesn't Matter</item>
+    </string-array>
+    <string-array name="Medication_No_Of_Times">
+        <item>Once daily</item>
+        <item>Twice daily</item>
+        <item>3 times a day</item>
+        <item>4 times a day</item>
+        <item>Only as needed</item>
+    </string-array>
 </resources>
