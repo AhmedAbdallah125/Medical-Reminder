@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Medical Reminder</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="activeMeds">Active meds</string>
     <string name="inactiveTxt">Inactive Meds</string>
     <string name="btnAddMed">add med</string>
@@ -28,8 +26,23 @@
     <string name="Updates">Updates</string>
     <string name="Medications">Medications</string>
     <string name="more">More</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="FAB_add">add_new_medication</string>
     <string name="Calender">Calender</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="login">Log in</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgt_password">Forget Your password</string>
+    <string name="previsous_logged_with_Google">Previously Logged in with Google+?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="txt_sign_up_details" >Register to securely back up your data on your server</string>
 </resources>

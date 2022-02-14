@@ -17,7 +17,7 @@ private ActivityMainBinding mainBinding;
         setContentView(mainBinding.getRoot());
 
         mainBinding.button.setOnClickListener(v->{
-            Intent intent =new Intent(this, HomeActivity.class);
+            Intent intent =new Intent(this, LoginActivity.class);
             startActivity(intent);
         });
     }
