@@ -56,6 +56,7 @@ public class HomeActivity extends AppCompatActivity {
     private NavigationBarView.OnItemSelectedListener itemSelectedListener
             = item -> {
 
+
         switch (item.getItemId()) {
             case R.id.nav_menu_home:
                 selectFragment = new HomeFragment();

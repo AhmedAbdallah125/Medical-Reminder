@@ -9,23 +9,28 @@
         <entry key="..\:/ITI/androidProject/app/src/main/res/layout/fragment_medication_list.xml" value="0.2" />
         <entry key="..\:/ITI/androidProject/app/src/main/res/layout/inactive_meds_row.xml" value="0.33" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.1" />
+        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.1835" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.2115" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/drawable/ic_baseline_more_horiz_24.xml" value="0.2115" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/drawable/ic_baseline_sports_handball_24.xml" value="0.1" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/activity_home.xml" value="0.14" />
-        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/activty_sign_up.xml" value="0.18568840579710144" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/app_bar_home.xml" value="0.16304347826086957" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/calendar_day_layout.xml" value="0.1" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/content_home.xml" value="0.16304347826086957" />
+        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/fragment_add_medication.xml" value="0.1" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/fragment_gallery.xml" value="0.16304347826086957" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/fragment_home.xml" value="0.16304347826086957" />
+        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/fragment_recycle.xml" value="0.20416666666666666" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/fragment_slideshow.xml" value="0.16304347826086957" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/home_drawer.xml" value="0.1" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/home_screen_recycle_view_layout.xml" value="0.25" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/home_tool_bar_action.xml" value="0.1" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/nav_header_home.xml" value="0.16304347826086957" />
+        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/section_recycle_view.xml" value="0.20416666666666666" />
+        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/txt_section_recycle_header.xml" value="0.20416666666666666" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/menu/activity_main_drawer.xml" value="0.19947916666666668" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/menu/bottom_nav_menu.xml" value="0.19947916666666668" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/menu/home.xml" value="0.19947916666666668" />

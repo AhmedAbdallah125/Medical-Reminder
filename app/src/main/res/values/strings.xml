@@ -86,7 +86,6 @@
     <string name="forgt_password">Forget Your password</string>
     <string name="previsous_logged_with_Google">Previously Logged in with Google+?</string>
     <string name="sign_up">Sign Up</string>
-    <string name="txt_sign_up_details" >Register to securely back up your data on your server</string>
     <string name="edit_medication">Edit Medication</string>
     <string name="txt_sign_up_details">Register to securely back up your data on your server</string>
 </resources>

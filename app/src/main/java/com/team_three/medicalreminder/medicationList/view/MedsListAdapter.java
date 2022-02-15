@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.team_three.medicalreminder.Home_Screen.model.MedicineDetails;
 import com.team_three.medicalreminder.databinding.ActiveMedsRowBinding;
 import com.team_three.medicalreminder.medicationList.model.MedicinesActive;
 
