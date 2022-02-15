@@ -12,6 +12,7 @@ import com.team_three.medicalreminder.databinding.ActivityHomeBinding;
 import com.team_three.medicalreminder.databinding.FragmentHomeBinding;
 import com.team_three.medicalreminder.medicationList.view.MedicationListFragment;
 import com.team_three.medicalreminder.taker.view.AddTaker;
+import com.team_three.medicalreminder.taker.view.TakerList;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
                 selectFragment = new MedicationListFragment();
                 break;
             case R.id.nav_menu_updates:
-                selectFragment = new AddTaker();
+                selectFragment = new TakerList();
 
         }
         getSupportFragmentManager().beginTransaction().replace(
