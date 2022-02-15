@@ -1,25 +1,17 @@
-package com.team_three.medicalreminder.Home_Screen.view;
+package com.team_three.medicalreminder.homeScreen.view;
 
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.ActivityHomeBinding;
-import com.team_three.medicalreminder.databinding.HomeDrawerBinding;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.helper.widget.Layer;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 
@@ -90,9 +82,6 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
-
-
-
 }
 
 

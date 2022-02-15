@@ -4,15 +4,21 @@ pluginManagement {
         google()
         mavenCentral()
     }
+    repositories {
+        jcenter()
+
+    }
 }
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
-        jcenter()
-        maven { url "https://jitpack.io" }
         mavenCentral()
+    }
+    repositories {
+        jcenter()
+
     }
 }
 rootProject.name = "Medical Reminder"

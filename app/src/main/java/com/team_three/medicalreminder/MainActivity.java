@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.team_three.medicalreminder.Home_Screen.view.HomeActivity;
 import com.team_three.medicalreminder.databinding.ActivityMainBinding;
+import com.team_three.medicalreminder.homeScreen.view.HomeActivity;
 
 public class MainActivity extends AppCompatActivity {
 private ActivityMainBinding mainBinding;
@@ -17,7 +17,7 @@ private ActivityMainBinding mainBinding;
         setContentView(mainBinding.getRoot());
 
         mainBinding.button.setOnClickListener(v->{
-            Intent intent =new Intent(this, LoginActivity.class);
+            Intent intent =new Intent(this, HomeActivity.class);
             startActivity(intent);
         });
     }

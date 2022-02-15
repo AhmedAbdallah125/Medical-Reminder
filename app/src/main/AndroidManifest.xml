@@ -19,7 +19,7 @@
             android:name=".medicationdrug.view.MedicationDrugDisplay"
             android:exported="false" />
         <activity
-            android:name=".Home_Screen.view.HomeActivity"
+            android:name=".homeScreen.view.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
