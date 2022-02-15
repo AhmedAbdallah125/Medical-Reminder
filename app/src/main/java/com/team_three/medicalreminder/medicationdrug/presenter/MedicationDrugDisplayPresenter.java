@@ -1,0 +1,4 @@
+package com.team_three.medicalreminder.medicationdrug.presenter;
+
+public class MedicationDrugDisplayPresenter implements MedicationDrugDisplayPresenterInterface{
+}
