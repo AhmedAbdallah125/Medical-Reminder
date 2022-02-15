@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.team_three.medicalreminder.Home_Screen.HomeFragment;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.FragmentAcrtiveMedsBinding;
 import com.team_three.medicalreminder.medicationList.model.MedicinesActive;

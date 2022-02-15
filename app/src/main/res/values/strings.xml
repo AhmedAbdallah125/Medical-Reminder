@@ -32,7 +32,6 @@
     <string name="btnAddTaker">add taker</string>
     <string name="txtTitleOfAddTaker">Add Taker</string>
     <string name="name">name</string>
-    <string name="email">email</string>
     <string name="todo">TODO</string>
     <string name="Date_Format">dd/mm/yyyy</string>
     <string name="end_date">End Date</string>
@@ -45,7 +44,7 @@
     <string name="btnAdd">Add</string>
     <string name="no_of_pills">Pills per time</string>
     <string name="btnChooseTime">Choose Time</string>
-    <string-array name="Medication_Type">
+    <!--<string-array name="Medication_Type">
         <item>Pill</item>
         <item>Solution</item>
         <item>Injection</item>
@@ -71,7 +70,7 @@
         <item>3 times a day</item>
         <item>4 times a day</item>
         <item>Only as needed</item>
-    </string-array>
+    </string-array>-->
     <string name="title_activity_login">LoginActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -88,4 +87,5 @@
     <string name="previsous_logged_with_Google">Previously Logged in with Google+?</string>
     <string name="sign_up">Sign Up</string>
     <string name="txt_sign_up_details" >Register to securely back up your data on your server</string>
+    <string name="edit_medication">Edit Medication</string>
 </resources>

@@ -16,7 +16,6 @@ public class MedicationDrugDisplay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMedicationDrugDisplayBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Objects.requireNonNull(getSupportActionBar()).hide();
         binding.imageEdit.setOnClickListener(view->{
             Intent intent = new Intent(this,MedicationDrugEdit.class);
             intent.putExtra("name",binding.txtDrugName.getText());
