@@ -1,4 +1,4 @@
-package com.team_three.medicalreminder.Home_Screen.model;
+package com.team_three.medicalreminder.homeScreen.model;
 
 public class MedicineDetails {
     private String time;

@@ -1,11 +1,11 @@
-package com.team_three.medicalreminder.Home_Screen.view;
+package com.team_three.medicalreminder.homeScreen.view;
 
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.team_three.medicalreminder.Home_Screen.model.MedicineDetails;
+import com.team_three.medicalreminder.homeScreen.model.MedicineDetails;
 import com.team_three.medicalreminder.databinding.HomeScreenRecycleViewLayoutBinding;
 
 import java.util.List;
@@ -17,10 +17,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     final private Context _context;
     private List<MedicineDetails> medicines;
 
+
     public HomeAdapter(Context context, List<MedicineDetails> medicines) {
         Log.i("TAG", "HomeAdapter: ");
         _context = context;
         this.medicines = medicines;
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

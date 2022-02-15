@@ -5,19 +5,37 @@
     android:id="@+id/fragment_home_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home_Screen.view.HomeFragment" >
+    tools:context=".homeScreen.view.HomeFragment" >
+
+    <devs.mulham.horizontalcalendar.HorizontalCalendarView
+        app:layout_constraintVertical_weight="1"
+        android:id="@+id/calendarView"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="0dp"
+
+        android:layout_marginBottom="1dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="#FFFF"
+        app:layout_constraintBottom_toTopOf="@+id/fragmnt_home_screen_recycle_vie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:textColorSelected="#03A9F4" />
 
     <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintVertical_weight="3"
         android:id="@+id/fragmnt_home_screen_recycle_vie"
         android:layout_width="match_parent"
-        android:layout_height="657dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="2dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_fab_addMedication"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_fab_addMedication"
