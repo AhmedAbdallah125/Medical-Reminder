@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imgActiveMed"
             android:layout_width="46dp"
             android:layout_height="34dp"
             android:layout_marginStart="4dp"
@@ -20,12 +21,12 @@
             app:srcCompat="@drawable/ic_launcher_foreground" />
 
         <TextView
-            android:id="@+id/TxtActiveMedName"
+            android:id="@+id/txtActiveMedName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/imgActiveMed"
+            app:layout_constraintTop_toTopOf="@+id/imgActiveMed"
             tools:text="Panadol" />
 
         <TextView
@@ -34,8 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:textSize="12dp"
-            app:layout_constraintStart_toEndOf="@+id/TxtActiveMedName"
-            app:layout_constraintTop_toTopOf="@+id/TxtActiveMedName"
+            app:layout_constraintStart_toEndOf="@+id/txtActiveMedName"
+            app:layout_constraintTop_toTopOf="@+id/txtActiveMedName"
             tools:text="1000" />
 
         <TextView
@@ -54,8 +55,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textSize="12dp"
-            app:layout_constraintStart_toStartOf="@+id/TxtActiveMedName"
-            app:layout_constraintTop_toBottomOf="@+id/TxtActiveMedName"
+            app:layout_constraintStart_toStartOf="@+id/txtActiveMedName"
+            app:layout_constraintTop_toBottomOf="@+id/txtActiveMedName"
             tools:text="4" />
 
         <TextView

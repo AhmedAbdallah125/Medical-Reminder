@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imgInactive"
             android:layout_width="44dp"
             android:layout_height="36dp"
             android:layout_marginStart="4dp"
@@ -25,12 +26,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/imgInactive"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="dawaya" />
 
         <TextView
-            android:id="@+id/txtInactiveStrengthMuberOfTheMed"
+            android:id="@+id/txtInactiveStrengthNumberOfTheMed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -43,8 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            app:layout_constraintStart_toEndOf="@+id/txtInactiveStrengthMuberOfTheMed"
-            app:layout_constraintTop_toTopOf="@+id/txtInactiveStrengthMuberOfTheMed"
+            app:layout_constraintStart_toEndOf="@+id/txtInactiveStrengthNumberOfTheMed"
+            app:layout_constraintTop_toTopOf="@+id/txtInactiveStrengthNumberOfTheMed"
             tools:text="g" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
