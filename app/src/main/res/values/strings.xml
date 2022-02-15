@@ -44,6 +44,7 @@
     <string name="btnAdd">Add</string>
     <string name="no_of_pills">Pills per time</string>
     <string name="btnChooseTime">Choose Time</string>
+
     <!--<string-array name="Medication_Type">
         <item>Pill</item>
         <item>Solution</item>
