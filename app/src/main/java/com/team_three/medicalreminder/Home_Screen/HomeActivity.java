@@ -45,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
                 break;
             case R.id.nav_menu_medication:
                 selectFragment = new MedicationListFragment();
+                break;
             case R.id.nav_menu_updates:
                 selectFragment = new AddTaker();
 

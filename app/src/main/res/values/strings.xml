@@ -33,6 +33,6 @@
     <string name="btnAddTaker">add taker</string>
     <string name="txtTitleOfAddTaker">Add Taker</string>
     <string name="name">name</string>
-    <string name="email">email</string>
+
     <string name="todo">TODO</string>
 </resources>

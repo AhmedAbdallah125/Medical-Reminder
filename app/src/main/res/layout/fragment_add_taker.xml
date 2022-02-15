@@ -55,7 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:hint="@string/email"
+                android:hint="email"
                 app:endIconMode="clear_text"
                 app:helperText="required*"
                 app:helperTextTextColor="#ff0000"
