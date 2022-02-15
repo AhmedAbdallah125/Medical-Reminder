@@ -1,4 +1,4 @@
-package com.team_three.medicationList.view;
+package com.team_three.medicalreminder.taker.view;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.team_three.medicalreminder.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link InactiveMedsFragment#newInstance} factory method to
+ * Use the {@link AddTaker#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class InactiveMedsFragment extends Fragment {
+public class AddTaker extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class InactiveMedsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public InactiveMedsFragment() {
+    public AddTaker() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class InactiveMedsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment InactiveMedsFragment.
+     * @return A new instance of fragment AddTaker.
      */
     // TODO: Rename and change types and number of parameters
-    public static InactiveMedsFragment newInstance(String param1, String param2) {
-        InactiveMedsFragment fragment = new InactiveMedsFragment();
+    public static AddTaker newInstance(String param1, String param2) {
+        AddTaker fragment = new AddTaker();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class InactiveMedsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inactive_meds, container, false);
+        return inflater.inflate(R.layout.fragment_add_taker, container, false);
     }
 }

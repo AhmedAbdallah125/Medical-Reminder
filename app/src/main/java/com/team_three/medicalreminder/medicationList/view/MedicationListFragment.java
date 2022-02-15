@@ -1,4 +1,4 @@
-package com.team_three.medicationList.view;
+package com.team_three.medicalreminder.medicationList.view;
 
 import android.os.Bundle;
 
@@ -11,14 +11,11 @@ import android.view.ViewGroup;
 import com.team_three.medicalreminder.R;
 
 
-public class AcrtiveMedsFragment extends Fragment {
+public class MedicationListFragment extends Fragment {
 
-
-    public AcrtiveMedsFragment() {
+    public MedicationListFragment() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +27,6 @@ public class AcrtiveMedsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_acrtive_meds, container, false);
+        return inflater.inflate(R.layout.fragment_medication_list, container, false);
     }
 }
