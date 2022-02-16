@@ -16,13 +16,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.homeScreen.model.MedicineDetails;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.FragmentHomeBinding;
+import com.team_three.medicalreminder.model.MedicationPOJO;
+import com.team_three.medicalreminder.model.Repository;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class HomeFragment extends Fragment {
@@ -48,6 +54,23 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.i("TAG", "onCreateView:Fragment ");
+
+        //
+        Repository mRepository=Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(getContext()),getContext());
+       MedicationPOJO medicationPOJO=new MedicationPOJO();
+        medicationPOJO.setEndDate("88");
+        medicationPOJO.setActive(true);
+        List<Boolean> l = new ArrayList<>();
+        l.add(true);
+        medicationPOJO.setIsTakenList(l);
+        Map<String,Integer> m = new HashMap<>();
+        m.put("8:00 AM" , 3);
+        medicationPOJO.setTimeAndDose(m);
+        medicationPOJO.setStartDate("22/2/99");
+        medicationPOJO.setEndDate("27/2/99");
+        medicationPOJO.setMedicationName("ahmed");
+        mRepository.insertMedication(medicationPOJO);
+        //
 
         ArrayList<MedicineDetails> medicineDetails = new ArrayList<>();
         medicineDetails.add(new MedicineDetails("8:00 am", R.drawable.ic_baseline_add_24,
@@ -80,7 +103,6 @@ public class HomeFragment extends Fragment {
                 Log.e("TAG", "onDateSelected: "+date);
 
             }
-
 
 
             @Override

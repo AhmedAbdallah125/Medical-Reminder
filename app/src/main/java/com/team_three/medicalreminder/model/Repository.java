@@ -11,7 +11,6 @@ import java.util.List;
 
 public class Repository implements RepositoryInterface{
     private Context context;
-    private DAO movieDAO;
     LocalSourceInterface localSourceInterface;
     private static Repository repo= null;
     private Repository(LocalSourceInterface localSourceInterface,Context context){

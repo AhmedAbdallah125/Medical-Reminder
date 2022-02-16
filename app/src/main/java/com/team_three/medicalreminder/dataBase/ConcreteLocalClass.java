@@ -8,9 +8,9 @@ import com.team_three.medicalreminder.model.MedicationPOJO;
 
 import java.util.List;
 
-public class ConcreteLocalClass implements LocalSourceInterface{
+public class ConcreteLocalClass implements LocalSourceInterface {
 
-    private final DAO dao = null;
+    private final DAO dao;
     private final LiveData<List<MedicationPOJO>> storedMedications;
     private static ConcreteLocalClass concreteLocalClass = null;
 
@@ -18,7 +18,9 @@ public class ConcreteLocalClass implements LocalSourceInterface{
         /*MovieDataBase movieDataBase = MovieDataBase.getMovieDataBaseInstance(context.getApplicationContext());
         movieDao = movieDataBase.getMovieDao();
         storedMedications = movieDao.getAllMovies();*/
-        storedMedications=dao.getAllMedication();
+        ApplicationDataBase applicationDatabase = ApplicationDataBase.getInstance(context);
+        dao = applicationDatabase.getDao();
+        storedMedications = dao.getAllMedication();
     }
 
     public static ConcreteLocalClass getConcreteLocalClassInstance(Context context) {

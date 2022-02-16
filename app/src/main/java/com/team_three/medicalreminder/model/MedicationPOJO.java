@@ -2,17 +2,28 @@ package com.team_three.medicalreminder.model;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 //import java.sql.Timestamp;  Timestamp
-
 @Entity(tableName = "medications")
 public class MedicationPOJO {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
+
+    public void setTimeAndDose(Map<String, Integer> timeAndDose) {
+        this.timeAndDose = timeAndDose;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @NotNull
     private String medicationName;
     private int strength;
@@ -24,14 +35,26 @@ public class MedicationPOJO {
     @NotNull
     private String endDate;
     private String takeTimePerDay;//how often do you take
-    private HashMap<String, Integer> timeAndDose;
+    private Map<String, Integer> timeAndDose;
     private String instruction;
     private boolean fillReminder;
     private boolean dailyReminder;
     private int leftNumber;
     private int leftNumberReminder;
     private boolean isActive;
-    private boolean isTaken;
+    private List<Boolean> isTakenList;
+
+    public int getId() {
+        return id;
+    }
+
+    public List<Boolean> getIsTakenList() {
+        return isTakenList;
+    }
+
+    public void setIsTakenList(List<Boolean> isTakenList) {
+        this.isTakenList = isTakenList;
+    }
 
     @NotNull
     public String getMedicationName() {
@@ -100,13 +123,11 @@ public class MedicationPOJO {
         this.takeTimePerDay = takeTimePerDay;
     }
 
-    public HashMap<String, Integer> getTimeAndDose() {
+    public Map<String, Integer> getTimeAndDose() {
         return timeAndDose;
     }
 
-    public void setTimeAndDose(HashMap<String, Integer> timeAndDose) {
-        this.timeAndDose = timeAndDose;
-    }
+
 
     public String getInstruction() {
         return instruction;
@@ -154,13 +175,7 @@ public class MedicationPOJO {
 
     public void setActive(boolean active) {
         isActive = active;
+
     }
 
-    public boolean isTaken() {
-        return isTaken;
-    }
-
-    public void setTaken(boolean taken) {
-        isTaken = taken;
-    }
 }
