@@ -56,20 +56,20 @@ public class HomeFragment extends Fragment {
         Log.i("TAG", "onCreateView:Fragment ");
 
         //
-        Repository mRepository=Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(getContext()),getContext());
-       MedicationPOJO medicationPOJO=new MedicationPOJO();
-        medicationPOJO.setEndDate("88");
-        medicationPOJO.setActive(true);
-        List<Boolean> l = new ArrayList<>();
-        l.add(true);
-        medicationPOJO.setIsTakenList(l);
-        Map<String,Integer> m = new HashMap<>();
-        m.put("8:00 AM" , 3);
-        medicationPOJO.setTimeAndDose(m);
-        medicationPOJO.setStartDate("22/2/99");
-        medicationPOJO.setEndDate("27/2/99");
-        medicationPOJO.setMedicationName("ahmed");
-        mRepository.insertMedication(medicationPOJO);
+//        Repository mRepository=Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(getContext()),getContext());
+//       MedicationPOJO medicationPOJO=new MedicationPOJO();
+//        medicationPOJO.setEndDate("88");
+//        medicationPOJO.setActive(true);
+//        List<Boolean> l = new ArrayList<>();
+//        l.add(true);
+//        medicationPOJO.setIsTakenList(l);
+//        Map<String,Integer> m = new HashMap<>();
+//        m.put("8:00 AM" , 3);
+//        medicationPOJO.setTimeAndDose(m);
+//        medicationPOJO.setStartDate("22/2/99");
+//        medicationPOJO.setEndDate("27/2/99");
+//        medicationPOJO.setMedicationName("ahmed");
+//        mRepository.insertMedication(medicationPOJO);
         //
 
         ArrayList<MedicineDetails> medicineDetails = new ArrayList<>();
