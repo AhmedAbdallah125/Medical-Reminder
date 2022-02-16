@@ -6,7 +6,7 @@ import com.team_three.medicalreminder.model.MedicationPOJO;
 
 import java.util.List;
 
-public interface LocalSource {
+public interface LocalSourceInterface {
     LiveData<List<MedicationPOJO>> getAllMedication();
 
     void insertMedication(MedicationPOJO medication);
