@@ -24,7 +24,11 @@
         android:id="@+id/fragment_medication_list"
         android:name="com.team_three.medicalreminder.medicationList.view.MedicationListFragment"
         android:label="fragment_medication_list"
-        tools:layout="@layout/fragment_medication_list" />
+        tools:layout="@layout/fragment_medication_list" >
+        <action
+            android:id="@+id/action_fragment_medication_list_to_fragment_add_Medication"
+            app:destination="@id/fragment_add_Medication" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_add_Medication"
         android:name="com.team_three.medicalreminder.addmedication.view.AddMedication"

@@ -15,6 +15,7 @@ import com.team_three.medicalreminder.databinding.FragmentMedicationListBinding;
 
 public class MedicationListFragment extends Fragment {
     private FragmentMedicationListBinding binding;
+
     public MedicationListFragment() {
         // Required empty public constructor
     }
@@ -30,7 +31,7 @@ public class MedicationListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentMedicationListBinding.inflate(inflater, container, false);
-        binding.btnAddMed.setOnClickListener(v->{
+        binding.btnAddMed.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_fragment_medication_list_to_fragment_add_Medication);
         });
         return binding.getRoot();

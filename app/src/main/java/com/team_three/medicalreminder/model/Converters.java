@@ -35,16 +35,16 @@ public class Converters {
     }
     // for hash map
     @TypeConverter
-    public String fromHashMapToString(Map<String, Integer> timeAndDose) {
+    public String fromHashMapToString(Map<Long, Integer> timeAndDose) {
         return gson.toJson(timeAndDose);
     }
 
     @TypeConverter
-    public Map<String, Integer> fromStringToHashMap(String timeAndDoseString) {
+    public Map<Long, Integer> fromStringToHashMap(String timeAndDoseString) {
         if (timeAndDoseString == null) {
-            return  Collections.<String, Integer>emptyMap();
+            return  Collections.<Long, Integer>emptyMap();
         } else {
-            Type list = new TypeToken<Map<String, Integer>>() {
+            Type list = new TypeToken<Map<Long, Integer>>() {
             }.getType();
             return gson.fromJson(timeAndDoseString, list);
         }
