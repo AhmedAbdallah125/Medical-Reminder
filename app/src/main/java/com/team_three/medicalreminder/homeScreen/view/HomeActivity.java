@@ -4,75 +4,86 @@ package com.team_three.medicalreminder.homeScreen.view;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toolbar;
 ;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.ActivityHomeBinding;
 import com.team_three.medicalreminder.medicationList.view.MedicationListFragment;
-import com.team_three.medicalreminder.taker.view.AddTaker;
 import com.team_three.medicalreminder.taker.view.TakerList;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 
 public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding homeBinding;
     Fragment selectFragment = null;
+    NavController navController;
+    NavHostFragment navHostFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(homeBinding.getRoot());
         handleToolBar();
+        initNavigation();
 
-        selectFragment = new HomeFragment();
-        getSupportFragmentManager().beginTransaction().replace(
-                R.id.HomeDyanmicFragmentContainer, selectFragment)
-                .commit();
-        homeBinding.navigatorViewHome.setOnItemSelectedListener(itemSelectedListener);
 
+        //
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
+                if (navDestination.getId() == R.id.fragment_add_Medication) {
+                    homeBinding.toolbar.setVisibility(View.GONE);
+                    homeBinding.navigatorViewHome.setVisibility(View.GONE);
+                } else {
+                    homeBinding.toolbar.setVisibility(View.VISIBLE);
+                    homeBinding.navigatorViewHome.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
 
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        navController.navigateUp();
+        return super.onSupportNavigateUp();
+    }
+
     @Override
     public void onBackPressed() {
-        if(homeBinding.homeActivityDrawer.isOpen()){
+        if (homeBinding.homeActivityDrawer.isOpen()) {
             homeBinding.homeActivityDrawer.close();
-        }else{
+        } else {
             finish();
         }
     }
 
+    private void initNavigation() {
+        navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fragmentContainerView);
 
-    private NavigationBarView.OnItemSelectedListener itemSelectedListener
-            = item -> {
+        navController =
+                navHostFragment.getNavController();
 
-
-        switch (item.getItemId()) {
-            case R.id.nav_menu_home:
-                selectFragment = new HomeFragment();
-                break;
-            case R.id.nav_menu_medication:
-                selectFragment = new MedicationListFragment();
-                break;
-            case R.id.nav_menu_updates:
-                selectFragment = new TakerList();
-
-                break;
-
-        }
-        getSupportFragmentManager().beginTransaction().replace(
-                R.id.HomeDyanmicFragmentContainer, selectFragment)
-                .commit();
-        return true;
-
-    };
-
+        NavigationUI.setupWithNavController(homeBinding.navigatorViewHome,
+                navController);
+    }
 
 
     private void handleToolBar() {
@@ -84,17 +95,16 @@ public class HomeActivity extends AppCompatActivity {
                 homeBinding.homeActivityDrawer.openDrawer(GravityCompat.START);
 
                 homeBinding.navigatorViewHome.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-                            @Override
-                            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                                return false;
-                            }
-                        });
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        return false;
+                    }
+                });
 
             }
         });
 
     }
-
 
 
 }

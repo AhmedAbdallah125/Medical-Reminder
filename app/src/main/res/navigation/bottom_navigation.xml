@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@id/fragment_home">
+
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.team_three.medicalreminder.homeScreen.view.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_fragment_home_to_addMedication"
+            app:destination="@id/fragment_add_Medication" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_medication_list"
+        android:name="com.team_three.medicalreminder.medicationList.view.MedicationListFragment"
+        android:label="fragment_medication_list"
+        tools:layout="@layout/fragment_medication_list" />
+    <fragment
+        android:id="@+id/fragment_add_Medication"
+        android:name="com.team_three.medicalreminder.addmedication.view.AddMedication"
+        android:label="fragment_add_medication"
+        tools:layout="@layout/fragment_add_medication" >
+        <action
+            android:id="@+id/action_fragment_add_Medication_to_fragment_home"
+            app:destination="@id/fragment_home" />
+    </fragment>
+</navigation>
