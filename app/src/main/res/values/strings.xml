@@ -45,7 +45,7 @@
     <string name="no_of_pills">Pills per time</string>
     <string name="btnChooseTime">Choose Time</string>
 
-    <!--<string-array name="Medication_Type">
+    <string-array name="Medication_Type">
         <item>Pill</item>
         <item>Solution</item>
         <item>Injection</item>
@@ -63,7 +63,7 @@
         <item>Before Eating</item>
         <item>While Eating</item>
         <item>After Eating</item>
-        <item>Doesn't Matter</item>
+        <item>Does not Matter</item>
     </string-array>
     <string-array name="Medication_No_Of_Times">
         <item>Once daily</item>
@@ -71,7 +71,7 @@
         <item>3 times a day</item>
         <item>4 times a day</item>
         <item>Only as needed</item>
-    </string-array>-->
+    </string-array>
     <string name="title_activity_login">LoginActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".medicationdrug.view.MedicationDrugDisplay">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".medicationdrug.view.DisplayMedicationDrug">
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
@@ -221,5 +220,4 @@
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:text="After Dinner" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
