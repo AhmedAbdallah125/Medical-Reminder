@@ -13,12 +13,6 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".medicationdrug.view.MedicationDrugEdit"
-            android:exported="false" />
-        <activity
-            android:name=".medicationdrug.view.MedicationDrugDisplay"
-            android:exported="false" />
-        <activity
             android:name=".homeScreen.view.HomeActivity"
             android:exported="false" />
         <activity

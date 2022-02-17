@@ -63,6 +63,7 @@
             android:layout_weight="2"
             android:minHeight="48dp"
             android:spinnerMode="dropdown"
+            android:entries="@array/Medication_Type"
             tools:ignore="SpeakableTextPresentCheck" />
 
     </LinearLayout>
@@ -105,6 +106,7 @@
             android:layout_weight="1"
             android:minHeight="48dp"
             android:spinnerMode="dropdown"
+            android:entries="@array/Medication_Strength"
             tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
 
@@ -217,6 +219,7 @@
             android:layout_weight="2"
             android:minHeight="48dp"
             android:spinnerMode="dropdown"
+            android:entries="@array/Medication_Instructions"
             tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
 
@@ -288,6 +291,7 @@
             android:layout_weight="2"
             android:minHeight="48dp"
             android:spinnerMode="dropdown"
+            android:entries="@array/Medication_No_Of_Times"
             tools:ignore="SpeakableTextPresentCheck" />
 
     </LinearLayout>
