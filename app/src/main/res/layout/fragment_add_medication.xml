@@ -5,334 +5,430 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".addmedication.view.AddMedication">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/MedicationNameLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/MedicationName"
-        app:endIconMode="clear_text"
-        app:helperText="Required*"
-        app:helperTextTextColor="#ff0000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtMedicneName"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#757575"
-            tools:ignore="TextContrastCheck" />
+            android:layout_marginTop="-16dp"
+            app:cardCornerRadius="@dimen/buttonCornerRadius"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/primaryColor"
+                android:paddingBottom="16dp">
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MedicationNameLayout">
+                <ImageView
+                    android:id="@+id/imageExit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_baseline_close_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtDone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/txtDone"
+                    app:srcCompat="@drawable/ic_baseline_close_24" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/medication_type" />
+                <TextView
+                    android:id="@+id/txtDone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/done"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/buttonFontSize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <Spinner
-            android:id="@+id/spinneMedicationType"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:minHeight="48dp"
-            android:spinnerMode="dropdown"
-            android:entries="@array/Medication_Type"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+                <TextView
+                    android:id="@+id/txtTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/buttonFontSize"
+                    app:layout_constraintEnd_toStartOf="@+id/txtDone"
+                    app:layout_constraintStart_toEndOf="@+id/imageExit"
+                    app:layout_constraintTop_toTopOf="@+id/txtDone"
+                    tools:text="Add Medication" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/MedicationNameLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="@string/Strength">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/MedicationName"
+            app:endIconMode="clear_text"
+            app:helperText="Required*"
+            app:helperTextTextColor="#ff0000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtMedicationStrengthNumber"
+                android:id="@+id/txtMedicneName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="48dp"
                 android:textColorHint="#757575"
-                tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+                tools:ignore="TextContrastCheck" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/spinnerMedicationStrengthWeight"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:minHeight="48dp"
-            android:spinnerMode="dropdown"
-            android:entries="@array/Medication_Strength"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/calendersLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:baselineAligned="false"
-        android:orientation="vertical"
-        android:weightSum="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
         <LinearLayout
-            android:id="@+id/startDateLinearLayout"
+            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="12dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:baselineAligned="false"
             android:orientation="horizontal"
-            android:weightSum="3">
-
-            <Button
-                android:id="@+id/startDateButton"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/buttonHeight"
-                android:layout_weight="1"
-                android:backgroundTint="@color/primaryColor"
-                android:text="@string/start_date"
-                app:cornerRadius="@dimen/buttonCornerRadius"
-                android:layout_gravity="center"
-                tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MedicationNameLayout">
 
             <TextView
-                android:id="@+id/startDateSelected"
+                android:id="@+id/textView6"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/buttonHeight"
-                android:layout_marginStart="4dp"
-                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/Date_Format"
-                android:layout_gravity="center"
-                android:textSize="20sp" />
+                android:text="@string/medication_type" />
+
+            <Spinner
+                android:id="@+id/spinneMedicationType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:entries="@array/Medication_Type"
+                android:minHeight="48dp"
+                android:spinnerMode="dropdown"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="@string/Strength">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtMedicationStrengthNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:textColorHint="#757575"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/spinnerMedicationStrengthWeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:entries="@array/Medication_Strength"
+                android:minHeight="48dp"
+                android:spinnerMode="dropdown"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/calendersLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:baselineAligned="false"
+            android:orientation="vertical"
+            android:weightSum="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <LinearLayout
+                android:id="@+id/startDateLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="12dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <Button
+                    android:id="@+id/btnStartDate"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/buttonHeight"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/primaryColor"
+                    android:text="@string/start_date"
+                    android:textSize="16sp"
+                    app:cornerRadius="@dimen/buttonCornerRadius"
+                    tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/startDateSelected"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/buttonHeight"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="@string/Date_Format"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/stopDateLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <Button
+                    android:id="@+id/btnEndDate"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/buttonHeight"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/primaryColor"
+                    android:text="@string/end_date"
+                    android:textSize="16sp"
+                    app:cornerRadius="@dimen/buttonCornerRadius"
+                    tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/endDateSelected"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/buttonHeight"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="@string/Date_Format"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/stopDateLinearLayout"
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:baselineAligned="false"
             android:orientation="horizontal"
-            android:weightSum="3">
-
-            <Button
-                android:id="@+id/endDateButton"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/buttonHeight"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/primaryColor"
-                android:text="@string/end_date"
-                app:cornerRadius="@dimen/buttonCornerRadius"
-                tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/LinearLayout6">
 
             <TextView
-                android:id="@+id/endDateSelected"
+                android:id="@+id/textView5"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/buttonHeight"
-                android:layout_marginStart="4dp"
-                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/Date_Format"
-                android:textSize="20sp" />
+                android:text="@string/Instructions" />
 
+            <Spinner
+                android:id="@+id/spinnerMedicationInstructions"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:entries="@array/Medication_Instructions"
+                android:minHeight="48dp"
+                android:spinnerMode="dropdown"
+                tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/LinearLayout6">
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/Instructions" />
-
-        <Spinner
-            android:id="@+id/spinnerMedicationInstructions"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:minHeight="48dp"
-            android:spinnerMode="dropdown"
-            android:entries="@array/Medication_Instructions"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </LinearLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/MedicationPillsLeftLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/pills_left"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtPillsLeft"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="#757575"
-            tools:ignore="TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/reminderDailySwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/reminder_daily"
-        app:layout_constraintStart_toStartOf="@+id/MedicationPillsLeftLayout"
-        app:layout_constraintTop_toBottomOf="@+id/MedicationPillsLeftLayout" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/reminderFillSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/reminder_fill"
-        app:layout_constraintEnd_toEndOf="@+id/MedicationPillsLeftLayout"
-        app:layout_constraintTop_toTopOf="@+id/reminderDailySwitch" />
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendersLinearLayout">
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/how_often_do_you_take_it" />
-
-        <Spinner
-            android:id="@+id/spinnerMedicationNoOfTimes"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:minHeight="48dp"
-            android:spinnerMode="dropdown"
-            android:entries="@array/Medication_No_Of_Times"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="@dimen/buttonWidth"
-        android:layout_height="@dimen/buttonHeight"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/primaryColor"
-        android:text="@string/btnAdd"
-        app:cornerRadius="@dimen/buttonCornerRadius"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reminderDailySwitch"
-        tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
-
-    <LinearLayout
-        android:id="@+id/LinearLayout6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/MedicationPillsLeftLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/pills_left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPillsLeft"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#757575"
+                tools:ignore="TextContrastCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/reminderDailySwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/reminder_daily"
+            app:layout_constraintStart_toStartOf="@+id/MedicationPillsLeftLayout"
+            app:layout_constraintTop_toBottomOf="@+id/MedicationPillsLeftLayout" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/reminderFillSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reminder_fill"
+            app:layout_constraintEnd_toEndOf="@+id/MedicationPillsLeftLayout"
+            app:layout_constraintTop_toTopOf="@+id/reminderDailySwitch" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/calendersLinearLayout">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/how_often_do_you_take_it" />
+
+            <Spinner
+                android:id="@+id/spinnerMedicationNoOfTimes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:entries="@array/Medication_No_Of_Times"
+                android:minHeight="48dp"
+                android:spinnerMode="dropdown"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="@dimen/buttonWidth"
+            android:layout_height="@dimen/buttonHeight"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/primaryColor"
+            android:text="@string/btnAdd"
+            android:textSize="16sp"
+            app:cornerRadius="@dimen/buttonCornerRadius"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textLayout"
+            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+        <LinearLayout
+            android:id="@+id/LinearLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="@string/no_of_pills">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtMedicationTakePillsNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColorHint="#757575"
+                    tools:ignore="TextContrastCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnChooseTime"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/buttonHeight"
+                android:layout_gravity="center"
+                android:layout_marginStart="4dp"
+                android:layout_weight="2"
+                android:backgroundTint="@color/primaryColor"
+                android:gravity="center"
+                android:text="@string/btnChooseTime"
+                android:textSize="16sp"
+                app:cornerRadius="@dimen/buttonCornerRadius"
+                tools:ignore="TextContrastCheck" />
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:hint="@string/no_of_pills">
+            android:hint="@string/pills_left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/reminderFillSwitch">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtMedicationTakePillsNo"
+                android:id="@+id/fillReminderPills"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -340,19 +436,5 @@
                 tools:ignore="TextContrastCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:layout_gravity="center"
-            android:id="@+id/btnChooseTime"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/buttonHeight"
-            android:layout_marginStart="4dp"
-            android:layout_weight="2"
-            android:backgroundTint="@color/primaryColor"
-            android:gravity="center"
-            android:text="@string/btnChooseTime"
-            app:cornerRadius="@dimen/buttonCornerRadius"
-            tools:ignore="TextContrastCheck" />
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
