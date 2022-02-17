@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.navigation.NavigationView;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.FragmentTakerListBinding;
 import com.team_three.medicalreminder.medicationList.view.AcrtiveMedsFragment;
@@ -50,6 +52,10 @@ TakerListAdabter adabter;
         adabter =new TakerListAdabter(this.getContext(),takers);
         fragmentTakerListBinding.takerRecyclerView.setLayoutManager(layoutManager);
         fragmentTakerListBinding.takerRecyclerView.setAdapter(adabter);
+
+        fragmentTakerListBinding.btnAddTaker.setOnClickListener(view1 -> {
+            Navigation.findNavController(view1).navigate(R.id.action_takerList2_to_addTaker);
+        });
     }
 
     @Override
@@ -57,4 +63,5 @@ TakerListAdabter adabter;
         super.onDestroy();
         fragmentTakerListBinding =null;
     }
+
 }

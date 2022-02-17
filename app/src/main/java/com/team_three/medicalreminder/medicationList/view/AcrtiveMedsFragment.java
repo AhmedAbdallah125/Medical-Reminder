@@ -39,18 +39,28 @@ public class AcrtiveMedsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ArrayList<MedicinesActive> medicinesActiveList = new ArrayList<>();
-        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Panadol",1000,"g",4,"pills","left"));
-        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",500,"g",6,"pills","left"));
-        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",500,"g",6,"pills","left"));
-        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",500,"g",6,"pills","left"));
-        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",500,"g",6,"pills","left"));
-        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",500,"g",6,"pills","left"));
-        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",400,"g",6,"pills","left"));
-        LinearLayoutManager layoutManager = new LinearLayoutManager(AcrtiveMedsFragment.this.getContext());
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
-        adapter=new MedsListAdapter(this.getContext(),medicinesActiveList);
-        fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setLayoutManager(layoutManager);
-        fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setAdapter(adapter);
+//        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Panadol",1000,"g",4,"pills","left"));
+//        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",500,"g",6,"pills","left"));
+//        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",500,"g",6,"pills","left"));
+//        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",500,"g",6,"pills","left"));
+//        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",500,"g",6,"pills","left"));
+//        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",500,"g",6,"pills","left"));
+//        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",400,"g",6,"pills","left"));
+
+        if(medicinesActiveList.size()==0){
+            fragmentAcrtiveMedsBinding.activeStr.setVisibility(View.GONE);
+            fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setVisibility(View.GONE);
+        }else {
+            fragmentAcrtiveMedsBinding.activeStr.setVisibility(View.VISIBLE);
+            fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setVisibility(View.VISIBLE);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(AcrtiveMedsFragment.this.getContext());
+            layoutManager.setOrientation(RecyclerView.VERTICAL);
+            adapter=new MedsListAdapter(this.getContext(),medicinesActiveList);
+            fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setLayoutManager(layoutManager);
+
+            fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setAdapter(adapter);
+
+        }
 
     }
 

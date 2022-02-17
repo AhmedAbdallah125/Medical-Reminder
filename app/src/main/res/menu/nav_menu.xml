@@ -8,7 +8,13 @@
     <item
         android:id="@+id/fragment_medication_list"
         android:title="@string/Medications"
-        android:icon="@drawable/ic_baseline_vpn_key_24"/>
+        android:icon="@drawable/ic_pill"/>
+
+    />
+    <item
+        android:id="@+id/fragment_taker_list"
+        android:title="@string/takerList"
+        android:icon="@drawable/ic_baseline_medical_services_24"/>
 
     />
 </menu>

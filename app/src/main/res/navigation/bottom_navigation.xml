@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_fragment_home_to_addMedication"
             app:destination="@id/fragment_add_Medication" />
+        <action
+            android:id="@+id/action_fragment_home_to_takerList2"
+            app:destination="@id/fragment_taker_list" />
     </fragment>
     <fragment
         android:id="@+id/fragment_medication_list"
@@ -28,4 +31,26 @@
             android:id="@+id/action_fragment_add_Medication_to_fragment_home"
             app:destination="@id/fragment_home" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_taker_list"
+        android:name="com.team_three.medicalreminder.taker.view.TakerList"
+        android:label="fragment_taker_list"
+        tools:layout="@layout/fragment_taker_list" >
+        <action
+            android:id="@+id/action_takerList2_to_addTaker"
+            app:destination="@id/addTaker" />
+        <action
+            android:id="@+id/action_fragment_taker_list_to_takerProfileScreen"
+            app:destination="@id/takerProfileScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTaker"
+        android:name="com.team_three.medicalreminder.taker.view.AddTaker"
+        android:label="fragment_add_taker"
+        tools:layout="@layout/fragment_add_taker" />
+    <fragment
+        android:id="@+id/takerProfileScreen"
+        android:name="com.team_three.medicalreminder.taker.view.TakerProfileScreen"
+        android:label="fragment_taker_profile_screen"
+        tools:layout="@layout/fragment_taker_profile_screen" />
 </navigation>

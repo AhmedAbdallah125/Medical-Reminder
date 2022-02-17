@@ -89,4 +89,5 @@
     <string name="sign_up">Sign Up</string>
     <string name="edit_medication">Edit Medication</string>
     <string name="txt_sign_up_details">Register to securely back up your data on your server</string>
+    <string name="takerList">Taker List</string>
 </resources>

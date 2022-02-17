@@ -43,13 +43,22 @@ public class InactiveMedsFragment extends Fragment {
                 1000,"g",4,"pills","left"));
         medInactiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Panadol",
                 1000,"g",4,"pills","left"));
-        LinearLayoutManager layoutManager = new LinearLayoutManager(InactiveMedsFragment.this.getContext());
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        if(medInactiveList.size()==0){
+            fragmentInactiveMedsBinding.inActiveRecyclerView.setVisibility(View.GONE);
+            fragmentInactiveMedsBinding.inactiveTxt.setVisibility(View.GONE);
+        }
+        else {
+            fragmentInactiveMedsBinding.inActiveRecyclerView.setVisibility(View.VISIBLE);
+            fragmentInactiveMedsBinding.inactiveTxt.setVisibility(View.VISIBLE);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(InactiveMedsFragment.this.getContext());
+            layoutManager.setOrientation(RecyclerView.VERTICAL);
 
-        adapter =new InactiveListAdapter(this.getContext(),medInactiveList);
-        fragmentInactiveMedsBinding.inActiveRecyclerView.setLayoutManager(layoutManager);
-        fragmentInactiveMedsBinding.inActiveRecyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+            adapter =new InactiveListAdapter(this.getContext(),medInactiveList);
+            fragmentInactiveMedsBinding.inActiveRecyclerView.setLayoutManager(layoutManager);
+            fragmentInactiveMedsBinding.inActiveRecyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
+
     }
 
     @Override

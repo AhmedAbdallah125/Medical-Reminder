@@ -6,25 +6,29 @@
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.1" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/ic_baseline_family_restroom_24.xml" value="0.151" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/ic_baseline_gender_24.xml" value="0.151" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/ic_baseline_how_to_reg_24.xml" value="0.143" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/ic_baseline_medical_services_24.xml" value="0.143" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/ic_baseline_vpn_key_24.xml" value="0.21" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/ic_pill.xml" value="0.143" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/person.xml" value="0.1" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/activity_medication_drug_display.xml" value="0.21" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/activity_medication_drug_edit.xml" value="0.17074275362318841" />
-        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/activty_sign_up.xml" value="0.17074275362318841" />
-        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_add_taker.xml" value="0.18" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/activty_sign_up.xml" value="0.1" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_add_taker.xml" value="0.25" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_medication_list.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_taker_list.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_taker_profile_screen.xml" value="0.21" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/taker_row.xml" value="0.17074275362318841" />
-        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/activity_home.xml" value="0.1" />
-        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/menu/menu_navigation.xml" value="0.20416666666666666" />
-        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/menu/nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/menu/menu_drawer.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/menu/menu_navigation.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/menu/nav_menu.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/activity_medication_drug_display.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_medication_drug_edit.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_add_medication.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_add_taker.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_display_medication_drug.xml" value="0.33" />
       </map>
     </option>
   </component>
