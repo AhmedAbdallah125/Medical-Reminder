@@ -4,8 +4,8 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
-import com.team_three.medicalreminder.dataBase.DAO;
 import com.team_three.medicalreminder.dataBase.LocalSourceInterface;
+import com.team_three.medicalreminder.medicationList.view.AcrtiveMedsFragment;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class Repository implements RepositoryInterface{
         this.localSourceInterface = localSourceInterface;
     }
 
-    public static Repository getInstance(LocalSourceInterface localSourceInterface,Context context){
+    public static Repository getInstance(LocalSourceInterface localSourceInterface, Context context){
         if(repo==null){
             repo = new Repository(localSourceInterface,context);
         }
@@ -38,5 +38,25 @@ public class Repository implements RepositoryInterface{
     @Override
     public void deleteMedication(MedicationPOJO medication) {
         localSourceInterface.deleteMedication(medication);
+    }
+
+    @Override
+    public LiveData<MedicationPOJO> getMedications(int id) {
+       return localSourceInterface.getMedications(id);
+    }
+
+    @Override
+    public void updateMedications(MedicationPOJO medicationPOJO) {
+        localSourceInterface.updateMedications(medicationPOJO);
+    }
+
+    @Override
+    public LiveData<List<MedicationPOJO>> getActiveMedications() {
+        return localSourceInterface.getActiveMedications();
+    }
+
+    @Override
+    public LiveData<List<MedicationPOJO>> getInactiveMedications() {
+        return localSourceInterface.getInactiveMedications();
     }
 }
