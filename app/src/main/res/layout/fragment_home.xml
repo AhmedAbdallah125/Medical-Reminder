@@ -45,6 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#FFFF"
+                android:contentDescription="@string/todo"
                 app:textColorSelected="#03A9F4" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
