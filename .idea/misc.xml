@@ -17,6 +17,7 @@
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_taker_profile_screen.xml" value="0.21" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/taker_row.xml" value="0.17074275362318841" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/menu/menu_navigation.xml" value="0.20416666666666666" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/MedicalReminder/app/src/main/res/menu/nav_menu.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15625" />
@@ -24,7 +25,6 @@
         <entry key="app/src/main/res/layout/activity_medication_drug_edit.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_add_medication.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_add_taker.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_display_medication_drug.xml" value="0.33" />
       </map>
     </option>
   </component>

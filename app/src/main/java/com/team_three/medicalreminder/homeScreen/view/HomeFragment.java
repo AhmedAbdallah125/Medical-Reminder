@@ -16,31 +16,36 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
-import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.homeScreen.model.MedicineDetails;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.FragmentHomeBinding;
-import com.team_three.medicalreminder.model.MedicationPOJO;
-import com.team_three.medicalreminder.model.Repository;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding fragmentHomeBinding;
     HomeAdapter homeAdapter;
-
+    boolean isClicked = false;
+    private Animation rotateOpen;
+    private Animation rotateClose;
+    private Animation fromBottom;
+    private Animation toBottom;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        rotateOpen = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.rotate_open_anim);
+        rotateClose = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_close_anim);
+        fromBottom = AnimationUtils.loadAnimation(getActivity(), R.anim.from_bottom_anim);
+        toBottom = AnimationUtils.loadAnimation(getActivity(), R.anim.to_bottom_anim);
+
 
     }
 
@@ -52,6 +57,16 @@ public class HomeFragment extends Fragment {
         fragmentHomeBinding.btnFabAddMedication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                onAddButtonClicked(isClicked);
+                isClicked = !isClicked;
+            }
+        });
+
+
+        // handle floatActionButton
+        fragmentHomeBinding.secondfloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_fragment_home_to_addMedication);
             }
         });
@@ -59,6 +74,49 @@ public class HomeFragment extends Fragment {
         return fragmentHomeBinding.getRoot();
     }
 
+    private void onAddButtonClicked(boolean isClicked) {
+        setVisibility(isClicked);
+        setAnimation(isClicked);
+        setClickable(isClicked);
+
+    }
+
+    private void setVisibility(boolean clicked) {
+        if (!clicked) {
+            fragmentHomeBinding.secondfloatingActionButton.setVisibility(View.VISIBLE);
+            fragmentHomeBinding.thirdfloatingActionButton2.setVisibility(View.VISIBLE);
+
+        } else {
+            fragmentHomeBinding.secondfloatingActionButton.setVisibility(View.GONE);
+            fragmentHomeBinding.thirdfloatingActionButton2.setVisibility(View.GONE);
+        }
+
+
+    }
+
+    private void setAnimation(boolean clicked) {
+        if (!clicked) {
+            fragmentHomeBinding.secondfloatingActionButton.startAnimation(fromBottom);
+            fragmentHomeBinding.thirdfloatingActionButton2.startAnimation(fromBottom);
+            fragmentHomeBinding.btnFabAddMedication.startAnimation(rotateOpen);
+
+        } else {
+            fragmentHomeBinding.secondfloatingActionButton.startAnimation(toBottom);
+            fragmentHomeBinding.thirdfloatingActionButton2.startAnimation(toBottom);
+            fragmentHomeBinding.btnFabAddMedication.startAnimation(rotateClose);
+        }
+
+    }
+
+    private void setClickable(boolean clicked){
+        if(!clicked){
+            fragmentHomeBinding.secondfloatingActionButton.setClickable(false);
+            fragmentHomeBinding.thirdfloatingActionButton2.setClickable(false);
+        }
+        fragmentHomeBinding.secondfloatingActionButton.setClickable(true);
+        fragmentHomeBinding.thirdfloatingActionButton2.setClickable(true);
+
+    }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -103,13 +161,13 @@ public class HomeFragment extends Fragment {
         /* ends after 1 month from now */
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.MONTH, 1);
-        HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(view,R.id.calendarView).startDate(startDate.getTime())
+        HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(view, R.id.calendarView).startDate(startDate.getTime())
                 .endDate(endDate.getTime())
                 .build();
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Date date, int position) {
-                Log.e("TAG", "onDateSelected: "+date);
+                Log.e("TAG", "onDateSelected: " + date);
 
             }
 
@@ -117,7 +175,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onCalendarScroll(HorizontalCalendarView calendarView,
                                          int dx, int dy) {
-                Log.e("TAG", "onCalendarScroll: "+"dx="+dx   +"dy   "+dy);
+                Log.e("TAG", "onCalendarScroll: " + "dx=" + dx + "dy   " + dy);
 
             }
 

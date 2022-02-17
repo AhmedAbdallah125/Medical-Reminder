@@ -50,4 +50,30 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/secondfloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:visibility="invisible"
+        android:clickable="true"
+        android:src="@drawable/ic_baseline_color_lens"
+        app:layout_constraintBottom_toTopOf="@+id/btn_fab_addMedication"
+        app:layout_constraintEnd_toEndOf="@+id/btn_fab_addMedication"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_fab_addMedication" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/thirdfloatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:visibility="invisible"
+        android:clickable="true"
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintBottom_toTopOf="@+id/secondfloatingActionButton"
+        app:layout_constraintEnd_toEndOf="@+id/secondfloatingActionButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/secondfloatingActionButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

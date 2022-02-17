@@ -70,7 +70,7 @@ public class HomeActivity extends AppCompatActivity {
         if (homeBinding.homeActivityDrawer.isOpen()) {
             homeBinding.homeActivityDrawer.close();
         } else {
-            finish();
+            super.onBackPressed();
         }
     }
 
@@ -88,18 +88,17 @@ public class HomeActivity extends AppCompatActivity {
 
     private void handleToolBar() {
         setSupportActionBar(homeBinding.toolbar);
+
         getSupportActionBar().setTitle("");
         homeBinding.toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                homeBinding.homeActivityDrawer.openDrawer(GravityCompat.START);
+                if (homeBinding.homeActivityDrawer.isOpen()) {
+                    homeBinding.homeActivityDrawer.close();
+                } else {
+                    homeBinding.homeActivityDrawer.openDrawer(GravityCompat.START);
+                }
 
-                homeBinding.navigatorViewHome.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        return false;
-                    }
-                });
 
             }
         });
