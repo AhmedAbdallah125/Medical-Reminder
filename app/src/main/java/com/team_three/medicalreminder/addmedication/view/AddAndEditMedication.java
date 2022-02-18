@@ -241,6 +241,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         medication.setFillReminder(isFillReminder);
         medication.setIsTakenList(isTakenList(timeAndDose.size()));
         medication.setActive(true);
+        medication.setImageID(R.drawable.ic_pill);
     }
 
     public List<Boolean> isTakenList(int length){
