@@ -13,7 +13,7 @@ import com.team_three.medicalreminder.model.MedicationPOJO;
 import java.util.List;
 
 @Dao
-public  interface DAO {
+public interface DAO {
     @Query("Select * from medications")
     LiveData<List<MedicationPOJO>> getAllMedication();
 
@@ -28,7 +28,6 @@ public  interface DAO {
     LiveData<MedicationPOJO> getMedications(int id);
 
 
-
     @Delete
     void deleteMedication(MedicationPOJO medicationPOJO);
 
@@ -41,5 +40,8 @@ public  interface DAO {
     @Query("SELECT * FROM Medications WHERE isActive =0")
     LiveData<List<MedicationPOJO>> getInactiveMedications();
 
+    //for specified medicine
+    @Query("SELECT * FROM Medications WHERE (:data Between startDate AND endDate) AND isActive=1 ")
+    LiveData<MedicationPOJO> getMedicationDay(long data);
 
 }

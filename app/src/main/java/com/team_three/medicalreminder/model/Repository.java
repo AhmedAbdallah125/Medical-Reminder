@@ -61,4 +61,9 @@ public class Repository implements RepositoryInterface{
     public LiveData<List<MedicationPOJO>> getInactiveMedications() {
         return localSourceInterface.getInactiveMedications();
     }
+
+    @Override
+    public LiveData<List<MedicationPOJO>> getMedicationDay() {
+        return localSourceInterface.getMedicationDay();
+    }
 }

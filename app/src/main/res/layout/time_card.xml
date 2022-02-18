@@ -7,14 +7,15 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cardTimeView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
 
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -23,45 +24,37 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/recycle_hom_image_view"
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/recycle_hour"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="64dp"
+                android:layout_marginBottom="16dp"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/txt_pill_count"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_vpn_key_24" />
+                tools:text="8:30 am" />
 
             <TextView
-                android:id="@+id/txt_recycle_medicine"
-                android:layout_width="wrap_content"
+                android:id="@+id/txt_pill_count"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="64dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="7dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="TextView"
+                android:layout_marginEnd="64dp"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@+id/txt_medicine_dtails"
-                app:layout_constraintStart_toEndOf="@+id/recycle_hom_image_view"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="adol" />
-
-            <TextView
-                android:id="@+id/txt_medicine_dtails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:fontFamily="sans-serif-light"
-                android:text="TextView"
-                android:textSize="16sp"
+                android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/txt_recycle_medicine"
-                app:layout_constraintTop_toBottomOf="@+id/txt_recycle_medicine"
-                tools:text="50 gm , take 1 pill" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recycle_hour"
+                tools:text="3 pill at day" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,4 +17,7 @@ public interface LocalSourceInterface {
     LiveData<List<MedicationPOJO>> getActiveMedications();
     LiveData<List<MedicationPOJO>> getInactiveMedications();
 
+
+    LiveData<List<MedicationPOJO>> getMedicationDay();
+
 }
