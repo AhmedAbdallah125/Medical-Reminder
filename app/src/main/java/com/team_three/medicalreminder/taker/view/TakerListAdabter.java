@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.team_three.medicalreminder.databinding.ActiveMedsRowBinding;
 import com.team_three.medicalreminder.databinding.TakerRowBinding;
-import com.team_three.medicalreminder.medicationList.model.MedicinesActive;
+
 import com.team_three.medicalreminder.taker.model.Taker;
 
 import java.util.List;

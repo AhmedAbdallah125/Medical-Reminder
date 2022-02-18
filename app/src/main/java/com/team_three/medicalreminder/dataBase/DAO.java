@@ -35,7 +35,11 @@ public  interface DAO {
     @Update()
     void updateMedications(MedicationPOJO medicationPOJO);
 
+    @Query("SELECT * FROM Medications WHERE isActive =1")
+    LiveData<List<MedicationPOJO>> getActiveMedications();
 
+    @Query("SELECT * FROM Medications WHERE isActive =0")
+    LiveData<List<MedicationPOJO>> getInactiveMedications();
 
 
 }

@@ -12,15 +12,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.team_three.medicalreminder.R;
+import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.databinding.FragmentAcrtiveMedsBinding;
-import com.team_three.medicalreminder.medicationList.model.MedicinesActive;
+import com.team_three.medicalreminder.medicationList.presenter.ActivePresenter;
+import com.team_three.medicalreminder.medicationList.presenter.ActivePresenterInterface;
+import com.team_three.medicalreminder.model.MedicationPOJO;
+import com.team_three.medicalreminder.model.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class AcrtiveMedsFragment extends Fragment {
+public class AcrtiveMedsFragment extends Fragment implements ActiveViewInterface {
     private FragmentAcrtiveMedsBinding fragmentAcrtiveMedsBinding;
+    ActivePresenterInterface activePresenterInterface;
     MedsListAdapter adapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,29 +43,17 @@ public class AcrtiveMedsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ArrayList<MedicinesActive> medicinesActiveList = new ArrayList<>();
-//        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Panadol",1000,"g",4,"pills","left"));
-//        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",500,"g",6,"pills","left"));
-//        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",500,"g",6,"pills","left"));
-//        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",500,"g",6,"pills","left"));
-//        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",500,"g",6,"pills","left"));
-//        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",500,"g",6,"pills","left"));
-//        medicinesActiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Parastmol",400,"g",6,"pills","left"));
+        ArrayList<MedicationPOJO> medicinesActiveList = new ArrayList<>();
 
-        if(medicinesActiveList.size()==0){
-            fragmentAcrtiveMedsBinding.activeStr.setVisibility(View.GONE);
-            fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setVisibility(View.GONE);
-        }else {
-            fragmentAcrtiveMedsBinding.activeStr.setVisibility(View.VISIBLE);
-            fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setVisibility(View.VISIBLE);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(AcrtiveMedsFragment.this.getContext());
-            layoutManager.setOrientation(RecyclerView.VERTICAL);
-            adapter=new MedsListAdapter(this.getContext(),medicinesActiveList);
-            fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setLayoutManager(layoutManager);
+        fragmentAcrtiveMedsBinding.activeStr.setVisibility(View.GONE);
+        fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setVisibility(View.GONE);
 
-            fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setAdapter(adapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(AcrtiveMedsFragment.this.getContext());
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setLayoutManager(layoutManager);
 
-        }
+        activePresenterInterface =new ActivePresenter(this, Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext()),this.getContext()));
+        activePresenterInterface.getActiveMeds(AcrtiveMedsFragment.this);
 
     }
 
@@ -68,5 +61,21 @@ public class AcrtiveMedsFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         fragmentAcrtiveMedsBinding =null;
+    }
+
+
+    @Override
+    public void getActiveMeds(List<MedicationPOJO> medications) {
+        if(medications.size()==0){
+            fragmentAcrtiveMedsBinding.activeStr.setVisibility(View.GONE);
+            fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setVisibility(View.GONE);
+        }else {
+            fragmentAcrtiveMedsBinding.activeStr.setVisibility(View.VISIBLE);
+            fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setVisibility(View.VISIBLE);
+
+            adapter=new MedsListAdapter(this.getContext(),medications);
+            fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setAdapter(adapter);
+
+        }
     }
 }

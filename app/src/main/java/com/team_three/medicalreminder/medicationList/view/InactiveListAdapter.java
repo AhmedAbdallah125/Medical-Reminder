@@ -9,14 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.team_three.medicalreminder.databinding.InactiveMedsRowBinding;
-import com.team_three.medicalreminder.medicationList.model.MedicinesActive;
+import com.team_three.medicalreminder.model.MedicationPOJO;
 
 import java.util.List;
 public class InactiveListAdapter extends RecyclerView.Adapter<InactiveListAdapter.ViewHolder> {
     final private Context _context;
-    private List<MedicinesActive> medicines;
+    private List<MedicationPOJO> medicines;
 
-    public InactiveListAdapter(Context context, List<MedicinesActive> medicines) {
+    public InactiveListAdapter(Context context, List<MedicationPOJO> medicines) {
         Log.i("TAG", "InactiveListAdapter: 222222222222");
         _context = context;
         this.medicines = medicines;
@@ -33,10 +33,10 @@ public class InactiveListAdapter extends RecyclerView.Adapter<InactiveListAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.i("TAG", "onBindViewHolder:2222 ");
-        holder.binding.imgInactive.setImageResource(medicines.get(position).getIconResource());
-        holder.binding.txtInactiveMedName.setText(medicines.get(position).getName());
-        holder.binding.txtInactiveStrengthNumberOfTheMed.setText(String.valueOf(medicines.get(position).getStrengthNumber()));
-        holder.binding.txtInactiveStrengthWeightOfTheMed.setText(medicines.get(position).getStrengthWeight());
+        holder.binding.imgInactive.setImageResource(medicines.get(position).getImageID());
+        holder.binding.txtInactiveMedName.setText(medicines.get(position).getMedicationName());
+        holder.binding.txtInactiveStrengthNumberOfTheMed.setText(String.valueOf(medicines.get(position).getStrength()));
+        holder.binding.txtInactiveStrengthWeightOfTheMed.setText(medicines.get(position).getWeight());
 
     }
 

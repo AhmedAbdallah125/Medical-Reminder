@@ -12,15 +12,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.team_three.medicalreminder.R;
+import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.databinding.FragmentInactiveMedsBinding;
-import com.team_three.medicalreminder.medicationList.model.MedicinesActive;
+import com.team_three.medicalreminder.medicationList.presenter.ActivePresenter;
+import com.team_three.medicalreminder.medicationList.presenter.InactivePresenter;
+import com.team_three.medicalreminder.medicationList.presenter.InactivePresenterInterface;
+import com.team_three.medicalreminder.model.MedicationPOJO;
+import com.team_three.medicalreminder.model.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class InactiveMedsFragment extends Fragment {
+public class InactiveMedsFragment extends Fragment implements InactiveViewInterface{
     FragmentInactiveMedsBinding fragmentInactiveMedsBinding;
+    InactivePresenterInterface inactivePresenterInterface;
     InactiveListAdapter adapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,26 +44,17 @@ public class InactiveMedsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ArrayList<MedicinesActive> medInactiveList =new ArrayList<>();
-        medInactiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Panadol",
-                1000,"g",4,"pills","left"));
-        medInactiveList.add(new MedicinesActive(R.drawable.ic_baseline_add_24,"Panadol",
-                1000,"g",4,"pills","left"));
-        if(medInactiveList.size()==0){
-            fragmentInactiveMedsBinding.inActiveRecyclerView.setVisibility(View.GONE);
-            fragmentInactiveMedsBinding.inactiveTxt.setVisibility(View.GONE);
-        }
-        else {
-            fragmentInactiveMedsBinding.inActiveRecyclerView.setVisibility(View.VISIBLE);
-            fragmentInactiveMedsBinding.inactiveTxt.setVisibility(View.VISIBLE);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(InactiveMedsFragment.this.getContext());
-            layoutManager.setOrientation(RecyclerView.VERTICAL);
+        ArrayList<MedicationPOJO> medInactiveList =new ArrayList<>();
 
-            adapter =new InactiveListAdapter(this.getContext(),medInactiveList);
-            fragmentInactiveMedsBinding.inActiveRecyclerView.setLayoutManager(layoutManager);
-            fragmentInactiveMedsBinding.inActiveRecyclerView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        }
+        fragmentInactiveMedsBinding.inActiveRecyclerView.setVisibility(View.GONE);
+        fragmentInactiveMedsBinding.inactiveTxt.setVisibility(View.GONE);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(InactiveMedsFragment.this.getContext());
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        fragmentInactiveMedsBinding.inActiveRecyclerView.setLayoutManager(layoutManager);
+
+        inactivePresenterInterface= new InactivePresenter(this,Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext()),this.getContext()));
+        inactivePresenterInterface.getInactiveMeds(this);
 
     }
 
@@ -65,5 +62,23 @@ public class InactiveMedsFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         fragmentInactiveMedsBinding=null;
+    }
+
+    @Override
+    public void getInactiveMeds(List<MedicationPOJO> medications) {
+        if(medications.size()==0){
+            fragmentInactiveMedsBinding.inActiveRecyclerView.setVisibility(View.GONE);
+            fragmentInactiveMedsBinding.inactiveTxt.setVisibility(View.GONE);
+        }
+        else {
+            fragmentInactiveMedsBinding.inActiveRecyclerView.setVisibility(View.VISIBLE);
+            fragmentInactiveMedsBinding.inactiveTxt.setVisibility(View.VISIBLE);
+
+
+            adapter =new InactiveListAdapter(this.getContext(),medications);
+
+            fragmentInactiveMedsBinding.inActiveRecyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
     }
 }
