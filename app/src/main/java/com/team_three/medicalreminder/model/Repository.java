@@ -1,6 +1,7 @@
 package com.team_three.medicalreminder.model;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -33,6 +34,7 @@ public class Repository implements RepositoryInterface{
     @Override
     public void insertMedication(MedicationPOJO medication) {
         localSourceInterface.insertMedication(medication);
+        Log.i("TAG", "insertMedication: ");
     }
 
     @Override

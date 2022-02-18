@@ -16,7 +16,7 @@ public class MedicationPOJO {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    public void setTimeAndDose(Map<Long, Integer> timeAndDose) {
+    public void setTimeAndDose(Map<String, Integer> timeAndDose) {
         this.timeAndDose = timeAndDose;
     }
 
@@ -31,11 +31,11 @@ public class MedicationPOJO {
     private String format;
     private int imageID;
     @NotNull
-    private String startDate;
+    private Long startDate;
     @NotNull
-    private String endDate;
+    private Long endDate;
     private String takeTimePerDay;//how often do you take
-    private Map<Long, Integer> timeAndDose;
+    private Map<String, Integer> timeAndDose;
     private String instruction;
     private boolean fillReminder;
     private boolean dailyReminder;
@@ -43,6 +43,24 @@ public class MedicationPOJO {
     private int leftNumberReminder;
     private boolean isActive;
     private List<Boolean> isTakenList;
+    private String medicationReason;
+    private String recurrence;
+
+    public String getMedicationReason() {
+        return medicationReason;
+    }
+
+    public void setMedicationReason(String medicationReason) {
+        this.medicationReason = medicationReason;
+    }
+
+    public String getRecurrence() {
+        return recurrence;
+    }
+
+    public void setRecurrence(String recurrence) {
+        this.recurrence = recurrence;
+    }
 
     public int getId() {
         return id;
@@ -98,20 +116,20 @@ public class MedicationPOJO {
     }
 
     @NotNull
-    public String getStartDate() {
+    public Long getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(@NotNull String startDate) {
+    public void setStartDate(@NotNull Long startDate) {
         this.startDate = startDate;
     }
 
     @NotNull
-    public String getEndDate() {
+    public Long getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(@NotNull String endDate) {
+    public void setEndDate(@NotNull Long endDate) {
         this.endDate = endDate;
     }
 
@@ -123,7 +141,7 @@ public class MedicationPOJO {
         this.takeTimePerDay = takeTimePerDay;
     }
 
-    public Map<Long, Integer> getTimeAndDose() {
+    public Map<String, Integer> getTimeAndDose() {
         return timeAndDose;
     }
 

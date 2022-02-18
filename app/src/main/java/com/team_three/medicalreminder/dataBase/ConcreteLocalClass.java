@@ -1,6 +1,7 @@
 package com.team_three.medicalreminder.dataBase;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -37,11 +38,13 @@ public class ConcreteLocalClass implements LocalSourceInterface {
 
     @Override
     public void insertMedication(MedicationPOJO medication) {
+        Log.i("TAG", "insertMedication: "+medication.getMedicationName());
         new Thread() {
             @Override
             public void run() {
                 super.run();
                 dao.insertMedication(medication);
+                Log.i("TAG", "run: ");
             }
         }.start();
     }
@@ -56,4 +59,17 @@ public class ConcreteLocalClass implements LocalSourceInterface {
             }
         }.start();
     }
+
+    @Override
+    public void updateMedication(MedicationPOJO medication) {
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                dao.updateMedications(medication);
+            }
+        }.start();
+    }
+
+
 }

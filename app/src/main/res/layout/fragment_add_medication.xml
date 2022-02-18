@@ -4,17 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".addmedication.view.AddMedication">
+    tools:context=".addmedication.view.AddAndEditMedication">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/spinner_dropdown_background"
+        android:paddingBottom="16dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="-16dp"
+            android:layout_marginEnd="8dp"
             app:cardCornerRadius="@dimen/buttonCornerRadius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +117,7 @@
             <Spinner
                 android:id="@+id/spinneMedicationType"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/buttonHeight"
                 android:layout_weight="2"
                 android:entries="@array/Medication_Type"
                 android:minHeight="48dp"
@@ -147,7 +151,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtMedicationStrengthNumber"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:minHeight="48dp"
                     android:textColorHint="#757575"
                     tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
@@ -156,7 +160,7 @@
             <Spinner
                 android:id="@+id/spinnerMedicationStrengthWeight"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/buttonHeight"
                 android:layout_weight="1"
                 android:entries="@array/Medication_Strength"
                 android:minHeight="48dp"
@@ -207,8 +211,8 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="@string/Date_Format"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    tools:text="@string/Date_Format" />
 
             </LinearLayout>
 
@@ -239,8 +243,8 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="@string/Date_Format"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    tools:text="@string/Date_Format" />
 
             </LinearLayout>
 
@@ -271,7 +275,7 @@
             <Spinner
                 android:id="@+id/spinnerMedicationInstructions"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/buttonHeight"
                 android:layout_weight="2"
                 android:entries="@array/Medication_Instructions"
                 android:minHeight="48dp"
@@ -279,18 +283,72 @@
                 tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/recurrence" />
+
+            <Spinner
+                android:id="@+id/spinnerMedicationRecurrence"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/buttonHeight"
+                android:layout_weight="2"
+                android:entries="@array/Medication_Recurrence"
+                android:minHeight="48dp"
+                android:spinnerMode="dropdown"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/MedicationReasonLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/buttonHeight"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/reason_of_medication"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtReason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#757575"
+                tools:ignore="TextContrastCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/MedicationPillsLeftLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/buttonHeight"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:hint="@string/pills_left"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+            app:layout_constraintTop_toBottomOf="@+id/MedicationReasonLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtPillsLeft"
@@ -301,21 +359,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/reminderDailySwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/reminder_daily"
-            app:layout_constraintStart_toStartOf="@+id/MedicationPillsLeftLayout"
-            app:layout_constraintTop_toBottomOf="@+id/MedicationPillsLeftLayout" />
-
-        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/reminderFillSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reminder_fill"
+            app:layout_constraintBottom_toBottomOf="@+id/txtReminderRefill"
             app:layout_constraintEnd_toEndOf="@+id/MedicationPillsLeftLayout"
-            app:layout_constraintTop_toTopOf="@+id/reminderDailySwitch" />
+            app:layout_constraintTop_toTopOf="@+id/txtReminderRefill" />
 
 
         <LinearLayout
@@ -343,7 +393,7 @@
             <Spinner
                 android:id="@+id/spinnerMedicationNoOfTimes"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/buttonHeight"
                 android:layout_weight="2"
                 android:entries="@array/Medication_No_Of_Times"
                 android:minHeight="48dp"
@@ -363,7 +413,7 @@
             app:cornerRadius="@dimen/buttonCornerRadius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textLayout"
+            app:layout_constraintTop_toBottomOf="@id/txtReminderRefill"
             tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
         <LinearLayout
@@ -413,25 +463,24 @@
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textLayout"
+            android:id="@+id/txtReminderRefill"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/buttonHeight"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:hint="@string/pills_left"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/txtReminderRefill"
+            app:layout_constraintEnd_toStartOf="@+id/reminderFillSwitch"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/reminderFillSwitch">
+            app:layout_constraintTop_toBottomOf="@id/MedicationPillsLeftLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fillReminderPills"
+                android:id="@+id/txtfillReminderPills"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:textColorHint="#757575"
                 tools:ignore="TextContrastCheck" />
         </com.google.android.material.textfield.TextInputLayout>

@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_add_Medication"
-        android:name="com.team_three.medicalreminder.addmedication.view.AddMedication"
+        android:name="com.team_three.medicalreminder.addmedication.view.AddAndEditMedication"
         android:label="fragment_add_medication"
         tools:layout="@layout/fragment_add_medication" >
         <action

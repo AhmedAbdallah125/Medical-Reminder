@@ -22,7 +22,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/activity_medication_drug_display.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_medication_drug_edit.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_add_medication.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_add_medication.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_add_taker.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_display_medication_drug.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18489583333333334" />
