@@ -39,4 +39,9 @@ public class Repository implements RepositoryInterface{
     public void deleteMedication(MedicationPOJO medication) {
         localSourceInterface.deleteMedication(medication);
     }
+
+    @Override
+    public LiveData<List<MedicationPOJO>> getMedicationDay() {
+        return localSourceInterface.getMedicationDay();
+    }
 }

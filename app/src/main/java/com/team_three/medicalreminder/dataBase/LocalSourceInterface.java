@@ -12,4 +12,7 @@ public interface LocalSourceInterface {
     void insertMedication(MedicationPOJO medication);
 
     void deleteMedication(MedicationPOJO medication);
+
+    LiveData<List<MedicationPOJO>> getMedicationDay();
+
 }

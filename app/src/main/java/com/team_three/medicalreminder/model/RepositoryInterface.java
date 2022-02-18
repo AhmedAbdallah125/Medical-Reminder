@@ -10,4 +10,6 @@ public interface RepositoryInterface {
     void insertMedication(MedicationPOJO medication);
 
     void deleteMedication(MedicationPOJO medication);
+    LiveData<List<MedicationPOJO>> getMedicationDay();
+
 }

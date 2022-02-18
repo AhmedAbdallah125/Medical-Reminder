@@ -1,5 +1,6 @@
 package com.team_three.medicalreminder.homeScreen.view;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarListener;
 import devs.mulham.horizontalcalendar.HorizontalCalendarView;
@@ -19,32 +21,37 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import com.team_three.medicalreminder.homeScreen.model.MedicineDetails;
+import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
+import com.team_three.medicalreminder.dataBase.LocalSourceInterface;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.FragmentHomeBinding;
+import com.team_three.medicalreminder.homeScreen.presenter.HomeScreenPresenter;
+import com.team_three.medicalreminder.model.MedicationPOJO;
+import com.team_three.medicalreminder.model.Repository;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements HomeFragmentInterface ,OnClickListener{
 
     private FragmentHomeBinding fragmentHomeBinding;
     HomeAdapter homeAdapter;
+    HomeScreenPresenter myPresenter;
+    Repository myRepository;
     boolean isClicked = false;
     private Animation rotateOpen;
     private Animation rotateClose;
     private Animation fromBottom;
     private Animation toBottom;
+    private Long timeNow;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        rotateOpen = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.rotate_open_anim);
-        rotateClose = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_close_anim);
-        fromBottom = AnimationUtils.loadAnimation(getActivity(), R.anim.from_bottom_anim);
-        toBottom = AnimationUtils.loadAnimation(getActivity(), R.anim.to_bottom_anim);
+        loadAnimation();
 
 
     }
@@ -70,8 +77,14 @@ public class HomeFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_fragment_home_to_addMedication);
             }
         });
-
         return fragmentHomeBinding.getRoot();
+    }
+
+    private void loadAnimation() {
+        rotateOpen = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.rotate_open_anim);
+        rotateClose = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_close_anim);
+        fromBottom = AnimationUtils.loadAnimation(getActivity(), R.anim.from_bottom_anim);
+        toBottom = AnimationUtils.loadAnimation(getActivity(), R.anim.to_bottom_anim);
     }
 
     private void onAddButtonClicked(boolean isClicked) {
@@ -108,8 +121,8 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void setClickable(boolean clicked){
-        if(!clicked){
+    private void setClickable(boolean clicked) {
+        if (!clicked) {
             fragmentHomeBinding.secondfloatingActionButton.setClickable(false);
             fragmentHomeBinding.thirdfloatingActionButton2.setClickable(false);
         }
@@ -117,42 +130,38 @@ public class HomeFragment extends Fragment {
         fragmentHomeBinding.thirdfloatingActionButton2.setClickable(true);
 
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.i("TAG", "onCreateView:Fragment ");
 
-        //
-//        Repository mRepository=Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(getContext()),getContext());
-//       MedicationPOJO medicationPOJO=new MedicationPOJO();
-//        medicationPOJO.setEndDate("88");
-//        medicationPOJO.setActive(true);
-//        List<Boolean> l = new ArrayList<>();
-//        l.add(true);
-//        medicationPOJO.setIsTakenList(l);
-//        Map<String,Integer> m = new HashMap<>();
-//        m.put("8:00 AM" , 3);
-//        medicationPOJO.setTimeAndDose(m);
-//        medicationPOJO.setStartDate("22/2/99");
-//        medicationPOJO.setEndDate("27/2/99");
-//        medicationPOJO.setMedicationName("ahmed");
-//        mRepository.insertMedication(medicationPOJO);
-        //
+// get
+        initRecycleView();
+        initRepository();
+        initCalendar(view);
+//        requestDataFromPresenter(timeNow);
+        // make presenter
 
-        ArrayList<MedicineDetails> medicineDetails = new ArrayList<>();
-        medicineDetails.add(new MedicineDetails("8:00 am", R.drawable.ic_baseline_add_24,
-                "dore", "50 g take it at 1 am"));
-        medicineDetails.add(new MedicineDetails("8:00 am", R.drawable.ic_baseline_add_24,
-                "dore", "50 g take it at 1 am"));
-        medicineDetails.add(new MedicineDetails("8:00 am", R.drawable.ic_baseline_add_24,
-                "dore", "50 g take it at 1 am"));
+
+    }
+
+    private void initRecycleView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(HomeFragment.this.getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-        homeAdapter = new HomeAdapter(this.getContext(), medicineDetails);
+        homeAdapter = new HomeAdapter(this.getContext(), null,this);
         fragmentHomeBinding.fragmntHomeScreenRecycleVie.setLayoutManager(layoutManager);
         fragmentHomeBinding.fragmntHomeScreenRecycleVie.setAdapter(homeAdapter);
-        homeAdapter.notifyDataSetChanged();
+//        homeAdapter.notifyDataSetChanged();
+    }
 
+
+    private void initRepository() {
+        LocalSourceInterface myLocal = ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext());
+        myRepository = Repository.getInstance(myLocal, this.getContext());
+        myPresenter = new HomeScreenPresenter(this, myRepository);
+    }
+
+    private void initCalendar(View view) {
         //
         /* starts before 1 month from now */
         Calendar startDate = Calendar.getInstance();
@@ -160,6 +169,10 @@ public class HomeFragment extends Fragment {
 
         /* ends after 1 month from now */
         Calendar endDate = Calendar.getInstance();
+        // get Time Now
+        timeNow = endDate.getTimeInMillis();
+        // request Data from presenter
+
         endDate.add(Calendar.MONTH, 1);
         HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(view, R.id.calendarView).startDate(startDate.getTime())
                 .endDate(endDate.getTime())
@@ -167,19 +180,21 @@ public class HomeFragment extends Fragment {
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Date date, int position) {
-                Log.e("TAG", "onDateSelected: " + date);
-
+                timeNow = date.getTime();
+                requestDataFromPresenter(timeNow);
             }
 
 
             @Override
             public void onCalendarScroll(HorizontalCalendarView calendarView,
                                          int dx, int dy) {
-                Log.e("TAG", "onCalendarScroll: " + "dx=" + dx + "dy   " + dy);
-
             }
 
         });
+    }
+
+    private void requestDataFromPresenter(long timeNow) {
+        myPresenter.getMedicationDay(this, timeNow);
 
     }
 
@@ -188,4 +203,22 @@ public class HomeFragment extends Fragment {
         super.onDestroy();
         fragmentHomeBinding = null;
     }
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    @Override
+    public void showMedications(List<MedicationPOJO> storedMedications) {
+        homeAdapter.setMedicines(storedMedications);
+        homeAdapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void onClick(View view,int position) {
+        myPresenter.updatePosition(position);
+        Navigation.findNavController(view).navigate(R.id.action_fragment_home_to_medicationTimeFragment);
+
+
+    }
 }
+
