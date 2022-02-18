@@ -91,8 +91,8 @@ public class ConcreteLocalClass implements LocalSourceInterface {
 
 
     @Override
-    public LiveData<List<MedicationPOJO>> getMedicationDay() {
-        return storedMedications;
+    public LiveData<List<MedicationPOJO>> getMedicationDay(long time) {
+        return dao.getMedicationDay(time);
     }
 
 }

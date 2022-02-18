@@ -63,7 +63,7 @@ public class Repository implements RepositoryInterface{
     }
 
     @Override
-    public LiveData<List<MedicationPOJO>> getMedicationDay() {
-        return localSourceInterface.getMedicationDay();
+    public LiveData<List<MedicationPOJO>> getMedicationDay(long time) {
+        return localSourceInterface.getMedicationDay(time);
     }
 }

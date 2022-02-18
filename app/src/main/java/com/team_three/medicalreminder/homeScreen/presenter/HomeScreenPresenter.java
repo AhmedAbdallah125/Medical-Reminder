@@ -33,13 +33,19 @@ public class HomeScreenPresenter implements HomePresenterInterface {
         if (time == 0) {
             time = timeSaved;
         }
-        myRepository.getMedicationDay().observe(owner, new Observer<List<MedicationPOJO>>() {
+        myRepository.getAllMedication().observe(owner, new Observer<List<MedicationPOJO>>() {
             @Override
             public void onChanged(List<MedicationPOJO> medicationPOJOS) {
-                // call to update there
                 myView.showMedications(medicationPOJOS);
             }
         });
+//        myRepository.getMedicationDay(time).observe(owner, new Observer<List<MedicationPOJO>>() {
+//            @Override
+//            public void onChanged(List<MedicationPOJO> medicationPOJOS) {
+//                // call to update there
+//                myView.showMedications(medicationPOJOS);
+//            }
+//        });
     }
 
     @Override

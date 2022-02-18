@@ -34,7 +34,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment implements HomeFragmentInterface ,OnClickListener{
+public class HomeFragment extends Fragment implements HomeFragmentInterface, OnClickListener {
 
     private FragmentHomeBinding fragmentHomeBinding;
     HomeAdapter homeAdapter;
@@ -135,10 +135,9 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface ,OnC
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-// get
+        initCalendar(view);
         initRecycleView();
         initRepository();
-        initCalendar(view);
 //        requestDataFromPresenter(timeNow);
         // make presenter
 
@@ -148,7 +147,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface ,OnC
     private void initRecycleView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(HomeFragment.this.getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-        homeAdapter = new HomeAdapter(this.getContext(), null,this);
+        homeAdapter = new HomeAdapter(this.getContext(), null, this);
         fragmentHomeBinding.fragmntHomeScreenRecycleVie.setLayoutManager(layoutManager);
         fragmentHomeBinding.fragmntHomeScreenRecycleVie.setAdapter(homeAdapter);
 //        homeAdapter.notifyDataSetChanged();
@@ -214,7 +213,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface ,OnC
 
 
     @Override
-    public void onClick(View view,int position) {
+    public void onClick(View view, int position) {
         myPresenter.updatePosition(position);
         Navigation.findNavController(view).navigate(R.id.action_fragment_home_to_medicationTimeFragment);
 

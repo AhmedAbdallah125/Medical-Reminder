@@ -2,6 +2,7 @@ package com.team_three.medicalreminder.homeScreen.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,8 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
 
     public void setMedicine(MedicationPOJO medicines) {
         this.medicines = medicines;
+        timeAndDose=medicines.getTimeAndDose();
+        Log.i("TAG", "setMedicine: "+medicines.getTimeAndDose().entrySet().iterator().next().getKey());
     }
 
 
@@ -53,9 +56,9 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Map.Entry<String, Integer> entry = timeAndDose.entrySet().iterator().next();
-
+        Log.d("TAG", "onBindViewHolder: fdddd");
         holder.timeBinding.recycleHour.setText(entry.getKey());
-        holder.timeBinding.txtPillCount.setText(medicines.getFormat() + " :" + entry.getValue());
+        holder.timeBinding.txtPillCount.setText(medicines.getFormat() + " : " + entry.getValue());
         holder.timeBinding.cardTimeView.setOnClickListener(view -> {
             onClickListener.onClick(view,position);
         });
@@ -71,6 +74,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
 
         public ViewHolder(TimeCardBinding timeBinding) {
             super(timeBinding.getRoot());
+            this.timeBinding=timeBinding;
         }
     }
 }

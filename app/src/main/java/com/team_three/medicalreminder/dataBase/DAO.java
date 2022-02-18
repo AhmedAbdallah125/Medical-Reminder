@@ -42,6 +42,6 @@ public interface DAO {
 
     //for specified medicine
     @Query("SELECT * FROM Medications WHERE (:data Between startDate AND endDate) AND isActive=1 ")
-    LiveData<MedicationPOJO> getMedicationDay(long data);
+    LiveData<List<MedicationPOJO>> getMedicationDay(long data);
 
 }
