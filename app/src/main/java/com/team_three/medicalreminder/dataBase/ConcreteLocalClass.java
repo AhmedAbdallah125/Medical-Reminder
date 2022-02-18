@@ -88,16 +88,7 @@ public class ConcreteLocalClass implements LocalSourceInterface {
         return dao.getInactiveMedications();
     }
 
-    @Override
-    public void updateMedication(MedicationPOJO medication) {
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                dao.updateMedications(medication);
-            }
-        }.start();
-    }
+
 
 
 }
