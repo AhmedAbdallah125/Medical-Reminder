@@ -18,4 +18,9 @@ public class MedicationDrugDisplayPresenter implements MedicationDrugDisplayPres
     public void deleteMedication(MedicationPOJO medication) {
         repository.deleteMedication(medication);
     }
+
+    @Override
+    public void updateMedication(MedicationPOJO medication) {
+        repository.updateMedications(medication);
+    }
 }

@@ -196,7 +196,6 @@ public class MedicationPOJO implements Parcelable {
 
     public void setActive(boolean active) {
         isActive = active;
-
     }
 
     @Override

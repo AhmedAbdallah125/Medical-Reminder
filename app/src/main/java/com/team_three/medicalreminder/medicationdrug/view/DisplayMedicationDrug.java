@@ -82,6 +82,12 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
             Navigation.findNavController(v).navigate(R.id.action_displayMedicationDrug_to_fragment_home);
         });
 
+        binding.btnSuspend.setOnClickListener(v->{
+            medication.setActive(!medication.isActive());
+            updateMedication(medication);
+            binding.btnSuspend.setText(medication.isActive()?"SUSPEND":"RESUME");
+            Toast.makeText(this.getContext(), "Successfully updated!", Toast.LENGTH_SHORT).show();
+        });
     }
 
     @Override
@@ -89,9 +95,15 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
         presenterInterface.deleteMedication(medication);
     }
 
+    @Override
+    public void updateMedication(MedicationPOJO medication) {
+        presenterInterface.updateMedication(medication);
+    }
+
     private void setDisplay() {
         binding.imageDrug.setImageResource(medication.getImageID());
         binding.txtDrugName.setText(medication.getMedicationName());
+        binding.btnSuspend.setText(medication.isActive()?"SUSPEND":"RESUME");
         String drugDose = medication.getStrength() + " " + medication.getWeight();
         binding.txtDrugDose.setText(drugDose);
         String date = medication.getRecurrence() + ", until " + getDate();
