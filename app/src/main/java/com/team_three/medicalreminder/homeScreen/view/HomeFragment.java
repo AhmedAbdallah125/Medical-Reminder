@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.dataBase.LocalSourceInterface;
@@ -138,10 +139,18 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
         initCalendar(view);
         initRecycleView();
         initRepository();
+       requestDataFromPresenter(timeNow);
 //        requestDataFromPresenter(timeNow);
         // make presenter
+        checkWorking();
 
 
+
+    }
+    private void checkWorking(){
+        fragmentHomeBinding.thirdfloatingActionButton2.setOnClickListener(v->{
+            Navigation.findNavController(v).navigate(R.id.action_fragment_home_to_loginFragment);
+        });
     }
 
     private void initRecycleView() {
@@ -215,6 +224,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
     @Override
     public void onClick(View view, int position) {
         myPresenter.updatePosition(position);
+        myPresenter.updateTime(timeNow);
         Navigation.findNavController(view).navigate(R.id.action_fragment_home_to_medicationTimeFragment);
     }
 }

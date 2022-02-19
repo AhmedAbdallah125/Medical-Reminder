@@ -20,17 +20,17 @@ import java.util.Map;
 
 public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
     final private Context _context;
-    private MedicationPOJO medicines;
+    private MedicationPOJO medicine;
     private Map<String, Integer> timeAndDose;
     private OnClickListener onClickListener;
 
 
     public TimeAdapter(Context context, MedicationPOJO medicines,OnClickListener onClickListener) {
         if (medicines == null) {
-            medicines = new MedicationPOJO();
+            medicine = new MedicationPOJO();
             this.timeAndDose = new HashMap<>();
         } else {
-            this.medicines = medicines;
+            this.medicine = medicines;
             this.timeAndDose = medicines.getTimeAndDose();
         }
         _context = context;
@@ -39,7 +39,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
     }
 
     public void setMedicine(MedicationPOJO medicines) {
-        this.medicines = medicines;
+        this.medicine = medicines;
         timeAndDose=medicines.getTimeAndDose();
         Log.i("TAG", "setMedicine: "+medicines.getTimeAndDose().entrySet().iterator().next().getKey());
     }
@@ -58,7 +58,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
         Map.Entry<String, Integer> entry = timeAndDose.entrySet().iterator().next();
         Log.d("TAG", "onBindViewHolder: fdddd");
         holder.timeBinding.recycleHour.setText(entry.getKey());
-        holder.timeBinding.txtPillCount.setText(medicines.getFormat() + " : " + entry.getValue());
+        holder.timeBinding.txtPillCount.setText(medicine.getFormat() + " : " + entry.getValue());
         holder.timeBinding.cardTimeView.setOnClickListener(view -> {
             onClickListener.onClick(view,position);
         });

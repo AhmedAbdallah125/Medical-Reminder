@@ -21,8 +21,6 @@ public interface DAO {
     void insertMedication(MedicationPOJO medication);
 
 
-
-
     //for specified medicine
     @Query("SELECT * FROM Medications WHERE id =:id")
     LiveData<MedicationPOJO> getMedications(int id);

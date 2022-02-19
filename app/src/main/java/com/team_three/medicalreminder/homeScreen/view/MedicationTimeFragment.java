@@ -51,9 +51,10 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initRepository();
         initRecycleView();
+        initRepository();
 
+        requestDataFromPresenter();
 
     }
     private void bindViews(){
@@ -69,7 +70,7 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
         // don't forget
         binding.timeRecycleView.setLayoutManager(layoutManager);
         binding.timeRecycleView.setAdapter(timeAdapter);
-        requestDataFromPresenter();
+//        requestDataFromPresenter();
 //        homeAdapter.notifyDataSetChanged();
     }
 
@@ -82,9 +83,8 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void showMedications(List<MedicationPOJO> storedMedications) {
-        medicationPOJO=storedMedications.get(0);
-        Log.i("TAG", "showMedications: "+medicationPOJO.getTimeAndDose().entrySet().iterator().next().getKey());
-//        medicationPOJO=storedMedications.get(HomeScreenPresenter.position);
+
+        medicationPOJO=storedMedications.get(HomeScreenPresenter.position);
         bindViews();
         timeAdapter.setMedicine(medicationPOJO);
         timeAdapter.notifyDataSetChanged();
