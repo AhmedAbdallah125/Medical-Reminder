@@ -9,14 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.team_three.medicalreminder.databinding.ActiveMedsRowBinding;
-import com.team_three.medicalreminder.medicationList.model.MedicinesActive;
+import com.team_three.medicalreminder.model.MedicationPOJO;
 
 import java.util.List;
 public class MedsListAdapter extends RecyclerView.Adapter<MedsListAdapter.ViewHolder> {
     final private Context _context;
-    private List<MedicinesActive> medicines;
+    private List<MedicationPOJO> medicines;
 
-    public MedsListAdapter(Context context, List<MedicinesActive> medicines) {
+    public MedsListAdapter(Context context, List<MedicationPOJO> medicines) {
         Log.i("TAG", "MedsListAdapter: abdoooo");
         _context = context;
         this.medicines = medicines;
@@ -44,13 +44,13 @@ public class MedsListAdapter extends RecyclerView.Adapter<MedsListAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull MedsListAdapter.ViewHolder holder, int position) {
         Log.i("TAG", "onBindViewHolder:ABDOOOOOOOOOO ");
-        holder.binding.imgActiveMed.setImageResource(medicines.get(position).getIconResource());
-        holder.binding.txtActiveMedName.setText(medicines.get(position).getName());
-        holder.binding.txtActiveStrengthNumberOfTheMed.setText(String.valueOf(medicines.get(position).getStrengthNumber()));
-        holder.binding.txtActiveStrengthWeightOfTheMed.setText(medicines.get(position).getStrengthWeight());
-        holder.binding.txtNumberOfUnits.setText(String.valueOf(medicines.get(position).getNumberOfUnits()));
-        holder.binding.txtFormOfMed.setText(medicines.get(position).getMedsForm());
-        holder.binding.txtLeft.setText(medicines.get(position).getLeft());
+        holder.binding.imgActiveMed.setImageResource(medicines.get(position).getImageID());
+        holder.binding.txtActiveMedName.setText(medicines.get(position).getMedicationName());
+        holder.binding.txtActiveStrengthNumberOfTheMed.setText(String.valueOf(medicines.get(position).getStrength()));
+        holder.binding.txtActiveStrengthWeightOfTheMed.setText(medicines.get(position).getWeight());
+        holder.binding.txtNumberOfUnits.setText(String.valueOf(medicines.get(position).getLeftNumber()));
+        holder.binding.txtFormOfMed.setText(medicines.get(position).getFormat());
+        holder.binding.txtLeft.setText("left");
     }
 
     @Override

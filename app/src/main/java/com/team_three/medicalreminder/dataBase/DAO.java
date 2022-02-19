@@ -21,6 +21,8 @@ public interface DAO {
     void insertMedication(MedicationPOJO medication);
 
 
+
+
     //for specified medicine
     @Query("SELECT * FROM Medications WHERE id =:id")
     LiveData<MedicationPOJO> getMedications(int id);
@@ -32,9 +34,14 @@ public interface DAO {
     @Update()
     void updateMedications(MedicationPOJO medicationPOJO);
 
+    @Query("SELECT * FROM Medications WHERE isActive =1")
+    LiveData<List<MedicationPOJO>> getActiveMedications();
+
+    @Query("SELECT * FROM Medications WHERE isActive =0")
+    LiveData<List<MedicationPOJO>> getInactiveMedications();
 
     //for specified medicine
-    @Query("SELECT * FROM Medications WHERE (:data Between startDate AND endDate) AND isActive=1 ")
-    LiveData<MedicationPOJO> getMedicationDay(long data);
+    @Query("SELECT * FROM Medications WHERE (:data >=startDate And :data>endDate ) AND isActive=1 ")
+    LiveData<List<MedicationPOJO>> getMedicationDay(long data);
 
 }

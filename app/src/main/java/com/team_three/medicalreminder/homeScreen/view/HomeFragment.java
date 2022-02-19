@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.dataBase.LocalSourceInterface;
@@ -34,7 +35,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment implements HomeFragmentInterface ,OnClickListener{
+public class HomeFragment extends Fragment implements HomeFragmentInterface, OnClickListener {
 
     private FragmentHomeBinding fragmentHomeBinding;
     HomeAdapter homeAdapter;
@@ -135,20 +136,26 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface ,OnC
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-// get
+        initCalendar(view);
         initRecycleView();
         initRepository();
-        initCalendar(view);
-//        requestDataFromPresenter(timeNow);
+       requestDataFromPresenter(timeNow);
         // make presenter
+        checkWorking();
 
 
+
+    }
+    private void checkWorking(){
+        fragmentHomeBinding.thirdfloatingActionButton2.setOnClickListener(v->{
+            Navigation.findNavController(v).navigate(R.id.action_fragment_home_to_loginFragment);
+        });
     }
 
     private void initRecycleView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(HomeFragment.this.getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-        homeAdapter = new HomeAdapter(this.getContext(), null,this);
+        homeAdapter = new HomeAdapter(this.getContext(), null, this);
         fragmentHomeBinding.fragmntHomeScreenRecycleVie.setLayoutManager(layoutManager);
         fragmentHomeBinding.fragmntHomeScreenRecycleVie.setAdapter(homeAdapter);
 //        homeAdapter.notifyDataSetChanged();
@@ -214,8 +221,9 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface ,OnC
 
 
     @Override
-    public void onClick(View view,int position) {
+    public void onClick(View view, int position) {
         myPresenter.updatePosition(position);
+        myPresenter.updateTime(timeNow);
         Navigation.findNavController(view).navigate(R.id.action_fragment_home_to_medicationTimeFragment);
 
 

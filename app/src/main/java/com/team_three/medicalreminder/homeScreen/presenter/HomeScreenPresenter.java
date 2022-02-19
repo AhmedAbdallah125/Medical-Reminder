@@ -1,9 +1,13 @@
 package com.team_three.medicalreminder.homeScreen.presenter;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import com.team_three.medicalreminder.homeScreen.view.HomeFragmentInterface;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
 
+import java.nio.file.ClosedFileSystemException;
 import java.util.List;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -18,7 +22,7 @@ public class HomeScreenPresenter implements HomePresenterInterface {
     private Repository myRepository;
     private HomeFragmentInterface myView;
     private LiveData<List<MedicationPOJO>> storedMedications;
-    private static long timeSaved;
+     static long timeSaved;
     public static int position;
 
     public HomeScreenPresenter(HomeFragmentInterface myView, Repository myRepository) {
@@ -33,7 +37,13 @@ public class HomeScreenPresenter implements HomePresenterInterface {
         if (time == 0) {
             time = timeSaved;
         }
-        myRepository.getMedicationDay().observe(owner, new Observer<List<MedicationPOJO>>() {
+//        myRepository.getAllMedication().observe(owner, new Observer<List<MedicationPOJO>>() {
+//            @Override
+//            public void onChanged(List<MedicationPOJO> medicationPOJOS) {
+//                myView.showMedications(medicationPOJOS);
+//            }
+//        });
+        myRepository.getMedicationDay(time).observe(owner, new Observer<List<MedicationPOJO>>() {
             @Override
             public void onChanged(List<MedicationPOJO> medicationPOJOS) {
                 // call to update there
@@ -45,6 +55,11 @@ public class HomeScreenPresenter implements HomePresenterInterface {
     @Override
     public void updatePosition(int p) {
         position = p;
+    }
+
+    @Override
+    public void updateTime(long time) {
+        timeSaved=time;
     }
 
 

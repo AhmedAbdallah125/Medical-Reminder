@@ -43,6 +43,24 @@ public class MedicationPOJO {
     private int leftNumberReminder;
     private boolean isActive;
     private List<Boolean> isTakenList;
+    private String medicationReason;
+    private String recurrence;
+
+    public String getMedicationReason() {
+        return medicationReason;
+    }
+
+    public void setMedicationReason(String medicationReason) {
+        this.medicationReason = medicationReason;
+    }
+
+    public String getRecurrence() {
+        return recurrence;
+    }
+
+    public void setRecurrence(String recurrence) {
+        this.recurrence = recurrence;
+    }
 
     public int getId() {
         return id;

@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
     HomeScreenPresenter myPresenter;
     Repository myRepository;
     FragmentMedicationTimeBinding binding;
+    MedicationPOJO medicationPOJO;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,12 +47,20 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
         return binding.getRoot();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initRepository();
         initRecycleView();
+        initRepository();
 
+        requestDataFromPresenter();
+
+    }
+    private void bindViews(){
+        binding.iconTimeMedication.setImageResource(medicationPOJO.getImageID());
+        binding.timeTxtMedicationName.setText(medicationPOJO.getMedicationName());
+        binding.timeTxtStrength.setText(medicationPOJO.getStrength()+" :"+medicationPOJO.getWeight());
     }
 
     private void initRecycleView() {
@@ -60,7 +70,7 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
         // don't forget
         binding.timeRecycleView.setLayoutManager(layoutManager);
         binding.timeRecycleView.setAdapter(timeAdapter);
-        requestDataFromPresenter();
+//        requestDataFromPresenter();
 //        homeAdapter.notifyDataSetChanged();
     }
 
@@ -73,12 +83,16 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void showMedications(List<MedicationPOJO> storedMedications) {
-        timeAdapter.setMedicine(storedMedications.get(HomeScreenPresenter.position));
+
+        medicationPOJO=storedMedications.get(HomeScreenPresenter.position);
+        bindViews();
+        timeAdapter.setMedicine(medicationPOJO);
         timeAdapter.notifyDataSetChanged();
     }
 
     private void requestDataFromPresenter() {
-        myPresenter.getMedicationDay(this, 0);
+       myPresenter.getMedicationDay(this, 0);
+//        myPresenter.getMedicationDay;
 
     }
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "987090001629",
+    "project_id": "medical-reminder-2d5d9",
+    "storage_bucket": "medical-reminder-2d5d9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987090001629:android:266642523366c16336c534",
+        "android_client_info": {
+          "package_name": "com.team_three.medicalreminder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987090001629-qs2g035me24hhq5fj1g4hdfhv66iiakc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHvekEypxnL8wnC4VQdf00SUhiXQ3ssj8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987090001629-qs2g035me24hhq5fj1g4hdfhv66iiakc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
