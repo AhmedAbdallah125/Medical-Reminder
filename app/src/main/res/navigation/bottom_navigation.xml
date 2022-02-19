@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_fragment_home_to_medicationTimeFragment"
             app:destination="@id/medicationTimeFragment" />
+        <action
+            android:id="@+id/action_fragment_home_to_helpRequistList"
+            app:destination="@id/helpRequistList" />
     </fragment>
     <fragment
         android:id="@+id/fragment_medication_list"
@@ -31,6 +34,9 @@
         <action
             android:id="@+id/action_fragment_medication_list_to_fragment_add_Medication"
             app:destination="@id/fragment_add_Medication" />
+        <action
+            android:id="@+id/action_fragment_medication_list_to_displayMedicationDrug"
+            app:destination="@id/displayMedicationDrug" />
     </fragment>
     <fragment
         android:id="@+id/fragment_add_Medication"
@@ -90,4 +96,9 @@
             android:id="@+id/action_medicationTimeFragment_to_displayMedicationDrug"
             app:destination="@id/displayMedicationDrug" />
     </fragment>
+    <fragment
+        android:id="@+id/helpRequistList"
+        android:name="com.team_three.medicalreminder.helpRequest.HelpRequistList"
+        android:label="fragment_help_requist_list"
+        tools:layout="@layout/fragment_help_requist_list" />
 </navigation>

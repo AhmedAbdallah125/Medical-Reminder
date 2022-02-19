@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/requestRow"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/takerRequestConstrainyt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/requestImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/one"
+            app:civ_border_color="#FFf0f0f0"
+            app:civ_border_width="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtinvitorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="12dp"
+            android:text="abdelrhman"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/requestImage"
+            app:layout_constraintTop_toTopOf="@+id/requestImage" />
+
+        <TextView
+            android:id="@+id/txtInvite"
+            android:layout_width="200dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="8dp"
+            android:text="invite you to help him"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/txtinvitorName"
+            app:layout_constraintTop_toBottomOf="@+id/txtinvitorName" />
+
+        <Button
+            android:id="@+id/btnReject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#CA2F2F"
+            android:text="@string/btnReject"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/requestImage" />
+
+        <Button
+            android:id="@+id/btnAccept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:backgroundTint="#34B539"
+            android:text="@string/btnAccept"
+            app:layout_constraintStart_toEndOf="@+id/btnReject"
+            app:layout_constraintTop_toTopOf="@+id/btnReject" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

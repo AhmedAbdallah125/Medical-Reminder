@@ -1,17 +1,19 @@
 package com.team_three.medicalreminder.taker.view;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.team_three.medicalreminder.databinding.ActiveMedsRowBinding;
+import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.TakerRowBinding;
 
-import com.team_three.medicalreminder.taker.model.Taker;
+import com.team_three.medicalreminder.model.Taker;
 
 import java.util.List;
 
@@ -50,6 +52,11 @@ public class TakerListAdabter extends RecyclerView.Adapter<TakerListAdabter.View
         Log.i("TAG", "onBindViewHolder:ABDOOOOOOOOOO ");
         holder.binding.imageView.setImageResource(takers.get(position).getImg());
         holder.binding.txttakerName.setText(takers.get(position).getName());
+        holder.binding.takerConstraint.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("profileData",  takers.get(position));
+            Navigation.findNavController(view).navigate(R.id.action_fragment_taker_list_to_takerProfileScreen,bundle);
+        });
     }
 
     @Override

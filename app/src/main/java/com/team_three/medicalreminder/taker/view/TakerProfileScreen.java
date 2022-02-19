@@ -2,17 +2,20 @@ package com.team_three.medicalreminder.taker.view;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.team_three.medicalreminder.R;
+import com.team_three.medicalreminder.databinding.FragmentTakerProfileScreenBinding;
+import com.team_three.medicalreminder.model.Taker;
 
 
 public class TakerProfileScreen extends Fragment {
-
+    FragmentTakerProfileScreenBinding binding;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,18 @@ public class TakerProfileScreen extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_taker_profile_screen, container, false);
+        binding =FragmentTakerProfileScreenBinding.inflate(inflater,container,false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Bundle bundle = getArguments();
+        if(bundle!=null){
+            Taker taker = bundle.getParcelable("profileData");
+            binding.txtFirstNameProfileTaker.setText(taker.getName());
+        }
+
     }
 }

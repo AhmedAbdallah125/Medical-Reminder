@@ -1,13 +1,17 @@
 package com.team_three.medicalreminder.medicationList.view;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.InactiveMedsRowBinding;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 
@@ -37,7 +41,12 @@ public class InactiveListAdapter extends RecyclerView.Adapter<InactiveListAdapte
         holder.binding.txtInactiveMedName.setText(medicines.get(position).getMedicationName());
         holder.binding.txtInactiveStrengthNumberOfTheMed.setText(String.valueOf(medicines.get(position).getStrength()));
         holder.binding.txtInactiveStrengthWeightOfTheMed.setText(medicines.get(position).getWeight());
+        holder.binding.inactiveConstraint.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("displayMed", medicines.get(position));
+            Navigation.findNavController(view).navigate(R.id.action_fragment_medication_list_to_displayMedicationDrug,bundle);
 
+        });
     }
 
     @Override

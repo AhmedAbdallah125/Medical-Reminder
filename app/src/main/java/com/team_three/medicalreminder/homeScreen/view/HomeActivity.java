@@ -42,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-                if (navDestination.getId() == R.id.fragment_medication_list ||navDestination.getId() == R.id.fragment_home || navDestination.getId() == R.id.fragment_taker_list) {
+                if (navDestination.getId() == R.id.fragment_medication_list ||navDestination.getId() == R.id.fragment_home || navDestination.getId() == R.id.fragment_taker_list||navDestination.getId() == R.id.helpRequistList) {
                     homeBinding.toolbar.setVisibility(View.VISIBLE);
                     homeBinding.navigatorViewHome.setVisibility(View.VISIBLE);
 

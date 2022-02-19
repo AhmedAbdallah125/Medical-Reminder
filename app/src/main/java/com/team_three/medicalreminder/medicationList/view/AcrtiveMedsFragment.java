@@ -26,7 +26,7 @@ import java.util.List;
 public class AcrtiveMedsFragment extends Fragment implements ActiveViewInterface {
     private FragmentAcrtiveMedsBinding fragmentAcrtiveMedsBinding;
     ActivePresenterInterface activePresenterInterface;
-    MedsListAdapter adapter;
+    ActiveListAdapter adapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +73,7 @@ public class AcrtiveMedsFragment extends Fragment implements ActiveViewInterface
             fragmentAcrtiveMedsBinding.activeStr.setVisibility(View.VISIBLE);
             fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setVisibility(View.VISIBLE);
 
-            adapter=new MedsListAdapter(this.getContext(),medications);
+            adapter=new ActiveListAdapter(this.getContext(),medications);
             fragmentAcrtiveMedsBinding.activeRecyclerVeiw.setAdapter(adapter);
 
         }
