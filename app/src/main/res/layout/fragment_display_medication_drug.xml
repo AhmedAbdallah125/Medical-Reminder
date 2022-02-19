@@ -5,10 +5,15 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".medicationdrug.view.DisplayMedicationDrug">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="-16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="@dimen/buttonCornerRadius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -35,8 +40,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginBottom="4dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/txtDrugDose"
                 app:layout_constraintStart_toEndOf="@+id/imageDrug"
@@ -48,8 +53,8 @@
                 android:id="@+id/txtDrugDose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:layout_marginBottom="16dp"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
 
                 app:layout_constraintStart_toStartOf="@+id/txtDrugName"
@@ -61,7 +66,7 @@
                 android:id="@+id/imageBack"
                 android:layout_width="@dimen/iconWidth"
                 android:layout_height="@dimen/iconHeight"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:contentDescription="@string/backPhoto"
                 app:layout_constraintStart_toStartOf="@+id/imageDrug"
                 app:layout_constraintTop_toTopOf="parent"
@@ -113,30 +118,29 @@
     <Button
         android:id="@+id/btnSuspend"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/buttonHeight"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/primaryColor"
         android:text="@string/btnSuspend"
         android:textColor="@color/white"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView1"
+        app:cornerRadius="@dimen/buttonCornerRadius"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView1"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
         tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     <Button
         android:id="@+id/btnRefill"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/buttonHeight"
         android:backgroundTint="@color/primaryColor"
         android:text="@string/btnRefill"
         android:textColor="@color/white"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:cornerRadius="@dimen/buttonCornerRadius"
         app:layout_constraintEnd_toEndOf="@+id/btnSuspend"
         app:layout_constraintTop_toTopOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.5"
         tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     <TextView
@@ -144,12 +148,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:text="@string/txtReminder"
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toTopOf="@+id/btnSuspend" />
 
     <TextView
         android:id="@+id/textView3"
@@ -206,7 +209,7 @@
         android:id="@+id/txtPrescriptionRefill"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
@@ -216,7 +219,7 @@
         android:id="@+id/txtHowToUse"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:text="After Dinner" />

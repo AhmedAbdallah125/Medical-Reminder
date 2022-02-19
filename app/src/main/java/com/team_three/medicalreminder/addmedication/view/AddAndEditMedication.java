@@ -36,6 +36,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class AddAndEditMedication extends Fragment implements onClickAddMedication, AddAndEditMedicationInterface {
+
     private FragmentAddMedicationBinding binding;
 
     private int pillCounter;
@@ -47,6 +48,8 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
     private ConcreteLocalClass localClass;
     private AddMedicationPresenterInterface presenterInterface;
     private boolean isFillReminder = false;
+    private int previousDestination;
+    private boolean isAdd = false;
 
     public AddAndEditMedication() {
         // Required empty public constructor
@@ -73,17 +76,23 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        previousDestination = Navigation.findNavController(view).getPreviousBackStackEntry().getDestination().getId();
+        Log.i("TAG", "onViewCreated: " + R.id.fragment_medication_list);
+        if(previousDestination == R.id.displayMedicationDrug){
+            binding.txtTitle.setText(R.string.edit_medication);
+            binding.btnAdd.setVisibility(View.INVISIBLE);
+            isAdd =false;
+        }else{
+            isAdd = true;
+            handleDisplayScreen();
+        }
+    }
 
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.Medication_Type,android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-//        binding.spinneMedicationType.setAdapter(adapter);
-//        binding.spinneMedicationType.getSelectedItem().toString();
-
+    private void handleDisplayScreen() {
+        binding.txtTitle.setText(R.string.add_medication);
+        binding.txtDone.setVisibility(View.INVISIBLE);
         binding.btnChooseTime.setVisibility(View.INVISIBLE);
         binding.txtReminderRefill.setVisibility(View.INVISIBLE);
-        binding.txtDone.setVisibility(View.INVISIBLE);
-
-        //must check
         binding.btnAdd.setOnClickListener(v -> {
             setEditTextResultToPOJO();
             setSpinnerResultToPOJO();
@@ -126,18 +135,17 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         binding.reminderFillSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked)
+                if (isChecked)
                     binding.txtReminderRefill.setVisibility(View.VISIBLE);
-                else{
+                else {
                     binding.txtReminderRefill.setVisibility(View.INVISIBLE);
                 }
                 isFillReminder = isChecked;
             }
         });
-
     }
 
-    public void showHourPicker(int s) {
+    private void showHourPicker(int s) {
         final Calendar myCalender = Calendar.getInstance();
         int hour = myCalender.get(Calendar.HOUR_OF_DAY);
         int minute = myCalender.get(Calendar.MINUTE);
@@ -161,7 +169,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         timePickerDialog.show();
     }
 
-    public void showDatePicker(TextView v, String s) {
+    private void showDatePicker(TextView v, String s) {
         final Calendar myCalender = Calendar.getInstance();
         int year = myCalender.get(Calendar.YEAR);
         int month = myCalender.get(Calendar.MONTH);
@@ -195,8 +203,10 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
 
     @Override
     public void onClick(MedicationPOJO medication) {
-        addMedication(medication);
-        Log.i("TAG", "onClickAdd: ");
+        if(isAdd)
+            addMedication(medication);
+        else
+            updateMedication(medication);
     }
 
     @Override
@@ -206,7 +216,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
 
     @Override
     public void showMedication() {
-        presenterInterface.showMedication();
+        medication = presenterInterface.showMedication();
     }
 
     @Override
@@ -215,7 +225,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         Log.i("TAG", "addMedication: ");
     }
 
-    public void setEditTextResultToPOJO(){
+    private void setEditTextResultToPOJO() {
         medication.setMedicationName(Objects.requireNonNull(binding.txtMedicneName.getEditableText()).toString());
         medication.setStrength(Integer.parseInt(binding.txtMedicationStrengthNumber.getEditableText().toString()));
         medication.setLeftNumber(Integer.parseInt(binding.txtPillsLeft.getEditableText().toString()));
@@ -223,7 +233,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         medication.setMedicationReason(binding.txtReason.getEditableText().toString());
     }
 
-    public void setSpinnerResultToPOJO(){
+    private void setSpinnerResultToPOJO() {
         medication.setFormat(binding.spinneMedicationType.getSelectedItem().toString());
         medication.setWeight(binding.spinnerMedicationStrengthWeight.getSelectedItem().toString());
         medication.setTakeTimePerDay(binding.spinnerMedicationNoOfTimes.getSelectedItem().toString());
@@ -231,24 +241,26 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         medication.setRecurrence(binding.spinnerMedicationRecurrence.getSelectedItem().toString());
     }
 
-    public void setDateAndTimeResultToPOJO(){
+    private void setDateAndTimeResultToPOJO() {
         medication.setStartDate(startDate);
         medication.setEndDate(endDate);
         medication.setTimeAndDose(timeAndDose);
     }
 
-    public void setBooleanResultToPOJO() {
+    private void setBooleanResultToPOJO() {
         medication.setFillReminder(isFillReminder);
         medication.setIsTakenList(isTakenList(timeAndDose.size()));
         medication.setActive(true);
         medication.setImageID(R.drawable.ic_pill);
     }
 
-    public List<Boolean> isTakenList(int length){
+    private List<Boolean> isTakenList(int length) {
         List<Boolean> list = new ArrayList<Boolean>();
-        for(int i = 0; i < length; i++){
+        for (int i = 0; i < length; i++) {
             list.add(false);
         }
         return list;
     }
+
+
 }

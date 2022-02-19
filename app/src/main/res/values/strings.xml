@@ -109,4 +109,5 @@
     <string name="txtReminderRefill">How much?</string>
     <string name="recurrence">Recurrence</string>
     <string name="reason_of_medication">Reason of Medication</string>
+    <string name="add_medication">Add Medication</string>
 </resources>
