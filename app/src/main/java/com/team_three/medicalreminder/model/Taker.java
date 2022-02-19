@@ -1,6 +1,11 @@
-package com.team_three.medicalreminder.taker.model;
+package com.team_three.medicalreminder.model;
 
-public class Taker {
+import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+@SuppressLint("ParcelCreator")
+public class Taker implements Parcelable {
     private int img;
    private String name;
 
@@ -23,5 +28,15 @@ public class Taker {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
     }
 }

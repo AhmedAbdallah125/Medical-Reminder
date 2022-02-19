@@ -17,4 +17,10 @@
         android:icon="@drawable/ic_baseline_medical_services_24"/>
 
     />
+    <item
+        android:id="@+id/helpRequistList"
+        android:title="@string/requestString"
+        android:icon="@drawable/ic_baseline_notifications_24"/>
+
+    />
 </menu>

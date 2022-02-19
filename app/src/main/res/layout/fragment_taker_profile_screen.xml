@@ -92,7 +92,7 @@
                     android:layout_marginTop="24dp"
                     app:layout_constraintStart_toStartOf="@+id/imageView5"
                     app:layout_constraintTop_toBottomOf="@+id/imageView5"
-                    tools:src="@drawable/ic_baseline_family_restroom_24" />
+                    app:srcCompat="@drawable/ic_baseline_family_restroom_24" />
 
                 <TextView
                     android:id="@+id/txtLastName"
@@ -110,7 +110,7 @@
                     android:layout_marginTop="24dp"
                     app:layout_constraintStart_toStartOf="@+id/imageView2"
                     app:layout_constraintTop_toBottomOf="@+id/imageView2"
-                    tools:src="@drawable/ic_baseline_gender_24" />
+                    app:srcCompat="@drawable/ic_baseline_gender_24" />
 
                 <TextView
                     android:id="@+id/txtGenderProfileTaker"

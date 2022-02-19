@@ -1,5 +1,9 @@
 package com.team_three.medicalreminder.model;
 
+import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
@@ -11,8 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 //import java.sql.Timestamp;  Timestamp
+@SuppressLint("ParcelCreator")
 @Entity(tableName = "medications")
-public class MedicationPOJO {
+public class MedicationPOJO implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -194,4 +199,13 @@ public class MedicationPOJO {
 
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+    }
 }

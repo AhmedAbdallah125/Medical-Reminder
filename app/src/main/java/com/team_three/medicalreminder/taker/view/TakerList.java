@@ -13,11 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.navigation.NavigationView;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.FragmentTakerListBinding;
-import com.team_three.medicalreminder.medicationList.view.AcrtiveMedsFragment;
-import com.team_three.medicalreminder.taker.model.Taker;
+import com.team_three.medicalreminder.model.Taker;
 
 import java.util.ArrayList;
 
@@ -54,8 +52,9 @@ TakerListAdabter adabter;
         fragmentTakerListBinding.takerRecyclerView.setAdapter(adabter);
 
         fragmentTakerListBinding.btnAddTaker.setOnClickListener(view1 -> {
-            Navigation.findNavController(view1).navigate(R.id.action_takerList2_to_addTaker);
+            Navigation.findNavController(view1).navigate(R.id.action_fragment_home_to_takerList2);
         });
+
     }
 
     @Override
