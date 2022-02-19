@@ -58,7 +58,8 @@ public class ActiveListAdapter extends RecyclerView.Adapter<ActiveListAdapter.Vi
         holder.binding.activeConstraint.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
             bundle.putParcelable("displayMed",  medicines.get(position));
-            Navigation.findNavController(view).navigate(R.id.action_fragment_medication_list_to_displayMedicationDrug,bundle);
+            Navigation.findNavController(view)
+                    .navigate(R.id.action_fragment_medication_list_to_displayMedicationDrug,bundle);
         });
     }
 

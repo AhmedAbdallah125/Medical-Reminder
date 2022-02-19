@@ -17,7 +17,7 @@ public class AddMedicationPresenter implements AddMedicationPresenterInterface{
 
     @Override
     public void updateToDatabase(MedicationPOJO medication) {
-//        repository.updateToDatabase(medication);
+        repository.updateMedications(medication);
     }
 
     @Override

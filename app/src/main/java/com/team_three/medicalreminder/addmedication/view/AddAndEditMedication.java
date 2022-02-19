@@ -28,10 +28,14 @@ import com.team_three.medicalreminder.databinding.FragmentAddMedicationBinding;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -50,6 +54,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
     private boolean isFillReminder = false;
     private int previousDestination;
     private boolean isAdd = false;
+    private String format;
 
     public AddAndEditMedication() {
         // Required empty public constructor
@@ -78,11 +83,11 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         super.onViewCreated(view, savedInstanceState);
         previousDestination = Navigation.findNavController(view).getPreviousBackStackEntry().getDestination().getId();
         Log.i("TAG", "onViewCreated: " + R.id.fragment_medication_list);
-        if(previousDestination == R.id.displayMedicationDrug){
+        if (previousDestination == R.id.displayMedicationDrug) {
             binding.txtTitle.setText(R.string.edit_medication);
             binding.btnAdd.setVisibility(View.INVISIBLE);
-            isAdd =false;
-        }else{
+            isAdd = false;
+        } else {
             isAdd = true;
             handleDisplayScreen();
         }
@@ -156,12 +161,23 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
                 if (view.isShown()) {
                     myCalender.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     myCalender.set(Calendar.MINUTE, minute);
-                    timeAndDose.put(hourOfDay + "/" + minute, s);
+                    if (hourOfDay == 0) {
+                        hourOfDay += 12;
+                        format = "AM";
+                    } else if (hourOfDay == 12) {
+                        format = "PM";
+                    } else if (hourOfDay > 12) {
+                        hourOfDay -= 12;
+                        format = "PM";
+                    } else {
+                        format = "AM";
+                    }
+                    timeAndDose.put(hourOfDay + ":" + minute + " " + format, s);
                 }
             }
         };
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
-                myTimeListener, hour, minute, true);
+                myTimeListener, hour, minute, false);
         String title = "Choose (" + s + ") pill time";
         timePickerDialog.setTitle(title);
 
@@ -175,18 +191,17 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         int month = myCalender.get(Calendar.MONTH);
         int day = myCalender.get(Calendar.DAY_OF_MONTH);
 
-
         DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
                 if (view.isShown()) {
-                    if (s.equals("start")) {
-                        startDate = myCalender.getTimeInMillis();
-                    } else {
-                        endDate = myCalender.getTimeInMillis();
-                    }
                     month = month + 1;
                     String date = day + "/" + month + "/" + year;
+                    if (s.equals("start")) {
+                        startDate = getDateMillis(date);
+                    } else {
+                        endDate = getDateMillis(date);
+                    }
                     v.setText(date);
                 }
 
@@ -203,7 +218,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
 
     @Override
     public void onClick(MedicationPOJO medication) {
-        if(isAdd)
+        if (isAdd)
             addMedication(medication);
         else
             updateMedication(medication);
@@ -262,5 +277,16 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         return list;
     }
 
+    private Long getDateMillis(String date) {
+        long milliseconds = -1;
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        try {
+            Date d = f.parse(date);
+            milliseconds = d.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return milliseconds;
+    }
 
 }

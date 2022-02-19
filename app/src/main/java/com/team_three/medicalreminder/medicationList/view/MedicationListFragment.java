@@ -7,11 +7,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.work.Constraints;
-import androidx.work.Data;
-import androidx.work.NetworkType;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +14,7 @@ import android.view.ViewGroup;
 
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.FragmentMedicationListBinding;
-import com.team_three.medicalreminder.model.WorkMangerForRefil;
 
-import java.util.concurrent.TimeUnit;
 
 
 public class MedicationListFragment extends Fragment {

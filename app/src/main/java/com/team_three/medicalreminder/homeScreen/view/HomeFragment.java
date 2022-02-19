@@ -216,8 +216,6 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
     public void onClick(View view, int position) {
         myPresenter.updatePosition(position);
         Navigation.findNavController(view).navigate(R.id.action_fragment_home_to_medicationTimeFragment);
-
-
     }
 }
 
