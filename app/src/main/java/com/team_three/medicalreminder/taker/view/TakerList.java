@@ -52,7 +52,7 @@ TakerListAdabter adabter;
         fragmentTakerListBinding.takerRecyclerView.setAdapter(adabter);
 
         fragmentTakerListBinding.btnAddTaker.setOnClickListener(view1 -> {
-            Navigation.findNavController(view1).navigate(R.id.action_fragment_home_to_takerList2);
+            Navigation.findNavController(view1).navigate(R.id.action_takerList2_to_addTaker);
         });
 
     }
