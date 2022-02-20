@@ -45,8 +45,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#FFFF"
+                app:selectorColor="@color/secondaryColor"
                 android:contentDescription="@string/todo"
-                app:textColorSelected="#03A9F4" />
+                app:textColorSelected="@color/secondaryColor" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -67,9 +68,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        android:layout_marginBottom="44dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="64dp"
+        android:layout_marginEnd="64dp"
+        android:backgroundTint="@color/primaryColor"
         android:contentDescription="@string/FAB_add"
+        android:tint="@color/white"
         android:src="@drawable/ic_baseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -80,6 +83,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:backgroundTint="@color/primaryColor"
+        android:tint="@color/white"
+
         android:src="@drawable/ic_baseline_color_lens"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/btn_fab_addMedication"
@@ -93,8 +99,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:tint="@color/white"
+
         android:src="@drawable/ic_baseline_edit_24"
         android:visibility="invisible"
+        android:backgroundTint="@color/primaryColor"
         app:layout_constraintBottom_toTopOf="@+id/secondfloatingActionButton"
         app:layout_constraintEnd_toEndOf="@+id/secondfloatingActionButton"
         app:layout_constraintHorizontal_bias="0.0"

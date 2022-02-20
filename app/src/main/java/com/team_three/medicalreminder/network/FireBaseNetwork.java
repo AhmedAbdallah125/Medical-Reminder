@@ -11,6 +11,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthEmailException;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException;
+import com.google.firebase.auth.FirebaseAuthRegistrar;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class FireBaseNetwork implements NetworkInterface {
@@ -32,10 +40,9 @@ public class FireBaseNetwork implements NetworkInterface {
     }
 
 
-
     @Override
     public void setNetworkDelegation(NetworkDelegation networkDelegation) {
-        myDelegation=networkDelegation;
+        myDelegation = networkDelegation;
     }
 
     @Override
@@ -45,11 +52,11 @@ public class FireBaseNetwork implements NetworkInterface {
 //        if(currentUser != null){
 //            reload();
 //        }
-        if(currentUser!=null){
+        if (currentUser != null) {
 
-            myDelegation.onSuccess(true);
+            myDelegation.onSuccess();
         } else {
-            myDelegation.onFailure(false);
+            myDelegation.onFailure("no available");
         }
     }
 
@@ -60,26 +67,22 @@ public class FireBaseNetwork implements NetworkInterface {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            myDelegation.onSuccess(true);
+                            myDelegation.onSuccess();
                         } else {
-                            myDelegation.onFailure(false);
+                            String errorMessage = handleFireBaseException(task);
+                            myDelegation.onFailure(errorMessage);
                         }
 //                        if (task.isSuccessful()) {
 //                            // Sign in success, update UI with the signed-in user's information
 //                            FirebaseUser user = mAuth.getCurrentUser();
 //                            myDelegation.onSuccess(true);
 ////                            updateUI(user);
-//                        } else {
-////                             If sign in fails, display a message to the user.
-////                            Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
-////                                    Toast.LENGTH_SHORT).show();
-////                            updateUI(null);
-//                            myDelegation.onFailure(false);
 //                        }
                     }
                 });
 
     }
+
 
     @Override
     public void signInWithEmailAndPass(Activity activity, String email, String password) {
@@ -88,9 +91,10 @@ public class FireBaseNetwork implements NetworkInterface {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            myDelegation.onSuccess(true);
+                            myDelegation.onSuccess();
                         } else {
-                            myDelegation.onFailure(false);
+                            String errorMessage = handleFireBaseException(task);
+                            myDelegation.onFailure(errorMessage);
                         }
 //                        if (task.isSuccessful()) {
 //                            // Sign in success, update UI with the signed-in user's information
@@ -98,14 +102,28 @@ public class FireBaseNetwork implements NetworkInterface {
 ////                            updateUI(user);
 //                            myDelegation.onSuccess(true);
 //
-//                        } else {
-//                            // If sign in fails, display a message to the user.
-////                            Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
-////                                    Toast.LENGTH_SHORT).show();
-////                            updateUI(null);
 //                        }
                     }
                 });
+    }
+
+    private String handleFireBaseException(Task task) {
+        String errorMessage = "";
+
+        try {
+            throw task.getException();
+        } catch (FirebaseAuthWeakPasswordException e) {
+            errorMessage = "weak Password";
+        } catch (FirebaseAuthUserCollisionException e) {
+            errorMessage = "user exists already";
+        } catch (FirebaseAuthInvalidUserException e) {
+            errorMessage = "problem in e-mail or password";
+        } catch (Exception e) {
+            errorMessage = e.getMessage();
+        }
+
+
+        return errorMessage;
     }
 
 

@@ -106,6 +106,10 @@
         tools:layout="@layout/fragment_help_requist_list" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.team_three.medicalreminder.login.view.LoginFragment"
+        android:name="com.team_three.medicalreminder.Registeration.view.SignINFragment"
         android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.team_three.medicalreminder.Registeration.view.RegisterFragment"
+        android:label="RegisterFragment" />
 </navigation>

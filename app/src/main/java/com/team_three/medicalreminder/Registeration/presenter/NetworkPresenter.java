@@ -1,18 +1,18 @@
-package com.team_three.medicalreminder.login.presenter;
+package com.team_three.medicalreminder.Registeration.presenter;
 
 import android.app.Activity;
 
-import com.team_three.medicalreminder.login.view.LoginViewInterface;
+import com.team_three.medicalreminder.Registeration.view.NetworkViewInterface;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.network.NetworkDelegation;
 
-public class LoginPresenter implements LoginPresenterInterface, NetworkDelegation {
+public class NetworkPresenter implements NetworkPresenterInterface, NetworkDelegation {
 
     private Activity myActivity;
-    private LoginViewInterface myView;
+    private NetworkViewInterface myView;
     private Repository myRepository;
 
-    public LoginPresenter(Activity myActivity, LoginViewInterface myView, Repository myRepository) {
+    public NetworkPresenter(Activity myActivity, NetworkViewInterface myView, Repository myRepository) {
         this.myActivity = myActivity;
         this.myView = myView;
         this.myRepository = myRepository;
@@ -37,13 +37,13 @@ public class LoginPresenter implements LoginPresenterInterface, NetworkDelegatio
 
 
     @Override
-    public void onSuccess(boolean response) {
-        myView.setResponse(response);
+    public void onSuccess() {
+        myView.setSuccessfulResponse();
     }
 
     @Override
-    public void onFailure(boolean response) {
-        myView.setResponse(response);
+    public void onFailure(String errorMessage) {
+        myView.setFailureResponse(errorMessage);
 
     }
 }
