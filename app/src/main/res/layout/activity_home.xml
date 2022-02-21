@@ -53,7 +53,7 @@
                 android:textColor="@color/primaryText"
                 android:text="@string/tool_bar_name"
                 android:textAlignment="textStart"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/icon_avatar"
                 app:layout_constraintTop_toTopOf="parent" />
 

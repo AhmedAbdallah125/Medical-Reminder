@@ -55,10 +55,13 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Map.Entry<String, Integer> entry = timeAndDose.entrySet().iterator().next();
+        List<String> keyList = new ArrayList<String>(timeAndDose.keySet());
+        String key = keyList.get(position);
+        Integer value = timeAndDose.get(key);
+
         Log.d("TAG", "onBindViewHolder: fdddd");
-        holder.timeBinding.recycleHour.setText(entry.getKey());
-        holder.timeBinding.txtPillCount.setText(medicine.getFormat() + " : " + entry.getValue());
+        holder.timeBinding.recycleHour.setText(key);
+        holder.timeBinding.txtPillCount.setText(medicine.getFormat() + " : " +value);
         holder.timeBinding.cardTimeView.setOnClickListener(view -> {
             onClickListener.onClick(view,position);
         });
