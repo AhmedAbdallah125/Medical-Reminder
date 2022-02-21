@@ -2,7 +2,9 @@ package com.team_three.medicalreminder.homeScreen.view;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationBarView;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.Registeration.view.LoginActivity;
+import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.databinding.ActivityHomeBinding;
 import com.team_three.medicalreminder.databinding.HomeDrawerBinding;
 
@@ -21,6 +24,7 @@ import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
@@ -29,19 +33,28 @@ public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding homeBinding;
     NavController navController;
     NavHostFragment navHostFragment;
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
+    String name = "";
+    String email = "";
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        handleDrawer();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(homeBinding.getRoot());
+
         handleToolBar();
         initNavigation();
-        handleDrawer();
-
 
         //
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
@@ -90,15 +103,33 @@ public class HomeActivity extends AppCompatActivity {
     private void handleDrawer() {
         View v = homeBinding.drawerNav.getHeaderView(0);
         HomeDrawerBinding binding = HomeDrawerBinding.bind(v);
-        binding.drawerEditText.setOnClickListener(view -> {
-            Intent outComing = new Intent(this, LoginActivity.class);
-            startActivity(outComing);
-        });
+        if (!checkShared()) {
+            binding.drawerName.setText(name);
+            binding.drawerEditText.setText(email);
+            binding.drawerEditText.setClickable(false);
+        } else {
+            binding.drawerName.setText(R.string.gusest);
+            binding.drawerEditText.setText(R.string.create_profile);
+            binding.drawerEditText.setClickable(true);
+            binding.drawerEditText.setOnClickListener(view -> {
+                homeBinding.homeActivityDrawer.close();
+                Intent outComing = new Intent(this, LoginActivity.class);
+                startActivity(outComing);
+            });
+        }
+
     }
 
     private void handleToolBar() {
         setSupportActionBar(homeBinding.toolbar);
         getSupportActionBar().setTitle("");
+        if (checkShared()) {
+            homeBinding.userNameToolBar.setText(R.string.gusest);
+        } else {
+            homeBinding.userNameToolBar.setText(name);
+
+        }
+
         homeBinding.toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,6 +143,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private boolean checkShared() {
+        sharedPref = getSharedPreferences(RegisterFragment.SHAREDfILE, MODE_PRIVATE);
+        email = sharedPref.getString(RegisterFragment.USER_EMAIL, "null");
+        name = sharedPref.getString(RegisterFragment.USER_NAME, "null");
+        Log.i("TAG", "checkShared: " + name);
+        Log.i("TAG", "checkShared: " + email);
+        return (name.equals("null") && email.equals("null"));
     }
 
 

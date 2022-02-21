@@ -42,14 +42,16 @@
 
         <TextView
             android:id="@+id/drawer_editText"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
             android:layout_marginTop="8dp"
-
-            android:textColor="@color/secondaryColor"
-
+            android:fontFamily="sans-serif-medium"
+            android:gravity="left"
+            android:lineSpacingExtra="8sp"
+            android:lines="2"
+            android:maxLines="2"
             android:text="@string/create_profile"
+            android:textColor="@color/secondaryColor"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/drawer_name"
             app:layout_constraintTop_toBottomOf="@+id/drawer_name" />

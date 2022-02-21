@@ -1,6 +1,8 @@
 package com.team_three.medicalreminder.homeScreen.view;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +24,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.dataBase.LocalSourceInterface;
 import com.team_three.medicalreminder.R;
@@ -47,7 +50,8 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
     private Animation fromBottom;
     private Animation toBottom;
     private Long timeNow;
-
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -147,6 +151,14 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
 
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        sharedPref =getActivity().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
+        handleRegistration();
+    }
+
     private void checkWorking(){
         fragmentHomeBinding.thirdfloatingActionButton2.setOnClickListener(v->{
 //            Navigation.findNavController(v).navigate(R.id.action_fragment_home_to_loginFragment);
@@ -226,6 +238,16 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
         myPresenter.updatePosition(position);
         myPresenter.updateTime(timeNow);
         Navigation.findNavController(view).navigate(R.id.action_fragment_home_to_medicationTimeFragment);
+    }
+    private void handleRegistration() {
+
+        if (sharedPref.getInt("STATE", 2) == 1) {
+            editor = sharedPref.edit();
+            editor.putInt("STATE", 2);
+            editor.apply();
+            Navigation.findNavController(fragmentHomeBinding.getRoot()).navigate(R.id.action_fragment_home_to_registerFragment);
+        }
+
     }
 }
 

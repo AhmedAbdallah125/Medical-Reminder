@@ -1,9 +1,13 @@
 package com.team_three.medicalreminder.Registeration.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
@@ -15,8 +19,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.Registeration.presenter.NetworkPresenter;
 import com.team_three.medicalreminder.databinding.ActivityLoginBinding;
+import com.team_three.medicalreminder.homeScreen.view.HomeActivity;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
 import com.team_three.medicalreminder.network.NetworkInterface;
@@ -31,7 +38,10 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
     private static final int RC_SIGN_IN = 258120;
     private static final int EMAILLOGIN = 1;
     private static final int GOOGLELOGIN = 2;
-
+    private static final int STATE_CODE = 1;
+    private static final String STATE = "STATE";
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
     GoogleSignInOptions gso;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth mAuth;
@@ -39,6 +49,8 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initShared();
+
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initPresenter();
@@ -50,6 +62,12 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
         // handle GoogleCard
         binding.cardWigninGoogle.setOnClickListener(view -> {
             makeLoginRequest(null, null, GOOGLELOGIN);
+        });
+        //handle register
+        binding.txtNewRegister.setOnClickListener(v->{
+            editor.putInt(STATE,STATE_CODE);
+            editor.apply();
+            finish();
         });
 
 
@@ -123,12 +141,14 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
     public void setSuccessfulResponse() {
         binding.progressBarLogin.setVisibility(View.GONE);
         handleVisibility(false);
-        // handle here
-        Toast.makeText(this, "current user is \n "+myRepository.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
+//        initShared();
+        storeUserInformation(getCurrentUser());
+        finish();
     }
 
     private void handleErrorResponse(String error) {
         binding.textInputEditEmailLogIn.setError(error);
+
     }
 
     @Override
@@ -185,6 +205,22 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
     private void signInWithGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private FirebaseUser getCurrentUser() {
+        return myRepository.getCurrentUser();
+    }
+
+    private void initShared() {
+        sharedPref = getSharedPreferences(
+                RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+    }
+
+    private void storeUserInformation(FirebaseUser user) {
+        editor.putString(RegisterFragment.USER_EMAIL, user.getEmail());
+        editor.putString(RegisterFragment.USER_NAME, user.getDisplayName());
+        editor.apply();
     }
 
 }

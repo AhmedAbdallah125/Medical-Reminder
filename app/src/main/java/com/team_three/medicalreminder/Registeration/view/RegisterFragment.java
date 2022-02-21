@@ -27,9 +27,9 @@ import com.team_three.medicalreminder.network.NetworkInterface;
 
 
 public class RegisterFragment extends Fragment implements NetworkViewInterface {
-    private static final String SHAREDfILE = "SHAREDfILE";
-    private static final String USER_EMAIL = "USER_EMAIL";
-    private static final String USER_NAME = "USER_NAME";
+    public static final String SHAREDfILE = "SHAREDfILE";
+    public static final String USER_EMAIL = "USER_EMAIL";
+    public static final String USER_NAME = "USER_NAME";
 
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
@@ -147,6 +147,7 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
     private void storeUserInformation(FirebaseUser user) {
         editor.putString(USER_EMAIL, user.getEmail());
         editor.putString(USER_NAME, user.getDisplayName());
+        editor.apply();
     }
 
     private void handleErrorResponse(String error) {

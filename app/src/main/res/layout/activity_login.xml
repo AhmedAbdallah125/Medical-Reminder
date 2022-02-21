@@ -108,30 +108,19 @@
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/login_txt_forget_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/forgt_password"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/text_input_layout_password_log_in"
-                app:layout_constraintTop_toBottomOf="@+id/text_input_layout_password_log_in" />
-
             <Button
                 android:id="@+id/btn_login"
                 android:layout_width="@dimen/buttonWidth"
                 android:layout_height="@dimen/buttonHeight"
 
                 android:layout_marginStart="72dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="72dp"
                 android:text="@string/login"
                 app:cornerRadius="@dimen/buttonCornerRadius"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/login_txt_forget_password" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardWigninGoogle"
@@ -140,7 +129,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginBottom="221dp"
                 app:cardCornerRadius="@dimen/buttonCornerRadius"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/btn_login"
                 app:layout_constraintStart_toStartOf="@id/btn_login"
                 app:layout_constraintTop_toBottomOf="@+id/btn_login">
@@ -171,6 +162,47 @@
                         app:layout_constraintTop_toTopOf="@+id/imageGoogle" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="1dp"
+
+                android:layout_marginEnd="64dp"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/text_input_layout_password_log_in"
+                app:layout_constraintStart_toStartOf="@+id/text_input_layout_password_log_in"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_layout_password_log_in">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:clickable="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/newRegister"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="@dimen/buttonFontSize"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:clickable="true"
+                    android:id="@+id/txt_new_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/Register"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/buttonFontSize"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/textView9"
+                    app:layout_constraintStart_toEndOf="@+id/textView9"
+                    app:layout_constraintTop_toTopOf="@+id/textView9" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

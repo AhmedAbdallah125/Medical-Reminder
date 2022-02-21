@@ -118,4 +118,7 @@
     <string name="SignInGoogle">Sign InWith Google</string>
     <string name="create_profile">Create Profile</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="gusest">Guest</string>
+    <string name="newRegister">New Register ?</string>
+    <string name="Register">Register</string>
 </resources>
