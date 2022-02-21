@@ -50,7 +50,7 @@ public class TakerListAdabter extends RecyclerView.Adapter<TakerListAdabter.View
     @Override
     public void onBindViewHolder(@NonNull TakerListAdabter.ViewHolder holder, int position) {
         Log.i("TAG", "onBindViewHolder:ABDOOOOOOOOOO ");
-        holder.binding.imageView.setImageResource(takers.get(position).getImg());
+        holder.binding.imgPlus1.setImageResource(takers.get(position).getImg());
         holder.binding.txttakerName.setText(takers.get(position).getName());
         holder.binding.takerConstraint.setOnClickListener(view -> {
             Bundle bundle = new Bundle();

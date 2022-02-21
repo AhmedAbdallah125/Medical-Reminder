@@ -68,8 +68,8 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
 
         binding.imageEdit.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putParcelable(editTag,  medication);
-            Navigation.findNavController(v).navigate(R.id.action_displayMedicationDrug_to_fragment_add_Medication,bundle);
+            bundle.putParcelable(editTag, medication);
+            Navigation.findNavController(v).navigate(R.id.action_displayMedicationDrug_to_fragment_add_Medication, bundle);
         });
 
         binding.imageBack.setOnClickListener(v -> {
@@ -82,10 +82,10 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
             Navigation.findNavController(v).navigate(R.id.action_displayMedicationDrug_to_fragment_home);
         });
 
-        binding.btnSuspend.setOnClickListener(v->{
+        binding.btnSuspend.setOnClickListener(v -> {
             medication.setActive(!medication.isActive());
             updateMedication(medication);
-            binding.btnSuspend.setText(medication.isActive()?"SUSPEND":"RESUME");
+            binding.btnSuspend.setText(medication.isActive() ? "SUSPEND" : "RESUME");
             Toast.makeText(this.getContext(), "Successfully updated!", Toast.LENGTH_SHORT).show();
         });
     }
@@ -103,7 +103,7 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
     private void setDisplay() {
         binding.imageDrug.setImageResource(medication.getImageID());
         binding.txtDrugName.setText(medication.getMedicationName());
-        binding.btnSuspend.setText(medication.isActive()?"SUSPEND":"RESUME");
+        binding.btnSuspend.setText(medication.isActive() ? "SUSPEND" : "RESUME");
         String drugDose = medication.getStrength() + " " + medication.getWeight();
         binding.txtDrugDose.setText(drugDose);
         String date = medication.getRecurrence() + ", until " + getDate();
@@ -120,12 +120,14 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
     }
 
     private void printMap(Map mp) {
-        Iterator it = mp.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
-            time = time.concat(pair.getKey() + "\n");
-            dose = dose.concat("take " + pair.getValue() + "" + medication.getFormat() + "(s)\n");
-            it.remove(); // avoids a ConcurrentModificationException
+        if (mp != null) {
+            Iterator it = mp.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry) it.next();
+                time = time.concat(pair.getKey() + "\n");
+                dose = dose.concat("take " + pair.getValue() + "" + medication.getFormat() + "(s)\n");
+                it.remove(); // avoids a ConcurrentModificationException
+            }
         }
     }
 
