@@ -117,4 +117,11 @@
     <string name="how_much_do_you_get">How much do you get?</string>
     <string name="_1">1</string>
     <string name="dose">Dose:</string>
+    <string name="tool_bar_name">ahmd</string>
+    <string name="SignInGoogle">Sign InWith Google</string>
+    <string name="create_profile">Create Profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="gusest">Guest</string>
+    <string name="newRegister">New Register ?</string>
+    <string name="Register">Register</string>
 </resources>

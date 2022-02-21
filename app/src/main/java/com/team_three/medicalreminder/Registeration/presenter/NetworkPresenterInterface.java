@@ -1,8 +1,8 @@
-package com.team_three.medicalreminder.login.presenter;
+package com.team_three.medicalreminder.Registeration.presenter;
 
 import android.app.Activity;
 
-public interface LoginPresenterInterface {
+public interface NetworkPresenterInterface {
     // fireBase
     void isSignedIn();
 

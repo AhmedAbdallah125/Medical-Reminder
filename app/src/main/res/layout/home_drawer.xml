@@ -5,9 +5,10 @@
 
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
+    android:layout_height="120dp"
     android:layout_marginTop="24dp"
-
+    android:background="@drawable/drawer_image"
+    android:backgroundTintMode="screen"
     android:orientation="vertical"
     android:weightSum="5">
 
@@ -18,42 +19,45 @@
 
         <ImageView
             android:id="@+id/drawer_imagView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/drawer_editText"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_vpn_key_24" />
+            app:layout_constraintTop_toTopOf="@+id/drawer_name"
+            app:srcCompat="@drawable/ic_doctor_male" />
 
         <TextView
             android:id="@+id/drawer_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:layout_marginStart="64dp"
-            android:fontFamily="sans-serif-medium"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-black"
             android:text="ahmed"
+            android:textColor="@color/secondaryColor"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/drawer_editText"
             app:layout_constraintStart_toEndOf="@+id/drawer_imagView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/drawer_editText"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="sans-serif-light"
-            android:text="edit Profile"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="left"
+            android:lineSpacingExtra="8sp"
+            android:lines="2"
+            android:maxLines="2"
+            android:text="@string/create_profile"
+            android:textColor="@color/secondaryColor"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/drawer_name"
             app:layout_constraintTop_toBottomOf="@+id/drawer_name" />
 
         <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#ffffff"

@@ -17,7 +17,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="#393E3E"
+        android:background="@color/primaryColor"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -36,10 +36,9 @@
 
             <ImageView
                 android:id="@+id/icon_avatar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/black"
-                android:src="@drawable/ic_baseline_sports_handball_24"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_doctor_male"
                 app:circularflow_radiusInDP="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,9 +49,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="42dp"
-                android:text="ahmd"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/primaryText"
+                android:text="@string/tool_bar_name"
                 android:textAlignment="textStart"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/icon_avatar"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,6 +65,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
             android:layout_height="0dp"
+
             android:layout_marginBottom="50dp"
             app:layout_constraintBottom_toBottomOf="@id/navigator_View_Home"
             app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +95,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/nav_menu" />
+        app:menu="@menu/nav_menu">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
 
 
 
