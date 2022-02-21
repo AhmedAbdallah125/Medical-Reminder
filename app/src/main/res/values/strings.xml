@@ -114,4 +114,7 @@
     <string name="btnReject">REJECT</string>
     <string name="requestString">Request</string>
     <string name="add_medication">Add Medication</string>
+    <string name="how_much_do_you_get">How much do you get?</string>
+    <string name="_1">1</string>
+    <string name="dose">Dose:</string>
 </resources>

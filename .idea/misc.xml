@@ -36,6 +36,8 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/fragment_taker_profile_screen.xml" value="0.5" />
         <entry key="app/src/main/res/layout/home_screen_recycle_view_layout.xml" value="0.1598731884057971" />
+        <entry key="app/src/main/res/layout/refill_dialog.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/time_card.xml" value="0.1598731884057971" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.18489583333333334" />
       </map>
     </option>

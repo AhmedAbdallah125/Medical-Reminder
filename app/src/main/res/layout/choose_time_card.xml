@@ -25,9 +25,9 @@
         android:layout_height="28dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
+        android:text="@string/dose"
         app:layout_constraintEnd_toStartOf="@id/imgMinus1"
-        app:layout_constraintTop_toTopOf="@id/txtDoseTime"
-        tools:text="Pills Number:" />
+        app:layout_constraintTop_toTopOf="@id/txtDoseTime" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgPlus1"
@@ -49,11 +49,11 @@
         android:layout_height="28dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
+        android:text="@string/_1"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/imgPlus1"
         app:layout_constraintEnd_toStartOf="@+id/imgPlus1"
-        app:layout_constraintTop_toTopOf="@+id/imgPlus1"
-        tools:text="1" />
+        app:layout_constraintTop_toTopOf="@+id/imgPlus1" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgMinus1"

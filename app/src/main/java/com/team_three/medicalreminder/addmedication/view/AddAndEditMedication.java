@@ -9,23 +9,26 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.addmedication.presenter.AddMedicationPresenter;
 import com.team_three.medicalreminder.addmedication.presenter.AddMedicationPresenterInterface;
 import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.databinding.FragmentAddMedicationBinding;
+import com.team_three.medicalreminder.displaymedicationdrug.view.DisplayMedicationDrug;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -82,7 +85,6 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentAddMedicationBinding.inflate(inflater, container, false);
-        medication = new MedicationPOJO();
         localClass = ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext());
         repository = Repository.getInstance(localClass, this.getContext());
         presenterInterface = new AddMedicationPresenter(repository, this);
@@ -93,47 +95,24 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         previousDestination = Navigation.findNavController(view).getPreviousBackStackEntry().getDestination().getId();
-        initRecycleView();
         if (previousDestination == R.id.displayMedicationDrug) {
             binding.txtTitle.setText(R.string.edit_medication);
-            binding.btnAdd.setVisibility(View.INVISIBLE);
-            isAdd = false;
+            binding.btnAdd.setVisibility(View.GONE);
+            if (getArguments() != null) {
+                medication = getArguments().getParcelable(DisplayMedicationDrug.editTag);
+                isAdd = false;
+                handleEditScreen();
+            }
         } else {
+            medication = new MedicationPOJO();
             isAdd = true;
             handleAddScreen();
         }
+        initRecycleView();
+        handleSameButtons();
     }
 
-    private void handleAddScreen() {
-        binding.txtTitle.setText(R.string.add_medication);
-        binding.txtDone.setVisibility(View.INVISIBLE);
-        binding.txtReminderRefill.setVisibility(View.INVISIBLE);
-
-        binding.btnAdd.setOnClickListener(v -> {
-            getEditableText();
-            if (medicationName.isEmpty()) {
-                binding.txtMedicneName.setError("Medication name required");
-                binding.txtMedicneName.requestFocus();
-            } else if (start_date.isEmpty()) {
-                binding.startDateSelected.setError("Start date required");
-                binding.startDateSelected.requestFocus();
-            } else if (end_date.isEmpty()) {
-                binding.endDateSelected.setError("End date required");
-                binding.btnEndDate.requestFocus();
-            } else {
-                setEditTextResultToPOJO();
-                setSpinnerResultToPOJO();
-                setDateAndTimeResultToPOJO();
-                setBooleanResultToPOJO();
-                onClickAdd(medication);
-                Navigation.findNavController(v).navigate(R.id.action_fragment_add_Medication_to_fragment_home);
-            }
-        });
-
-        binding.btnStartDate.setOnClickListener(v -> showDatePicker(binding.startDateSelected, "start"));
-
-        binding.btnEndDate.setOnClickListener(v -> showDatePicker(binding.endDateSelected, "end"));
-
+    private void handleSameButtons(){
         binding.imageExit.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_fragment_add_Medication_to_fragment_home));
 
         binding.reminderFillSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -151,8 +130,8 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         binding.spinnerMedicationNoOfTimes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i==5)
-                    i=0;
+                if (i == 5)
+                    i = 0;
 
                 setDosePerTime(i);
 
@@ -217,6 +196,65 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
 
             }
         });
+
+        binding.btnStartDate.setOnClickListener(v -> showDatePicker(binding.startDateSelected, "start"));
+
+        binding.btnEndDate.setOnClickListener(v -> showDatePicker(binding.endDateSelected, "end"));
+    }
+
+    private void handleEditScreen() {
+        binding.txtReminderRefill.setVisibility(View.INVISIBLE);
+        setSpinnerResult();
+        setEditText();
+        binding.txtDone.setOnClickListener(v->{
+            getEditableText();
+            if (medicationName.isEmpty()) {
+                binding.txtMedicneName.setError("Medication name required");
+                binding.txtMedicneName.requestFocus();
+            } else if (start_date.isEmpty()) {
+                binding.startDateSelected.setError("Start date required");
+                binding.startDateSelected.requestFocus();
+            } else if (end_date.isEmpty()) {
+                binding.endDateSelected.setError("End date required");
+                binding.btnEndDate.requestFocus();
+            } else {
+                setEditTextResultToPOJO();
+                setSpinnerResultToPOJO();
+                setDateAndTimeResultToPOJO();
+                setBooleanResultToPOJO();
+                onClick(medication);
+                Navigation.findNavController(v).navigate(R.id.action_fragment_add_Medication_to_fragment_home);
+                Toast.makeText(this.getContext(), "Successfully Updated!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void handleAddScreen() {
+        binding.txtTitle.setText(R.string.add_medication);
+        binding.txtDone.setVisibility(View.INVISIBLE);
+
+        binding.btnAdd.setOnClickListener(v -> {
+            getEditableText();
+            if (medicationName.isEmpty()) {
+                binding.txtMedicneName.setError("Medication name required");
+                binding.txtMedicneName.requestFocus();
+            } else if (start_date.isEmpty()) {
+                binding.startDateSelected.setError("Start date required");
+                binding.startDateSelected.requestFocus();
+            } else if (end_date.isEmpty()) {
+                binding.endDateSelected.setError("End date required");
+                binding.btnEndDate.requestFocus();
+            } else {
+                setEditTextResultToPOJO();
+                setSpinnerResultToPOJO();
+                setDateAndTimeResultToPOJO();
+                setBooleanResultToPOJO();
+                onClick(medication);
+                Navigation.findNavController(v).navigate(R.id.action_fragment_add_Medication_to_fragment_home);
+                Toast.makeText(this.getContext(), "Successfully Added!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void getEditableText() {
@@ -261,7 +299,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
     }
 
     @Override
-    public void onClickAdd(MedicationPOJO medication) {
+    public void onClick(MedicationPOJO medication) {
         if (isAdd)
             addMedication(medication);
         else
@@ -281,14 +319,16 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
     @Override
     public void addMedication(MedicationPOJO medication) {
         presenterInterface.addToDatabase(medication);
-        Log.i("TAG", "addMedication: ");
     }
 
     private void setEditTextResultToPOJO() {
         medication.setMedicationName(medicationName);
-        medication.setStrength(strength.isEmpty() ? -1 : Integer.parseInt(strength));
-        medication.setLeftNumber(leftNumber.isEmpty() ? -1 : Integer.parseInt(leftNumber));
-        medication.setLeftNumberReminder(leftNumberReminder.isEmpty() ? -1 : Integer.parseInt(leftNumberReminder));
+        if (!strength.isEmpty())
+            medication.setStrength(Integer.parseInt(strength));
+        if (!leftNumber.isEmpty())
+            medication.setLeftNumber(Integer.parseInt(leftNumber));
+        if (!leftNumberReminder.isEmpty())
+            medication.setLeftNumberReminder(Integer.parseInt(leftNumberReminder));
         medication.setMedicationReason(reason);
     }
 
@@ -333,10 +373,20 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         return milliseconds;
     }
 
+    private String getDateString(Long date) {
+        Date d = new Date(date);
+        DateFormat f = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        return f.format(d);
+    }
+
     private void initRecycleView() {
+        int n = 0;
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        timeAndDoseAdapter = new TimeAndDoseAdapter(0, this.getContext());
+        if (medication.getTimeAndDose()!= null && medication.getTimeAndDose().size() != 0) {
+            n = medication.getTimeAndDose().size();
+        }
+        timeAndDoseAdapter = new TimeAndDoseAdapter(n, this.getContext(), medication.getTimeAndDose());
         binding.chooseTimeRecyclerView.setLayoutManager(layoutManager);
         binding.chooseTimeRecyclerView.setAdapter(timeAndDoseAdapter);
     }
@@ -344,6 +394,41 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
     private void setDosePerTime(int n) {
         timeAndDoseAdapter.setDosePerDay(n);
         timeAndDoseAdapter.notifyDataSetChanged();
+    }
+
+    private void setSpinnerResult(){
+        if (!medication.getFormat().isEmpty())
+            binding.spinneMedicationType.setSelection(((ArrayAdapter) binding.spinneMedicationType.getAdapter())
+                    .getPosition(medication.getFormat()));
+
+        if (!medication.getWeight().isEmpty())
+            binding.spinnerMedicationStrengthWeight.setSelection(((ArrayAdapter) binding.spinnerMedicationStrengthWeight.getAdapter())
+                    .getPosition(medication.getWeight()));
+
+        if (!medication.getTakeTimePerDay().isEmpty())
+            binding.spinnerMedicationNoOfTimes.setSelection(((ArrayAdapter) binding.spinnerMedicationNoOfTimes.getAdapter())
+                    .getPosition(medication.getTakeTimePerDay()));
+
+        if (!medication.getInstruction().isEmpty())
+            binding.spinnerMedicationInstructions.setSelection(((ArrayAdapter) binding.spinnerMedicationInstructions.getAdapter())
+                    .getPosition(medication.getInstruction()));
+
+        if (!medication.getRecurrence().isEmpty())
+            binding.spinnerMedicationRecurrence.setSelection(((ArrayAdapter) binding.spinnerMedicationRecurrence.getAdapter())
+                    .getPosition(medication.getRecurrence()));
+    }
+
+    private void setEditText(){
+        binding.txtMedicneName.setText(medication.getMedicationName());
+        binding.startDateSelected.setText(getDateString(medication.getStartDate()));
+        binding.endDateSelected.setText(getDateString(medication.getEndDate()));
+        binding.txtMedicationStrengthNumber.setText(medication.getStrength()+"");
+        binding.txtReason.setText(medication.getMedicationReason().isEmpty()?"":medication.getMedicationReason());
+        binding.txtPillsLeft.setText(medication.getLeftNumber()+"");
+        binding.txtfillReminderPills.setText(medication.getLeftNumberReminder()+"");
+        binding.reminderFillSwitch.setChecked(medication.isFillReminder());
+        if(medication.isFillReminder())
+            binding.txtfillReminderPills.setVisibility(View.VISIBLE);
     }
 
 }

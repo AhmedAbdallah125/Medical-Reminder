@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/displayMedicationDrug"
-        android:name="com.team_three.medicalreminder.medicationdrug.view.DisplayMedicationDrug"
+        android:name="com.team_three.medicalreminder.displaymedicationdrug.view.DisplayMedicationDrug"
         android:label="fragment_display_medication_drug"
         tools:layout="@layout/fragment_display_medication_drug" >
         <action

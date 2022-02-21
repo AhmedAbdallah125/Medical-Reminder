@@ -1,6 +1,6 @@
-package com.team_three.medicalreminder.medicationdrug.presenter;
+package com.team_three.medicalreminder.displaymedicationdrug.presenter;
 
-import com.team_three.medicalreminder.medicationdrug.view.DisplayMedicationDrugViewInterface;
+import com.team_three.medicalreminder.displaymedicationdrug.view.DisplayMedicationDrugViewInterface;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
 

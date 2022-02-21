@@ -27,10 +27,13 @@ public class TimeAndDoseAdapter extends RecyclerView.Adapter<TimeAndDoseAdapter.
         return timeAndDose;
     }
 
-    public TimeAndDoseAdapter(int n , Context context) {
+    public TimeAndDoseAdapter(int n , Context context, Map<String,Integer> map) {
         dosePerDay = n;
         this.context = context;
-        timeAndDose = new HashMap<>();
+        if(map==null)
+            timeAndDose = new HashMap<>();
+        else
+            timeAndDose = map;
     }
 
     public void setDosePerDay(int n) {
@@ -46,9 +49,17 @@ public class TimeAndDoseAdapter extends RecyclerView.Adapter<TimeAndDoseAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull TimeAndDoseAdapter.ViewHolder holder, int position) {
-        holder.binding.txtDoseTime.setText("Choose Time");
+        if(timeAndDose.isEmpty()) {
+            holder.binding.txtDoseTime.setText("Choose Time");
+            holder.binding.txtDoseNumber.setText(holder.counter + "");
+        }else{
+            holder.result= (String) timeAndDose.keySet().toArray()[position];
+            holder.counter=timeAndDose.get(holder.result);
+            holder.binding.txtDoseTime.setText(holder.result);
+            holder.binding.txtDoseNumber.setText(holder.counter + "");
+        }
         holder.binding.txtDoseFormat.setText("Dose:");
-        holder.binding.txtDoseNumber.setText(holder.counter + "");
+
         holder.binding.txtDoseTime.setOnClickListener(v -> {
             final Calendar myCalender = Calendar.getInstance();
             int hour = myCalender.get(Calendar.HOUR_OF_DAY);
@@ -59,7 +70,7 @@ public class TimeAndDoseAdapter extends RecyclerView.Adapter<TimeAndDoseAdapter.
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-                    if(!holder.result.isEmpty())
+                    if (!holder.result.isEmpty())
                         timeAndDose.remove(holder.result);
 
                     if (view.isShown()) {

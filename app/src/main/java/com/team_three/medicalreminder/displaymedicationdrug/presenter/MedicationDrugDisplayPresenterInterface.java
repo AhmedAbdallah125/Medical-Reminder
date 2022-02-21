@@ -1,8 +1,8 @@
-package com.team_three.medicalreminder.medicationdrug.view;
+package com.team_three.medicalreminder.displaymedicationdrug.presenter;
 
 import com.team_three.medicalreminder.model.MedicationPOJO;
 
-public interface DisplayMedicationDrugViewInterface {
+public interface MedicationDrugDisplayPresenterInterface {
     void deleteMedication(MedicationPOJO medication);
 
     void updateMedication(MedicationPOJO medication);
