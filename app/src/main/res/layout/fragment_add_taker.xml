@@ -110,7 +110,7 @@
         android:contentDescription="@string/todo" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgPlus1"
+        android:id="@+id/imageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="32dp"

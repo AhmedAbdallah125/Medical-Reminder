@@ -112,7 +112,10 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         handleSameButtons();
     }
 
-    private void handleSameButtons(){
+    private void handleSameButtons() {
+
+        binding.txtReminderRefill.setVisibility(View.INVISIBLE);
+
         binding.imageExit.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_fragment_add_Medication_to_fragment_home));
 
         binding.reminderFillSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -206,7 +209,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         binding.txtReminderRefill.setVisibility(View.INVISIBLE);
         setSpinnerResult();
         setEditText();
-        binding.txtDone.setOnClickListener(v->{
+        binding.txtDone.setOnClickListener(v -> {
             getEditableText();
             if (medicationName.isEmpty()) {
                 binding.txtMedicneName.setError("Medication name required");
@@ -383,7 +386,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         int n = 0;
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        if (medication.getTimeAndDose()!= null && medication.getTimeAndDose().size() != 0) {
+        if (medication.getTimeAndDose() != null && medication.getTimeAndDose().size() != 0) {
             n = medication.getTimeAndDose().size();
         }
         timeAndDoseAdapter = new TimeAndDoseAdapter(n, this.getContext(), medication.getTimeAndDose());
@@ -396,7 +399,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         timeAndDoseAdapter.notifyDataSetChanged();
     }
 
-    private void setSpinnerResult(){
+    private void setSpinnerResult() {
         if (!medication.getFormat().isEmpty())
             binding.spinneMedicationType.setSelection(((ArrayAdapter) binding.spinneMedicationType.getAdapter())
                     .getPosition(medication.getFormat()));
@@ -418,16 +421,16 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
                     .getPosition(medication.getRecurrence()));
     }
 
-    private void setEditText(){
+    private void setEditText() {
         binding.txtMedicneName.setText(medication.getMedicationName());
         binding.startDateSelected.setText(getDateString(medication.getStartDate()));
         binding.endDateSelected.setText(getDateString(medication.getEndDate()));
-        binding.txtMedicationStrengthNumber.setText(medication.getStrength()+"");
-        binding.txtReason.setText(medication.getMedicationReason().isEmpty()?"":medication.getMedicationReason());
-        binding.txtPillsLeft.setText(medication.getLeftNumber()+"");
-        binding.txtfillReminderPills.setText(medication.getLeftNumberReminder()+"");
+        binding.txtMedicationStrengthNumber.setText(medication.getStrength() + "");
+        binding.txtReason.setText(medication.getMedicationReason().isEmpty() ? "" : medication.getMedicationReason());
+        binding.txtPillsLeft.setText(medication.getLeftNumber() + "");
+        binding.txtfillReminderPills.setText(medication.getLeftNumberReminder() + "");
         binding.reminderFillSwitch.setChecked(medication.isFillReminder());
-        if(medication.isFillReminder())
+        if (medication.isFillReminder())
             binding.txtfillReminderPills.setVisibility(View.VISIBLE);
     }
 
