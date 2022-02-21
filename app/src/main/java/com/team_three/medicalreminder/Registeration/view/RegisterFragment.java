@@ -1,5 +1,6 @@
 package com.team_three.medicalreminder.Registeration.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.team_three.medicalreminder.databinding.FragmenetRegisterBinding;
 import com.team_three.medicalreminder.databinding.FragmentLoginBinding;
 import com.team_three.medicalreminder.Registeration.presenter.NetworkPresenter;
@@ -52,7 +55,6 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
             email = binding.textInputEditEmailSignUp.getEditableText().toString();
             password = binding.textInputEditPasswordSignUp.getEditableText().toString();
             makeRegisterRequest(email, password);
-            binding.progressBarRegister.setVisibility(View.VISIBLE);
         });
 
 
@@ -61,8 +63,11 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
     private void makeRegisterRequest(String email, String password) {
         if (checkEmail(email) && checkPassword(password)) {
             request(email, password);
+            handleVisibility(true);
         }
     }
+
+
 
     private boolean checkEmail(String emailString) {
         boolean check;
@@ -112,7 +117,7 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
     @Override
     public void setSuccessfulResponse() {
         // can get User
-        binding.progressBarRegister.setVisibility(View.GONE);
+        handleVisibility(false);
     }
 
     private void handleErrorResponse(String error) {
@@ -125,5 +130,17 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
         binding.progressBarRegister.setVisibility(View.GONE);
         binding.textInputEditPasswordSignUp.requestFocus();
         handleErrorResponse(errorMessage);
+        handleVisibility(false);
+    }
+
+    private void handleVisibility(boolean visible) {
+        if (!visible) {
+            binding.constraintRegister.setVisibility(View.VISIBLE);
+            binding.progressBarRegister.setVisibility(View.GONE);
+        } else {
+            binding.constraintRegister.setVisibility(View.GONE);
+            binding.progressBarRegister.setVisibility(View.VISIBLE);
+        }
+
     }
 }

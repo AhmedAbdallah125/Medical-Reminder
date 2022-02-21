@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.team_three.medicalreminder.dataBase.LocalSourceInterface;
 import com.team_three.medicalreminder.medicationList.view.AcrtiveMedsFragment;
 import com.team_three.medicalreminder.medicationList.view.AcrtiveMedsFragment;
@@ -18,7 +19,6 @@ public class Repository implements RepositoryInterface {
     private Context context;
     LocalSourceInterface localSourceInterface;
     private static Repository repo = null;
-
 
 
     // for firebase
@@ -37,6 +37,7 @@ public class Repository implements RepositoryInterface {
         }
         return repo;
     }
+
     // for fireBase
     private Repository(NetworkInterface myRemote, Context context) {
         this.context = context;
@@ -49,6 +50,7 @@ public class Repository implements RepositoryInterface {
         }
         return myRepositoryNetwork;
     }
+
     public void setMyDelegation(NetworkDelegation myDelegation) {
         this.myDelegation = myDelegation;
         myRemote.setNetworkDelegation(myDelegation);
@@ -93,23 +95,35 @@ public class Repository implements RepositoryInterface {
     }
 
     @Override
+    public LiveData<List<MedicationPOJO>> getMedicationDay(long time) {
+        return localSourceInterface.getMedicationDay(time);
+    }
+
+    // for firebase
+    @Override
     public void isSignedIn() {
         myRemote.isSignedIn();
     }
 
     @Override
     public void registerWithEmailAndPass(Activity activity, String email, String password) {
-        myRemote.registerWithEmailAndPass(activity,email,password);
+        myRemote.registerWithEmailAndPass(activity, email, password);
 
     }
 
     @Override
     public void signInWithEmailAndPass(Activity activity, String email, String password) {
-                myRemote.signInWithEmailAndPass(activity,email,password);
+        myRemote.signInWithEmailAndPass(activity, email, password);
     }
 
     @Override
-    public LiveData<List<MedicationPOJO>> getMedicationDay(long time) {
-        return localSourceInterface.getMedicationDay(time);
+    public void signInUsingGoogle(String idToken) {
+        myRemote.signInUsingGoogle(idToken);
     }
+
+    @Override
+    public FirebaseUser getCurrentUser() {
+        return myRemote.getCurrentUser();
+    }
+
 }

@@ -1,29 +1,32 @@
 package com.team_three.medicalreminder.network;
 
+
 import android.app.Activity;
-import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthEmailException;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException;
-import com.google.firebase.auth.FirebaseAuthRegistrar;
+
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.team_three.medicalreminder.R;
 
 public class FireBaseNetwork implements NetworkInterface {
+
     Activity _activity;
-    private static FirebaseAuth mAuth;
+    public static FirebaseAuth mAuth;
     private static FireBaseNetwork myFireBase;
     private NetworkDelegation myDelegation;
 
@@ -59,6 +62,7 @@ public class FireBaseNetwork implements NetworkInterface {
             myDelegation.onFailure("no available");
         }
     }
+
 
     @Override
     public void registerWithEmailAndPass(Activity myActivity, String email, String password) {
@@ -105,6 +109,37 @@ public class FireBaseNetwork implements NetworkInterface {
 //                        }
                     }
                 });
+    }
+
+    @Override
+    public void signInUsingGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(_activity, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            myDelegation.onSuccess();
+                            // Sign in success, update UI with the signed-in user's information
+//                            FirebaseUser user = mAuth.getCurrentUser();
+//                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+//                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+//                            updateUI(null);
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public FirebaseUser getCurrentUser() {
+        // check if null or not
+        if (mAuth == null) {
+            // check
+            mAuth = FirebaseAuth.getInstance();
+        }
+        return mAuth.getCurrentUser();
     }
 
     private String handleFireBaseException(Task task) {

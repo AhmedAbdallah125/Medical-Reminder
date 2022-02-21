@@ -23,11 +23,11 @@
             android:id="@+id/action_fragment_home_to_medicationTimeFragment"
             app:destination="@id/medicationTimeFragment" />
         <action
-            android:id="@+id/action_fragment_home_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
             android:id="@+id/action_fragment_home_to_helpRequistList"
             app:destination="@id/helpRequistList" />
+        <action
+            android:id="@+id/action_fragment_home_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_medication_list"

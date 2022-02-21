@@ -39,6 +39,7 @@ public class SignINFragment extends Fragment implements NetworkViewInterface {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(inflater, container, false);
+
         return binding.getRoot();
     }
 
@@ -50,7 +51,6 @@ public class SignINFragment extends Fragment implements NetworkViewInterface {
             email = binding.textInputEditEmailLogIn.getEditableText().toString();
             password = binding.textInputEditPasswordLogIn.getEditableText().toString();
             makeRegisterRequest(email, password);
-            handleVisibility(true);
         });
 
 
@@ -59,6 +59,8 @@ public class SignINFragment extends Fragment implements NetworkViewInterface {
     private void makeRegisterRequest(String email, String password) {
         if (checkEmail(email) && checkPassword(password)) {
             request(email, password);
+            handleVisibility(true);
+
         }
     }
 
@@ -126,11 +128,12 @@ public class SignINFragment extends Fragment implements NetworkViewInterface {
         handleVisibility(false);
 
     }
-    private void handleVisibility(boolean visible){
-        if(!visible){
+
+    private void handleVisibility(boolean visible) {
+        if (!visible) {
             binding.constraintLogin.setVisibility(View.VISIBLE);
             binding.progressBarLogin.setVisibility(View.GONE);
-        }else {
+        } else {
             binding.constraintLogin.setVisibility(View.GONE);
             binding.progressBarLogin.setVisibility(View.VISIBLE);
         }

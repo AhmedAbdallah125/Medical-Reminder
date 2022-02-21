@@ -115,4 +115,7 @@
     <string name="requestString">Request</string>
     <string name="add_medication">Add Medication</string>
     <string name="tool_bar_name">ahmd</string>
+    <string name="SignInGoogle">Sign InWith Google</string>
+    <string name="create_profile">Create Profile</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>
