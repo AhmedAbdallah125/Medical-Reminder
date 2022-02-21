@@ -8,10 +8,44 @@ import android.os.Parcelable;
 public class Taker implements Parcelable {
     private int img;
    private String name;
+   private  String email;
+   private String id;
 
     public Taker(int img, String name) {
         this.img = img;
         this.name = name;
+    }
+
+    public Taker(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
+
+    public Taker() {
+    }
+
+    public Taker(String email, int img, String name, String id) {
+        this.img = img;
+        this.name = name;
+        this.email = email;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getImg() {
