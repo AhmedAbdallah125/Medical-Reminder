@@ -46,7 +46,7 @@
     <string name="btnChooseTime">Choose Time</string>
 
     <string-array name="Medication_Type">
-        <item/>
+        <item>choose medication type</item>
         <item>Pill</item>
         <item>Solution</item>
         <item>Injection</item>
@@ -55,21 +55,21 @@
         <item>Inhaler</item>
     </string-array>
     <string-array name="Medication_Strength">
-        <item/>
+        <item>choose strength</item>
         <item>g</item>
         <item>IU</item>
         <item>mcg</item>
         <item>m</item>
     </string-array>
     <string-array name="Medication_Instructions">
-        <item/>
+        <item>choose instruction</item>
         <item>Before Eating</item>
         <item>While Eating</item>
         <item>After Eating</item>
         <item>Does not Matter</item>
     </string-array>
     <string-array name="Medication_No_Of_Times">
-        <item/>
+        <item>choose dose per day</item>
         <item>Once daily</item>
         <item>Twice daily</item>
         <item>3 times a day</item>
@@ -77,7 +77,7 @@
         <item>Only as needed</item>
     </string-array>
     <string-array name="Medication_Recurrence">
-        <item/>
+        <item>choose recurrence</item>
         <item>Once a week</item>
         <item>Every day</item>
         <item>Every 2 days</item>
@@ -114,4 +114,7 @@
     <string name="btnReject">REJECT</string>
     <string name="requestString">Request</string>
     <string name="add_medication">Add Medication</string>
+    <string name="how_much_do_you_get">How much do you get?</string>
+    <string name="_1">1</string>
+    <string name="dose">Dose:</string>
 </resources>

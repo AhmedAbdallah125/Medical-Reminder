@@ -24,14 +24,21 @@
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_pill.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/active_meds_row.xml" value="0.16485507246376813" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/activity_medication_drug_display.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_medication_drug_edit.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_add_medication.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/choose_time_card.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_add_medication.xml" value="0.27439024390243905" />
         <entry key="app/src/main/res/layout/fragment_add_taker.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_display_medication_drug.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/fragment_taker_profile_screen.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/home_screen_recycle_view_layout.xml" value="0.1598731884057971" />
+        <entry key="app/src/main/res/layout/refill_dialog.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/taker_row.xml" value="0.1598731884057971" />
+        <entry key="app/src/main/res/layout/time_card.xml" value="0.1598731884057971" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.18489583333333334" />
       </map>
     </option>

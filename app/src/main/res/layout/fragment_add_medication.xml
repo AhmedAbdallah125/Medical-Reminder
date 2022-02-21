@@ -16,9 +16,7 @@
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="-16dp"
-            android:layout_marginEnd="8dp"
             app:cardCornerRadius="@dimen/buttonCornerRadius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -199,7 +197,7 @@
                     android:layout_height="@dimen/buttonHeight"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/primaryColor"
+                    android:backgroundTint="@color/secondaryColor"
                     android:text="@string/start_date"
                     android:textSize="16sp"
                     app:cornerRadius="@dimen/buttonCornerRadius"
@@ -232,7 +230,7 @@
                     android:layout_height="@dimen/buttonHeight"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/primaryColor"
+                    android:backgroundTint="@color/secondaryColor"
                     android:text="@string/end_date"
                     android:textSize="16sp"
                     app:cornerRadius="@dimen/buttonCornerRadius"
@@ -264,7 +262,7 @@
             android:weightSum="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/LinearLayout6">
+            app:layout_constraintTop_toBottomOf="@id/linearLayout4">
 
             <TextView
                 android:id="@+id/textView5"
@@ -371,7 +369,7 @@
             app:layout_constraintTop_toTopOf="@+id/txtReminderRefill" />
 
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -388,29 +386,43 @@
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/how_often_do_you_take_it" />
+                android:text="@string/how_often_do_you_take_it"
+                app:layout_constraintBottom_toBottomOf="@+id/spinnerMedicationNoOfTimes"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Spinner
                 android:id="@+id/spinnerMedicationNoOfTimes"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/buttonHeight"
-                android:layout_weight="2"
                 android:entries="@array/Medication_No_Of_Times"
                 android:minHeight="48dp"
                 android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView7"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck" />
 
-        </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/chooseTimeRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerMedicationNoOfTimes" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
             android:id="@+id/btnAdd"
             android:layout_width="@dimen/buttonWidth"
             android:layout_height="@dimen/buttonHeight"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/primaryColor"
+            android:backgroundTint="@color/secondaryColor"
             android:text="@string/btnAdd"
             android:textSize="16sp"
             app:cornerRadius="@dimen/buttonCornerRadius"
@@ -418,53 +430,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtReminderRefill"
             tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
-
-        <LinearLayout
-            android:id="@+id/LinearLayout6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:hint="@string/no_of_pills">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtMedicationTakePillsNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:textColorHint="#757575"
-                    tools:ignore="TextContrastCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/btnChooseTime"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/buttonHeight"
-                android:layout_gravity="center"
-                android:layout_marginStart="4dp"
-                android:layout_weight="2"
-                android:backgroundTint="@color/primaryColor"
-                android:gravity="center"
-                android:text="@string/btnChooseTime"
-                android:textSize="16sp"
-                app:cornerRadius="@dimen/buttonCornerRadius"
-                tools:ignore="TextContrastCheck" />
-        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtReminderRefill"

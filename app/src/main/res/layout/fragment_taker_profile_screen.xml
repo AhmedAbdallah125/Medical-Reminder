@@ -58,7 +58,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/imgMinus1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:text="abdosayed@gmail.com"
                     android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgMinus1"
                     app:layout_constraintStart_toStartOf="@+id/txtLastName" />
 
                 <ImageView
@@ -108,8 +108,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    app:layout_constraintStart_toStartOf="@+id/imageView2"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                    app:layout_constraintStart_toStartOf="@+id/imgMinus1"
+                    app:layout_constraintTop_toBottomOf="@+id/imgMinus1"
                     app:srcCompat="@drawable/ic_baseline_gender_24" />
 
                 <TextView

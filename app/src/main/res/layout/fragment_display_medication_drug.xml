@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".medicationdrug.view.DisplayMedicationDrug">
+    android:background="@color/grayBG"
+    tools:context=".displaymedicationdrug.view.DisplayMedicationDrug">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="-16dp"
-        android:layout_marginEnd="16dp"
-        app:cardCornerRadius="@dimen/buttonCornerRadius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/primaryColor">
 
             <ImageView
@@ -66,7 +63,7 @@
                 android:id="@+id/imageBack"
                 android:layout_width="@dimen/iconWidth"
                 android:layout_height="@dimen/iconHeight"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:contentDescription="@string/backPhoto"
                 app:layout_constraintStart_toStartOf="@+id/imageDrug"
                 app:layout_constraintTop_toTopOf="parent"
@@ -103,7 +100,7 @@
         android:layout_width="@dimen/buttonWidth"
         android:layout_height="@dimen/buttonHeight"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/primaryColor"
+        android:backgroundTint="@color/secondaryColor"
         android:backgroundTintMode="add"
         android:text="@string/btnAddDose"
         android:textColor="@color/white"
@@ -121,7 +118,7 @@
         android:layout_height="@dimen/buttonHeight"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/primaryColor"
+        android:backgroundTint="@color/secondaryColor"
         android:text="@string/btnSuspend"
         android:textColor="@color/white"
         android:textSize="12sp"
@@ -134,12 +131,13 @@
         android:id="@+id/btnRefill"
         android:layout_width="0dp"
         android:layout_height="@dimen/buttonHeight"
-        android:backgroundTint="@color/primaryColor"
+        android:backgroundTint="@color/secondaryColor"
         android:text="@string/btnRefill"
         android:textColor="@color/white"
         android:textSize="12sp"
         app:cornerRadius="@dimen/buttonCornerRadius"
         app:layout_constraintEnd_toEndOf="@+id/btnSuspend"
+        app:layout_constraintStart_toStartOf="@+id/btnSuspend"
         app:layout_constraintTop_toTopOf="@+id/textView3"
         tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
