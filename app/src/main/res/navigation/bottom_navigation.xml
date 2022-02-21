@@ -23,11 +23,11 @@
             android:id="@+id/action_fragment_home_to_medicationTimeFragment"
             app:destination="@id/medicationTimeFragment" />
         <action
-            android:id="@+id/action_fragment_home_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
             android:id="@+id/action_fragment_home_to_helpRequistList"
             app:destination="@id/helpRequistList" />
+        <action
+            android:id="@+id/action_fragment_home_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_medication_list"
@@ -105,7 +105,7 @@
         android:label="fragment_help_requist_list"
         tools:layout="@layout/fragment_help_requist_list" />
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.team_three.medicalreminder.login.view.LoginFragment"
-        android:label="LoginFragment" />
+        android:id="@+id/registerFragment"
+        android:name="com.team_three.medicalreminder.Registeration.view.RegisterFragment"
+        android:label="RegisterFragment" />
 </navigation>
