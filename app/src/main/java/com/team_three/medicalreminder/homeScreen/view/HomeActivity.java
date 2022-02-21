@@ -1,14 +1,18 @@
 package com.team_three.medicalreminder.homeScreen.view;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 ;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.team_three.medicalreminder.R;
+import com.team_three.medicalreminder.Registeration.view.LoginActivity;
 import com.team_three.medicalreminder.databinding.ActivityHomeBinding;
+import com.team_three.medicalreminder.databinding.HomeDrawerBinding;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +27,6 @@ import androidx.navigation.ui.NavigationUI;
 
 public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding homeBinding;
-    Fragment selectFragment = null;
     NavController navController;
     NavHostFragment navHostFragment;
 
@@ -32,17 +35,19 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(homeBinding.getRoot());
         handleToolBar();
         initNavigation();
+        handleDrawer();
 
 
         //
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-                if (navDestination.getId() == R.id.fragment_medication_list ||navDestination.getId() == R.id.fragment_home || navDestination.getId() == R.id.fragment_taker_list||navDestination.getId() == R.id.helpRequistList) {
+                if (navDestination.getId() == R.id.fragment_medication_list || navDestination.getId() == R.id.fragment_home || navDestination.getId() == R.id.fragment_taker_list || navDestination.getId() == R.id.helpRequistList) {
                     homeBinding.toolbar.setVisibility(View.VISIBLE);
                     homeBinding.navigatorViewHome.setVisibility(View.VISIBLE);
 
@@ -82,10 +87,17 @@ public class HomeActivity extends AppCompatActivity {
                 navController);
     }
 
+    private void handleDrawer() {
+        View v = homeBinding.drawerNav.getHeaderView(0);
+        HomeDrawerBinding binding = HomeDrawerBinding.bind(v);
+        binding.drawerEditText.setOnClickListener(view -> {
+            Intent outComing = new Intent(this, LoginActivity.class);
+            startActivity(outComing);
+        });
+    }
 
     private void handleToolBar() {
         setSupportActionBar(homeBinding.toolbar);
-
         getSupportActionBar().setTitle("");
         homeBinding.toolbar.setOnClickListener(new View.OnClickListener() {
             @Override

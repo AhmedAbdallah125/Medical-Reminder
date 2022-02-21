@@ -149,7 +149,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
     }
     private void checkWorking(){
         fragmentHomeBinding.thirdfloatingActionButton2.setOnClickListener(v->{
-            Navigation.findNavController(v).navigate(R.id.action_fragment_home_to_loginFragment);
+//            Navigation.findNavController(v).navigate(R.id.action_fragment_home_to_loginFragment);
         });
     }
 

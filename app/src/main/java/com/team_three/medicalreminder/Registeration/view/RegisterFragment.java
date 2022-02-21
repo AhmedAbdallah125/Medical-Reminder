@@ -1,6 +1,8 @@
 package com.team_three.medicalreminder.Registeration.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseUser;
 import com.team_three.medicalreminder.databinding.FragmenetRegisterBinding;
 import com.team_three.medicalreminder.databinding.FragmentLoginBinding;
 import com.team_three.medicalreminder.Registeration.presenter.NetworkPresenter;
@@ -24,6 +27,13 @@ import com.team_three.medicalreminder.network.NetworkInterface;
 
 
 public class RegisterFragment extends Fragment implements NetworkViewInterface {
+    private static final String SHAREDfILE = "SHAREDfILE";
+    private static final String USER_EMAIL = "USER_EMAIL";
+    private static final String USER_NAME = "USER_NAME";
+
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
+
     FragmenetRegisterBinding binding;
     NetworkPresenter myPresenter;
     NetworkInterface myNetwork;
@@ -66,7 +76,6 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
             handleVisibility(true);
         }
     }
-
 
 
     private boolean checkEmail(String emailString) {
@@ -118,6 +127,26 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
     public void setSuccessfulResponse() {
         // can get User
         handleVisibility(false);
+        initShared();
+        storeUserInformation(getCurrentUser());
+
+    }
+
+    private FirebaseUser getCurrentUser() {
+        return myRepository.getCurrentUser();
+    }
+
+    private void initShared() {
+        Context context = getActivity();
+        sharedPref = context.getSharedPreferences(
+                SHAREDfILE, Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+
+    }
+
+    private void storeUserInformation(FirebaseUser user) {
+        editor.putString(USER_EMAIL, user.getEmail());
+        editor.putString(USER_NAME, user.getDisplayName());
     }
 
     private void handleErrorResponse(String error) {
