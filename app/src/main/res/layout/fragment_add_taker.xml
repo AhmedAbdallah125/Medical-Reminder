@@ -43,6 +43,7 @@
                 app:startIconDrawable="@drawable/ic_baseline_edit_24">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="20" />
@@ -65,10 +66,10 @@
                 app:startIconDrawable="@drawable/ic_baseline_edit_24">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                     />
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
