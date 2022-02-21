@@ -22,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.FragmentHelpRequistListBinding;
 import com.team_three.medicalreminder.medicationList.view.ActiveListAdapter;
@@ -75,11 +76,11 @@ helpRequestAdapter adapter;
     private void Load(Context context) {
 
 
-        Query query = FirebaseDatabase.getInstance().getReference().child("Request");
+        Query query = FirebaseDatabase.getInstance().getReference().child("Request").child("email");
 
-        query.addChildEventListener(new ChildEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 takerList.clear();
                 for(DataSnapshot dataSnapshot:snapshot.getChildren()){
                     if(dataSnapshot.child("email").getValue().toString().equals("mohab@gmail.com")){
@@ -87,25 +88,11 @@ helpRequestAdapter adapter;
                             (Integer.parseInt(String.valueOf(dataSnapshot.child("img").getValue()))),
                             dataSnapshot.child("name").getValue().toString(),
                             dataSnapshot.child("id").getValue().toString());
-                    takerList.add(taker);}
+                    takerList.add(taker);
+                    }
                 }
                 adapter=new helpRequestAdapter(context,takerList);
                 fragmentHelpRequistListBinding.recyclerView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
             }
 
             @Override
