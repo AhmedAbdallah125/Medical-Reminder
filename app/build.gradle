@@ -76,6 +76,10 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-storage:8.0.0'
     implementation 'com.firebaseui:firebase-ui-database:8.0.0'
 
+    //splash
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
 
 
 }
