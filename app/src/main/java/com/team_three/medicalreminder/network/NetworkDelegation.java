@@ -8,6 +8,9 @@ import java.util.List;
 public interface NetworkDelegation {
     void onSuccess();
     void onFailure(String errorMessage);
+
+    // for response
+    void onSuccessReturn(String userName);
     void onSuccessRequest(List<RequestPojo> requestPojos);
     void onSuccessTaker(List<TakerPOJO> takerPOJOS);
 }

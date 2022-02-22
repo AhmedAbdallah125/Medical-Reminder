@@ -30,13 +30,18 @@ public class NetworkPresenter implements NetworkPresenterInterface, NetworkDeleg
     }
 
     @Override
-    public void registerWithEmailAndPass(Activity activity, String email, String password) {
-        myRepository.registerWithEmailAndPass(activity, email, password);
+    public void registerWithEmailAndPass(Activity activity, String email, String password, String name) {
+        myRepository.registerWithEmailAndPass(activity, email, password, name);
     }
 
     @Override
     public void signInWithEmailAndPass(Activity activity, String email, String password) {
         myRepository.signInWithEmailAndPass(activity, email, password);
+    }
+
+    @Override
+    public void getUserFromDB(String email) {
+        myRepository.getUserName(email);
     }
 
 
@@ -60,4 +65,11 @@ public class NetworkPresenter implements NetworkPresenterInterface, NetworkDeleg
     public void onSuccessTaker(List<TakerPOJO> takerPOJOS) {
 
     }
+
+    @Override
+    public void onSuccessReturn(String userName) {
+        myView.setSuccessfulReturnResponse(userName);
+    }
+
+
 }

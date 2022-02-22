@@ -114,8 +114,6 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
 
     private void handleSameButtons() {
 
-        binding.txtReminderRefill.setVisibility(View.INVISIBLE);
-
         binding.imageExit.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_fragment_add_Medication_to_fragment_home));
 
         binding.reminderFillSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -206,7 +204,6 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
     }
 
     private void handleEditScreen() {
-        binding.txtReminderRefill.setVisibility(View.INVISIBLE);
         setSpinnerResult();
         setEditText();
         binding.txtDone.setOnClickListener(v -> {
@@ -235,6 +232,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
     private void handleAddScreen() {
         binding.txtTitle.setText(R.string.add_medication);
         binding.txtDone.setVisibility(View.INVISIBLE);
+        binding.txtReminderRefill.setVisibility(View.INVISIBLE);
 
         binding.btnAdd.setOnClickListener(v -> {
             getEditableText();
@@ -314,10 +312,10 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         presenterInterface.updateToDatabase(medication);
     }
 
-    @Override
-    public void showMedication() {
-        medication = presenterInterface.showMedication();
-    }
+//    @Override
+//    public void showMedication() {
+//        medication = presenterInterface.showMedication();
+//    }
 
     @Override
     public void addMedication(MedicationPOJO medication) {
@@ -422,6 +420,8 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
     }
 
     private void setEditText() {
+        if (!medication.isFillReminder())
+            binding.txtReminderRefill.setVisibility(View.INVISIBLE);
         binding.txtMedicneName.setText(medication.getMedicationName());
         binding.startDateSelected.setText(getDateString(medication.getStartDate()));
         binding.endDateSelected.setText(getDateString(medication.getEndDate()));
@@ -430,8 +430,6 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         binding.txtPillsLeft.setText(medication.getLeftNumber() + "");
         binding.txtfillReminderPills.setText(medication.getLeftNumberReminder() + "");
         binding.reminderFillSwitch.setChecked(medication.isFillReminder());
-        if (medication.isFillReminder())
-            binding.txtfillReminderPills.setVisibility(View.VISIBLE);
     }
 
 }

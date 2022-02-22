@@ -107,5 +107,9 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.team_three.medicalreminder.Registeration.view.RegisterFragment"
-        android:label="RegisterFragment" />
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_fragment_home"
+            app:destination="@id/fragment_home" />
+    </fragment>
 </navigation>

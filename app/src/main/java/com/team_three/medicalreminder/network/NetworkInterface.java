@@ -7,19 +7,24 @@ import com.team_three.medicalreminder.model.RequestPojo;
 import com.team_three.medicalreminder.model.TakerPOJO;
 
 import java.util.List;
+import com.team_three.medicalreminder.model.User;
 
 public interface NetworkInterface {
     void setNetworkDelegation(NetworkDelegation networkDelegation);
 
     void isSignedIn();
 
-    void registerWithEmailAndPass(Activity activity, String email, String password);
+    void registerWithEmailAndPass(Activity activity, String email, String password,String name);
 
     void signInWithEmailAndPass(Activity activity, String email, String password);
 
     void signInUsingGoogle(String idToken);
 
     FirebaseUser getCurrentUser();
+
+     void addUserInDB(User user);
+
+     void getUserFromRealDB(String email);
 
     void sendRequest(RequestPojo requestPojo);
 

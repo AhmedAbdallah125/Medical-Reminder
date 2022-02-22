@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="140dp"
     android:layout_marginTop="24dp"
-    android:background="@drawable/drawer_image"
+    android:background="@drawable/cover"
     android:backgroundTintMode="screen"
     android:orientation="vertical"
     android:weightSum="5">

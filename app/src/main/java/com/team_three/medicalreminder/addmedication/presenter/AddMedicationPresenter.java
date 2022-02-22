@@ -26,8 +26,8 @@ public class AddMedicationPresenter implements AddMedicationPresenterInterface{
         Log.i("TAG", "addToDatabase: ");
     }
 
-    @Override
-    public MedicationPOJO showMedication() {
-        return null;
-    }
+//    @Override
+//    public MedicationPOJO showMedication() {
+//        return null;
+//    }
 }

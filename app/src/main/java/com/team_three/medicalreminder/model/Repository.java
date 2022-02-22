@@ -103,9 +103,10 @@ public class Repository implements RepositoryInterface  {
         myRemote.isSignedIn();
     }
 
+
     @Override
-    public void registerWithEmailAndPass(Activity activity, String email, String password) {
-        myRemote.registerWithEmailAndPass(activity, email, password);
+    public void registerWithEmailAndPass(Activity activity, String email, String password, String name) {
+        myRemote.registerWithEmailAndPass(activity, email, password, name);
 
     }
 
@@ -123,6 +124,13 @@ public class Repository implements RepositoryInterface  {
     public FirebaseUser getCurrentUser() {
         return myRemote.getCurrentUser();
     }
+
+    @Override
+    public void getUserName(String email) {
+         myRemote.getUserFromRealDB(email);
+
+    }
+
 
     @Override
     public void sendRequest(RequestPojo requestPojo) {
