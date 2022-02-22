@@ -175,11 +175,11 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
     }
 
     @Override
-    public void setFailureResponse(String errormessge) {
+    public void setFailureResponse(String errorMessge) {
         // can get User
         binding.progressBarRegister.setVisibility(View.GONE);
         binding.textInputEditPasswordSignUp.requestFocus();
-        handleErrorResponse(errormessge);
+        handleErrorResponse(errorMessge);
         handleVisibility(false);
     }
 

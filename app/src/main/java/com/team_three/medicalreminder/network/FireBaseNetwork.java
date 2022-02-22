@@ -129,14 +129,17 @@ public class FireBaseNetwork implements NetworkInterface {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            String userName = getCurrentUser().getDisplayName();
+                            String email = getCurrentUser().getEmail();
+                            User user = new User(email, userName);
+                            addUserInDB(user);
                             myDelegation.onSuccess();
                             // Sign in success, update UI with the signed-in user's information
 //                            FirebaseUser user = mAuth.getCurrentUser();
 //                            updateUI(user);
                         } else {
-                            // If sign in fails, display a message to the user.
-//                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-//                            updateUI(null);
+                            String errorMessage = handleFireBaseException(task);
+                            myDelegation.onFailure(errorMessage);
                         }
                     }
                 });
@@ -174,13 +177,13 @@ public class FireBaseNetwork implements NetworkInterface {
     @Override
     public void getUserFromRealDB(String email) {
         Log.i("TAG", "getUserFromRealDB: ");
-        String uid =email.split("\\.")[0];
+        String uid = email.split("\\.")[0];
         Query query = FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("name");
         query.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
-                    Log.i("TAG", "getUserFromRealDB: "+task.getResult().getValue().toString());
+                    Log.i("TAG", "getUserFromRealDB: " + task.getResult().getValue().toString());
 
                     myDelegation.onSuccessReturn(task.getResult().getValue().toString());
                 } else {

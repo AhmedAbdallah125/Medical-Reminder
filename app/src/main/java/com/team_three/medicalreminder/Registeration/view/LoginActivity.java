@@ -1,7 +1,6 @@
 package com.team_three.medicalreminder.Registeration.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.Navigation;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -20,10 +18,8 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.Registeration.presenter.NetworkPresenter;
 import com.team_three.medicalreminder.databinding.ActivityLoginBinding;
-import com.team_three.medicalreminder.homeScreen.view.HomeActivity;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
 import com.team_three.medicalreminder.network.NetworkInterface;
@@ -37,8 +33,8 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
     String password = "";
 
     private static final int RC_SIGN_IN = 258120;
-    private static final int EMAILLOGIN = 1;
-    private static final int GOOGLELOGIN = 2;
+    private static final int EMAIL_LOGIN = 1;
+    private static final int GOOGLE_LOGIN = 2;
     private static final int STATE_CODE = 1;
     private static final String STATE = "STATE";
     SharedPreferences sharedPref;
@@ -58,11 +54,11 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
         binding.btnLogin.setOnClickListener(v -> {
             email = binding.textInputEditEmailLogIn.getEditableText().toString();
             password = binding.textInputEditPasswordLogIn.getEditableText().toString();
-            makeLoginRequest(email, password, EMAILLOGIN);
+            makeLoginRequest(email, password, EMAIL_LOGIN);
         });
         // handle GoogleCard
         binding.cardWigninGoogle.setOnClickListener(view -> {
-            makeLoginRequest(null, null, GOOGLELOGIN);
+            makeLoginRequest(null, null, GOOGLE_LOGIN);
         });
         //handle register
         binding.txtNewRegister.setOnClickListener(v -> {
@@ -211,6 +207,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
             try {
 //                // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
+
 //                Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
                 myRepository.signInUsingGoogle(account.getIdToken());
             } catch (ApiException e) {

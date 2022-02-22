@@ -97,7 +97,7 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="login">Log in</string>
+    <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="forgt_password">Forget Your password</string>
@@ -119,7 +119,7 @@
     <string name="dose">Dose:</string>
     <string name="tool_bar_name">ahmd</string>
     <string name="SignInGoogle">Sign InWith Google</string>
-    <string name="create_profile">Create Profile</string>
+    <string name="create_profile">Login</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="gusest">Guest</string>
     <string name="newRegister">New Register ?</string>

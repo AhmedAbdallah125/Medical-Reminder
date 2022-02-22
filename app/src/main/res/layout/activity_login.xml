@@ -165,7 +165,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="64dp"
                 android:layout_marginTop="1dp"
@@ -185,7 +185,7 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/newRegister"
                     android:textColor="@color/secondaryColor"
-                    android:textSize="@dimen/buttonFontSize"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -194,10 +194,10 @@
                     android:id="@+id/txt_new_register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
+                    android:layout_marginStart="1dp"
                     android:text="@string/Register"
                     android:textColor="@color/primaryColor"
-                    android:textSize="@dimen/buttonFontSize"
+                    android:textSize="16sp"
 
                     app:layout_constraintBottom_toBottomOf="@+id/textView9"
                     app:layout_constraintStart_toEndOf="@+id/textView9"
