@@ -27,7 +27,7 @@ public interface NetworkInterface {
 
     void onAccept(TakerPOJO takerPOJO);
     void  onReject(String key);
-    void loadPatients(List<RequestPojo> patients);
+    void loadPatients(String email);
     void loadTakers(String email);
 
 

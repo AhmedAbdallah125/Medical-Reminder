@@ -170,7 +170,7 @@ public class FireBaseNetwork implements NetworkInterface {
                 requestPojos.clear();
 
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    if(dataSnapshot.child("myEmail").getValue() !=null){
+                    if(dataSnapshot.child("myEmail").getValue() !=null && Integer.parseInt(String.valueOf(dataSnapshot.child("acceptance").getValue()))==0){
                         RequestPojo taker =new RequestPojo((Integer.parseInt(String.valueOf(dataSnapshot.child("img").getValue())))
                                 , dataSnapshot.child("name").getValue().toString()
                                 ,dataSnapshot.child("myEmail").getValue().toString()
@@ -214,10 +214,39 @@ public class FireBaseNetwork implements NetworkInterface {
     }
 
     @Override
-    public void loadPatients(List<RequestPojo> patients) {
-//        List<RequestPojo> Patien = new ArrayList<>();
-//        Query query = FirebaseDatabase.getInstance().getReference().child("users").child(myEmail).child("request");
+    public void loadPatients(String email) {
+        List<RequestPojo> patients = new ArrayList<>();
+        Query query = FirebaseDatabase.getInstance().getReference().child("users").child(email).child("request");
 
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                patients.clear();
+
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    if(dataSnapshot.child("myEmail").getValue() !=null && Integer.parseInt(String.valueOf(dataSnapshot.child("acceptance").getValue()))==0){
+                        RequestPojo taker =new RequestPojo((Integer.parseInt(String.valueOf(dataSnapshot.child("img").getValue())))
+                                , dataSnapshot.child("name").getValue().toString()
+                                ,dataSnapshot.child("myEmail").getValue().toString()
+                                ,dataSnapshot.child("email").getValue().toString()
+                                ,Integer.parseInt(String.valueOf(dataSnapshot.child("acceptance").getValue()))
+                        );
+
+                        taker.setId(dataSnapshot.child("id").getValue().toString());
+                        patients.add(taker);
+                    }
+
+                }
+                myDelegation.onSuccessRequest(patients);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                myDelegation.onFailure(error.getMessage());
+                Log.i("TAG", "onCancelled: ");
+            }
+        });
     }
 
     @Override

@@ -21,6 +21,9 @@ import com.team_three.medicalreminder.helpRequest.view.HelpRequistList;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.RequestPojo;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
+import com.team_three.medicalreminder.patientsList.presenter.PatientListPresenter;
+import com.team_three.medicalreminder.patientsList.presenter.PatientListPresenterInterface;
+import com.team_three.medicalreminder.taker.presenter.TakerListPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +32,8 @@ import java.util.List;
 public class PatientList extends Fragment implements PatientListViewInterface{
     FragmentPatientListBinding binding;
     SharedPreferences sharedPreferences;
-
+    String myEmail;
+    PatientListPresenterInterface patientListPresenterInterface;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +57,18 @@ public class PatientList extends Fragment implements PatientListViewInterface{
         layoutManager.setOrientation(RecyclerView.VERTICAL);
 
         binding.patientRecylerView.setLayoutManager(layoutManager);
-//        sharedPreferences = this.getContext().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
 
+        sharedPreferences = this.getContext().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
+        String[] email = sharedPreferences.getString(RegisterFragment.USER_EMAIL,"null").split("\\.");
+        myEmail = email[0];
+
+        patientListPresenterInterface = new PatientListPresenter(this.getContext(),repository,this);
+        patientListPresenterInterface.sendEmail(myEmail);
+        patientListPresenterInterface.loadPatients();
     }
 
     @Override
     public void loadPatients(List<RequestPojo> patients) {
-
+        PatientListAdapter adapter = new PatientListAdapter(this.getContext(),patients,this);
     }
 }

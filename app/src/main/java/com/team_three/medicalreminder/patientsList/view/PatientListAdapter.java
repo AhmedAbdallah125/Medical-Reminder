@@ -24,14 +24,14 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
     final private Context _context;
     private List<RequestPojo> patients;
     SharedPreferences sharedPref;
-    OnClickRequest onClickRequest;
+    PatientListViewInterface patientListViewInterface;
 
-    public PatientListAdapter(Context context, List<RequestPojo> medicines,OnClickRequest onClickRequest) {
+    public PatientListAdapter(Context context, List<RequestPojo> patients,PatientListViewInterface patientListViewInterface) {
 
         Log.i("TAG", "MedsListAdapter: abdoooo");
         _context = context;
-        this.patients = medicines;
-        this.onClickRequest = onClickRequest;
+        this.patients = patients;
+        this.patientListViewInterface = patientListViewInterface;
         initShared();
     }
 
@@ -57,6 +57,8 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
     @Override
     public void onBindViewHolder(@NonNull PatientListAdapter.ViewHolder holder, int position) {
         Log.i("TAG", "onBindViewHolder:ABDOOOOOOOOOO ");
+        holder.binding.patientImage.setImageResource(patients.get(position).getImg());
+        holder.binding.patientName.setText(patients.get(position).getName());
 //        holder.binding.txtinvitorName.setText(patients.get(position).getName());
 //        holder.binding.txtInvite.setText("I invite you to help me");
 //        holder.binding.requestImage.setImageResource(patients.get(position).getImg());

@@ -11,11 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.team_three.medicalreminder.databinding.FragmentTakerProfileScreenBinding;
-import com.team_three.medicalreminder.model.RequestPojo;
-
+import com.team_three.medicalreminder.model.TakerPOJO;
 
 public class TakerProfileScreen extends Fragment {
     FragmentTakerProfileScreenBinding binding;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +25,6 @@ public class TakerProfileScreen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding =FragmentTakerProfileScreenBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
@@ -35,7 +34,7 @@ public class TakerProfileScreen extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = getArguments();
         if(bundle!=null){
-            RequestPojo taker = bundle.getParcelable("profileData");
+            TakerPOJO taker = bundle.getParcelable("profileData");
             binding.txtFirstNameProfileTaker.setText(taker.getName());
         }
 

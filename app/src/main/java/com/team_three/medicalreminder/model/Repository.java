@@ -145,7 +145,7 @@ public class Repository implements RepositoryInterface  {
     }
 
     @Override
-    public void loadPatients(List<RequestPojo> patients) {
+    public void loadPatients(String email) {
 
     }
 

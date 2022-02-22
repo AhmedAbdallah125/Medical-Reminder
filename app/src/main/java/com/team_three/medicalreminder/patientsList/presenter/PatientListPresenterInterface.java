@@ -5,7 +5,8 @@ import com.team_three.medicalreminder.model.RequestPojo;
 import java.util.List;
 
 public interface PatientListPresenterInterface {
-    void loadPatients(List<RequestPojo> patients);
+    void loadPatients();
+    public void sendEmail(String email);
 
 }
 
