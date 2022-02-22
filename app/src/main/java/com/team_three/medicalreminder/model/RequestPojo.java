@@ -5,31 +5,39 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SuppressLint("ParcelCreator")
-public class Taker implements Parcelable {
+public class RequestPojo implements Parcelable {
     private int img;
    private String name;
    private  String email;
    private String id;
+   private String myEmail;
+   private int acceptance;
 
-    public Taker(int img, String name) {
-        this.img = img;
-        this.name = name;
-    }
-
-    public Taker(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
-
-
-    public Taker() {
-    }
-
-    public Taker(String email, int img, String name, String id) {
+    public RequestPojo(int img, String name, String email,  String myEmail, int acceptance) {
         this.img = img;
         this.name = name;
         this.email = email;
-        this.id = id;
+        this.myEmail = myEmail;
+        this.acceptance = acceptance;
+    }
+
+    public RequestPojo() {
+    }
+
+    public int getAcceptance() {
+        return acceptance;
+    }
+
+    public void setAcceptance(int acceptance) {
+        this.acceptance = acceptance;
+    }
+
+    public String getMyEmail() {
+        return myEmail;
+    }
+
+    public void setMyEmail(String myEmail) {
+        this.myEmail = myEmail;
     }
 
     public String getId() {

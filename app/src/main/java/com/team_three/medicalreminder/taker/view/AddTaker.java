@@ -1,5 +1,7 @@
 package com.team_three.medicalreminder.taker.view;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,16 +12,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.team_three.medicalreminder.R;
+import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.databinding.FragmentAddTakerBinding;
-import com.team_three.medicalreminder.model.Taker;
+import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.model.RequestPojo;
+import com.team_three.medicalreminder.network.FireBaseNetwork;
+import com.team_three.medicalreminder.taker.presenter.AddTakerPresenerInterface;
+import com.team_three.medicalreminder.taker.presenter.AddTakerPresenter;
 
-public class AddTaker extends Fragment {
+public class AddTaker extends Fragment implements AddTakerViewInterface{
 
     FragmentAddTakerBinding binding;
-    Taker taker;
+    RequestPojo taker;
+    AddTakerPresenerInterface addTakerPresenerInterface;
+    Repository repository;
+    SharedPreferences sharedPreferences;
+    boolean response;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,15 +45,31 @@ public class AddTaker extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        repository = Repository.getInstance(FireBaseNetwork.getInstance(this.getActivity()),this.getContext());
+        addTakerPresenerInterface = new AddTakerPresenter(this.getContext(),this,repository);
         binding.btnTakerAdded.setOnClickListener(view1 -> {
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Request");
-            String id = databaseReference.child("email").push().getKey();
-            taker=new Taker(binding.txtEmail.getEditableText().toString(),R.drawable.one,binding.txtName.getEditableText().toString(),id);
-
-            databaseReference.child("email").push().setValue(taker);
+            addTakerPresenerInterface.isLoggedIn();
 
         });
     }
 
+
+
+    @Override
+    public void isLogedIn(boolean response) {
+        if(response){
+
+            sharedPreferences = this.getContext().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
+
+            RequestPojo requestPojo = new RequestPojo(R.drawable.one
+                    ,sharedPreferences.getString(RegisterFragment.USER_NAME,"null")
+                    ,binding.txtEmail.getEditableText().toString()
+                    ,sharedPreferences.getString(RegisterFragment.USER_EMAIL,"null")
+                    ,0
+                    );
+           // requestPojo.setMyEmail();
+            addTakerPresenerInterface.sendRequest(requestPojo);
+
+        }
+    }
 }

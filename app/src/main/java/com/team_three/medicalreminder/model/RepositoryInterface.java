@@ -5,7 +5,6 @@ import android.app.Activity;
 import androidx.lifecycle.LiveData;
 
 import com.google.firebase.auth.FirebaseUser;
-import com.team_three.medicalreminder.network.NetworkDelegation;
 
 import java.util.List;
 
@@ -37,4 +36,12 @@ public interface RepositoryInterface {
     void signInUsingGoogle(String idToken);
 
     FirebaseUser getCurrentUser();
+     void sendRequest(RequestPojo requestPojo);
+     void loadHelpRequest(String email);
+    void onAccept(TakerPOJO takerPOJO);
+    void  onReject(String key);
+    void loadPatients(List<RequestPojo> patients);
+    void loadTakers(String email);
+
+
 }

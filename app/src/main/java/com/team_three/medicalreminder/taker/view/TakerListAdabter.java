@@ -13,19 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.TakerRowBinding;
 
-import com.team_three.medicalreminder.model.Taker;
+import com.team_three.medicalreminder.model.RequestPojo;
+import com.team_three.medicalreminder.model.TakerPOJO;
 
 import java.util.List;
 
 
 public class TakerListAdabter extends RecyclerView.Adapter<TakerListAdabter.ViewHolder> {
     final private Context _context;
-    private List<Taker> takers;
+    private List<TakerPOJO> takers;
 
-    public TakerListAdabter(Context context, List<Taker> medicines) {
+    public TakerListAdabter(Context context, List<TakerPOJO> takers) {
         Log.i("TAG", "MedsListAdapter: abdoooo");
         _context = context;
-        this.takers = medicines;
+        this.takers = takers;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -54,7 +55,7 @@ public class TakerListAdabter extends RecyclerView.Adapter<TakerListAdabter.View
         holder.binding.txttakerName.setText(takers.get(position).getName());
         holder.binding.takerConstraint.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
-            bundle.putParcelable("profileData",  takers.get(position));
+            bundle.putParcelable("profileData",takers.get(position));
             Navigation.findNavController(view).navigate(R.id.action_fragment_taker_list_to_takerProfileScreen,bundle);
         });
     }

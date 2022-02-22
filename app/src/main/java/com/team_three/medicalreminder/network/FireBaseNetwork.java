@@ -2,13 +2,10 @@ package com.team_three.medicalreminder.network;
 
 
 import android.app.Activity;
-import android.content.Intent;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -21,7 +18,17 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.team_three.medicalreminder.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.team_three.medicalreminder.model.RequestPojo;
+import com.team_three.medicalreminder.model.TakerPOJO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FireBaseNetwork implements NetworkInterface {
 
@@ -141,6 +148,110 @@ public class FireBaseNetwork implements NetworkInterface {
         }
         return mAuth.getCurrentUser();
     }
+
+    @Override
+    public void sendRequest(RequestPojo requestPojo) {
+        String[] uid = requestPojo.getEmail().split("\\.");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid[0]);
+        String key = databaseReference.child("request").push().getKey();
+        // taker=new RequestPojo(binding.txtEmail.getEditableText().toString(),R.drawable.one,binding.txtName.getEditableText().toString(),id);
+        requestPojo.setId(key);
+        databaseReference.child("request").child(key).setValue(requestPojo);
+    }
+
+    @Override
+    public void loadHelpRequest( String myEmail) {
+        List<RequestPojo> requestPojos = new ArrayList<>();
+        Query query = FirebaseDatabase.getInstance().getReference().child("users").child(myEmail).child("request");
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                requestPojos.clear();
+
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    if(dataSnapshot.child("myEmail").getValue() !=null){
+                        RequestPojo taker =new RequestPojo((Integer.parseInt(String.valueOf(dataSnapshot.child("img").getValue())))
+                                , dataSnapshot.child("name").getValue().toString()
+                                ,dataSnapshot.child("myEmail").getValue().toString()
+                                ,dataSnapshot.child("email").getValue().toString()
+                                ,Integer.parseInt(String.valueOf(dataSnapshot.child("acceptance").getValue()))
+                                );
+
+                        taker.setId(dataSnapshot.child("id").getValue().toString());
+                        requestPojos.add(taker);
+                    }
+
+                }
+                myDelegation.onSuccessRequest(requestPojos);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                myDelegation.onFailure(error.getMessage());
+                Log.i("TAG", "onCancelled: ");
+            }
+        });
+    }
+
+    @Override
+    public void onAccept(TakerPOJO takerPOJO) {
+        String[] uid = takerPOJO.getPatientEmail().split("\\.");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid[0]);
+        String key = databaseReference.child("taker").push().getKey();
+       // takerPOJO.setId(key);
+        databaseReference.child("taker").child(key).setValue(takerPOJO);
+        String[] takerId = takerPOJO.getEmail().split("\\.");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(takerId[0]);
+        reference.child("request").child(takerPOJO.getRequestId()).child("acceptance").setValue(1);
+
+    }
+
+    @Override
+    public void onReject(String key) {
+
+    }
+
+    @Override
+    public void loadPatients(List<RequestPojo> patients) {
+//        List<RequestPojo> Patien = new ArrayList<>();
+//        Query query = FirebaseDatabase.getInstance().getReference().child("users").child(myEmail).child("request");
+
+    }
+
+    @Override
+    public void loadTakers(String email) {
+        List<TakerPOJO> takers = new ArrayList<>();
+        Query query = FirebaseDatabase.getInstance().getReference().child("users").child(email).child("taker");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                takers.clear();
+
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    TakerPOJO taker =new TakerPOJO(dataSnapshot.child("patientEmail").getValue().toString()
+                            ,dataSnapshot.child("name").getValue().toString()
+                            , dataSnapshot.child("email").getKey().toString()
+                            ,(Integer.parseInt(String.valueOf(dataSnapshot.child("img").getValue())))
+                            ,dataSnapshot.child("requestId").getValue().toString()
+                    );
+
+                    takers.add(taker);
+
+
+                }
+                myDelegation.onSuccessTaker(takers);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
 
     private String handleFireBaseException(Task task) {
         String errorMessage = "";

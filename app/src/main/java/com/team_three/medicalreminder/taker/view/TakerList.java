@@ -1,5 +1,7 @@
 package com.team_three.medicalreminder.taker.view;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,16 +16,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.team_three.medicalreminder.R;
+import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.databinding.FragmentTakerListBinding;
-import com.team_three.medicalreminder.model.Taker;
+import com.team_three.medicalreminder.helpRequest.presenter.HelpRequestPresenter;
+import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.model.RequestPojo;
+import com.team_three.medicalreminder.model.TakerPOJO;
+import com.team_three.medicalreminder.network.FireBaseNetwork;
+import com.team_three.medicalreminder.taker.presenter.TakerLIstPresenterInterface;
+import com.team_three.medicalreminder.taker.presenter.TakerListPresenter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class TakerList extends Fragment {
+public class TakerList extends Fragment implements TakerListViewInterface{
 
 private FragmentTakerListBinding fragmentTakerListBinding;
 TakerListAdabter adabter;
+SharedPreferences sharedPreferences;
+String myEmail;
+TakerLIstPresenterInterface lIstPresenterInterface;
 
 
     @Override
@@ -43,13 +56,23 @@ TakerListAdabter adabter;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ArrayList<Taker> takers = new ArrayList<>();
-        takers.add(new Taker(R.drawable.one,"abdo"));
+        Repository repository =  Repository.getInstance(FireBaseNetwork.getInstance(this.getActivity()),this.getContext());
+
+
+        ArrayList<RequestPojo> takers = new ArrayList<>();
+        //takers.add(new RequestPojo(R.drawable.one,"abdo"));
         LinearLayoutManager layoutManager = new LinearLayoutManager(TakerList.this.getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-        adabter =new TakerListAdabter(this.getContext(),takers);
         fragmentTakerListBinding.takerRecyclerView.setLayoutManager(layoutManager);
-        fragmentTakerListBinding.takerRecyclerView.setAdapter(adabter);
+
+
+        sharedPreferences = this.getContext().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
+        String[] email = sharedPreferences.getString(RegisterFragment.USER_EMAIL,"null").split("\\.");
+        myEmail = email[0];
+
+        lIstPresenterInterface = new TakerListPresenter(this.getContext(),repository,this);
+        lIstPresenterInterface.sendEmail(myEmail);
+        lIstPresenterInterface.loadTakers();
 
         fragmentTakerListBinding.btnAddTaker.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigate(R.id.action_takerList2_to_addTaker);
@@ -63,4 +86,11 @@ TakerListAdabter adabter;
         fragmentTakerListBinding =null;
     }
 
+
+    @Override
+    public void loadTakers(List<TakerPOJO> takerPOJOS) {
+        adabter =new TakerListAdabter(this.getContext(),takerPOJOS);
+        fragmentTakerListBinding.takerRecyclerView.setAdapter(adabter);
+
+    }
 }

@@ -1,59 +1,75 @@
 package com.team_three.medicalreminder.model;
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-@Entity(tableName = "taker")
-public class TakerPOJO {
-    @NonNull
-    private String firstName;
-    private String lastName;
-    @NonNull
-    @PrimaryKey
+@SuppressLint("ParcelCreator")
+public class TakerPOJO implements Parcelable {
+    private String patientEmail;
+    private String name;
     private String email;
-    @NonNull
-    private String gender;
+    private  int img;
+    private String requestId;
 
-    public TakerPOJO(@NonNull String firstName, String lastName, @NonNull String email, @NonNull String gender) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public TakerPOJO(String patientEmail, String name, String email, int img, String requestId) {
+        this.patientEmail = patientEmail;
+        this.name = name;
         this.email = email;
-        this.gender = gender;
+        this.img = img;
+        this.requestId = requestId;
     }
 
-    @NonNull
-    public String getFirstName() {
-        return firstName;
+    public TakerPOJO() {
     }
 
-    public void setFirstName(@NonNull String firstName) {
-        this.firstName = firstName;
+    public String getRequestId() {
+        return requestId;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public int getImg() {
+        return img;
     }
 
-    @NonNull
+    public void setImg(int img) {
+        this.img = img;
+    }
+
+    public String getPatientEmail() {
+        return patientEmail;
+    }
+
+    public void setPatientEmail(String patientEmail) {
+        this.patientEmail = patientEmail;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(@NonNull String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    @NonNull
-    public String getGender() {
-        return gender;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setGender(@NonNull String gender) {
-        this.gender = gender;
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
     }
 }

@@ -4,7 +4,11 @@ import android.app.Activity;
 
 import com.team_three.medicalreminder.Registeration.view.NetworkViewInterface;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.model.RequestPojo;
+import com.team_three.medicalreminder.model.TakerPOJO;
 import com.team_three.medicalreminder.network.NetworkDelegation;
+
+import java.util.List;
 
 public class NetworkPresenter implements NetworkPresenterInterface, NetworkDelegation {
 
@@ -44,6 +48,16 @@ public class NetworkPresenter implements NetworkPresenterInterface, NetworkDeleg
     @Override
     public void onFailure(String errorMessage) {
         myView.setFailureResponse(errorMessage);
+
+    }
+
+    @Override
+    public void onSuccessRequest(List<RequestPojo> requestPojos) {
+
+    }
+
+    @Override
+    public void onSuccessTaker(List<TakerPOJO> takerPOJOS) {
 
     }
 }

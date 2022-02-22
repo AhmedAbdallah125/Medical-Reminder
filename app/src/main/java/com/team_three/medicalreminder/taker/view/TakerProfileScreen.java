@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.team_three.medicalreminder.databinding.FragmentTakerProfileScreenBinding;
-import com.team_three.medicalreminder.model.Taker;
+import com.team_three.medicalreminder.model.RequestPojo;
 
 
 public class TakerProfileScreen extends Fragment {
@@ -35,7 +35,7 @@ public class TakerProfileScreen extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = getArguments();
         if(bundle!=null){
-            Taker taker = bundle.getParcelable("profileData");
+            RequestPojo taker = bundle.getParcelable("profileData");
             binding.txtFirstNameProfileTaker.setText(taker.getName());
         }
 

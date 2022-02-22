@@ -101,7 +101,7 @@
     </fragment>
     <fragment
         android:id="@+id/helpRequistList"
-        android:name="com.team_three.medicalreminder.helpRequest.HelpRequistList"
+        android:name="com.team_three.medicalreminder.helpRequest.view.HelpRequistList"
         android:label="fragment_help_requist_list"
         tools:layout="@layout/fragment_help_requist_list" />
     <fragment

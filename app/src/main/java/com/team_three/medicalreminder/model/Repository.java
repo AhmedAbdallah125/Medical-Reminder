@@ -8,14 +8,12 @@ import androidx.lifecycle.LiveData;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.team_three.medicalreminder.dataBase.LocalSourceInterface;
-import com.team_three.medicalreminder.medicationList.view.AcrtiveMedsFragment;
-import com.team_three.medicalreminder.medicationList.view.AcrtiveMedsFragment;
 import com.team_three.medicalreminder.network.NetworkDelegation;
 import com.team_three.medicalreminder.network.NetworkInterface;
 
 import java.util.List;
 
-public class Repository implements RepositoryInterface {
+public class Repository implements RepositoryInterface  {
     private Context context;
     LocalSourceInterface localSourceInterface;
     private static Repository repo = null;
@@ -125,5 +123,37 @@ public class Repository implements RepositoryInterface {
     public FirebaseUser getCurrentUser() {
         return myRemote.getCurrentUser();
     }
+
+    @Override
+    public void sendRequest(RequestPojo requestPojo) {
+        myRemote.sendRequest(requestPojo);
+    }
+
+    @Override
+    public void   loadHelpRequest(String email) {
+        myRemote.loadHelpRequest(email);
+    }
+
+    @Override
+    public void onAccept(TakerPOJO takerPOJO) {
+        myRemote.onAccept(takerPOJO);
+    }
+
+    @Override
+    public void onReject(String key) {
+
+    }
+
+    @Override
+    public void loadPatients(List<RequestPojo> patients) {
+
+    }
+
+    @Override
+    public void loadTakers(String email) {
+
+         myRemote.loadTakers(email);
+    }
+
 
 }

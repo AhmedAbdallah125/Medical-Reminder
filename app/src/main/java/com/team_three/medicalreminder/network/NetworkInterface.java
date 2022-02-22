@@ -1,9 +1,12 @@
 package com.team_three.medicalreminder.network;
 
 import android.app.Activity;
-import android.content.Context;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.team_three.medicalreminder.model.RequestPojo;
+import com.team_three.medicalreminder.model.TakerPOJO;
+
+import java.util.List;
 
 public interface NetworkInterface {
     void setNetworkDelegation(NetworkDelegation networkDelegation);
@@ -17,5 +20,16 @@ public interface NetworkInterface {
     void signInUsingGoogle(String idToken);
 
     FirebaseUser getCurrentUser();
+
+    void sendRequest(RequestPojo requestPojo);
+
+    void loadHelpRequest(String email);
+
+    void onAccept(TakerPOJO takerPOJO);
+    void  onReject(String key);
+    void loadPatients(List<RequestPojo> patients);
+    void loadTakers(String email);
+
+
 
 }
