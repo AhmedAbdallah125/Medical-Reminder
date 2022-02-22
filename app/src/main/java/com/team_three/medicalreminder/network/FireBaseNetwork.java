@@ -3,6 +3,7 @@ package com.team_three.medicalreminder.network;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -21,7 +22,13 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.team_three.medicalreminder.R;
+import com.team_three.medicalreminder.model.User;
 
 public class FireBaseNetwork implements NetworkInterface {
 
@@ -65,13 +72,16 @@ public class FireBaseNetwork implements NetworkInterface {
 
 
     @Override
-    public void registerWithEmailAndPass(Activity myActivity, String email, String password) {
+    public void registerWithEmailAndPass(Activity myActivity, String email, String password, String name) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(myActivity, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            myDelegation.onSuccess();
+                            // first make must add to database
+                            User user = new User(email, name);
+                            addUserInDB(user);
+
                         } else {
                             String errorMessage = handleFireBaseException(task);
                             myDelegation.onFailure(errorMessage);
@@ -141,6 +151,47 @@ public class FireBaseNetwork implements NetworkInterface {
         }
         return mAuth.getCurrentUser();
     }
+
+    @Override
+    public void addUserInDB(User user) {
+        String uid = user.getEmail().split("\\.")[0];
+        // check if null or not
+        FirebaseDatabase.getInstance().getReference("users")
+                .child(uid)
+                .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    myDelegation.onSuccess();
+                } else {
+                    String errorMessage = handleFireBaseException(task);
+                    myDelegation.onFailure(errorMessage);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getUserFromRealDB(String email) {
+        Log.i("TAG", "getUserFromRealDB: ");
+        String uid =email.split("\\.")[0];
+        Query query = FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("name");
+        query.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    Log.i("TAG", "getUserFromRealDB: "+task.getResult().getValue().toString());
+
+                    myDelegation.onSuccessReturn(task.getResult().getValue().toString());
+                } else {
+                    myDelegation.onFailure(task.getException().getMessage());
+                    Log.i("TAG", "problem in getting name: " + task.getException().getMessage());
+
+                }
+            }
+        });
+    }
+
 
     private String handleFireBaseException(Task task) {
         String errorMessage = "";

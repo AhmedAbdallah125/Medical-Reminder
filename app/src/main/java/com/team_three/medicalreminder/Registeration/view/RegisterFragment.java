@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseUser;
+import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.FragmenetRegisterBinding;
 import com.team_three.medicalreminder.databinding.FragmentLoginBinding;
 import com.team_three.medicalreminder.Registeration.presenter.NetworkPresenter;
@@ -40,6 +42,7 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
     Repository myRepository;
     String email = "";
     String password = "";
+    String name = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,15 +67,16 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
         binding.btnSignUp.setOnClickListener(v -> {
             email = binding.textInputEditEmailSignUp.getEditableText().toString();
             password = binding.textInputEditPasswordSignUp.getEditableText().toString();
-            makeRegisterRequest(email, password);
+            name = binding.textInputEditNameSignUp.getEditableText().toString();
+            makeRegisterRequest(email, password, name);
         });
 
 
     }
 
-    private void makeRegisterRequest(String email, String password) {
-        if (checkEmail(email) && checkPassword(password)) {
-            request(email, password);
+    private void makeRegisterRequest(String email, String password, String name) {
+        if (checkEmail(email) && checkPassword(password) && checkName(name)) {
+            request(email, password, name);
             handleVisibility(true);
         }
     }
@@ -112,6 +116,20 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
         return check;
     }
 
+    private boolean checkName(String userName) {
+        boolean check;
+
+        if (userName.isEmpty()) {
+            binding.textInputEditNameSignUp.setError("User Name is Required");
+            binding.textInputEditNameSignUp.requestFocus();
+            check = false;
+            // continue
+        } else {
+            check = true;
+        }
+        return check;
+    }
+
     private void initPresenter() {
         myNetwork = FireBaseNetwork.getInstance(getActivity());
         myRepository = Repository.getInstance(myNetwork, this.getContext());
@@ -119,8 +137,8 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
     }
 
 
-    public void request(String email, String password) {
-        myPresenter.registerWithEmailAndPass(getActivity(), email, password);
+    public void request(String email, String password, String name) {
+        myPresenter.registerWithEmailAndPass(getActivity(), email, password, name);
     }
 
     @Override
@@ -128,7 +146,9 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
         // can get User
         handleVisibility(false);
         initShared();
-        storeUserInformation(getCurrentUser());
+        storeUserInformation();
+        // back to home
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_registerFragment_to_fragment_home);
 
     }
 
@@ -144,9 +164,9 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
 
     }
 
-    private void storeUserInformation(FirebaseUser user) {
-        editor.putString(USER_EMAIL, user.getEmail());
-        editor.putString(USER_NAME, user.getDisplayName());
+    private void storeUserInformation() {
+        editor.putString(USER_EMAIL, email);
+        editor.putString(USER_NAME, name);
         editor.apply();
     }
 
@@ -155,12 +175,17 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
     }
 
     @Override
-    public void setFailureResponse(String errorMessage) {
+    public void setFailureResponse(String errormessge) {
         // can get User
         binding.progressBarRegister.setVisibility(View.GONE);
         binding.textInputEditPasswordSignUp.requestFocus();
-        handleErrorResponse(errorMessage);
+        handleErrorResponse(errormessge);
         handleVisibility(false);
+    }
+
+    @Override
+    public void setSuccessfulReturnResponse(String userName) {
+
     }
 
     private void handleVisibility(boolean visible) {

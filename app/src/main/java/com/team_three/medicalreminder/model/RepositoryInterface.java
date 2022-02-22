@@ -30,11 +30,13 @@ public interface RepositoryInterface {
     // fireBase
     void isSignedIn();
 
-    void registerWithEmailAndPass(Activity activity, String email, String password);
+    void registerWithEmailAndPass(Activity activity, String email, String password,String name);
 
     void signInWithEmailAndPass(Activity activity, String email, String password);
 
     void signInUsingGoogle(String idToken);
 
     FirebaseUser getCurrentUser();
+    void getUserName(String email);
+
 }

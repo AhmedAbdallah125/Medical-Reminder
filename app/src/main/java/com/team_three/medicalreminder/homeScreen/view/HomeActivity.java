@@ -7,24 +7,24 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 ;
 
-import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.navigation.NavigationView;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.Registeration.view.LoginActivity;
 import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.databinding.ActivityHomeBinding;
 import com.team_three.medicalreminder.databinding.HomeDrawerBinding;
+import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.network.FireBaseNetwork;
+import com.team_three.medicalreminder.network.NetworkInterface;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
@@ -37,16 +37,10 @@ public class HomeActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     String name = "";
     String email = "";
+    Repository myRepository;
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        handleDrawer();
-
-    }
-
+    // synchronisation when network is connected
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,14 +49,20 @@ public class HomeActivity extends AppCompatActivity {
 
         handleToolBar();
         initNavigation();
-
+        handleDrawerMenu();
+//        setSignOut(true);
         //
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-                if (navDestination.getId() == R.id.fragment_medication_list || navDestination.getId() == R.id.fragment_home || navDestination.getId() == R.id.fragment_taker_list || navDestination.getId() == R.id.helpRequistList) {
+                if (navDestination.getId() == R.id.fragment_medication_list ||
+                        navDestination.getId() == R.id.fragment_home ||
+                        navDestination.getId() == R.id.fragment_taker_list ||
+                        navDestination.getId() == R.id.helpRequistList) {
                     homeBinding.toolbar.setVisibility(View.VISIBLE);
                     homeBinding.navigatorViewHome.setVisibility(View.VISIBLE);
+                    handleDrawer();
+                    handleToolBar();
 
                 } else {
                     homeBinding.toolbar.setVisibility(View.GONE);
@@ -72,6 +72,14 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handleDrawer();
+        handleDrawerMenu();
+        handleToolBar();
     }
 
     @Override
@@ -107,15 +115,43 @@ public class HomeActivity extends AppCompatActivity {
             binding.drawerName.setText(name);
             binding.drawerEditText.setText(email);
             binding.drawerEditText.setClickable(false);
+            // handle menu
+//            homeBinding.drawerNav.getMenu().addSubMenu("");
+
         } else {
             binding.drawerName.setText(R.string.gusest);
             binding.drawerEditText.setText(R.string.create_profile);
             binding.drawerEditText.setClickable(true);
+//            homeBinding.drawerNav.getMenu().removeItem(R.id.nav_logout);
+
             binding.drawerEditText.setOnClickListener(view -> {
                 homeBinding.homeActivityDrawer.close();
                 Intent outComing = new Intent(this, LoginActivity.class);
                 startActivity(outComing);
             });
+        }
+
+
+    }
+
+    private void handleDrawerMenu() {
+        View v = homeBinding.drawerNav.getHeaderView(0);
+        HomeDrawerBinding binding = HomeDrawerBinding.bind(v);
+        if (!binding.drawerEditText.getText().equals(R.string.create_profile)) {
+            homeBinding.drawerNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Log.i("TAG", "onNavigationItemSelected: abdddddddd");
+                    if (item.getItemId() == R.id.nav_logout) {
+                        setSignOut();
+                        return true;
+                    }
+                    return false;
+
+                }
+            });
+        } else {
+
         }
 
     }
@@ -155,6 +191,23 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+    private void setSignOut() {
+        Log.i("TAG", "setSignOut:Activty ");
+        // sign out
+        handleSignOutCondition();
+        // update all
+        handleDrawer();
+        handleToolBar();
+    }
+
+
+
+    private void handleSignOutCondition() {
+        editor = sharedPref.edit();
+        editor.putString(RegisterFragment.USER_EMAIL, "null");
+        editor.putString(RegisterFragment.USER_NAME, "null");
+        editor.apply();
+    }
 }
 
 

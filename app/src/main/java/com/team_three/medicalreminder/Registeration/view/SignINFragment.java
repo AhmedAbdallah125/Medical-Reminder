@@ -121,11 +121,16 @@ public class SignINFragment extends Fragment implements NetworkViewInterface {
     }
 
     @Override
-    public void setFailureResponse(String errorMessage) {
+    public void setFailureResponse(String errormessge) {
         binding.progressBarLogin.setVisibility(View.GONE);
         binding.textInputEditEmailLogIn.requestFocus();
-        handleErrorResponse(errorMessage);
+        handleErrorResponse(errormessge);
         handleVisibility(false);
+
+    }
+
+    @Override
+    public void setSuccessfulReturnResponse(String userName) {
 
     }
 

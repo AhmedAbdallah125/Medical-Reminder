@@ -125,6 +125,24 @@
 
                     />
             </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_layout_name_sign_up"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                android:hint="@string/userName"
+                app:layout_constraintTop_toBottomOf="@id/text_input_layout_password_sign_up"
+                app:layout_constraintStart_toStartOf="@id/text_input_layout_password_sign_up"
+                app:layout_constraintEnd_toEndOf="@id/text_input_layout_password_sign_up">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_input_edit_name_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btn_sign_up"
@@ -132,13 +150,13 @@
                 android:layout_height="@dimen/buttonHeight"
 
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="156dp"
+                android:layout_marginTop="63dp"
                 android:layout_marginEnd="32dp"
                 android:text="@string/sign_up"
                 app:cornerRadius="@dimen/buttonCornerRadius"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_input_layout_password_sign_up" />
+                app:layout_constraintTop_toBottomOf="@+id/text_input_layout_name_sign_up" />
 
 
 

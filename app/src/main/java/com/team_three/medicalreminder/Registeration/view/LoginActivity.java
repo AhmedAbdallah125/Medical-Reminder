@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
     Repository myRepository;
     String email = "";
     String password = "";
+
     private static final int RC_SIGN_IN = 258120;
     private static final int EMAILLOGIN = 1;
     private static final int GOOGLELOGIN = 2;
@@ -64,9 +65,13 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
             makeLoginRequest(null, null, GOOGLELOGIN);
         });
         //handle register
-        binding.txtNewRegister.setOnClickListener(v->{
-            editor.putInt(STATE,STATE_CODE);
+        binding.txtNewRegister.setOnClickListener(v -> {
+            editor.putInt(STATE, STATE_CODE);
             editor.apply();
+            finish();
+        });
+        // handle back
+        binding.imageSignBack.setOnClickListener(view -> {
             finish();
         });
 
@@ -139,12 +144,24 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
 
     @Override
     public void setSuccessfulResponse() {
+        String userName;
+        String email;
         binding.progressBarLogin.setVisibility(View.GONE);
-        handleVisibility(false);
+        userName = getCurrentUser().getDisplayName();
+        email = getCurrentUser().getEmail();
 //        initShared();
-        storeUserInformation(getCurrentUser());
-        finish();
+//        if (userName == null) {
+            myPresenter.getUserFromDB(getCurrentUser().getEmail());
+            Log.d("TAG", "request: User");
+//        } else {
+//            storeUserInformation(email, userName);
+//            finish();
+//            handleVisibility(false);
+//
+//        }
+
     }
+
 
     private void handleErrorResponse(String error) {
         binding.textInputEditEmailLogIn.setError(error);
@@ -152,13 +169,26 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
     }
 
     @Override
-    public void setFailureResponse(String errorMessage) {
+    public void setFailureResponse(String errormessge) {
         binding.progressBarLogin.setVisibility(View.GONE);
         binding.textInputEditEmailLogIn.requestFocus();
-        handleErrorResponse(errorMessage);
+        handleErrorResponse(errormessge);
         handleVisibility(false);
 
     }
+
+
+    @Override
+    public void setSuccessfulReturnResponse(String userName) {
+        handleVisibility(false);
+        Log.i("TAG", "successfully: ");
+        // return from requesting username
+        storeUserInformation(getCurrentUser().getEmail(),
+                userName);
+        finish();
+
+    }
+
 
     private void handleVisibility(boolean visible) {
         if (!visible) {
@@ -217,9 +247,9 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
         editor = sharedPref.edit();
     }
 
-    private void storeUserInformation(FirebaseUser user) {
-        editor.putString(RegisterFragment.USER_EMAIL, user.getEmail());
-        editor.putString(RegisterFragment.USER_NAME, user.getDisplayName());
+    private void storeUserInformation(String email, String name) {
+        editor.putString(RegisterFragment.USER_EMAIL, email);
+        editor.putString(RegisterFragment.USER_NAME, name);
         editor.apply();
     }
 
