@@ -188,6 +188,11 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
 
     }
 
+    @Override
+    public void setResponse(boolean response) {
+
+    }
+
     private void handleVisibility(boolean visible) {
         if (!visible) {
             binding.constraintRegister.setVisibility(View.VISIBLE);

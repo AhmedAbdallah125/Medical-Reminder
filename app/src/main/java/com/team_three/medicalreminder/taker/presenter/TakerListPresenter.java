@@ -2,6 +2,7 @@ package com.team_three.medicalreminder.taker.presenter;
 
 import android.content.Context;
 
+import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.RequestPojo;
 import com.team_three.medicalreminder.model.TakerPOJO;
@@ -44,6 +45,11 @@ public class TakerListPresenter implements TakerLIstPresenterInterface , Network
     }
 
     @Override
+    public void onSuccessReturn(String userName) {
+
+    }
+
+    @Override
     public void onSuccessRequest(List<RequestPojo> requestPojos) {
 
     }
@@ -51,6 +57,16 @@ public class TakerListPresenter implements TakerLIstPresenterInterface , Network
     @Override
     public void onSuccessTaker(List<TakerPOJO> takerPOJOS) {
         takerListViewInterface.loadTakers(takerPOJOS);
+    }
+
+    @Override
+    public void onSuccess(boolean response) {
+
+    }
+
+    @Override
+    public void onSuccessPatient(List<PatientPojo> patientPojos) {
+
     }
 
 }

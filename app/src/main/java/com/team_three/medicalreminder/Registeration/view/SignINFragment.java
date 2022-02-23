@@ -134,6 +134,11 @@ public class SignINFragment extends Fragment implements NetworkViewInterface {
 
     }
 
+    @Override
+    public void setResponse(boolean response) {
+
+    }
+
     private void handleVisibility(boolean visible) {
         if (!visible) {
             binding.constraintLogin.setVisibility(View.VISIBLE);

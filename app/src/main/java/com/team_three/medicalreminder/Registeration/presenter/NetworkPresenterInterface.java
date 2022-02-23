@@ -10,6 +10,9 @@ public interface NetworkPresenterInterface {
 
     void signInWithEmailAndPass(Activity activity, String email, String password);
 
+    void isAlreadySignedWithGoogle(String email);
+    void signWithGoogle(String idToken);
+
     void getUserFromDB(String email);
 
 }

@@ -3,6 +3,7 @@ package com.team_three.medicalreminder.Registeration.presenter;
 import android.app.Activity;
 
 import com.team_three.medicalreminder.Registeration.view.NetworkViewInterface;
+import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.RequestPojo;
 import com.team_three.medicalreminder.model.TakerPOJO;
@@ -40,6 +41,16 @@ public class NetworkPresenter implements NetworkPresenterInterface, NetworkDeleg
     }
 
     @Override
+    public void isAlreadySignedWithGoogle(String email) {
+        myRepository.isSignedWithGoogle(email);
+    }
+
+    @Override
+    public void signWithGoogle(String idToken) {
+        myRepository.signInUsingGoogle(idToken);
+    }
+
+    @Override
     public void getUserFromDB(String email) {
         myRepository.getUserName(email);
     }
@@ -63,6 +74,16 @@ public class NetworkPresenter implements NetworkPresenterInterface, NetworkDeleg
 
     @Override
     public void onSuccessTaker(List<TakerPOJO> takerPOJOS) {
+
+    }
+
+    @Override
+    public void onSuccess(boolean response) {
+      myView.setResponse(response);
+    }
+
+    @Override
+    public void onSuccessPatient(List<PatientPojo> patientPojos) {
 
     }
 

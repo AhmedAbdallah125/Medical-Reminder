@@ -24,6 +24,7 @@ import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.databinding.FragmentHelpRequistListBinding;
 import com.team_three.medicalreminder.helpRequest.presenter.HelpRequestPresenter;
 import com.team_three.medicalreminder.helpRequest.presenter.HelpRequestPresenterInterface;
+import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.RequestPojo;
 import com.team_three.medicalreminder.model.TakerPOJO;
@@ -87,8 +88,8 @@ HelpRequestPresenterInterface helpRequestPresenterInterface;
     }
 
     @Override
-    public void onClickAccept(TakerPOJO takerPOJO) {
-        helpRequestPresenterInterface.onAccept(takerPOJO);
+    public void onClickAccept(TakerPOJO takerPOJO, PatientPojo patientPojo) {
+        helpRequestPresenterInterface.onAccept(takerPOJO,patientPojo);
     }
 
     @Override

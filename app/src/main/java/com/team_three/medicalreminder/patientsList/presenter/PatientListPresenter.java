@@ -3,6 +3,7 @@ package com.team_three.medicalreminder.patientsList.presenter;
 import android.content.Context;
 
 import com.team_three.medicalreminder.helpRequest.view.HelpRequestViewInterface;
+import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.RequestPojo;
 import com.team_three.medicalreminder.model.TakerPOJO;
@@ -24,12 +25,12 @@ public class PatientListPresenter implements  PatientListPresenterInterface , Ne
     @Override
     public void loadPatients() {
         repository.setMyDelegation(this);
-        repository.loadTakers(email);
+        repository.loadPatients(email);
     }
 
     @Override
     public void sendEmail(String email) {
-        email=this.email;
+        this.email = email;
     }
 
     @Override
@@ -43,12 +44,27 @@ public class PatientListPresenter implements  PatientListPresenterInterface , Ne
     }
 
     @Override
+    public void onSuccessReturn(String userName) {
+
+    }
+
+    @Override
     public void onSuccessRequest(List<RequestPojo> requestPojos) {
+
+    }
+
+    @Override
+    public void onSuccessPatient(List<PatientPojo> requestPojos) {
         listViewInterface.loadPatients(requestPojos);
     }
 
     @Override
     public void onSuccessTaker(List<TakerPOJO> takerPOJOS) {
+
+    }
+
+    @Override
+    public void onSuccess(boolean response) {
 
     }
 }

@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
     Repository myRepository;
     String email = "";
     String password = "";
+    String idToken="";
 
     private static final int RC_SIGN_IN = 258120;
     private static final int EMAIL_LOGIN = 1;
@@ -185,6 +186,19 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
 
     }
 
+    @Override
+    public void setResponse(boolean response) {
+        if(!response){
+            handleVisibility(false);
+            storeUserInformation(getCurrentUser().getEmail(),
+                    getCurrentUser().getDisplayName());
+            finish();
+        }
+        else {
+            myPresenter.signWithGoogle(idToken);
+        }
+    }
+
 
     private void handleVisibility(boolean visible) {
         if (!visible) {
@@ -209,7 +223,12 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
                 GoogleSignInAccount account = task.getResult(ApiException.class);
 
 //                Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
-                myRepository.signInUsingGoogle(account.getIdToken());
+
+                // check first if already exist or not
+                idToken=account.getIdToken();
+                myPresenter.isAlreadySignedWithGoogle(account.getEmail());
+//                myRepository.signInUsingGoogle(account.getEmail(),account.getIdToken());
+
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
 //                Log.w(TAG, "Google sign in failed", e);

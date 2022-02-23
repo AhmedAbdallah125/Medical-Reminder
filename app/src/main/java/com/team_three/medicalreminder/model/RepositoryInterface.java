@@ -34,13 +34,13 @@ public interface RepositoryInterface {
     void signInWithEmailAndPass(Activity activity, String email, String password);
 
     void signInUsingGoogle(String idToken);
-
+    void isSignedWithGoogle(String email);
     FirebaseUser getCurrentUser();
     void getUserName(String email);
 
      void sendRequest(RequestPojo requestPojo);
      void loadHelpRequest(String email);
-    void onAccept(TakerPOJO takerPOJO);
+    void onAccept(TakerPOJO takerPOJO,PatientPojo patientPojo);
     void  onReject(String key);
     void loadPatients(String email);
     void loadTakers(String email);

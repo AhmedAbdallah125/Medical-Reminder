@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.databinding.TakerRequestRowBinding;
+import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.RequestPojo;
 import com.team_three.medicalreminder.model.TakerPOJO;
 
@@ -65,7 +66,14 @@ public class HelpRequestAdapter extends RecyclerView.Adapter<HelpRequestAdapter.
             takerPOJO.setPatientEmail(takers.get(position).getEmail());
             takerPOJO.setImg(takers.get(position).getImg());
             takerPOJO.setRequestId(takers.get(position).getId());
-            onClickRequest.onClickAccept(takerPOJO);
+
+            PatientPojo patientPojo = new PatientPojo(sharedPref.getString(RegisterFragment.USER_EMAIL,"null")
+                    ,takers.get(position).getMyEmail()
+                    ,takers.get(position).getImg()
+                    ,takers.get(position).getName()
+                    );
+
+            onClickRequest.onClickAccept(takerPOJO,patientPojo);
 
         });
         holder.binding.btnReject.setOnClickListener(view -> {

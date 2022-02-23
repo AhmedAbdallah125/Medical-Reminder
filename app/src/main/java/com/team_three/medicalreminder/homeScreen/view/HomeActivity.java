@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
@@ -144,6 +145,9 @@ public class HomeActivity extends AppCompatActivity {
                     Log.i("TAG", "onNavigationItemSelected: abdddddddd");
                     if (item.getItemId() == R.id.nav_logout) {
                         setSignOut();
+                        return true;
+                    }else if(item.getItemId() == R.id.patients){
+
                         return true;
                     }
                     return false;

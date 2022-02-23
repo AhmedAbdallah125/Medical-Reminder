@@ -18,6 +18,7 @@ import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.databinding.FragmentPatientListBinding;
 import com.team_three.medicalreminder.helpRequest.view.HelpRequistList;
+import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.RequestPojo;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
@@ -68,7 +69,8 @@ public class PatientList extends Fragment implements PatientListViewInterface{
     }
 
     @Override
-    public void loadPatients(List<RequestPojo> patients) {
+    public void loadPatients(List<PatientPojo> patients) {
         PatientListAdapter adapter = new PatientListAdapter(this.getContext(),patients,this);
+        binding.patientRecylerView.setAdapter(adapter);
     }
 }

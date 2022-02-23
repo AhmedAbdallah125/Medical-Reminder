@@ -13,6 +13,7 @@ import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.databinding.PatientRowBinding;
 import com.team_three.medicalreminder.databinding.TakerRequestRowBinding;
 import com.team_three.medicalreminder.helpRequest.view.OnClickRequest;
+import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.RequestPojo;
 import com.team_three.medicalreminder.model.TakerPOJO;
 
@@ -22,11 +23,11 @@ import java.util.List;
 
 public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.ViewHolder> {
     final private Context _context;
-    private List<RequestPojo> patients;
+    private List<PatientPojo> patients;
     SharedPreferences sharedPref;
     PatientListViewInterface patientListViewInterface;
 
-    public PatientListAdapter(Context context, List<RequestPojo> patients,PatientListViewInterface patientListViewInterface) {
+    public PatientListAdapter(Context context, List<PatientPojo> patients, PatientListViewInterface patientListViewInterface) {
 
         Log.i("TAG", "MedsListAdapter: abdoooo");
         _context = context;
@@ -57,7 +58,7 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
     @Override
     public void onBindViewHolder(@NonNull PatientListAdapter.ViewHolder holder, int position) {
         Log.i("TAG", "onBindViewHolder:ABDOOOOOOOOOO ");
-        holder.binding.patientImage.setImageResource(patients.get(position).getImg());
+        holder.binding.patientImage.setImageResource(patients.get(position).getImage());
         holder.binding.patientName.setText(patients.get(position).getName());
 //        holder.binding.txtinvitorName.setText(patients.get(position).getName());
 //        holder.binding.txtInvite.setText("I invite you to help me");

@@ -115,6 +115,13 @@ public class Repository implements RepositoryInterface  {
         myRemote.signInWithEmailAndPass(activity, email, password);
     }
 
+
+
+    @Override
+    public void isSignedWithGoogle(String email) {
+        myRemote.tryLoginGoogle(email);
+    }
+
     @Override
     public void signInUsingGoogle(String idToken) {
         myRemote.signInUsingGoogle(idToken);
@@ -143,8 +150,8 @@ public class Repository implements RepositoryInterface  {
     }
 
     @Override
-    public void onAccept(TakerPOJO takerPOJO) {
-        myRemote.onAccept(takerPOJO);
+    public void onAccept(TakerPOJO takerPOJO,PatientPojo patientPojo) {
+        myRemote.onAccept(takerPOJO,patientPojo);
     }
 
     @Override
@@ -154,7 +161,7 @@ public class Repository implements RepositoryInterface  {
 
     @Override
     public void loadPatients(String email) {
-
+        myRemote.loadPatients(email);
     }
 
     @Override

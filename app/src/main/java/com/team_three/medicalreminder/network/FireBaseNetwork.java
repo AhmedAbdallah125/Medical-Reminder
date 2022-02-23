@@ -2,6 +2,7 @@ package com.team_three.medicalreminder.network;
 
 
 import android.app.Activity;
+import android.os.Parcelable;
 import android.util.Log;
 import android.content.Intent;
 import android.util.Log;
@@ -20,12 +21,14 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.team_three.medicalreminder.R;
+import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -107,6 +110,7 @@ public class FireBaseNetwork implements NetworkInterface {
     }
 
 
+
     @Override
     public void signInWithEmailAndPass(Activity activity, String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
@@ -131,8 +135,32 @@ public class FireBaseNetwork implements NetworkInterface {
     }
 
     @Override
+    public void tryLoginGoogle(String email) {
+        mAuth.fetchSignInMethodsForEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                        if (task.isSuccessful()) {
+                            if (!task.getResult().getSignInMethods().isEmpty()) {
+                                myDelegation.onSuccess(true);
+                            }else{
+                                myDelegation.onSuccess(false);
+
+                            }
+                        } else {
+                            handleFireBaseException(task);
+                        }
+                    }
+                });
+
+    }
+
+
+
+    @Override
     public void signInUsingGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(_activity, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -141,7 +169,7 @@ public class FireBaseNetwork implements NetworkInterface {
                             String userName = getCurrentUser().getDisplayName();
                             String email = getCurrentUser().getEmail();
                             User user = new User(email, userName);
-                            addUserInDB(user);
+                           addUserInDB(user);
                             myDelegation.onSuccess();
                             // Sign in success, update UI with the signed-in user's information
 //                            FirebaseUser user = mAuth.getCurrentUser();
@@ -211,16 +239,24 @@ public class FireBaseNetwork implements NetworkInterface {
     }
 
     @Override
-    public void onAccept(TakerPOJO takerPOJO) {
+    public void onAccept(TakerPOJO takerPOJO, PatientPojo patientPojo) {
+
         String[] uid = takerPOJO.getPatientEmail().split("\\.");
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid[0]);
         String key = databaseReference.child("taker").push().getKey();
-       // takerPOJO.setId(key);
         databaseReference.child("taker").child(key).setValue(takerPOJO);
+
+
         String[] takerId = takerPOJO.getEmail().split("\\.");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(takerId[0]);
         reference.child("request").child(takerPOJO.getRequestId()).child("acceptance").setValue(1);
 
+
+        String[] myId = patientPojo.getEmail().split(("\\."));
+        DatabaseReference patientReference = FirebaseDatabase.getInstance().getReference().child("users").child(myId[0]);
+        String key1 = databaseReference.child("patient").push().getKey();
+        patientPojo.setId(key1);
+        patientReference.child("patient").child(key1).setValue(patientPojo);
     }
 
     @Override
@@ -230,8 +266,8 @@ public class FireBaseNetwork implements NetworkInterface {
 
     @Override
     public void loadPatients(String email) {
-        List<RequestPojo> patients = new ArrayList<>();
-        Query query = FirebaseDatabase.getInstance().getReference().child("users").child(email).child("request");
+        List<PatientPojo> patients = new ArrayList<>();
+        Query query = FirebaseDatabase.getInstance().getReference("users").child(email).child("patient");
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -239,20 +275,19 @@ public class FireBaseNetwork implements NetworkInterface {
                 patients.clear();
 
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    if(dataSnapshot.child("myEmail").getValue() !=null && Integer.parseInt(String.valueOf(dataSnapshot.child("acceptance").getValue()))==0){
-                        RequestPojo taker =new RequestPojo((Integer.parseInt(String.valueOf(dataSnapshot.child("img").getValue())))
+                    if(dataSnapshot.child("patientEmail").getValue() !=null){
+                        PatientPojo patient =new PatientPojo(dataSnapshot.child("email").getValue().toString()
+                                ,dataSnapshot.child("patientEmail").getValue().toString()
+                                ,(Integer.parseInt(String.valueOf(dataSnapshot.child("image").getValue())))
                                 , dataSnapshot.child("name").getValue().toString()
-                                ,dataSnapshot.child("myEmail").getValue().toString()
-                                ,dataSnapshot.child("email").getValue().toString()
-                                ,Integer.parseInt(String.valueOf(dataSnapshot.child("acceptance").getValue()))
                         );
 
-                        taker.setId(dataSnapshot.child("id").getValue().toString());
-                        patients.add(taker);
+                        patient.setId(dataSnapshot.child("id").getValue().toString());
+                        patients.add(patient);
                     }
 
                 }
-                myDelegation.onSuccessRequest(patients);
+                myDelegation.onSuccessPatient(patients);
 
             }
 

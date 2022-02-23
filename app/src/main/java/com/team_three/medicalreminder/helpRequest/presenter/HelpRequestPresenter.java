@@ -3,6 +3,7 @@ package com.team_three.medicalreminder.helpRequest.presenter;
 import android.content.Context;
 
 import com.team_three.medicalreminder.helpRequest.view.HelpRequestViewInterface;
+import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.RequestPojo;
 import com.team_three.medicalreminder.model.TakerPOJO;
@@ -35,9 +36,9 @@ public class HelpRequestPresenter implements HelpRequestPresenterInterface , Net
     }
 
     @Override
-    public void onAccept(TakerPOJO takerPOJO) {
+    public void onAccept(TakerPOJO takerPOJO, PatientPojo patientPojo) {
         repository.setMyDelegation(this);
-        repository.onAccept(takerPOJO);
+        repository.onAccept(takerPOJO,patientPojo);
     }
 
     @Override
@@ -57,12 +58,27 @@ public class HelpRequestPresenter implements HelpRequestPresenterInterface , Net
     }
 
     @Override
+    public void onSuccessReturn(String userName) {
+
+    }
+
+    @Override
     public void onSuccessRequest(List<RequestPojo> requestPojos) {
         helpRequestViewInterface.loadHelpRequest(requestPojos);
     }
 
     @Override
     public void onSuccessTaker(List<TakerPOJO> takerPOJOS) {
+
+    }
+
+    @Override
+    public void onSuccess(boolean response) {
+
+    }
+
+    @Override
+    public void onSuccessPatient(List<PatientPojo> patientPojos) {
 
     }
 }

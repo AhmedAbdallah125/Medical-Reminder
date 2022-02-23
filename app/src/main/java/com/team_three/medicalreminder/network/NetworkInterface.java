@@ -3,10 +3,12 @@ package com.team_three.medicalreminder.network;
 import android.app.Activity;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.RequestPojo;
 import com.team_three.medicalreminder.model.TakerPOJO;
 
 import java.util.List;
+
 import com.team_three.medicalreminder.model.User;
 
 public interface NetworkInterface {
@@ -14,27 +16,31 @@ public interface NetworkInterface {
 
     void isSignedIn();
 
-    void registerWithEmailAndPass(Activity activity, String email, String password,String name);
+    void registerWithEmailAndPass(Activity activity, String email, String password, String name);
 
     void signInWithEmailAndPass(Activity activity, String email, String password);
 
-    void signInUsingGoogle(String idToken);
+    void tryLoginGoogle(String email);
+
+    void signInUsingGoogle( String idToken);
 
     FirebaseUser getCurrentUser();
 
-     void addUserInDB(User user);
+    void addUserInDB(User user);
 
-     void getUserFromRealDB(String email);
+    void getUserFromRealDB(String email);
 
     void sendRequest(RequestPojo requestPojo);
 
     void loadHelpRequest(String email);
 
-    void onAccept(TakerPOJO takerPOJO);
-    void  onReject(String key);
-    void loadPatients(String email);
-    void loadTakers(String email);
+    void onAccept(TakerPOJO takerPOJO, PatientPojo patientPojo);
 
+    void onReject(String key);
+
+    void loadPatients(String email);
+
+    void loadTakers(String email);
 
 
 }

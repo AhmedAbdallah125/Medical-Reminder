@@ -6,5 +6,7 @@ public interface NetworkViewInterface {
     //
     void setSuccessfulReturnResponse(String userName);
 
+    void setResponse(boolean response);
+
 
 }
