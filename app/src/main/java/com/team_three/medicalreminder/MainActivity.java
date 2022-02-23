@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         };
         SplashScreen();
 //        remind(1);
-        setWorkTimer();
     }
 
     private void SplashScreen(){
@@ -78,19 +77,6 @@ public class MainActivity extends AppCompatActivity {
         thread.start();
     }
 
-    private void setWorkTimer(){
-        Constraints constraints = new Constraints.Builder()
-                .setRequiresBatteryNotLow(true)
-                .build();
-
-        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(MyPeriodicWorkManger.class,
-                6, TimeUnit.HOURS)
-                .setConstraints(constraints)
-                .build();
-
-//        WorkManager.getInstance(this).enqueueUniquePeriodicWork("Counter", ExistingPeriodicWorkPolicy.KEEP,periodicWorkRequest);
-        WorkManager.getInstance(this).enqueue(periodicWorkRequest);
-    }
 
     // for work manager
 }
