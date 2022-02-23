@@ -11,6 +11,7 @@ import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
+import com.google.gson.Gson;
 import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
@@ -122,9 +123,10 @@ public class MyPeriodicWorkManger extends Worker {
                 for(Map.Entry<String,Integer> entry: medicationList.get(i).getTimeAndDose().entrySet()) {
                     Log.i("zoooooz", "getCurrentAlarms: " + medicationList.get(i).getMedicationName());
                     if (checkPeriod(entry.getKey())){
+
                         Log.i("zoooooz", "getCurrentAlarmsperiod: " + alarmTimePeriod);
                         setDurationTimes(timeNow, alarmTimePeriod);
-                        setOnTimeWorkManger(periodBeforeRunning, medicationList.get(i));
+                        setOnTimeWorkManger(periodBeforeRunning, medicationList.get(i),entry.getKey(),entry.getValue());
                     }
                 }
 //                }
@@ -152,10 +154,14 @@ public class MyPeriodicWorkManger extends Worker {
         return t * 1000;
     }
 
-    private void setOnTimeWorkManger(long time, MedicationPOJO medicationPOJO) {
+    private void setOnTimeWorkManger(long time, MedicationPOJO medicationPOJO,String index,int pillsCount) {
         Log.i("zoooooz", "setOnTimeWorkManger: "+time);
+        // pass medication POJO
         Data data = new Data.Builder()
-                .putString("Medication",medicationPOJO.getMedicationName())
+                .putString("MED",serializeToJason(medicationPOJO))
+//                .putString("Medication",medicationPOJO.getMedicationName())
+                .putString("INDEX",index)
+                .putInt("COUNT",pillsCount)
                 .build();
         Constraints constraints = new Constraints.Builder()
                 .setRequiresBatteryNotLow(true)
@@ -168,5 +174,10 @@ public class MyPeriodicWorkManger extends Worker {
                 .build();
         WorkManager.getInstance(context).enqueue(oneTimeWorkRequest);
     }
+    public String serializeToJason(MedicationPOJO pojo) {
+        Gson gson = new Gson();
+        return gson.toJson(pojo);
+    }
+
 
 }
