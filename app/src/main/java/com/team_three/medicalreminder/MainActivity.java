@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding mainBinding;
     private Handler handler;
     private Thread thread;
+
     // for work manager
 
     @Override
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         };
         SplashScreen();
 //        remind(1);
+//        setWorkTimer();
     }
 
     private void SplashScreen(){

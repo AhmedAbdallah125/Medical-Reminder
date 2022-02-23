@@ -59,38 +59,25 @@ public class MyPeriodicWorkManger extends Worker {
     // for periodic
     private void getTimePeriod() {
         Calendar calendar = Calendar.getInstance();
-        if (calendar.get(Calendar.AM_PM) == 1) {
-            timeNow = 12;
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        if (hour == 0) {
+            hour += 12;
+        } else if (hour > 12) {
+            hour -= 12;
         }
-        timeNow = (timeNow + calendar.get(Calendar.HOUR)) * 60;
-        timeNow = (timeNow + calendar.get(Calendar.MINUTE)) * 60 * 1000;
+
+        timeNow = hour;
+        timeNow = hour * 60;
+        timeNow = (timeNow + minute) * 60 * 1000;
         timeNowPlusSixHours = timeNow + (6 * 60 * 60 * 1000);
 
         Log.i("zoooooz", "getTimeNow: "+timeNow);
         Log.i("zoooooz", "getTimeNow+6: "+timeNowPlusSixHours);
 
-//        getTimeDose(times, "12:05 AM");
-//        setDurationTimes(timeNow, times, time);
     }
 
-    //1
-   /* private void getTimeDose(int times, String timeDose) {
-        time = new ArrayList<>(times);
-//        while (timeDose.entrySet().iterator().hasNext()) {
-        time.add(setTime(timeDose));
-    }
-
-    private long setTime(String time) {
-        long t = 0;
-        t = Long.parseLong(time.split(" ")[0].split(":")[0]) * 60;
-        t = (t + Long.parseLong(time.split(" ")[0].split(":")[1])) * 60;
-        if (time.split(" ")[1].equals("PM")) {
-            t = t + (12 * 60 * 60);
-            Log.i("TAG", "time is: "+t);
-        }
-        return t;
-    }
-*/
     //setting for period before running alarm
     private void setDurationTimes(long timeNow, long alarmPeriod) {
         periodBeforeRunning = (alarmPeriod - timeNow) / 60000;
@@ -148,9 +135,11 @@ public class MyPeriodicWorkManger extends Worker {
         long t = 0;
         t = Long.parseLong(time.split(" ")[0].split(":")[0]) * 60;
         t = (t + Long.parseLong(time.split(" ")[0].split(":")[1])) * 60;
+        Log.i("zoooooz", "setTime1: "+t*1000);
         if (time.split(" ")[1].equals("PM")) {
             t = t + (12 * 60 * 60);
         }
+        Log.i("zoooooz", "setTime2: "+t*1000);
         return t * 1000;
     }
 

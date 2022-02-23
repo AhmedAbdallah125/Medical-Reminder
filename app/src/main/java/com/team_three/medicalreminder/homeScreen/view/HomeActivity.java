@@ -2,6 +2,7 @@ package com.team_three.medicalreminder.homeScreen.view;
 
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.widget.Toast;
 ;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import com.team_three.medicalreminder.MainActivity;
 import com.team_three.medicalreminder.R;
@@ -33,6 +35,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -60,8 +63,8 @@ public class HomeActivity extends AppCompatActivity {
     String email = "";
     Repository myRepository;
     //
-    private static final int RC_OVERLAY = 33;
-
+    private static final int REQUEST_PERMISSION = 14;
+    public final static int REQUEST_CODE = -1010101;
 
     // synchronisation when network is connected
     @Override
@@ -75,23 +78,9 @@ public class HomeActivity extends AppCompatActivity {
         handleDrawerMenu();
 //        setSignOut(true);
         ///
-
+        checkDrawOverlayPermission();
 
         //2
-        if (ContextCompat.checkSelfPermission(
-                this, Settings.ACTION_MANAGE_OVERLAY_PERMISSION) ==
-                PackageManager.PERMISSION_GRANTED) {
-            // may be wrong
-            setWorkTimer();
-
-        } else if (shouldShowRequestPermissionRationale(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)) {
-            Toast.makeText(this, "should accept permission to start Alarm ", Toast.LENGTH_SHORT).show();
-        } else {
-            // You can directly ask for the permission.
-            // The registered ActivityResultCallback gets the result of this request.
-            requestPermissionLauncher.launch(
-                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-        }
         //
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
@@ -113,7 +102,6 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 ///////////////////////////////
-
 
 
     }
@@ -257,21 +245,6 @@ public class HomeActivity extends AppCompatActivity {
 
     // return after requesting Permission
 
-    private final ActivityResultLauncher<String> requestPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-                if (isGranted) {
-                    setWorkTimer();
-                } else {
-                    final Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                            Uri.parse("package:" + getPackageName()));
-                    try {
-                        startActivityForResult(intent, RC_OVERLAY);
-                    } catch (ActivityNotFoundException e) {
-                        Log.e("MainActivity", e.getMessage());
-                    }
-                }
-            });
-
     private void setWorkTimer() {
         Constraints constraints = new Constraints.Builder()
                 .setRequiresBatteryNotLow(true)
@@ -282,50 +255,64 @@ public class HomeActivity extends AppCompatActivity {
                 .setConstraints(constraints)
                 .build();
 
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork("Counter", ExistingPeriodicWorkPolicy.KEEP, periodicWorkRequest);
-//        WorkManager.getInstance(this).enqueue(periodicWorkRequest);
+//        WorkManager.getInstance(this).enqueueUniquePeriodicWork("Counter", ExistingPeriodicWorkPolicy.KEEP, periodicWorkRequest);
+        WorkManager.getInstance(this).enqueue(periodicWorkRequest);
     }
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                                           int[] grantResults) {
-//
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        switch (requestCode) {
-//            case 33:
-//                // If request is cancelled, the result arrays are empty.
-//                if (grantResults.length > 0 &&
-//                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    // Permission is granted. Continue the action or workflow
-//                    // in your app.
-//                } else {
-//                    // Explain to the user that the feature is unavailable because
-//                    // the features requires a permission that the user has denied.
-//                    // At the same time, respect the user's decision. Don't link to
-//                    // system settings in an effort to convince the user to change
-//                    // their decision.
-//                }
-//                return;
-//        }
-//        // Other 'case' lines to check for other
-//        // permissions this app might request.
-//    }
-//}
-@Override
-protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    switch (requestCode) {
-        case RC_OVERLAY:
-            final boolean overlayEnabled = Settings.canDrawOverlays(this);
-            if (overlayEnabled) {
-                Toast.makeText(this, "xxxxxxx", Toast.LENGTH_SHORT).show();
+
+    @Override
+    public void onRequestPermissionsResult(int permissionRequestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(permissionRequestCode, permissions, grantResults);
+        if (permissionRequestCode == REQUEST_PERMISSION) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 setWorkTimer();
             } else {
-//                    switchCyberBulling.setChecked(false);
+                // Ask the user to grant the permission
+                Toast.makeText(this, "please we need your permission to have all our features", Toast.LENGTH_LONG).show();
             }
-            // Do something...
-            break;
+        }
     }
-}
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void checkDrawOverlayPermission() {
+        // Check if we already  have permission to draw over other apps
+        if (!Settings.canDrawOverlays(this)) {
+            // if not construct intent to request permission
+            MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(this);
+            alertDialogBuilder.setTitle("We need Your Permission")
+                    .setMessage("Let's enjoy our features")
+                    .setPositiveButton("Let's Go", (dialog, i) -> {
+                        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                Uri.parse("package:" + getApplicationContext().getPackageName()));
+                        // request permission via start activity for result
+                        startActivityForResult(intent, REQUEST_CODE); //It will call onActivityResult Function After you press Yes/No and go Back after giving permission
+                        dialog.dismiss();
+                    }).setNegativeButton("Cancel", (dialog, i) -> {
+                dialog.dismiss();
+            }).show();
+        } else {
+            setWorkTimer();
+            // disablePullNotificationTouch();
+            // Do your stuff, we got permission captain
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.v("App", "OnActivity Result.");
+        //check if received result code
+        //  is equal our requested code for draw permission
+        if (requestCode == REQUEST_CODE) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Settings.canDrawOverlays(this)) {
+                    // Permission Granted by Overlay
+                    // Do your Stuff
+                    setWorkTimer();
+                }
+            }
+        }
+    }
 
 }
 
