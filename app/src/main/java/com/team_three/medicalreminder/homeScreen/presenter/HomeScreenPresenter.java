@@ -47,6 +47,7 @@ public class HomeScreenPresenter implements HomePresenterInterface {
             @Override
             public void onChanged(List<MedicationPOJO> medicationPOJOS) {
                 // call to update there
+                Log.i("TAG", "onChanged: "+medicationPOJOS.size());
                 myView.showMedications(medicationPOJOS);
             }
         });
@@ -60,6 +61,11 @@ public class HomeScreenPresenter implements HomePresenterInterface {
     @Override
     public void updateTime(long time) {
         timeSaved=time;
+    }
+
+    @Override
+    public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String email) {
+        myRepository.addMedicationListViaNetwork(medicationPOJOS,email);
     }
 
 

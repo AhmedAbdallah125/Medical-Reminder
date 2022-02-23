@@ -8,7 +8,7 @@
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/ic_baseline_gender_24.xml" value="0.151" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/person.xml" value="0.1" />
-        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/active_meds_row.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/active_meds_row.xml" value="0.2" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/activity_home.xml" value="0.10208333333333333" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/activity_medication_drug_display.xml" value="0.21" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/activity_medication_drug_edit.xml" value="0.17074275362318841" />
@@ -16,11 +16,12 @@
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_acrtive_meds.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_add_taker.xml" value="0.18" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_help_requist_list.xml" value="0.16485507246376813" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_inactive_meds.xml" value="0.1015625" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_medication_list.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_patient_list.xml" value="0.1852355072463768" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_taker_list.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_taker_profile_screen.xml" value="0.21" />
-        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/inactive_meds_row.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/inactive_meds_row.xml" value="0.5" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/patient_row.xml" value="0.1852355072463768" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/taker_request_row.xml" value="0.2" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/taker_row.xml" value="0.17074275362318841" />

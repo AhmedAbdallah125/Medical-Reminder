@@ -3,6 +3,7 @@ package com.team_three.medicalreminder.network;
 import android.app.Activity;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.RequestPojo;
 import com.team_three.medicalreminder.model.TakerPOJO;
@@ -41,6 +42,7 @@ public interface NetworkInterface {
     void loadPatients(String email);
 
     void loadTakers(String email);
-
+    void loadPatientMedicationList(String email);
+    void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS,String email);
 
 }

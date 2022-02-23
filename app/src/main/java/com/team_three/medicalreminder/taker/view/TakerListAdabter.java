@@ -57,7 +57,9 @@ public class TakerListAdabter extends RecyclerView.Adapter<TakerListAdabter.View
             Bundle bundle = new Bundle();
             bundle.putParcelable("profileData",takers.get(position));
             Navigation.findNavController(view).navigate(R.id.action_fragment_taker_list_to_takerProfileScreen,bundle);
+
         });
+
     }
 
     @Override

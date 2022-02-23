@@ -4,17 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp">
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/activeConstraint"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#f9f9f9">
 
         <ImageView
             android:id="@+id/imgActiveMed"
-            android:layout_width="46dp"
-            android:layout_height="34dp"
+            android:layout_width="50dp"
+            android:layout_height="45dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imgActiveMed"
             app:layout_constraintTop_toTopOf="@+id/imgActiveMed"
             tools:text="Panadol" />
@@ -35,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textSize="12dp"
+            android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/txtActiveMedName"
             app:layout_constraintTop_toTopOf="@+id/txtActiveMedName"
             tools:text="1000" />
@@ -45,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:textSize="12dp"
+            android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/txtActiveStrengthNumberOfTheMed"
             app:layout_constraintTop_toTopOf="@+id/txtActiveStrengthNumberOfTheMed"
             tools:text="g" />
@@ -54,8 +59,8 @@
             android:id="@+id/txtNumberOfUnits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textSize="12dp"
+            android:layout_marginTop="12dp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/txtActiveMedName"
             app:layout_constraintTop_toBottomOf="@+id/txtActiveMedName"
             tools:text="4" />
@@ -65,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:textSize="12dp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/txtNumberOfUnits"
             app:layout_constraintStart_toEndOf="@+id/txtNumberOfUnits"
             tools:text="pills" />
@@ -76,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:text="@string/txtLeft"
-            android:textSize="12dp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/txtFormOfMed"
             app:layout_constraintStart_toEndOf="@+id/txtFormOfMed" />
     </androidx.constraintlayout.widget.ConstraintLayout>

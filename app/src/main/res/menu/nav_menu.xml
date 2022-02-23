@@ -14,13 +14,13 @@
     <item
         android:id="@+id/fragment_taker_list"
         android:title="@string/takerList"
-        android:icon="@drawable/ic_baseline_medical_services_24"/>
+        android:icon="@drawable/ic_doctor_female"/>
 
     />
     <item
         android:id="@+id/helpRequistList"
         android:title="@string/requestString"
-        android:icon="@drawable/ic_baseline_notifications_24"/>
+        android:icon="@drawable/ic_baseline_medical_services_24"/>
 
     />
 </menu>

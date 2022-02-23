@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.team_three.medicalreminder.R;
+import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.User;
 import com.google.firebase.database.DataSnapshot;
@@ -329,6 +330,28 @@ public class FireBaseNetwork implements NetworkInterface {
 
             }
         });
+
+    }
+
+    @Override
+    public void loadPatientMedicationList(String email) {
+        List<MedicationPOJO> medicationPOJOS = new ArrayList<>();
+        // Query query = FirebaseDatabase.getInstance().getReference().child("users").child(email).child("medications");
+
+    }
+
+    @Override
+    public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS,String email) {
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(email);
+        for (MedicationPOJO meds: medicationPOJOS)  {
+            String key =String.valueOf(meds.getId());
+            databaseReference.child("medications").child(key).setValue(meds);
+        }
+        // String key = databaseReference.child("medications").push().getKey();
+        // taker=new RequestPojo(binding.txtEmail.getEditableText().toString(),R.drawable.one,binding.txtName.getEditableText().toString(),id);
+
+
 
     }
 

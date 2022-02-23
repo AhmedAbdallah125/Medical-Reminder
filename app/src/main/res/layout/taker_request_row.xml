@@ -16,7 +16,7 @@
         android:id="@+id/takerRequestConstrainyt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#6172C6">
+        android:background="@color/primaryColor">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/requestImage"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:text="abdelrhman"
             android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@+id/requestImage"
@@ -55,20 +55,21 @@
             android:id="@+id/btnReject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="#CA2F2F"
             android:text="@string/btnReject"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requestImage" />
+            app:cornerRadius="@dimen/buttonCornerRadius"
+            app:layout_constraintStart_toStartOf="@+id/txtInvite"
+            app:layout_constraintTop_toBottomOf="@+id/txtInvite" />
 
         <Button
             android:id="@+id/btnAccept"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="16dp"
             android:backgroundTint="#34B539"
             android:text="@string/btnAccept"
+            app:cornerRadius="@dimen/buttonCornerRadius"
             app:layout_constraintStart_toEndOf="@+id/btnReject"
             app:layout_constraintTop_toTopOf="@+id/btnReject" />
     </androidx.constraintlayout.widget.ConstraintLayout>
