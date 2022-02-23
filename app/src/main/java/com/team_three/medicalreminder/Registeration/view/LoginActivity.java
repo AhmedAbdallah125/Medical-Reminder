@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -188,7 +189,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
 
     @Override
     public void setResponse(boolean response) {
-        if(!response){
+        if(response){
             handleVisibility(false);
             storeUserInformation(getCurrentUser().getEmail(),
                     getCurrentUser().getDisplayName());
