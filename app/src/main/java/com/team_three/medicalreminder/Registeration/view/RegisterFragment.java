@@ -70,7 +70,12 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
             name = binding.textInputEditNameSignUp.getEditableText().toString();
             makeRegisterRequest(email, password, name);
         });
+        // handle back button
 
+        binding.imageRegisterBackArrow.setOnClickListener(v->{
+            Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_fragment_home);
+
+        });
 
     }
 

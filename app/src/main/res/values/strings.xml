@@ -127,4 +127,5 @@
     <string name="patients_list">Patients List</string>
     <string name="take">TAKE</string>
     <string name="skip">SKIP</string>
+    <string name="clickToShowDetails">Click To Show Times</string>
 </resources>

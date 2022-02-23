@@ -47,7 +47,6 @@
         android:paddingLeft="16dp"
 
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/icon_time_medication"
         app:layout_constraintStart_toEndOf="@+id/icon_time_medication"
         app:layout_constraintTop_toTopOf="@+id/icon_time_medication"
         tools:text="pandol" />
@@ -56,7 +55,7 @@
         android:id="@+id/icon_time_medication"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/ic_baseline_person_24"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,13 +66,12 @@
         android:id="@+id/time_txt_strength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16sp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="32dp"
         android:fontFamily="sans-serif"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/time_recycleView"
-        app:layout_constraintStart_toStartOf="@+id/icon_time_medication"
-        app:layout_constraintTop_toBottomOf="@+id/icon_time_medication"
+        app:layout_constraintStart_toStartOf="@+id/time_txt_medicationName"
+        app:layout_constraintTop_toBottomOf="@+id/time_txt_medicationName"
         tools:text="32 pills" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -88,5 +86,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/time_txt_strength" />
+
+    <TextView
+        android:id="@+id/txt_instruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text=" "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/time_txt_medicationName"
+        tools:text="after Eating" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_icon_medical"
+        app:layout_constraintEnd_toEndOf="@+id/txt_instruction"
+        app:layout_constraintTop_toBottomOf="@+id/txt_instruction" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

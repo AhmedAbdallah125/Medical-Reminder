@@ -59,10 +59,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
 
         holder.binding.recycleHomImageView.setImageResource(medicines.get(position).getImageID());
         holder.binding.txtRecycleMedicine.setText(medicines.get(position).getMedicationName());
-        holder.binding.txtMedicineDtails.setText(medicines.get(position).getStrength()+" "+
-                medicines.get(position).getFormat()+ " : "+
+        holder.binding.txtMedicineDtails.setText(
+                medicines.get(position).getFormat() +" ,"+
+                medicines.get(position).getStrength()+" "+
                 medicines.get(position).getWeight());
-        holder.binding.cardView.setOnClickListener(view -> {
+        holder.binding.txtTimes.setText(medicines.get(position).getTakeTimePerDay());
+        holder.binding.btnGoToDetails.setOnClickListener(view -> {
             onClickListener.onClick(view,position);
         });
     }

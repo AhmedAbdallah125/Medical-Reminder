@@ -61,7 +61,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
 
         Log.d("TAG", "onBindViewHolder: fdddd");
         holder.timeBinding.recycleHour.setText(key);
-        holder.timeBinding.txtPillCount.setText(medicine.getFormat() + " : " +value);
+        holder.timeBinding.txtPillCount.setText( value +" " +medicine.getFormat());
         holder.timeBinding.cardTimeView.setOnClickListener(view -> {
             onClickListener.onClick(view,position);
         });

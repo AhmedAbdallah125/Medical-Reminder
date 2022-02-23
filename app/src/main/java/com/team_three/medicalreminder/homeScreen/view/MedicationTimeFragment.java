@@ -55,11 +55,15 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
         initRepository();
 
         requestDataFromPresenter();
+        binding.imageBack.setOnClickListener(v->{
+            Navigation.findNavController(view).navigate(R.id.action_medicationTimeFragment_to_fragment_home);
+        });
 
     }
     private void bindViews(){
         binding.iconTimeMedication.setImageResource(medicationPOJO.getImageID());
         binding.timeTxtMedicationName.setText(medicationPOJO.getMedicationName());
+        binding.txtInstruction.setText(medicationPOJO.getInstruction());
         binding.timeTxtStrength.setText(medicationPOJO.getStrength()+" :"+medicationPOJO.getWeight());
     }
 

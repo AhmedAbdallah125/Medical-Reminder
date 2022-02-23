@@ -101,8 +101,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-///////////////////////////////
-
 
     }
 
@@ -177,7 +175,7 @@ public class HomeActivity extends AppCompatActivity {
                     if (item.getItemId() == R.id.nav_logout) {
                         setSignOut();
                         return true;
-                    } else if (item.getItemId() == R.id.patients) {
+                    }else if(item.getItemId() == R.id.patients){
 
                         return true;
                     }
@@ -234,6 +232,7 @@ public class HomeActivity extends AppCompatActivity {
         handleDrawer();
         handleToolBar();
     }
+
 
 
     private void handleSignOutCondition() {
