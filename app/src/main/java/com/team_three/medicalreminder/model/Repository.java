@@ -13,7 +13,10 @@ import com.team_three.medicalreminder.network.NetworkInterface;
 
 import java.util.List;
 
-public class Repository implements RepositoryInterface  {
+import io.reactivex.Flowable;
+import io.reactivex.Single;
+
+public class Repository implements RepositoryInterface {
     private Context context;
     LocalSourceInterface localSourceInterface;
     private static Repository repo = null;
@@ -136,6 +139,11 @@ public class Repository implements RepositoryInterface  {
     public void getUserName(String email) {
          myRemote.getUserFromRealDB(email);
 
+    }
+
+    @Override
+    public Single<List<MedicationPOJO>> getMedicationDayWorkManger(long time) {
+        return localSourceInterface.getMedicationDayWorkManger(time);
     }
 
 

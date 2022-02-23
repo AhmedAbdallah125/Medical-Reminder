@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.Constraints;
 import androidx.work.Data;
-import androidx.work.NetworkType;
-import androidx.work.OneTimeWorkRequest;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
 import android.content.Intent;
@@ -13,14 +13,23 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 
+import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.databinding.ActivityMainBinding;
 import com.team_three.medicalreminder.homeScreen.view.HomeActivity;
-import com.team_three.medicalreminder.model.WorkMangerForRefil;
+import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.workmanger.MyPeriodicWorkManger;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding mainBinding;
     private Handler handler;
+    private Thread thread;
+    // for work manager
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +51,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
+                thread.interrupt();
                 startActivity(intent);
                 finish();
             }
         };
         SplashScreen();
+//        remind(1);
+        setWorkTimer();
     }
 
     private void SplashScreen(){
         mainBinding.lottie.setAnimation(R.raw.splash);
-        new Thread(){
+        thread = new Thread(){
             @Override
             public void run() {
                 super.run();
@@ -62,6 +74,23 @@ public class MainActivity extends AppCompatActivity {
                 }
                 handler.sendEmptyMessage(0);
             }
-        }.start();
+        };
+        thread.start();
     }
+
+    private void setWorkTimer(){
+        Constraints constraints = new Constraints.Builder()
+                .setRequiresBatteryNotLow(true)
+                .build();
+
+        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(MyPeriodicWorkManger.class,
+                6, TimeUnit.HOURS)
+                .setConstraints(constraints)
+                .build();
+
+//        WorkManager.getInstance(this).enqueueUniquePeriodicWork("Counter", ExistingPeriodicWorkPolicy.KEEP,periodicWorkRequest);
+        WorkManager.getInstance(this).enqueue(periodicWorkRequest);
+    }
+
+    // for work manager
 }

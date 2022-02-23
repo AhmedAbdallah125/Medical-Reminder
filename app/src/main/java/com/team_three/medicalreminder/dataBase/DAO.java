@@ -12,6 +12,9 @@ import com.team_three.medicalreminder.model.MedicationPOJO;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+import io.reactivex.Single;
+
 @Dao
 public interface DAO {
     @Query("Select * from medications")
@@ -42,4 +45,7 @@ public interface DAO {
     @Query("SELECT * FROM Medications WHERE (:data Between startDate AND endDate) AND isActive=1 ")
     LiveData<List<MedicationPOJO>> getMedicationDay(long data);
 
+    // get observable DB
+    @Query("SELECT * FROM Medications WHERE (:data Between startDate AND endDate) AND isActive=1 ")
+    Single<List<MedicationPOJO>> getMedicationDayWorkManger(long data);
 }

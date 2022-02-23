@@ -10,6 +10,9 @@ import com.team_three.medicalreminder.model.MedicationPOJO;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+import io.reactivex.Single;
+
 
 public class ConcreteLocalClass implements LocalSourceInterface {
 
@@ -93,6 +96,11 @@ public class ConcreteLocalClass implements LocalSourceInterface {
     @Override
     public LiveData<List<MedicationPOJO>> getMedicationDay(long time) {
         return dao.getMedicationDay(time);
+    }
+
+    @Override
+    public Single<List<MedicationPOJO>> getMedicationDayWorkManger(long time) {
+        return dao.getMedicationDayWorkManger(time);
     }
 
 }

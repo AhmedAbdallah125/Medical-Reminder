@@ -8,6 +8,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+import io.reactivex.Single;
+
 public interface RepositoryInterface {
     LiveData<List<MedicationPOJO>> getAllMedication();
 
@@ -16,7 +19,6 @@ public interface RepositoryInterface {
     void deleteMedication(MedicationPOJO medication);
 
     LiveData<List<MedicationPOJO>> getMedicationDay(long time);
-
 
     LiveData<MedicationPOJO> getMedications(int id);
 
@@ -45,5 +47,7 @@ public interface RepositoryInterface {
     void loadPatients(String email);
     void loadTakers(String email);
 
+
+    Single<List<MedicationPOJO>> getMedicationDayWorkManger(long time);
 
 }
