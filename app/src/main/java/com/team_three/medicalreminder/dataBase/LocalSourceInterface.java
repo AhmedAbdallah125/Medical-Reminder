@@ -6,6 +6,9 @@ import com.team_three.medicalreminder.model.MedicationPOJO;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+import io.reactivex.Single;
+
 public interface LocalSourceInterface {
     LiveData<List<MedicationPOJO>> getAllMedication();
 
@@ -17,7 +20,8 @@ public interface LocalSourceInterface {
     LiveData<List<MedicationPOJO>> getActiveMedications();
     LiveData<List<MedicationPOJO>> getInactiveMedications();
 
-
     LiveData<List<MedicationPOJO>> getMedicationDay(long time);
+
+    Single<List<MedicationPOJO>> getMedicationDayWorkManger(long time);
 
 }

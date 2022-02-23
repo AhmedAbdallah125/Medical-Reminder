@@ -80,6 +80,20 @@ dependencies {
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
+    // RxJava2 Dependencies
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+
+    //rx with room
+    def room_version = "2.4.1"
+
+    // optional - RxJava2 support for Room
+    implementation "androidx.room:room-rxjava2:$room_version"
+
+
+    // Rx with room adapter
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+
 
 
 }
