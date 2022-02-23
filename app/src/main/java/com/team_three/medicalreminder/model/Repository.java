@@ -26,6 +26,8 @@ public class Repository implements RepositoryInterface {
     NetworkInterface myRemote;
     private static Repository myRepositoryNetwork = null;
     private NetworkDelegation myDelegation;
+    // for two
+    private static Repository myRepositoryAll = null;
 
     private Repository(LocalSourceInterface localSourceInterface, Context context) {
         this.context = context;
@@ -50,6 +52,21 @@ public class Repository implements RepositoryInterface {
             myRepositoryNetwork = new Repository(myRemote, context);
         }
         return myRepositoryNetwork;
+    }
+
+    // for two DataSources
+    // for fireBase
+    private Repository(LocalSourceInterface localSourceInterface, NetworkInterface myRemote, Context context) {
+        this.localSourceInterface = localSourceInterface;
+        this.context = context;
+        this.myRemote = myRemote;
+    }
+
+    public static Repository getInstance(LocalSourceInterface localSourceInterface, NetworkInterface myRemote, Context context) {
+        if (myRepositoryAll == null) {
+            myRepositoryAll = new Repository(localSourceInterface, myRemote, context);
+        }
+        return myRepositoryAll;
     }
 
     public void setMyDelegation(NetworkDelegation myDelegation) {
@@ -119,7 +136,6 @@ public class Repository implements RepositoryInterface {
     }
 
 
-
     @Override
     public void isSignedWithGoogle(String email) {
         myRemote.tryLoginGoogle(email);
@@ -137,7 +153,7 @@ public class Repository implements RepositoryInterface {
 
     @Override
     public void getUserName(String email) {
-         myRemote.getUserFromRealDB(email);
+        myRemote.getUserFromRealDB(email);
 
     }
 
@@ -153,13 +169,13 @@ public class Repository implements RepositoryInterface {
     }
 
     @Override
-    public void   loadHelpRequest(String email) {
+    public void loadHelpRequest(String email) {
         myRemote.loadHelpRequest(email);
     }
 
     @Override
-    public void onAccept(TakerPOJO takerPOJO,PatientPojo patientPojo) {
-        myRemote.onAccept(takerPOJO,patientPojo);
+    public void onAccept(TakerPOJO takerPOJO, PatientPojo patientPojo) {
+        myRemote.onAccept(takerPOJO, patientPojo);
     }
 
     @Override
@@ -175,7 +191,15 @@ public class Repository implements RepositoryInterface {
     @Override
     public void loadTakers(String email) {
 
-         myRemote.loadTakers(email);
+        myRemote.loadTakers(email);
+    }
+
+    //add med to firebase
+    @Override
+    public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String email) {
+        Log.i("TAG", "addMedicationListViaNetwork: " + medicationPOJOS.size() + " " + email);
+// try one
+        myRemote.addMedicationListViaNetwork(medicationPOJOS, email);
     }
 
 

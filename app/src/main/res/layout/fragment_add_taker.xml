@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="110dp"
         app:cardCornerRadius="@dimen/buttonCornerRadius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,64 +20,41 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/takerName"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="24dp"
-                android:hint="@string/name"
-
-                app:counterEnabled="true"
-                app:counterMaxLength="20"
-                app:endIconMode="clear_text"
-                app:helperText="required*"
-                app:helperTextTextColor="#ff0000"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:startIconDrawable="@drawable/ic_baseline_edit_24">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLength="20" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="613dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/takerEmail"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
                 android:hint="email"
                 app:endIconMode="clear_text"
                 app:helperText="required*"
                 app:helperTextTextColor="#ff0000"
-                app:layout_constraintEnd_toEndOf="@+id/takerName"
-                app:layout_constraintStart_toStartOf="@+id/takerName"
-                app:layout_constraintTop_toBottomOf="@+id/takerName"
-                app:startIconDrawable="@drawable/ic_baseline_edit_24">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:startIconDrawable="@drawable/fui_ic_mail_white_24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtEmail"
-                    android:layout_width="match_parent"
+                    android:layout_width="319dp"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnTakerAdded"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/buttonWidth"
+                android:layout_height="@dimen/buttonHeight"
                 android:layout_marginTop="100dp"
                 android:text="@string/btnAddTaker"
+                android:textSize="@dimen/buttonFontSize"
+                app:cornerRadius="@dimen/buttonCornerRadius"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/takerEmail" />
@@ -90,12 +67,12 @@
         android:id="@+id/txtAddTakerTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:text="@string/txtTitleOfAddTaker"
         android:textColor="#FFFCFC"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/icBackInAddTaker"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toEndOf="@+id/icBackInAddTaker"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -114,13 +91,15 @@
         android:id="@+id/imageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginEnd="32dp"
-        android:src="@drawable/one"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="36dp"
+        android:src="@drawable/ic_doctor_female"
         app:civ_border_color="#FFf0f0f0"
         app:civ_border_width="2dp"
         app:layout_constraintBottom_toTopOf="@+id/AddTakerForm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

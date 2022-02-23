@@ -20,10 +20,12 @@
 
     <Button
         android:id="@+id/btnAddTaker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/buttonWidth"
+        android:layout_height="@dimen/buttonHeight"
         android:layout_marginTop="50dp"
         android:text="@string/btnAddTaker"
+        android:textSize="@dimen/buttonFontSize"
+        app:cornerRadius="@dimen/buttonCornerRadius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/takerRecyclerView" />

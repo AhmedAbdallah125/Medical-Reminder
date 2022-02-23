@@ -84,7 +84,11 @@
         android:id="@+id/addTaker"
         android:name="com.team_three.medicalreminder.taker.view.AddTaker"
         android:label="fragment_add_taker"
-        tools:layout="@layout/fragment_add_taker" />
+        tools:layout="@layout/fragment_add_taker" >
+        <action
+            android:id="@+id/action_addTaker_to_fragment_taker_list"
+            app:destination="@id/fragment_taker_list" />
+    </fragment>
     <fragment
         android:id="@+id/takerProfileScreen"
         android:name="com.team_three.medicalreminder.taker.view.TakerProfileScreen"

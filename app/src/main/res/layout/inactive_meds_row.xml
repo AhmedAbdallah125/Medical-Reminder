@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp">
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/inactiveConstraint"
@@ -27,6 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imgInactive"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="dawaya" />
@@ -35,16 +38,19 @@
             android:id="@+id/txtInactiveStrengthNumberOfTheMed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@+id/txtInactiveMedName"
-            app:layout_constraintTop_toTopOf="@+id/txtInactiveMedName"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="@+id/txtInactiveMedName"
+            app:layout_constraintTop_toBottomOf="@+id/txtInactiveMedName"
             tools:text="50" />
 
         <TextView
             android:id="@+id/txtInactiveStrengthWeightOfTheMed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="8dp"
+            android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/txtInactiveStrengthNumberOfTheMed"
             app:layout_constraintTop_toTopOf="@+id/txtInactiveStrengthNumberOfTheMed"
             tools:text="g" />

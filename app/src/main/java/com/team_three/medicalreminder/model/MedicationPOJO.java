@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -50,6 +51,7 @@ public class MedicationPOJO implements Parcelable {
     private List<Boolean> isTakenList;
     private String medicationReason;
     private String recurrence;
+
 
     public String getMedicationReason() {
         return medicationReason;

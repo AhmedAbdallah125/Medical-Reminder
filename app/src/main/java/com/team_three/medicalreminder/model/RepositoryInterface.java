@@ -46,6 +46,9 @@ public interface RepositoryInterface {
     void  onReject(String key);
     void loadPatients(String email);
     void loadTakers(String email);
+//add med to fireBase
+    void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS,String email);
+
 
 
     Single<List<MedicationPOJO>> getMedicationDayWorkManger(long time);

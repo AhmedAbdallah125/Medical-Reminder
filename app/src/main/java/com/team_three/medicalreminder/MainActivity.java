@@ -9,6 +9,7 @@ import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         };
+        MediaPlayer ring= MediaPlayer.create(MainActivity.this,R.raw.ring);
+        ring.start();
         SplashScreen();
 //        remind(1);
         setWorkTimer();

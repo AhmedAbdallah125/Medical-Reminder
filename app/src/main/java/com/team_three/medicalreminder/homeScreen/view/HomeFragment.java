@@ -32,6 +32,8 @@ import com.team_three.medicalreminder.databinding.FragmentHomeBinding;
 import com.team_three.medicalreminder.homeScreen.presenter.HomeScreenPresenter;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.network.FireBaseNetwork;
+import com.team_three.medicalreminder.network.NetworkInterface;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -44,6 +46,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
     HomeAdapter homeAdapter;
     HomeScreenPresenter myPresenter;
     Repository myRepository;
+    //
     boolean isClicked = false;
     private Animation rotateOpen;
     private Animation rotateClose;
@@ -52,6 +55,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
     private Long timeNow;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
+    String email;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false);
         //must check
         fragmentHomeBinding.btnFabAddMedication.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +189,8 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
 
     private void initRepository() {
         LocalSourceInterface myLocal = ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext());
-        myRepository = Repository.getInstance(myLocal, this.getContext());
+        NetworkInterface  networkInterface= FireBaseNetwork.getInstance(this.getActivity());
+        myRepository = Repository.getInstance(myLocal,networkInterface,this.getContext());
         myPresenter = new HomeScreenPresenter(this, myRepository);
     }
 
@@ -237,6 +243,17 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
     public void showMedications(List<MedicationPOJO> storedMedications) {
         homeAdapter.setMedicines(storedMedications);
         homeAdapter.notifyDataSetChanged();
+        Log.i("TAG", "showMedications: "+storedMedications.size());
+        // sned data to firebase
+//        sharedPref =getActivity().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
+
+        if(storedMedications.size()>0&&checkShared()){
+            String[] mail = email.split("\\.");
+            String myEmail = mail[0];
+           // myPresenter.addMedicationListViaNetwork(storedMedications,myEmail);
+
+        }
+
     }
 
 
@@ -255,6 +272,13 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
             Navigation.findNavController(fragmentHomeBinding.getRoot()).navigate(R.id.action_fragment_home_to_registerFragment);
         }
 
+    }
+    //
+    private boolean checkShared() {
+        sharedPref = getActivity().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
+        email = sharedPref.getString(RegisterFragment.USER_EMAIL, "null");
+
+        return ( !email.equals("null"));
     }
 }
 
