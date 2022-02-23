@@ -10,5 +10,5 @@
     <color name="primaryColor">#1ca8ff</color>
     <color name="secondaryColor">#243475</color>
     <color name="primaryText">#060e30</color>
-    <color name="grayBG">#f8f9fd</color>
+    <color name="grayBG">#EFEFEF</color>
 </resources>

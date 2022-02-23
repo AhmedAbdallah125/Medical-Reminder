@@ -125,4 +125,6 @@
     <string name="newRegister">New Register ?</string>
     <string name="Register">Register</string>
     <string name="patients_list">Patients List</string>
+    <string name="take">TAKE</string>
+    <string name="skip">SKIP</string>
 </resources>
