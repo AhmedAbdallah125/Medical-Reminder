@@ -118,7 +118,7 @@
     <string name="_1">1</string>
     <string name="dose">Dose:</string>
     <string name="tool_bar_name">ahmd</string>
-    <string name="SignInGoogle">Sign InWith Google</string>
+    <string name="SignInGoogle">Login With Google</string>
     <string name="create_profile">Login</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="gusest">Guest</string>

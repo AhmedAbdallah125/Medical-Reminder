@@ -50,9 +50,9 @@ public class MyOneTimeWorkManger extends Worker {
     public Result doWork() {
 
         getData();
-        Log.i("ZO", "medicine: " + myMedicine.getId());
-        Log.i("ZO", "The time: " + key);
-        Log.i("ZO", "Count: " + count);
+        Log.i("zoooooz", "medicine: " + myMedicine.getId());
+        Log.i("zoooooz", "The time: " + key);
+        Log.i("zoooooz", "Count: " + count);
         lunchCustomDialog();
 
         return Result.success();
