@@ -26,7 +26,6 @@ public class HelpRequestAdapter extends RecyclerView.Adapter<HelpRequestAdapter.
 
     public HelpRequestAdapter(Context context, List<RequestPojo> medicines,OnClickRequest onClickRequest) {
 
-        Log.i("TAG", "MedsListAdapter: abdoooo");
         _context = context;
         this.takers = medicines;
         this.onClickRequest = onClickRequest;
@@ -38,7 +37,6 @@ public class HelpRequestAdapter extends RecyclerView.Adapter<HelpRequestAdapter.
         public ViewHolder(TakerRequestRowBinding sbinding) {
             super(sbinding.getRoot());
             binding = sbinding;
-            Log.i("TAG", "ViewHolder: abdooooooooo");
 
         }
     }
@@ -46,7 +44,6 @@ public class HelpRequestAdapter extends RecyclerView.Adapter<HelpRequestAdapter.
     @NonNull
     @Override
     public HelpRequestAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.i("TAG", "onCreateViewHolder: ABDOOOOOOOO");
         return new HelpRequestAdapter.ViewHolder(TakerRequestRowBinding.inflate(LayoutInflater.from(parent.getContext()),
                 parent, false));
 
@@ -54,7 +51,6 @@ public class HelpRequestAdapter extends RecyclerView.Adapter<HelpRequestAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull HelpRequestAdapter.ViewHolder holder, int position) {
-        Log.i("TAG", "onBindViewHolder:ABDOOOOOOOOOO ");
         holder.binding.txtinvitorName.setText(takers.get(position).getName());
         holder.binding.txtInvite.setText("I invite you to help me");
         holder.binding.requestImage.setImageResource(takers.get(position).getImg());
