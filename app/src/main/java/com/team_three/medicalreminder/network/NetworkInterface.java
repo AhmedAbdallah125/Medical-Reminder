@@ -37,7 +37,7 @@ public interface NetworkInterface {
 
     void onAccept(TakerPOJO takerPOJO, PatientPojo patientPojo);
 
-    void onReject(String key);
+    void onReject(String key,String email);
 
     void loadPatients(String email);
 

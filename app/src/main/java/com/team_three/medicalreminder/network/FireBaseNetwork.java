@@ -262,7 +262,11 @@ public class FireBaseNetwork implements NetworkInterface {
     }
 
     @Override
-    public void onReject(String key) {
+    public void onReject(String key,String email) {
+        String userId = email.split("\\.")[0];
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
+        reference.child("request").child(key).removeValue();
+
 
     }
 

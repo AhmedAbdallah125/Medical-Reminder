@@ -11,5 +11,5 @@ public interface HelpRequestPresenterInterface {
     void  loadHelpRequest();
     void sendEmail(String email);
     void onAccept(TakerPOJO takerPOJO, PatientPojo patientPojo);
-    void  onReject(String key);
+    void  onReject(String key,String email);
 }

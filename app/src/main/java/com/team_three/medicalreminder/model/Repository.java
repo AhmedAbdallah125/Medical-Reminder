@@ -179,8 +179,8 @@ public class Repository implements RepositoryInterface {
     }
 
     @Override
-    public void onReject(String key) {
-
+    public void onReject(String key,String email) {
+        myRemote.onReject(key,email);
     }
 
     @Override

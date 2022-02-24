@@ -77,7 +77,7 @@ public class HelpRequestAdapter extends RecyclerView.Adapter<HelpRequestAdapter.
 
         });
         holder.binding.btnReject.setOnClickListener(view -> {
-            onClickRequest.onClickReject(takers.get(position).getId());
+            onClickRequest.onClickReject(takers.get(position).getId(),takers.get(position).getMyEmail());
         });
 
     }

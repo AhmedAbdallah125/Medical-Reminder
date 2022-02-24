@@ -93,7 +93,7 @@ HelpRequestPresenterInterface helpRequestPresenterInterface;
     }
 
     @Override
-    public void onClickReject(String key) {
-
+    public void onClickReject(String key,String email) {
+        helpRequestPresenterInterface.onReject(key , email);
     }
 }

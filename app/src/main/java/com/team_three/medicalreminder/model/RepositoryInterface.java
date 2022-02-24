@@ -43,7 +43,7 @@ public interface RepositoryInterface {
      void sendRequest(RequestPojo requestPojo);
      void loadHelpRequest(String email);
     void onAccept(TakerPOJO takerPOJO,PatientPojo patientPojo);
-    void  onReject(String key);
+    void  onReject(String key,String email);
     void loadPatients(String email);
     void loadTakers(String email);
 //add med to fireBase

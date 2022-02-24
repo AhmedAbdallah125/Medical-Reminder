@@ -42,8 +42,8 @@ public class HelpRequestPresenter implements HelpRequestPresenterInterface , Net
     }
 
     @Override
-    public void onReject(String key) {
-
+    public void onReject(String key,String email) {
+        repository.onReject(key,email);
     }
 
 
