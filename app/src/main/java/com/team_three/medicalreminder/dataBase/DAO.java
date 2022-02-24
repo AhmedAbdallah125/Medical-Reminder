@@ -48,4 +48,7 @@ public interface DAO {
     // get observable DB
     @Query("SELECT * FROM Medications WHERE (:data Between startDate AND endDate) AND isActive=1 ")
     Single<List<MedicationPOJO>> getMedicationDayWorkManger(long data);
+
+    @Query("SELECT * FROM Medications WHERE (:time Between startDate AND endDate) AND fillReminder =1 ")
+    Single<List<MedicationPOJO>> getRefilReminderList(long time);
 }

@@ -41,7 +41,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
     public void setMedicine(MedicationPOJO medicines) {
         this.medicine = medicines;
         timeAndDose=medicines.getTimeAndDose();
-        Log.i("TAG", "setMedicine: "+medicines.getTimeAndDose().entrySet().iterator().next().getKey());
+//        Log.i("TAG", "setMedicine: "+medicines.getTimeAndDose().entrySet().iterator().next().getKey());
     }
 
 
@@ -69,6 +69,9 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
+        if(timeAndDose==null){
+            return 0;
+        }
         return timeAndDose.size();
     }
 

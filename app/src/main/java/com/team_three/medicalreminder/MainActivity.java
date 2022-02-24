@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         };
-        MediaPlayer ring= MediaPlayer.create(MainActivity.this,R.raw.ring);
-        ring.start();
+//        MediaPlayer ring= MediaPlayer.create(MainActivity.this,R.raw.ring);
+//        ring.start();
         SplashScreen();
 //        remind(1);
 //        setWorkTimer();

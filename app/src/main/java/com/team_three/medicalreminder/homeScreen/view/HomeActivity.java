@@ -250,7 +250,7 @@ public class HomeActivity extends AppCompatActivity {
                 .build();
 
         PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(MyPeriodicWorkManger.class,
-                6, TimeUnit.HOURS)
+                3, TimeUnit.HOURS)
                 .setConstraints(constraints)
                 .build();
 

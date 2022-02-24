@@ -53,4 +53,7 @@ public interface RepositoryInterface {
 
     Single<List<MedicationPOJO>> getMedicationDayWorkManger(long time);
 
+    Single<List<MedicationPOJO>> getRefilReminderList(long time);
+
+
 }

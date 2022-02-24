@@ -103,4 +103,9 @@ public class ConcreteLocalClass implements LocalSourceInterface {
         return dao.getMedicationDayWorkManger(time);
     }
 
+    @Override
+    public Single<List<MedicationPOJO>> getRefilReminderList(long time) {
+        return dao.getRefilReminderList(time);
+    }
+
 }

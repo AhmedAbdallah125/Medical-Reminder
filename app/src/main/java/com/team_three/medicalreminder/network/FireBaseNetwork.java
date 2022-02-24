@@ -94,7 +94,7 @@ public class FireBaseNetwork implements NetworkInterface {
                         if (task.isSuccessful()) {
                             // first make must add to database
                             User user = new User(email, name);
-                            addUserInDB(user);
+                            addRegisterInDB(user);
 
                         } else {
                             String errorMessage = handleFireBaseException(task);
@@ -358,12 +358,9 @@ public class FireBaseNetwork implements NetworkInterface {
 
 
     }
-
-
-    @Override
-    public void addUserInDB(User user) {
+    private void addRegisterInDB(User user){
         String uid = user.getEmail().split("\\.")[0];
-        // check if null or not
+
         FirebaseDatabase.getInstance().getReference("users")
                 .child(uid)
                 .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -377,6 +374,52 @@ public class FireBaseNetwork implements NetworkInterface {
                 }
             }
         });
+    }
+
+
+    @Override
+    public void addUserInDB(User user) {
+        String uid = user.getEmail().split("\\.")[0];
+
+        // check if null or not
+       Query query= FirebaseDatabase.getInstance().getReference().child("users");
+       query.addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot snapshot) {
+               boolean flag =true;
+               for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                   String email =dataSnapshot.child("email").getValue().toString();
+                   String key = email.split("\\.")[0];
+                   if(key.equals(uid)){
+                       flag=false;
+                       break;
+                   }
+               }
+               if(flag){
+                   FirebaseDatabase.getInstance().getReference("users")
+                           .child(uid)
+                           .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                       @Override
+                       public void onComplete(@NonNull Task<Void> task) {
+                           if (task.isSuccessful()) {
+                               myDelegation.onSuccess();
+                           } else {
+                               String errorMessage = handleFireBaseException(task);
+                               myDelegation.onFailure(errorMessage);
+                           }
+                       }
+                   });
+               }else {
+                   myDelegation.onSuccess();
+               }
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
+
+           }
+       });
+
     }
 
     @Override

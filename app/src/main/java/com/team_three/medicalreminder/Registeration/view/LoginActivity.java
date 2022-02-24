@@ -189,15 +189,15 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
 
     @Override
     public void setResponse(boolean response) {
-        if(response){
-            handleVisibility(false);
-            storeUserInformation(getCurrentUser().getEmail(),
-                    getCurrentUser().getDisplayName());
-            finish();
-        }
-        else {
+//        if(response){
+//            handleVisibility(false);
+//            storeUserInformation(getCurrentUser().getEmail(),
+//                    getCurrentUser().getDisplayName());
+//            finish();
+//        }
+//        else {
             myPresenter.signWithGoogle(idToken);
-        }
+//        }
     }
 
 

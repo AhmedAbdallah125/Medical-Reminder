@@ -75,8 +75,10 @@ HelpRequestPresenterInterface helpRequestPresenterInterface;
         myEmail = email[0];
         helpRequestPresenterInterface = new HelpRequestPresenter(this.getContext(),repository,this);
         helpRequestPresenterInterface.sendEmail(myEmail);
+        if(email[0]!=null){
+            helpRequestPresenterInterface.loadHelpRequest();
+        }
 
-        helpRequestPresenterInterface.loadHelpRequest();
 
     }
 

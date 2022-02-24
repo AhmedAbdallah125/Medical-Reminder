@@ -162,6 +162,11 @@ public class Repository implements RepositoryInterface {
         return localSourceInterface.getMedicationDayWorkManger(time);
     }
 
+    @Override
+    public Single<List<MedicationPOJO>> getRefilReminderList(long time) {
+        return localSourceInterface.getRefilReminderList(time);
+    }
+
 
     @Override
     public void sendRequest(RequestPojo requestPojo) {
