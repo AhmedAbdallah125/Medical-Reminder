@@ -67,6 +67,9 @@ public interface RepositoryInterface {
     void deleteInPatientMedicationList(String email, String medicationID);
 
     void UserExistance(String email);
+    // get medication Patient List
+
+    void loadMedicationListOFPatient(String email);
 
     public void deleteTaker(String takerEmail,String patientEmail);
 

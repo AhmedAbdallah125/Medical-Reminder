@@ -3,6 +3,7 @@ package com.team_three.medicalreminder.Registeration.presenter;
 import android.app.Activity;
 
 import com.team_three.medicalreminder.Registeration.view.NetworkViewInterface;
+import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.RequestPojo;
@@ -89,6 +90,11 @@ public class NetworkPresenter implements NetworkPresenterInterface, NetworkDeleg
 
     @Override
     public void isUserExist(boolean existance) {
+
+    }
+
+    @Override
+    public void onSuccessReturnMedicationList(List<MedicationPOJO> medicationPOJOList) {
 
     }
 

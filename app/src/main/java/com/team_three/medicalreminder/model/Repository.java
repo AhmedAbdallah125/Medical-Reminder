@@ -221,4 +221,13 @@ public class Repository implements RepositoryInterface {
     public void deleteInPatientMedicationList(String email, String medicationID) {
         myRemote.deleteInPatientMedicationList(email,medicationID);
     }
+    // get medication Patient List
+    @Override
+    public void loadMedicationListOFPatient(String email) {
+        myRemote.loadPatientMedicationList(email);
+
+    }
+
+
+
 }

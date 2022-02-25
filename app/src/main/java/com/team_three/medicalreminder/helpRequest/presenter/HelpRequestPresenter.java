@@ -3,6 +3,7 @@ package com.team_three.medicalreminder.helpRequest.presenter;
 import android.content.Context;
 
 import com.team_three.medicalreminder.helpRequest.view.HelpRequestViewInterface;
+import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.RequestPojo;
@@ -84,6 +85,11 @@ public class HelpRequestPresenter implements HelpRequestPresenterInterface , Net
 
     @Override
     public void isUserExist(boolean existance) {
+
+    }
+
+    @Override
+    public void onSuccessReturnMedicationList(List<MedicationPOJO> medicationPOJOList) {
 
     }
 }

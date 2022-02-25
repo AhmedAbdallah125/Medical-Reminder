@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.TimeCardBinding;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 
@@ -22,10 +23,10 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
     final private Context _context;
     private MedicationPOJO medicine;
     private Map<String, Integer> timeAndDose;
-    private OnClickListener onClickListener;
+    private OnMedicationTimeListener onMedicationTimeListener;
 
 
-    public TimeAdapter(Context context, MedicationPOJO medicines,OnClickListener onClickListener) {
+    public TimeAdapter(Context context, MedicationPOJO medicines,OnMedicationTimeListener onMedicationTimeListener) {
         if (medicines == null) {
             medicine = new MedicationPOJO();
             this.timeAndDose = new HashMap<>();
@@ -34,7 +35,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
             this.timeAndDose = medicines.getTimeAndDose();
         }
         _context = context;
-        this.onClickListener=onClickListener;
+        this.onMedicationTimeListener=onMedicationTimeListener;
 
     }
 
@@ -59,11 +60,15 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
         String key = keyList.get(position);
         Integer value = timeAndDose.get(key);
 
-        Log.d("TAG", "onBindViewHolder: fdddd");
         holder.timeBinding.recycleHour.setText(key);
         holder.timeBinding.txtPillCount.setText( value +" " +medicine.getFormat());
-        holder.timeBinding.cardTimeView.setOnClickListener(view -> {
-            onClickListener.onClick(view,position);
+        boolean take =medicine.getIsTakenList().get(position);
+        bindViews(holder.timeBinding,take);
+        holder.timeBinding.imageTake.setOnClickListener(v->{
+            onMedicationTimeListener.onTakeClick(position,take,medicine);
+        });
+        holder.timeBinding.imageSkip.setOnClickListener(v->{
+            onMedicationTimeListener.onTakeClick(position,take,medicine);
         });
     }
 
@@ -82,5 +87,23 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
             super(timeBinding.getRoot());
             this.timeBinding=timeBinding;
         }
+    }
+    private void bindViews(TimeCardBinding timeBinding,boolean take){
+        if(!take){
+            bindImagesBasedOnTaken(R.drawable.ic_baseline_done_24,R.drawable.ic_baseline_close_24,timeBinding);
+            bindTextBasedOnTaken(R.string.take,R.string.skip,timeBinding);
+        }else{
+            bindImagesBasedOnTaken(R.drawable.ic_baseline_replay_24,R.drawable.ic_baseline_replay_24,timeBinding);
+            bindTextBasedOnTaken(R.string.untake,R.string.unSkip,timeBinding);
+        }
+
+    }
+    private void bindImagesBasedOnTaken(int takeImage,int skipImage,TimeCardBinding timeBinding){
+        timeBinding.imageTake.setImageResource(takeImage);
+        timeBinding.imageSkip.setImageResource(skipImage);
+    }
+    private void bindTextBasedOnTaken(int txtTake,int txtSkip,TimeCardBinding timeBinding){
+        timeBinding.txtSkip.setText(_context.getString(txtSkip));
+        timeBinding.textTake.setText(_context.getString(txtTake));
     }
 }

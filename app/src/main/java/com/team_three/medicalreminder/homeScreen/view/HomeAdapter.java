@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.team_three.medicalreminder.homeScreen.model.MedicineDetails;
 import com.team_three.medicalreminder.databinding.HomeScreenRecycleViewLayoutBinding;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 

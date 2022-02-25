@@ -93,17 +93,17 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text=" "
+        app:layout_constraintBottom_toBottomOf="@+id/time_txt_strength"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/time_txt_medicationName"
         tools:text="after Eating" />
 
     <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_icon_medical"
-        app:layout_constraintEnd_toEndOf="@+id/txt_instruction"
-        app:layout_constraintTop_toBottomOf="@+id/txt_instruction" />
+        android:id="@+id/imgDeleteMed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_baseline_delete_forever_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/time_txt_medicationName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
