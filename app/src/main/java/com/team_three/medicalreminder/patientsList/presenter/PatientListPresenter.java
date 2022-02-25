@@ -59,6 +59,11 @@ public class PatientListPresenter implements  PatientListPresenterInterface , Ne
     }
 
     @Override
+    public void isUserExist(boolean existance) {
+
+    }
+
+    @Override
     public void onSuccessTaker(List<TakerPOJO> takerPOJOS) {
 
     }

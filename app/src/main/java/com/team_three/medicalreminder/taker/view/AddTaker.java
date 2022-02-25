@@ -73,12 +73,31 @@ public class AddTaker extends Fragment implements AddTakerViewInterface{
 
         if(checkShared()){
 
+//            sharedPreferences = this.getContext().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
+//            String[] myEmail = sharedPreferences.getString(RegisterFragment.USER_EMAIL,"null" ).split("\\.");
+
+           String[] inputedEmail = binding.txtEmail.getEditableText().toString().split("\\.");
+
+            addTakerPresenerInterface.userExistance(inputedEmail[0]);
+            
+           
+
+
+        }
+        else{
+            Toast.makeText(this.getContext(), "you must login first ", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this.getActivity(), LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void isUserExist(boolean existance) {
+        if(existance){
             sharedPreferences = this.getContext().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
             String[] myEmail = sharedPreferences.getString(RegisterFragment.USER_EMAIL,"null" ).split("\\.");
             String[] inputedEmail = binding.txtEmail.getEditableText().toString().split("\\.");
-            Log.i("TAG", "isLogedIn: "+ myEmail[0]);
-
-            if(myEmail[0] != inputedEmail[0]){
+            if(!myEmail[0].equals(inputedEmail[0]) ){
                 RequestPojo requestPojo = new RequestPojo(R.drawable.ic_doctor_male
                         ,sharedPreferences.getString(RegisterFragment.USER_NAME,"null")
                         ,binding.txtEmail.getEditableText().toString()
@@ -90,18 +109,15 @@ public class AddTaker extends Fragment implements AddTakerViewInterface{
                 addTakerPresenerInterface.sendRequest(requestPojo);
                 Toast.makeText(this.getContext(), "requested to add successfuly", Toast.LENGTH_SHORT).show();
                 Navigation.findNavController(binding.getRoot()).navigate(R.id.action_addTaker_to_fragment_taker_list);
-
             }else {
                 Toast.makeText(this.getContext(),   "you can't send request to yourself", Toast.LENGTH_SHORT).show();
             }
 
-
         }
-        else{
-            Toast.makeText(this.getContext(), "you must login first ", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this.getActivity(), LoginActivity.class);
-            startActivity(intent);
+        else {
+            Toast.makeText(this.getContext(), "this user is not exist", Toast.LENGTH_SHORT).show();
         }
+        
     }
 
 

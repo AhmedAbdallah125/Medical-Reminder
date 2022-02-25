@@ -69,4 +69,9 @@ public class TakerListPresenter implements TakerLIstPresenterInterface , Network
 
     }
 
+    @Override
+    public void isUserExist(boolean existance) {
+
+    }
+
 }

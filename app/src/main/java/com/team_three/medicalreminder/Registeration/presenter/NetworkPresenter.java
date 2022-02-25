@@ -88,6 +88,11 @@ public class NetworkPresenter implements NetworkPresenterInterface, NetworkDeleg
     }
 
     @Override
+    public void isUserExist(boolean existance) {
+
+    }
+
+    @Override
     public void onSuccessReturn(String userName) {
         myView.setSuccessfulReturnResponse(userName);
     }

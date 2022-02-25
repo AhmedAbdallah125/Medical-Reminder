@@ -36,6 +36,12 @@ public class AddTakerPresenter implements AddTakerPresenerInterface, NetworkDele
     }
 
     @Override
+    public void userExistance(String email) {
+        repository.setMyDelegation(this);
+        repository.UserExistance(email);
+    }
+
+    @Override
     public void onSuccess() {
         addTakerViewInterface.isLogedIn(true);
     }
@@ -68,5 +74,10 @@ public class AddTakerPresenter implements AddTakerPresenerInterface, NetworkDele
     @Override
     public void onSuccessPatient(List<PatientPojo> patientPojos) {
 
+    }
+
+    @Override
+    public void isUserExist(boolean existance) {
+        addTakerViewInterface.isUserExist(existance);
     }
 }

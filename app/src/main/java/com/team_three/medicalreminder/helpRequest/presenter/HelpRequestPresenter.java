@@ -81,4 +81,9 @@ public class HelpRequestPresenter implements HelpRequestPresenterInterface , Net
     public void onSuccessPatient(List<PatientPojo> patientPojos) {
 
     }
+
+    @Override
+    public void isUserExist(boolean existance) {
+
+    }
 }

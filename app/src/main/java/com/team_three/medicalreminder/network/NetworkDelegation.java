@@ -16,4 +16,6 @@ public interface NetworkDelegation {
     void onSuccessTaker(List<TakerPOJO> takerPOJOS);
     void onSuccess(boolean response);
     void onSuccessPatient(List<PatientPojo> patientPojos);
+    void isUserExist(boolean existance);
+
 }

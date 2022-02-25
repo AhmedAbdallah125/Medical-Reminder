@@ -12,7 +12,7 @@ public class TakerPOJO implements Parcelable {
     private  int img;
     private String requestId;
 
-    public TakerPOJO(String patientEmail, String name, String email, int img, String requestId) {
+    public TakerPOJO(String patientEmail, String name, String email, int img) {
         this.patientEmail = patientEmail;
         this.name = name;
         this.email = email;

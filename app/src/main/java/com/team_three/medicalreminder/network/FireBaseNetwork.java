@@ -50,6 +50,7 @@ public class FireBaseNetwork implements NetworkInterface {
     public static FirebaseAuth mAuth;
     private static FireBaseNetwork myFireBase;
     private NetworkDelegation myDelegation;
+    private boolean exist=false;
 
     private FireBaseNetwork(Activity myActivity) {
         _activity = myActivity;
@@ -197,11 +198,12 @@ public class FireBaseNetwork implements NetworkInterface {
     @Override
     public void sendRequest(RequestPojo requestPojo) {
         String[] uid = requestPojo.getEmail().split("\\.");
+        String senderEmail = requestPojo.getMyEmail().split("\\.")[0];
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid[0]);
-        String key = databaseReference.child("request").push().getKey();
-        // taker=new RequestPojo(binding.txtEmail.getEditableText().toString(),R.drawable.one,binding.txtName.getEditableText().toString(),id);
-        requestPojo.setId(key);
-        databaseReference.child("request").child(key).setValue(requestPojo);
+        databaseReference.child("request").child(senderEmail).setValue(requestPojo);
+
+
+
     }
 
     @Override
@@ -223,7 +225,7 @@ public class FireBaseNetwork implements NetworkInterface {
                                 ,Integer.parseInt(String.valueOf(dataSnapshot.child("acceptance").getValue()))
                                 );
 
-                        taker.setId(dataSnapshot.child("id").getValue().toString());
+                        //taker.setId(dataSnapshot.child("id").getValue().toString());
                         requestPojos.add(taker);
                     }
 
@@ -250,8 +252,9 @@ public class FireBaseNetwork implements NetworkInterface {
 
 
         String[] takerId = takerPOJO.getEmail().split("\\.");
+        String[] senderId = takerPOJO.getPatientEmail().split("\\.");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(takerId[0]);
-        reference.child("request").child(takerPOJO.getRequestId()).child("acceptance").setValue(1);
+        reference.child("request").child(senderId[0]).child("acceptance").setValue(1);
 
 
         String[] myId = patientPojo.getEmail().split(("\\."));
@@ -319,7 +322,7 @@ public class FireBaseNetwork implements NetworkInterface {
                             ,dataSnapshot.child("name").getValue().toString()
                             , dataSnapshot.child("email").getKey().toString()
                             ,(Integer.parseInt(String.valueOf(dataSnapshot.child("img").getValue())))
-                            ,dataSnapshot.child("requestId").getValue().toString()
+
                     );
 
                     takers.add(taker);
@@ -358,6 +361,35 @@ public class FireBaseNetwork implements NetworkInterface {
 
 
     }
+
+    @Override
+    public void UserExistance(String email) {
+
+        String takerEmail = email.split("\\.")[0];
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    String email =dataSnapshot.child("email").getValue().toString();
+                    String key = email.split("\\.")[0];
+                    if(key.equals(takerEmail)){
+                        exist=true;
+                        break;
+                    }
+                }
+                myDelegation.isUserExist(exist);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
     private void addRegisterInDB(User user){
         String uid = user.getEmail().split("\\.")[0];
 
@@ -431,7 +463,6 @@ public class FireBaseNetwork implements NetworkInterface {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
-                    Log.i("TAG", "getUserFromRealDB: " + task.getResult().getValue().toString());
 
                     myDelegation.onSuccessReturn(task.getResult().getValue().toString());
                 } else {

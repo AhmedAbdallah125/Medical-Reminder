@@ -167,6 +167,11 @@ public class Repository implements RepositoryInterface {
         return localSourceInterface.getRefilReminderList(time);
     }
 
+    @Override
+    public void UserExistance(String email) {
+         myRemote.UserExistance(email);
+    }
+
 
     @Override
     public void sendRequest(RequestPojo requestPojo) {
