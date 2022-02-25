@@ -64,7 +64,7 @@ public class HelpRequestAdapter extends RecyclerView.Adapter<HelpRequestAdapter.
             takerPOJO.setRequestId(takers.get(position).getId());
 
             PatientPojo patientPojo = new PatientPojo(sharedPref.getString(RegisterFragment.USER_EMAIL,"null")
-                    ,takers.get(position).getMyEmail()
+                    ,takers.get(position).getEmail()
                     ,takers.get(position).getImg()
                     ,takers.get(position).getName()
                     );
