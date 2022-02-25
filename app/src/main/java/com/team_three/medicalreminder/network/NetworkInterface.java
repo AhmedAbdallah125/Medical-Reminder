@@ -47,4 +47,5 @@ public interface NetworkInterface {
     void UserExistance(String email);
     public void deleteTaker(String takerEmail,String patientEmail);
 
+    void deleteInPatientMedicationList(String email, String medicationID);
 }

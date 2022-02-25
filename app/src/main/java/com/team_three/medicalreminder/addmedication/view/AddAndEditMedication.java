@@ -52,6 +52,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
     private boolean isFillReminder = false;
     private int previousDestination;
     private boolean isAdd = false;
+    private boolean chooseTimesFlag = false;
 
     //spinner
     private String format = "";
@@ -135,6 +136,12 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
                     i = 0;
 
                 setDosePerTime(i);
+
+                if (chooseTimesFlag) {
+                    timeAndDoseAdapter.setTimeAndDose();
+                }
+
+                chooseTimesFlag = true;
 
                 if (i != 0)
                     dosePerDay = binding.spinnerMedicationNoOfTimes.getSelectedItem().toString();

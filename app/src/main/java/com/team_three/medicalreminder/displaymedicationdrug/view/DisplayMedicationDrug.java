@@ -1,6 +1,8 @@
 package com.team_three.medicalreminder.displaymedicationdrug.view;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +22,14 @@ import android.widget.Toast;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.team_three.medicalreminder.R;
+import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.databinding.FragmentDisplayMedicationDrugBinding;
 import com.team_three.medicalreminder.displaymedicationdrug.presenter.MedicationDrugDisplayPresenter;
 import com.team_three.medicalreminder.displaymedicationdrug.presenter.MedicationDrugDisplayPresenterInterface;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.network.FireBaseNetwork;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -40,9 +45,13 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
     private String dose;
     public static String displayTag = "displayMed";
     public static String editTag = "editMed";
-
-    private Repository repository;
     private ConcreteLocalClass localClass;
+    private FireBaseNetwork fireBaseNetwork;
+    private Repository repository;
+    SharedPreferences sharedPref;
+    String name = "";
+    String email = "";
+
     private MedicationDrugDisplayPresenterInterface presenterInterface;
 
     //dialogs
@@ -69,8 +78,13 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
                              Bundle savedInstanceState) {
         binding = FragmentDisplayMedicationDrugBinding.inflate(inflater, container, false);
         localClass = ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext());
-        repository = Repository.getInstance(localClass, this.getContext());
-        presenterInterface = new MedicationDrugDisplayPresenter(repository, this);
+        if(isSharedPrefNull()) {
+            repository = Repository.getInstance(localClass, this.getContext());
+        }else{
+            fireBaseNetwork = FireBaseNetwork.getInstance(this.getActivity());
+            repository = Repository.getInstance(localClass,fireBaseNetwork,this.getContext());
+        }
+        presenterInterface = new MedicationDrugDisplayPresenter(repository, this,this.getContext());
         dialogBuilder = new MaterialAlertDialogBuilder(this.getContext());
         return binding.getRoot();
     }
@@ -268,5 +282,14 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
         timePickerDialog.setTitle("Choose time");
         timePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         timePickerDialog.show();
+    }
+
+    private boolean isSharedPrefNull() {
+        sharedPref = this.getContext().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
+        email = sharedPref.getString(RegisterFragment.USER_EMAIL, "null");
+        name = sharedPref.getString(RegisterFragment.USER_NAME, "null");
+        Log.i("TAG", "checkShared: " + name);
+        Log.i("TAG", "checkShared: " + email);
+        return (name.equals("null") && email.equals("null"));
     }
 }

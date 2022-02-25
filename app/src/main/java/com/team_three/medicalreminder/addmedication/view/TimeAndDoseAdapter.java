@@ -27,6 +27,10 @@ public class TimeAndDoseAdapter extends RecyclerView.Adapter<TimeAndDoseAdapter.
         return timeAndDose;
     }
 
+    public void setTimeAndDose(){
+        timeAndDose = new HashMap<>();
+    }
+
     public TimeAndDoseAdapter(int n , Context context, Map<String,Integer> map) {
         dosePerDay = n;
         this.context = context;
@@ -51,13 +55,12 @@ public class TimeAndDoseAdapter extends RecyclerView.Adapter<TimeAndDoseAdapter.
     public void onBindViewHolder(@NonNull TimeAndDoseAdapter.ViewHolder holder, int position) {
         if(timeAndDose.isEmpty()) {
             holder.binding.txtDoseTime.setText("Choose Time");
-            holder.binding.txtDoseNumber.setText(holder.counter + "");
         }else{
             holder.result= (String) timeAndDose.keySet().toArray()[position];
             holder.counter=timeAndDose.get(holder.result);
             holder.binding.txtDoseTime.setText(holder.result);
-            holder.binding.txtDoseNumber.setText(holder.counter + "");
         }
+        holder.binding.txtDoseNumber.setText(holder.counter + "");
         holder.binding.txtDoseFormat.setText("Dose:");
 
         holder.binding.txtDoseTime.setOnClickListener(v -> {
