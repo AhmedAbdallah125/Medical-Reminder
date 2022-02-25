@@ -8,6 +8,16 @@
     tools:context=".taker.view.TakerProfileScreen">
 
     <ImageView
+        android:id="@+id/deleteTaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_baseline_delete_forever_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/icBackInProfileTaker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

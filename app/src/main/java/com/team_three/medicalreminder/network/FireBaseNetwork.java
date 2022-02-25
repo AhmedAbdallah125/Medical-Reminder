@@ -64,7 +64,6 @@ public class FireBaseNetwork implements NetworkInterface {
         return myFireBase;
     }
 
-
     @Override
     public void setNetworkDelegation(NetworkDelegation networkDelegation) {
         myDelegation = networkDelegation;
@@ -113,6 +112,7 @@ public class FireBaseNetwork implements NetworkInterface {
     }
 
 
+
     @Override
     public void signInWithEmailAndPass(Activity activity, String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
@@ -158,6 +158,7 @@ public class FireBaseNetwork implements NetworkInterface {
     }
 
 
+
     @Override
     public void signInUsingGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
@@ -199,6 +200,7 @@ public class FireBaseNetwork implements NetworkInterface {
         String senderEmail = requestPojo.getMyEmail().split("\\.")[0];
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid[0]);
         databaseReference.child("request").child(senderEmail).setValue(requestPojo);
+
 
 
     }
@@ -243,26 +245,23 @@ public class FireBaseNetwork implements NetworkInterface {
     public void onAccept(TakerPOJO takerPOJO, PatientPojo patientPojo) {
 
         String[] uid = takerPOJO.getPatientEmail().split("\\.");
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid[0]);
-        String key = databaseReference.child("taker").push().getKey();
-        databaseReference.child("taker").child(key).setValue(takerPOJO);
-
-
-        String[] takerId = takerPOJO.getEmail().split("\\.");
-        String[] senderId = takerPOJO.getPatientEmail().split("\\.");
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(takerId[0]);
-        reference.child("request").child(senderId[0]).child("acceptance").setValue(1);
-
-
         String[] myId = patientPojo.getEmail().split(("\\."));
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid[0]);
+        databaseReference.child("taker").child(myId[0]).setValue(takerPOJO);
+
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(myId[0]);
+        reference.child("request").child(uid[0]).child("acceptance").setValue(1);
+
+
+
         DatabaseReference patientReference = FirebaseDatabase.getInstance().getReference().child("users").child(myId[0]);
-        String key1 = databaseReference.child("patient").push().getKey();
-        patientPojo.setId(key1);
-        patientReference.child("patient").child(key1).setValue(patientPojo);
+        patientReference.child("patient").child(uid[0]).setValue(patientPojo);
     }
 
     @Override
-    public void onReject(String key, String email) {
+    public void onReject(String key,String email) {
         String userId = email.split("\\.")[0];
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
         reference.child("request").child(key).removeValue();
@@ -280,15 +279,14 @@ public class FireBaseNetwork implements NetworkInterface {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 patients.clear();
 
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    if (dataSnapshot.child("patientEmail").getValue() != null) {
-                        PatientPojo patient = new PatientPojo(dataSnapshot.child("email").getValue().toString()
-                                , dataSnapshot.child("patientEmail").getValue().toString()
-                                , (Integer.parseInt(String.valueOf(dataSnapshot.child("image").getValue())))
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    if(dataSnapshot.child("patientEmail").getValue() !=null){
+                        PatientPojo patient =new PatientPojo(dataSnapshot.child("email").getValue().toString()
+                                ,dataSnapshot.child("patientEmail").getValue().toString()
+                                ,(Integer.parseInt(String.valueOf(dataSnapshot.child("image").getValue())))
                                 , dataSnapshot.child("name").getValue().toString()
                         );
 
-                        patient.setId(dataSnapshot.child("id").getValue().toString());
                         patients.add(patient);
                     }
 
@@ -314,11 +312,11 @@ public class FireBaseNetwork implements NetworkInterface {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 takers.clear();
 
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    TakerPOJO taker = new TakerPOJO(dataSnapshot.child("patientEmail").getValue().toString()
-                            , dataSnapshot.child("name").getValue().toString()
-                            , dataSnapshot.child("email").getKey().toString()
-                            , (Integer.parseInt(String.valueOf(dataSnapshot.child("img").getValue())))
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    TakerPOJO taker =new TakerPOJO(dataSnapshot.child("patientEmail").getValue().toString()
+                            ,dataSnapshot.child("name").getValue().toString()
+                            , dataSnapshot.child("email").getValue().toString()
+                            ,(Integer.parseInt(String.valueOf(dataSnapshot.child("img").getValue())))
 
                     );
 
@@ -365,8 +363,7 @@ public class FireBaseNetwork implements NetworkInterface {
             String key = String.valueOf(meds.getId());
             databaseReference.child("medications").child(key).setValue(meds);
         }
-        // String key = databaseReference.child("medications").push().getKey();
-        // taker=new RequestPojo(binding.txtEmail.getEditableText().toString(),R.drawable.one,binding.txtName.getEditableText().toString(),id);
+
 
 
     }
@@ -399,6 +396,21 @@ public class FireBaseNetwork implements NetworkInterface {
 
     }
 
+    @Override
+    public void deleteTaker(String takerEmail, String patientEmail) {
+        String patientKey = patientEmail.split("\\.")[0];
+        String takerKey = takerEmail.split("\\.")[0];
+
+
+        DatabaseReference deletTakerRefrenec = FirebaseDatabase.getInstance().getReference().child("users").child(patientKey);
+        deletTakerRefrenec.child("taker").child(takerKey).removeValue();
+
+        DatabaseReference deletePatientRefrenec = FirebaseDatabase.getInstance().getReference().child("users").child(takerKey);
+        deletePatientRefrenec.child("patient").child(patientKey).removeValue();
+
+        deletePatientRefrenec.child("request").child(patientKey).removeValue();
+    }
+
     private void addRegisterInDB(User user) {
         String uid = user.getEmail().split("\\.")[0];
 
@@ -423,37 +435,37 @@ public class FireBaseNetwork implements NetworkInterface {
         String uid = user.getEmail().split("\\.")[0];
 
         // check if null or not
-        Query query = FirebaseDatabase.getInstance().getReference().child("users");
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                boolean flag = true;
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    String email = dataSnapshot.child("email").getValue().toString();
-                    String key = email.split("\\.")[0];
-                    if (key.equals(uid)) {
-                        flag = false;
-                        break;
-                    }
-                }
-                if (flag) {
-                    FirebaseDatabase.getInstance().getReference("users")
-                            .child(uid)
-                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                myDelegation.onSuccess();
-                            } else {
-                                String errorMessage = handleFireBaseException(task);
-                                myDelegation.onFailure(errorMessage);
-                            }
-                        }
-                    });
-                } else {
-                    myDelegation.onSuccess();
-                }
-            }
+       Query query= FirebaseDatabase.getInstance().getReference().child("users");
+       query.addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot snapshot) {
+               boolean flag =true;
+               for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                   String email =dataSnapshot.child("email").getValue().toString();
+                   String key = email.split("\\.")[0];
+                   if(key.equals(uid)){
+                       flag=false;
+                       break;
+                   }
+               }
+               if(flag){
+                   FirebaseDatabase.getInstance().getReference("users")
+                           .child(uid)
+                           .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                       @Override
+                       public void onComplete(@NonNull Task<Void> task) {
+                           if (task.isSuccessful()) {
+                               myDelegation.onSuccess();
+                           } else {
+                               String errorMessage = handleFireBaseException(task);
+                               myDelegation.onFailure(errorMessage);
+                           }
+                       }
+                   });
+               }else {
+                   myDelegation.onSuccess();
+               }
+           }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -503,5 +515,11 @@ public class FireBaseNetwork implements NetworkInterface {
         return errorMessage;
     }
 
+    @Override
+    public void deleteInPatientMedicationList(String email, String medicationID) {
+        String uid = email.split("\\.")[0];
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+        databaseReference.child("medications").child(medicationID).removeValue();
+    }
 
 }

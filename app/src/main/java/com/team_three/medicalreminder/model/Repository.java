@@ -172,6 +172,10 @@ public class Repository implements RepositoryInterface {
          myRemote.UserExistance(email);
     }
 
+    @Override
+    public void deleteTaker(String takerEmail, String patientEmail) {
+        myRemote.deleteTaker(takerEmail,patientEmail);
+    }
 
 
     @Override
@@ -213,6 +217,10 @@ public class Repository implements RepositoryInterface {
         myRemote.addMedicationListViaNetwork(medicationPOJOS, email);
     }
 
+    @Override
+    public void deleteInPatientMedicationList(String email, String medicationID) {
+        myRemote.deleteInPatientMedicationList(email,medicationID);
+    }
     // get medication Patient List
     @Override
     public void loadMedicationListOFPatient(String email) {
