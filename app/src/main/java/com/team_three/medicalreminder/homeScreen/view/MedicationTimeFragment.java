@@ -124,19 +124,36 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
     }
 
     private void handleTakeClick(int position, boolean take, MedicationPOJO medicationPOJO) {
-        List<Boolean> takenList = medicationPOJO.getIsTakenList();
-        takenList.set(position, !take);
-        medicationPOJO.setIsTakenList(takenList);
         Map<String, Integer> timeAndDose = medicationPOJO.getTimeAndDose();
         List<String> keyList = new ArrayList<>(timeAndDose.keySet());
         String key = keyList.get(position);
         Integer value = timeAndDose.get(key);
+
+        updateMedicationTake(medicationPOJO, position, take);
+        updateMedicationPillsLeft(medicationPOJO, take, value);
         int takeString = (!take) ? R.string.take : R.string.untake;
-        Toast.makeText(this.getContext(), "You " + this.getString(takeString) +" "+
+        showUpdatedMessage(takeString, medicationPOJO, key);
+    }
+
+    private void updateMedicationPillsLeft(MedicationPOJO pojo, boolean take, int value) {
+        int left = medicationPOJO.getLeftNumber();
+        left = (!take) ? (left - value) : (left + value);
+        medicationPOJO.setLeftNumber(left);
+
+    }
+
+    private void updateMedicationTake(MedicationPOJO medicationPOJO, int position, boolean take) {
+        List<Boolean> takenList = medicationPOJO.getIsTakenList();
+        takenList.set(position, !take);
+        medicationPOJO.setIsTakenList(takenList);
+
+    }
+
+    private void showUpdatedMessage(int takeString, MedicationPOJO medicationPOJO, String key) {
+        Toast.makeText(this.getContext(), "You " + this.getString(takeString) + " " +
                 medicationPOJO.getMedicationName() + "" +
                 " which at  " + key, Toast.LENGTH_SHORT).show();
     }
-
 
     @Override
     public void onSkipClick(int position, boolean take, MedicationPOJO medicationPOJO) {

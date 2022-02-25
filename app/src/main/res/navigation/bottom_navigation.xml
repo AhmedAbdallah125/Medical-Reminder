@@ -123,5 +123,14 @@
         android:id="@+id/patientList"
         android:name="com.team_three.medicalreminder.patientsList.view.PatientList"
         android:label="fragment_patient_list"
-        tools:layout="@layout/fragment_patient_list" />
+        tools:layout="@layout/fragment_patient_list" >
+        <action
+            android:id="@+id/action_patientList_to_patientMedicationfragment"
+            app:destination="@id/patientMedicationfragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/patientMedicationfragment"
+        android:name="com.team_three.medicalreminder.PatientMedicationfragment"
+        android:label="fragment_patient_medicationfragment"
+        tools:layout="@layout/fragment_patient_medicationfragment" />
 </navigation>
