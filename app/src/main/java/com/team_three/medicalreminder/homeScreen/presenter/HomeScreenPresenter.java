@@ -67,6 +67,11 @@ public class HomeScreenPresenter implements HomePresenterInterface {
     public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String email) {
         myRepository.addMedicationListViaNetwork(medicationPOJOS,email);
     }
+    // handling delete
+    @Override
+    public void deleteMedication(MedicationPOJO medicationPOJO) {
+        myRepository.deleteMedication(medicationPOJO);
+    }
 
 
 }

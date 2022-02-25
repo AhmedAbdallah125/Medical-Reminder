@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
@@ -55,16 +56,24 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
         initRepository();
 
         requestDataFromPresenter();
-        binding.imageBack.setOnClickListener(v->{
+        binding.imageBack.setOnClickListener(v -> {
             Navigation.findNavController(view).navigate(R.id.action_medicationTimeFragment_to_fragment_home);
         });
 
     }
-    private void bindViews(){
+
+    private void bindViews() {
         binding.iconTimeMedication.setImageResource(medicationPOJO.getImageID());
         binding.timeTxtMedicationName.setText(medicationPOJO.getMedicationName());
         binding.txtInstruction.setText(medicationPOJO.getInstruction());
-        binding.timeTxtStrength.setText(medicationPOJO.getStrength()+" :"+medicationPOJO.getWeight());
+        binding.timeTxtStrength.setText(medicationPOJO.getStrength() + " :" + medicationPOJO.getWeight());
+        // handling delete medication
+        binding.imgDeleteMed.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_medicationTimeFragment_to_fragment_home);
+            myPresenter.deleteMedication(medicationPOJO);
+            Toast.makeText(this.getContext(), medicationPOJO.getMedicationName() + " is Deleted", Toast.LENGTH_SHORT).show();
+
+        });
     }
 
     private void initRecycleView() {
@@ -88,14 +97,14 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
     @Override
     public void showMedications(List<MedicationPOJO> storedMedications) {
 
-        medicationPOJO=storedMedications.get(HomeScreenPresenter.position);
+        medicationPOJO = storedMedications.get(HomeScreenPresenter.position);
         bindViews();
         timeAdapter.setMedicine(medicationPOJO);
         timeAdapter.notifyDataSetChanged();
     }
 
     private void requestDataFromPresenter() {
-       myPresenter.getMedicationDay(this, 0);
+        myPresenter.getMedicationDay(this, 0);
 //        myPresenter.getMedicationDay;
 
     }

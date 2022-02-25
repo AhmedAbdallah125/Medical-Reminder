@@ -57,6 +57,48 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_baseline_access_time_filled_24" />
 
+            <ImageView
+                android:id="@+id/imageTake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginEnd="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageSkip"
+                app:layout_constraintTop_toTopOf="@+id/imageSkip"
+                app:srcCompat="@drawable/ic_baseline_done_24" />
+
+            <ImageView
+                android:id="@+id/imageSkip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/imageTake"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_pill_count"
+                app:srcCompat="@drawable/ic_baseline_close_24" />
+
+            <TextView
+                android:id="@+id/textTake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/imageTake"
+                app:layout_constraintStart_toStartOf="@+id/imageTake"
+                app:layout_constraintTop_toBottomOf="@+id/imageTake"
+                tools:text="Take" />
+
+            <TextView
+                android:id="@+id/txtSkip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/imageSkip"
+                app:layout_constraintStart_toStartOf="@+id/imageSkip"
+                app:layout_constraintTop_toBottomOf="@+id/imageSkip"
+                tools:text="Skip" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
