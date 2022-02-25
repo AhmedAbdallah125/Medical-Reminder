@@ -155,11 +155,11 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
         initCalendar(view);
         initRecycleView();
         initRepository();
-       requestDataFromPresenter(timeNow);
+        requestDataFromPresenter(timeNow);
+        notifyMedicationChangeFromFirebase();
 //        requestDataFromPresenter(timeNow);
         // make presenter
         checkWorking();
-
 
 
     }
@@ -167,12 +167,12 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
     @Override
     public void onResume() {
         super.onResume();
-        sharedPref =getActivity().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
+        sharedPref = getActivity().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
         handleRegistration();
     }
 
-    private void checkWorking(){
-        fragmentHomeBinding.thirdfloatingActionButton2.setOnClickListener(v->{
+    private void checkWorking() {
+        fragmentHomeBinding.thirdfloatingActionButton2.setOnClickListener(v -> {
 //            Navigation.findNavController(v).navigate(R.id.action_fragment_home_to_loginFragment);
         });
     }
@@ -189,8 +189,8 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
 
     private void initRepository() {
         LocalSourceInterface myLocal = ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext());
-        NetworkInterface  networkInterface= FireBaseNetwork.getInstance(this.getActivity());
-        myRepository = Repository.getInstance(myLocal,networkInterface,this.getContext());
+        NetworkInterface networkInterface = FireBaseNetwork.getInstance(this.getActivity());
+        myRepository = Repository.getInstance(myLocal, networkInterface, this.getContext());
         myPresenter = new HomeScreenPresenter(this, myRepository);
     }
 
@@ -243,15 +243,14 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
     public void showMedications(List<MedicationPOJO> storedMedications) {
         homeAdapter.setMedicines(storedMedications);
         homeAdapter.notifyDataSetChanged();
-        Log.i("TAG", "showMedications: "+storedMedications.size());
+        Log.i("TAG", "showMedications: " + storedMedications.size());
         // sned data to firebase
 //        sharedPref =getActivity().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
 
-        if(storedMedications.size()>0&&checkShared()){
+        if (storedMedications.size() > 0 && checkShared()) {
             String[] mail = email.split("\\.");
             String myEmail = mail[0];
-            myPresenter.addMedicationListViaNetwork(storedMedications,myEmail);
-
+            myPresenter.addMedicationListViaNetwork(storedMedications, myEmail);
         }
 
     }
@@ -263,6 +262,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
         myPresenter.updateTime(timeNow);
         Navigation.findNavController(view).navigate(R.id.action_fragment_home_to_medicationTimeFragment);
     }
+
     private void handleRegistration() {
 
         if (sharedPref.getInt("STATE", 2) == 1) {
@@ -273,12 +273,21 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
         }
 
     }
+
     //
     private boolean checkShared() {
         sharedPref = getActivity().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
         email = sharedPref.getString(RegisterFragment.USER_EMAIL, "null");
 
-        return ( !email.equals("null"));
+        return (!email.equals("null"));
     }
+
+    private void notifyMedicationChangeFromFirebase() {
+        if (checkShared()) {
+            String myEmail = email.split("\\.")[0];
+            myPresenter.notifyMedicationChangeFromFirebase(myEmail);
+        }
+    }
+
 }
 

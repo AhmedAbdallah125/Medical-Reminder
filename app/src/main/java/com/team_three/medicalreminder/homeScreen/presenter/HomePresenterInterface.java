@@ -13,5 +13,5 @@ public interface HomePresenterInterface {
     void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String email);
     void deleteMedication(MedicationPOJO medicationPOJO);
     void updateMedication(MedicationPOJO medicationPOJO);
-
+    void notifyMedicationChangeFromFirebase(String email);
 }

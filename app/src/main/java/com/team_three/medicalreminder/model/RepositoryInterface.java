@@ -75,5 +75,6 @@ public interface RepositoryInterface {
 
     void updateToRoomFromFirebase(List<MedicationPOJO> medications);
 
+    void notifyMedicationChangeFromFirebase(String email);
 
 }

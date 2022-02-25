@@ -183,6 +183,10 @@ public class Repository implements RepositoryInterface {
         }
     }
 
+    @Override
+    public void notifyMedicationChangeFromFirebase(String email) {
+        myRemote.updateMedicationToRoomFromFirebase(email);
+    }
 
     @Override
     public void sendRequest(RequestPojo requestPojo) {

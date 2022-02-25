@@ -357,13 +357,10 @@ public class FireBaseNetwork implements NetworkInterface {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(email);
         for (MedicationPOJO meds : medicationPOJOS) {
             String key = String.valueOf(meds.getId());
+            meds.setLeftNumber(6);
             databaseReference.child("medications").child(key).setValue(meds);
         }
 
-//        if (!listenToUpdates)
-        updateMedicationToRoomFromFirebase(email);
-
-//        listenToUpdates = true;
     }
 
     @Override
@@ -518,6 +515,7 @@ public class FireBaseNetwork implements NetworkInterface {
         databaseReference.child("medications").child(medicationID).removeValue();
     }
 
+    @Override
     public void updateMedicationToRoomFromFirebase(String email) {
         updatedMedicationList = new ArrayList<>();
         Query query = FirebaseDatabase.getInstance().getReference().child("users").child(email).child("medications");

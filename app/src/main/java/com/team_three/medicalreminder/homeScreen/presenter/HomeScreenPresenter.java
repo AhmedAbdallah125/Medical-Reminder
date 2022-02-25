@@ -69,9 +69,15 @@ public class HomeScreenPresenter implements HomePresenterInterface, NetworkDeleg
 
     @Override
     public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String email) {
-        myRepository.setMyDelegation(this);
         myRepository.addMedicationListViaNetwork(medicationPOJOS,email);
     }
+
+    @Override
+    public void notifyMedicationChangeFromFirebase(String email) {
+        myRepository.setMyDelegation(this);
+        myRepository.notifyMedicationChangeFromFirebase(email);
+    }
+
     // handling delete
     @Override
     public void deleteMedication(MedicationPOJO medicationPOJO) {
