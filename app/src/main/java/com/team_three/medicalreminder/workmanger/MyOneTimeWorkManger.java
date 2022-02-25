@@ -48,6 +48,7 @@ public class MyOneTimeWorkManger extends Worker {
     @NonNull
     @Override
     public Result doWork() {
+
         getData();
         Log.i("zoooooz", "medicine: " + myMedicine.getId());
         Log.i("zoooooz", "The time: " + key);
