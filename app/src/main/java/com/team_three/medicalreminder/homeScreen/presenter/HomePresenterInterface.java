@@ -12,5 +12,6 @@ public interface HomePresenterInterface {
     void updateTime(long time);
     void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String email);
     void deleteMedication(MedicationPOJO medicationPOJO);
+    void updateMedication(MedicationPOJO medicationPOJO);
 
 }

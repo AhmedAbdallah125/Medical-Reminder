@@ -73,5 +73,10 @@ public class HomeScreenPresenter implements HomePresenterInterface {
         myRepository.deleteMedication(medicationPOJO);
     }
 
+    @Override
+    public void updateMedication(MedicationPOJO medicationPOJO) {
+        myRepository.updateMedications(medicationPOJO);
+    }
+
 
 }

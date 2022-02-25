@@ -24,10 +24,12 @@ import com.team_three.medicalreminder.homeScreen.presenter.HomeScreenPresenter;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
-public class MedicationTimeFragment extends Fragment implements HomeFragmentInterface, OnClickListener {
+public class MedicationTimeFragment extends Fragment implements HomeFragmentInterface, OnMedicationTimeListener {
     TimeAdapter timeAdapter;
     HomeScreenPresenter myPresenter;
     Repository myRepository;
@@ -109,9 +111,42 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
 
     }
 
+
     @Override
-    public void onClick(View view, int position) {
-        Navigation.findNavController(view).navigate(R.id.action_medicationTimeFragment_to_displayMedicationDrug);
+    public void onTakeClick(int position, boolean take, MedicationPOJO medicationPOJO) {
+
+        handleTakeClick(position, take, medicationPOJO);
+        myPresenter.updateMedication(medicationPOJO);
+        // back to home
+
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_medicationTimeFragment_to_fragment_home);
 
     }
+
+    private void handleTakeClick(int position, boolean take, MedicationPOJO medicationPOJO) {
+        List<Boolean> takenList = medicationPOJO.getIsTakenList();
+        takenList.set(position, !take);
+        medicationPOJO.setIsTakenList(takenList);
+        Map<String, Integer> timeAndDose = medicationPOJO.getTimeAndDose();
+        List<String> keyList = new ArrayList<>(timeAndDose.keySet());
+        String key = keyList.get(position);
+        Integer value = timeAndDose.get(key);
+        int takeString = (!take) ? R.string.take : R.string.untake;
+        Toast.makeText(this.getContext(), "You " + this.getString(takeString) +" "+
+                medicationPOJO.getMedicationName() + "" +
+                " which at  " + key, Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void onSkipClick(int position, boolean take, MedicationPOJO medicationPOJO) {
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_medicationTimeFragment_to_fragment_home);
+
+    }
+
+//    @Override
+//    public void onClick(View view, int position) {
+//        Navigation.findNavController(view).navigate(R.id.action_medicationTimeFragment_to_displayMedicationDrug);
+//
+//    }
 }
