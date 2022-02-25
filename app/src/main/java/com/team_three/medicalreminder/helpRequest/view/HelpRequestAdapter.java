@@ -87,6 +87,5 @@ public class HelpRequestAdapter extends RecyclerView.Adapter<HelpRequestAdapter.
     private void initShared() {
         sharedPref = _context.getSharedPreferences(
                 RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
-
     }
 }

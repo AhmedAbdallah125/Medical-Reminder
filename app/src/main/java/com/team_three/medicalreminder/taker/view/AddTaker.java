@@ -105,10 +105,10 @@ public class AddTaker extends Fragment implements AddTakerViewInterface{
                         ,0
                 );
                 // requestPojo.setMyEmail();
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_addTaker_to_fragment_taker_list);
 
                 addTakerPresenerInterface.sendRequest(requestPojo);
                 Toast.makeText(this.getContext(), "requested to add successfuly", Toast.LENGTH_SHORT).show();
-                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_addTaker_to_fragment_taker_list);
             }else {
                 Toast.makeText(this.getContext(),   "you can't send request to yourself", Toast.LENGTH_SHORT).show();
             }

@@ -47,6 +47,7 @@ public class TakerProfileScreen extends Fragment {
             TakerPOJO taker = bundle.getParcelable("profileData");
             binding.txtFirstNameProfileTaker.setText(taker.getName());
             binding.txtEmailProfileTaker.setText(taker.getEmail());
+            binding.imageView.setImageResource(taker.getImg());
 
             Repository repository =  Repository.getInstance(FireBaseNetwork.getInstance(this.getActivity()),this.getContext());
 
@@ -61,6 +62,7 @@ public class TakerProfileScreen extends Fragment {
                 if(!myEmail.equals("null")){
                     Log.i("TAG", "onViewCreated: atms7");
                     takerProfilePresenterInterface.deleteTaker(taker.getEmail(),myEmail);
+
                 }
             });
         }
