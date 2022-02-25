@@ -56,6 +56,9 @@ public interface RepositoryInterface {
     Single<List<MedicationPOJO>> getRefilReminderList(long time);
 
     void UserExistance(String email);
+    // get medication Patient List
+
+    void loadMedicationListOFPatient(String email);
 
 
 

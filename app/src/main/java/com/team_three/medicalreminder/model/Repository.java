@@ -173,6 +173,7 @@ public class Repository implements RepositoryInterface {
     }
 
 
+
     @Override
     public void sendRequest(RequestPojo requestPojo) {
         myRemote.sendRequest(requestPojo);
@@ -211,6 +212,14 @@ public class Repository implements RepositoryInterface {
 // try one
         myRemote.addMedicationListViaNetwork(medicationPOJOS, email);
     }
+
+    // get medication Patient List
+    @Override
+    public void loadMedicationListOFPatient(String email) {
+        myRemote.loadPatientMedicationList(email);
+
+    }
+
 
 
 }

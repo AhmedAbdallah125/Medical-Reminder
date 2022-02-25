@@ -130,7 +130,7 @@
     </fragment>
     <fragment
         android:id="@+id/patientMedicationfragment"
-        android:name="com.team_three.medicalreminder.PatientMedicationfragment"
+        android:name="com.team_three.medicalreminder.medicationPatient.view.PatientMedFragment"
         android:label="fragment_patient_medicationfragment"
         tools:layout="@layout/fragment_patient_medicationfragment" />
 </navigation>
