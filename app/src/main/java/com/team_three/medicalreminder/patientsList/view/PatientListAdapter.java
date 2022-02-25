@@ -2,14 +2,18 @@ package com.team_three.medicalreminder.patientsList.view;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
+import com.team_three.medicalreminder.databinding.FragmentPatientListBinding;
 import com.team_three.medicalreminder.databinding.PatientRowBinding;
 import com.team_three.medicalreminder.databinding.TakerRequestRowBinding;
 import com.team_three.medicalreminder.helpRequest.view.OnClickRequest;
@@ -74,6 +78,12 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
 //        holder.binding.btnReject.setOnClickListener(view -> {
 //            onClickRequest.onClickReject(patients.get(position).getId());
 //        });
+        // add
+        Bundle bundle = new Bundle();
+        bundle.putString("email", patients.get(position).getEmail());
+        holder.binding.patientImage.setOnClickListener(v->{
+            Navigation.findNavController(v).navigate(R.id.action_patientList_to_patientMedicationfragment,bundle);
+        });
 
     }
 

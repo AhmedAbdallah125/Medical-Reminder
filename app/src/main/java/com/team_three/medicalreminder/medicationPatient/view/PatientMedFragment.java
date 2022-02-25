@@ -13,11 +13,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.team_three.medicalreminder.R;
+import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.dataBase.LocalSourceInterface;
 import com.team_three.medicalreminder.databinding.FragmentMedicationTimeBinding;
 import com.team_three.medicalreminder.databinding.FragmentPatientMedicationfragmentBinding;
@@ -40,8 +43,7 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
     PatientMedPresenter myPresenter;
     Repository myRepository;
 
-    SharedPreferences sharedPref;
-    SharedPreferences.Editor editor;
+
     String email;
 
 
@@ -61,6 +63,8 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentPatientMedicationfragmentBinding.inflate(inflater, container, false);
+         email =getArguments().getString("email");
+         // check
         return binding.getRoot();
     }
 
@@ -73,9 +77,15 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
         // should get email
         // should ask whn internet exist first
         if(isOnline()){
-            requestDataFromPresenter("timeNow");
+            binding.patientMedScreenRecycleView.setVisibility(View.VISIBLE);
+            binding.connectionAnimation.setVisibility(View.GONE);
+            requestDataFromPresenter(email);
+
         }else{
+            binding.patientMedScreenRecycleView.setVisibility(View.GONE);
+            binding.connectionAnimation.setVisibility(View.VISIBLE);
             // should back
+            Toast.makeText(getContext(), "You must connect to internet to see Patient'sMedications", Toast.LENGTH_SHORT).show();
             // asked for connect internet
         }
 //        requestDataFromPresenter(timeNow);
@@ -83,7 +93,14 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
 //        checkWorking();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
     private void initRecycleView() {
+        Log.i("AAA", "initRecycleView: ");
         LinearLayoutManager layoutManager = new LinearLayoutManager(PatientMedFragment.this.getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         homeAdapter = new HomeAdapter(this.getContext(), null, this);
@@ -113,6 +130,16 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
 
     @Override
     public void onSuccessReturnMedicationList(List<MedicationPOJO> medicationPOJOList) {
+        if(medicationPOJOList.isEmpty()){
+            Log.i("AAA", "onSuccessReturnMedicationList: emptyyyyyyyy");
+
+            Toast.makeText(this.getContext(), "there is no medication for this patient", Toast.LENGTH_SHORT).show();
+        }else{
+            Log.i("AAA", "onSuccessReturnMedicationList: "+medicationPOJOList.get(0).getMedicationName());
+            homeAdapter.setMedicines(medicationPOJOList);
+
+            homeAdapter.notifyDataSetChanged();
+        }
 
     }
 
