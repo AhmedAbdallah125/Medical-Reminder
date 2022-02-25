@@ -5,19 +5,11 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
-import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.displaymedicationdrug.view.DisplayMedicationDrugViewInterface;
 import com.team_three.medicalreminder.model.MedicationPOJO;
-import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.Repository;
-import com.team_three.medicalreminder.model.RequestPojo;
-import com.team_three.medicalreminder.model.TakerPOJO;
-import com.team_three.medicalreminder.network.FireBaseNetwork;
-import com.team_three.medicalreminder.network.NetworkDelegation;
 
-import java.util.List;
-
-public class MedicationDrugDisplayPresenter implements MedicationDrugDisplayPresenterInterface, NetworkDelegation {
+public class MedicationDrugDisplayPresenter implements MedicationDrugDisplayPresenterInterface {
 
     private Repository repository;
     private DisplayMedicationDrugViewInterface viewInterface;
@@ -26,17 +18,16 @@ public class MedicationDrugDisplayPresenter implements MedicationDrugDisplayPres
     String name = "";
     String email = "";
 
-    public MedicationDrugDisplayPresenter(Repository repository, DisplayMedicationDrugViewInterface viewInterface,Context context) {
+    public MedicationDrugDisplayPresenter(Repository repository, DisplayMedicationDrugViewInterface viewInterface, Context context) {
         this.viewInterface = viewInterface;
         this.repository = repository;
-        this.context=context;
+        this.context = context;
     }
 
     @Override
     public void deleteMedication(MedicationPOJO medication) {
         repository.deleteMedication(medication);
-        if(!isSharedPrefNull()) {
-            repository.setMyDelegation(this);
+        if (!isSharedPrefNull()) {
             repository.deleteInPatientMedicationList(email, String.valueOf(medication.getId()));
         }
     }
@@ -47,42 +38,7 @@ public class MedicationDrugDisplayPresenter implements MedicationDrugDisplayPres
     }
 
     @Override
-    public void deleteMedicationInFireBase(MedicationPOJO medication,String email) {
-
-    }
-
-    @Override
-    public void onSuccess() {
-
-    }
-
-    @Override
-    public void onFailure(String errorMessage) {
-
-    }
-
-    @Override
-    public void onSuccessReturn(String userName) {
-
-    }
-
-    @Override
-    public void onSuccessRequest(List<RequestPojo> requestPojos) {
-
-    }
-
-    @Override
-    public void onSuccessTaker(List<TakerPOJO> takerPOJOS) {
-
-    }
-
-    @Override
-    public void onSuccess(boolean response) {
-
-    }
-
-    @Override
-    public void onSuccessPatient(List<PatientPojo> patientPojos) {
+    public void deleteMedicationInFireBase(MedicationPOJO medication, String email) {
 
     }
 
