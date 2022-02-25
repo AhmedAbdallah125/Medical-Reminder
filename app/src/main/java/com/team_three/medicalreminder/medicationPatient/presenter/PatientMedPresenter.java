@@ -84,5 +84,10 @@ public class PatientMedPresenter implements PatientMedPresenterInterface, Networ
 
     }
 
+    @Override
+    public void onUpdateMedicationFromFirebase(List<MedicationPOJO> medications) {
+
+    }
+
 
 }

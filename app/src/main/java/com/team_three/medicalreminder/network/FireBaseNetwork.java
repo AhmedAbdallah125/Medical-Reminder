@@ -188,7 +188,6 @@ public class FireBaseNetwork implements NetworkInterface {
         databaseReference.child("request").child(senderEmail).setValue(requestPojo);
 
 
-
     }
 
     @Override
@@ -239,7 +238,6 @@ public class FireBaseNetwork implements NetworkInterface {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(myId[0]);
         reference.child("request").child(uid[0]).child("acceptance").setValue(1);
-
 
 
         DatabaseReference patientReference = FirebaseDatabase.getInstance().getReference().child("users").child(myId[0]);
@@ -322,7 +320,7 @@ public class FireBaseNetwork implements NetworkInterface {
     @Override
     public void loadPatientMedicationList(String email) {
         String takerEmail = email.split("\\.")[0];
-        Log.i("AAA", "loadPatientMedicationList: "+email);
+        Log.i("AAA", "loadPatientMedicationList: " + email);
         List<MedicationPOJO> medicationPOJOS = new ArrayList<>();
         DatabaseReference mDatabase;
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -353,7 +351,6 @@ public class FireBaseNetwork implements NetworkInterface {
     }
 
     @Override
-    public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String email) {
     public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String
             email) {
 

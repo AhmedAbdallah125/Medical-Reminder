@@ -128,4 +128,9 @@ public class HomeScreenPresenter implements HomePresenterInterface, NetworkDeleg
     public void onUpdateMedicationFromFirebase(List<MedicationPOJO> medications) {
         myRepository.updateToRoomFromFirebase(medications);
     }
+
+    @Override
+    public void onSuccessReturnMedicationList(List<MedicationPOJO> medicationPOJOList) {
+
+    }
 }
