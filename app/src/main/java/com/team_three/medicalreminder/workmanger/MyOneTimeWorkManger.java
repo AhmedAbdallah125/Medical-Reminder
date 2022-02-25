@@ -50,7 +50,7 @@ public class MyOneTimeWorkManger extends Worker {
     public Result doWork() {
 
         //test 55555
-
+        //888
 
         getData();
         Log.i("zoooooz", "medicine: " + myMedicine.getId());
