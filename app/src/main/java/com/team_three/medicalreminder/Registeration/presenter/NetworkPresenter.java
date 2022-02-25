@@ -99,6 +99,11 @@ public class NetworkPresenter implements NetworkPresenterInterface, NetworkDeleg
     }
 
     @Override
+    public void onUpdateMedicationFromFirebase(List<MedicationPOJO> medications) {
+
+    }
+
+    @Override
     public void onSuccessReturn(String userName) {
         myView.setSuccessfulReturnResponse(userName);
     }

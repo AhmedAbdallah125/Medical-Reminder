@@ -70,6 +70,11 @@ public class PatientListPresenter implements  PatientListPresenterInterface , Ne
     }
 
     @Override
+    public void onUpdateMedicationFromFirebase(List<MedicationPOJO> medications) {
+
+    }
+
+    @Override
     public void onSuccessTaker(List<TakerPOJO> takerPOJOS) {
 
     }

@@ -18,6 +18,7 @@ public interface NetworkDelegation {
     void onSuccess(boolean response);
     void onSuccessPatient(List<PatientPojo> patientPojos);
     void isUserExist(boolean existance);
+    void onUpdateMedicationFromFirebase(List<MedicationPOJO> medications);
 
     //
     void onSuccessReturnMedicationList(List<MedicationPOJO> medicationPOJOList);

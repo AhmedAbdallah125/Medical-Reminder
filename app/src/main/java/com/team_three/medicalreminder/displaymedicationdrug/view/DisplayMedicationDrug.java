@@ -77,14 +77,8 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentDisplayMedicationDrugBinding.inflate(inflater, container, false);
-        localClass = ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext());
-        if(isSharedPrefNull()) {
-            repository = Repository.getInstance(localClass, this.getContext());
-        }else{
-            fireBaseNetwork = FireBaseNetwork.getInstance(this.getActivity());
-            repository = Repository.getInstance(localClass,fireBaseNetwork,this.getContext());
-        }
-        presenterInterface = new MedicationDrugDisplayPresenter(repository, this,this.getContext());
+        initRepository();
+        presenterInterface = new MedicationDrugDisplayPresenter(repository, this, this.getContext());
         dialogBuilder = new MaterialAlertDialogBuilder(this.getContext());
         return binding.getRoot();
     }
@@ -109,9 +103,7 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
         });
 
         binding.imageDelete.setOnClickListener(v -> {
-            deleteMedication(medication);
-            Toast.makeText(this.getContext(), "Successfully Deleted!", Toast.LENGTH_SHORT).show();
-            Navigation.findNavController(v).navigate(R.id.action_displayMedicationDrug_to_fragment_home);
+            lunchDeleteDialog();
         });
 
         binding.btnSuspend.setOnClickListener(v -> {
@@ -128,6 +120,20 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
             setDoseDialogView();
             lunchDoseDialog();
         });
+    }
+
+    private void lunchDeleteDialog() {
+        dialogBuilder.setTitle("Delete Medication")
+                .setMessage("Do you want to delete " + medication.getMedicationName() + "!")
+                .setPositiveButton("DELETE", (dialog, i) -> {
+                    deleteMedication(medication);
+                    Toast.makeText(this.getContext(), "Successfully Deleted!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    Navigation.findNavController(binding.getRoot()).navigate(R.id.action_displayMedicationDrug_to_fragment_home);
+                })
+                .setNegativeButton("cancel", (dialog, i) -> {
+                    dialog.dismiss();
+                }).show();
     }
 
     @Override
@@ -156,8 +162,8 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
     }
 
     private void printMap(Map mp) {
-        time ="";
-        dose="";
+        time = "";
+        dose = "";
         if (mp != null) {
             Iterator it = mp.entrySet().iterator();
             while (it.hasNext()) {
@@ -291,5 +297,15 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
         Log.i("TAG", "checkShared: " + name);
         Log.i("TAG", "checkShared: " + email);
         return (name.equals("null") && email.equals("null"));
+    }
+
+    private void initRepository() {
+        localClass = ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext());
+        if (isSharedPrefNull()) {
+            repository = Repository.getInstance(localClass, this.getContext());
+        } else {
+            fireBaseNetwork = FireBaseNetwork.getInstance(this.getActivity());
+            repository = Repository.getInstance(localClass, fireBaseNetwork, this.getContext());
+        }
     }
 }

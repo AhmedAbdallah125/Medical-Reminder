@@ -71,7 +71,9 @@ public interface RepositoryInterface {
 
     void loadMedicationListOFPatient(String email);
 
-    public void deleteTaker(String takerEmail,String patientEmail);
+    void deleteTaker(String takerEmail,String patientEmail);
+
+    void updateToRoomFromFirebase(List<MedicationPOJO> medications);
 
 
 }

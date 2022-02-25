@@ -92,4 +92,9 @@ public class HelpRequestPresenter implements HelpRequestPresenterInterface , Net
     public void onSuccessReturnMedicationList(List<MedicationPOJO> medicationPOJOList) {
 
     }
+
+    @Override
+    public void onUpdateMedicationFromFirebase(List<MedicationPOJO> medications) {
+
+    }
 }

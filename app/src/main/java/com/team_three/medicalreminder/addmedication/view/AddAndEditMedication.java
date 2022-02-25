@@ -19,6 +19,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.addmedication.presenter.AddMedicationPresenter;
 import com.team_three.medicalreminder.addmedication.presenter.AddMedicationPresenterInterface;
@@ -72,6 +73,9 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
 
     private TimeAndDoseAdapter timeAndDoseAdapter;
 
+    //dialog
+    MaterialAlertDialogBuilder dialogBuilder;
+
     public AddAndEditMedication() {
         // Required empty public constructor
     }
@@ -115,7 +119,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
 
     private void handleSameButtons() {
 
-        binding.imageExit.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_fragment_add_Medication_to_fragment_home));
+        binding.imageExit.setOnClickListener(v -> lunchExitDialog());
 
         binding.reminderFillSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -208,6 +212,18 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         binding.btnStartDate.setOnClickListener(v -> showDatePicker(binding.startDateSelected, "start"));
 
         binding.btnEndDate.setOnClickListener(v -> showDatePicker(binding.endDateSelected, "end"));
+    }
+
+    private void lunchExitDialog(){
+        dialogBuilder.setTitle("Do you want to cancel ?")
+                .setMessage("Your changes will not be saved!")
+                .setPositiveButton("Yes",(dialog, i)->{
+                    dialog.dismiss();
+                    Navigation.findNavController(binding.getRoot()).navigate(R.id.action_fragment_add_Medication_to_fragment_home);
+                })
+                .setNegativeButton("No",(dialog, i)->{
+                    dialog.dismiss();
+                }).show();
     }
 
     private void handleEditScreen() {

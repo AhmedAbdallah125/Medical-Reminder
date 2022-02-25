@@ -80,4 +80,9 @@ public class TakerListPresenter implements TakerLIstPresenterInterface , Network
         
     }
 
+    @Override
+    public void onUpdateMedicationFromFirebase(List<MedicationPOJO> medications) {
+
+    }
+
 }

@@ -2,11 +2,7 @@ package com.team_three.medicalreminder.network;
 
 
 import android.app.Activity;
-import android.os.Parcelable;
 import android.util.Log;
-import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -15,9 +11,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,18 +22,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.team_three.medicalreminder.R;
+import com.google.firebase.database.ValueEventListener;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.PatientPojo;
-import com.team_three.medicalreminder.model.User;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.team_three.medicalreminder.model.RequestPojo;
 import com.team_three.medicalreminder.model.TakerPOJO;
+import com.team_three.medicalreminder.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +39,8 @@ public class FireBaseNetwork implements NetworkInterface {
     private static FireBaseNetwork myFireBase;
     private NetworkDelegation myDelegation;
     private boolean exist = false;
+    private boolean listenToUpdates = false;
+    private List<MedicationPOJO> updatedMedicationList;
 
     private FireBaseNetwork(Activity myActivity) {
         _activity = myActivity;
@@ -111,7 +101,6 @@ public class FireBaseNetwork implements NetworkInterface {
 
     }
 
-
     @Override
     public void signInWithEmailAndPass(Activity activity, String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
@@ -156,7 +145,6 @@ public class FireBaseNetwork implements NetworkInterface {
 
     }
 
-
     @Override
     public void signInUsingGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
@@ -198,6 +186,7 @@ public class FireBaseNetwork implements NetworkInterface {
         String senderEmail = requestPojo.getMyEmail().split("\\.")[0];
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid[0]);
         databaseReference.child("request").child(senderEmail).setValue(requestPojo);
+
 
 
     }
@@ -252,6 +241,7 @@ public class FireBaseNetwork implements NetworkInterface {
         reference.child("request").child(uid[0]).child("acceptance").setValue(1);
 
 
+
         DatabaseReference patientReference = FirebaseDatabase.getInstance().getReference().child("users").child(myId[0]);
         patientReference.child("patient").child(uid[0]).setValue(patientPojo);
     }
@@ -261,8 +251,6 @@ public class FireBaseNetwork implements NetworkInterface {
         String userId = email.split("\\.")[0];
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
         reference.child("request").child(key).removeValue();
-
-
     }
 
     @Override
@@ -365,6 +353,7 @@ public class FireBaseNetwork implements NetworkInterface {
     }
 
     @Override
+    public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String email) {
     public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String
             email) {
 
@@ -374,7 +363,10 @@ public class FireBaseNetwork implements NetworkInterface {
             databaseReference.child("medications").child(key).setValue(meds);
         }
 
+//        if (!listenToUpdates)
+        updateMedicationToRoomFromFirebase(email);
 
+//        listenToUpdates = true;
     }
 
     @Override
@@ -519,8 +511,6 @@ public class FireBaseNetwork implements NetworkInterface {
         } catch (Exception e) {
             errorMessage = e.getMessage();
         }
-
-
         return errorMessage;
     }
 
@@ -529,6 +519,26 @@ public class FireBaseNetwork implements NetworkInterface {
         String uid = email.split("\\.")[0];
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
         databaseReference.child("medications").child(medicationID).removeValue();
+    }
+
+    public void updateMedicationToRoomFromFirebase(String email) {
+        updatedMedicationList = new ArrayList<>();
+        Query query = FirebaseDatabase.getInstance().getReference().child("users").child(email).child("medications");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                updatedMedicationList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    updatedMedicationList.add(dataSnapshot.getValue(MedicationPOJO.class));
+                }
+                myDelegation.onUpdateMedicationFromFirebase(updatedMedicationList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }
