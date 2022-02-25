@@ -487,7 +487,6 @@ public class FireBaseNetwork implements NetworkInterface {
         databaseReference.child("medications").child(medicationID).removeValue();
     }
 
-
     public void updateMedicationToRoomFromFirebase(String email) {
         updatedMedicationList = new ArrayList<>();
         Query query = FirebaseDatabase.getInstance().getReference().child("users").child(email).child("medications");
@@ -507,4 +506,5 @@ public class FireBaseNetwork implements NetworkInterface {
             }
         });
     }
+
 }
