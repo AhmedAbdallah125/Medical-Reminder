@@ -6,4 +6,6 @@ public interface MedicationDrugDisplayPresenterInterface {
     void deleteMedication(MedicationPOJO medication);
 
     void updateMedication(MedicationPOJO medication);
+
+    void deleteMedicationInFireBase(MedicationPOJO medication,String email);
 }

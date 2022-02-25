@@ -63,7 +63,6 @@ public class FireBaseNetwork implements NetworkInterface {
         return myFireBase;
     }
 
-
     @Override
     public void setNetworkDelegation(NetworkDelegation networkDelegation) {
         myDelegation = networkDelegation;
@@ -83,7 +82,6 @@ public class FireBaseNetwork implements NetworkInterface {
             myDelegation.onFailure("no available");
         }
     }
-
 
     @Override
     public void registerWithEmailAndPass(Activity myActivity, String email, String password, String name) {
@@ -110,8 +108,6 @@ public class FireBaseNetwork implements NetworkInterface {
                 });
 
     }
-
-
 
     @Override
     public void signInWithEmailAndPass(Activity activity, String email, String password) {
@@ -156,8 +152,6 @@ public class FireBaseNetwork implements NetworkInterface {
                 });
 
     }
-
-
 
     @Override
     public void signInUsingGoogle(String idToken) {
@@ -266,8 +260,6 @@ public class FireBaseNetwork implements NetworkInterface {
         String userId = email.split("\\.")[0];
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
         reference.child("request").child(key).removeValue();
-
-
     }
 
     @Override
@@ -358,6 +350,7 @@ public class FireBaseNetwork implements NetworkInterface {
 
 
     }
+
     private void addRegisterInDB(User user){
         String uid = user.getEmail().split("\\.")[0];
 
@@ -443,7 +436,6 @@ public class FireBaseNetwork implements NetworkInterface {
         });
     }
 
-
     private String handleFireBaseException(Task task) {
         String errorMessage = "";
 
@@ -458,10 +450,14 @@ public class FireBaseNetwork implements NetworkInterface {
         } catch (Exception e) {
             errorMessage = e.getMessage();
         }
-
-
         return errorMessage;
     }
 
+    @Override
+    public void deleteInPatientMedicationList(String email, String medicationID) {
+        String uid = email.split("\\.")[0];
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+        databaseReference.child("medications").child(medicationID).removeValue();
+    }
 
 }

@@ -207,5 +207,8 @@ public class Repository implements RepositoryInterface {
         myRemote.addMedicationListViaNetwork(medicationPOJOS, email);
     }
 
-
+    @Override
+    public void deleteInPatientMedicationList(String email, String medicationID) {
+        myRemote.deleteInPatientMedicationList(email,medicationID);
+    }
 }

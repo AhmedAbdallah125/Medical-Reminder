@@ -45,4 +45,5 @@ public interface NetworkInterface {
     void loadPatientMedicationList(String email);
     void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS,String email);
 
+    void deleteInPatientMedicationList(String email, String medicationID);
 }
