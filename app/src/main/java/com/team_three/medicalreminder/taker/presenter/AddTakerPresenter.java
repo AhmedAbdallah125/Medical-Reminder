@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.RequestPojo;
@@ -79,5 +80,10 @@ public class AddTakerPresenter implements AddTakerPresenerInterface, NetworkDele
     @Override
     public void isUserExist(boolean existance) {
         addTakerViewInterface.isUserExist(existance);
+    }
+
+    @Override
+    public void onUpdateMedicationFromFirebase(List<MedicationPOJO> medications) {
+
     }
 }

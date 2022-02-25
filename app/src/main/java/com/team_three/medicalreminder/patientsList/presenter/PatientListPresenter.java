@@ -3,6 +3,7 @@ package com.team_three.medicalreminder.patientsList.presenter;
 import android.content.Context;
 
 import com.team_three.medicalreminder.helpRequest.view.HelpRequestViewInterface;
+import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.RequestPojo;
@@ -60,6 +61,11 @@ public class PatientListPresenter implements  PatientListPresenterInterface , Ne
 
     @Override
     public void isUserExist(boolean existance) {
+
+    }
+
+    @Override
+    public void onUpdateMedicationFromFirebase(List<MedicationPOJO> medications) {
 
     }
 

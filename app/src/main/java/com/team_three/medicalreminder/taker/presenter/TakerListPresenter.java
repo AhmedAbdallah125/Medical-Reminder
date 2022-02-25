@@ -2,6 +2,7 @@ package com.team_three.medicalreminder.taker.presenter;
 
 import android.content.Context;
 
+import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.RequestPojo;
@@ -71,6 +72,11 @@ public class TakerListPresenter implements TakerLIstPresenterInterface , Network
 
     @Override
     public void isUserExist(boolean existance) {
+
+    }
+
+    @Override
+    public void onUpdateMedicationFromFirebase(List<MedicationPOJO> medications) {
 
     }
 

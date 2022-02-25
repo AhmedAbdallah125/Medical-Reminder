@@ -1,5 +1,6 @@
 package com.team_three.medicalreminder.network;
 
+import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.RequestPojo;
 import com.team_three.medicalreminder.model.TakerPOJO;
@@ -17,5 +18,6 @@ public interface NetworkDelegation {
     void onSuccess(boolean response);
     void onSuccessPatient(List<PatientPojo> patientPojos);
     void isUserExist(boolean existance);
+    void onUpdateMedicationFromFirebase(List<MedicationPOJO> medications);
 
 }

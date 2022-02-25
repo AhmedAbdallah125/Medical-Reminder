@@ -21,7 +21,6 @@ public class Repository implements RepositoryInterface {
     LocalSourceInterface localSourceInterface;
     private static Repository repo = null;
 
-
     // for firebase
     NetworkInterface myRemote;
     private static Repository myRepositoryNetwork = null;
@@ -169,12 +168,19 @@ public class Repository implements RepositoryInterface {
 
     @Override
     public void UserExistance(String email) {
-         myRemote.UserExistance(email);
+        myRemote.UserExistance(email);
     }
 
     @Override
     public void deleteTaker(String takerEmail, String patientEmail) {
-        myRemote.deleteTaker(takerEmail,patientEmail);
+        myRemote.deleteTaker(takerEmail, patientEmail);
+    }
+
+    @Override
+    public void updateToRoomFromFirebase(List<MedicationPOJO> medications) {
+        for (MedicationPOJO medication : medications) {
+            localSourceInterface.updateMedications(medication);
+        }
     }
 
 
@@ -194,8 +200,8 @@ public class Repository implements RepositoryInterface {
     }
 
     @Override
-    public void onReject(String key,String email) {
-        myRemote.onReject(key,email);
+    public void onReject(String key, String email) {
+        myRemote.onReject(key, email);
     }
 
     @Override
@@ -212,13 +218,12 @@ public class Repository implements RepositoryInterface {
     //add med to firebase
     @Override
     public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String email) {
-        Log.i("TAG", "addMedicationListViaNetwork: " + medicationPOJOS.size() + " " + email);
 // try one
         myRemote.addMedicationListViaNetwork(medicationPOJOS, email);
     }
 
     @Override
     public void deleteInPatientMedicationList(String email, String medicationID) {
-        myRemote.deleteInPatientMedicationList(email,medicationID);
+        myRemote.deleteInPatientMedicationList(email, medicationID);
     }
 }

@@ -5,7 +5,11 @@ import android.widget.Toast;
 
 import com.team_three.medicalreminder.homeScreen.view.HomeFragmentInterface;
 import com.team_three.medicalreminder.model.MedicationPOJO;
+import com.team_three.medicalreminder.model.PatientPojo;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.model.RequestPojo;
+import com.team_three.medicalreminder.model.TakerPOJO;
+import com.team_three.medicalreminder.network.NetworkDelegation;
 
 import java.nio.file.ClosedFileSystemException;
 import java.util.List;
@@ -14,7 +18,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
-public class HomeScreenPresenter implements HomePresenterInterface {
+public class HomeScreenPresenter implements HomePresenterInterface, NetworkDelegation {
 
     // reference to view
 //    private FavouriteViewInterface myView;
@@ -65,8 +69,53 @@ public class HomeScreenPresenter implements HomePresenterInterface {
 
     @Override
     public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String email) {
+        myRepository.setMyDelegation(this);
         myRepository.addMedicationListViaNetwork(medicationPOJOS,email);
     }
 
 
+    @Override
+    public void onSuccess() {
+
+    }
+
+    @Override
+    public void onFailure(String errorMessage) {
+
+    }
+
+    @Override
+    public void onSuccessReturn(String userName) {
+
+    }
+
+    @Override
+    public void onSuccessRequest(List<RequestPojo> requestPojos) {
+
+    }
+
+    @Override
+    public void onSuccessTaker(List<TakerPOJO> takerPOJOS) {
+
+    }
+
+    @Override
+    public void onSuccess(boolean response) {
+
+    }
+
+    @Override
+    public void onSuccessPatient(List<PatientPojo> patientPojos) {
+
+    }
+
+    @Override
+    public void isUserExist(boolean existance) {
+
+    }
+
+    @Override
+    public void onUpdateMedicationFromFirebase(List<MedicationPOJO> medications) {
+        myRepository.updateToRoomFromFirebase(medications);
+    }
 }

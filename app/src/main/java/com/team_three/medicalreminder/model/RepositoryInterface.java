@@ -68,7 +68,9 @@ public interface RepositoryInterface {
 
     void UserExistance(String email);
 
-    public void deleteTaker(String takerEmail,String patientEmail);
+    void deleteTaker(String takerEmail,String patientEmail);
+
+    void updateToRoomFromFirebase(List<MedicationPOJO> medications);
 
 
 }
