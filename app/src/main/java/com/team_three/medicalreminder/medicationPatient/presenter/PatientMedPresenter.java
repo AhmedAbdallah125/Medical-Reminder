@@ -1,5 +1,7 @@
 package com.team_three.medicalreminder.medicationPatient.presenter;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 
 import com.team_three.medicalreminder.homeScreen.view.HomeFragmentInterface;
@@ -26,6 +28,7 @@ public class PatientMedPresenter implements PatientMedPresenterInterface, Networ
     public PatientMedPresenter(PatientMedViewInterface myView, Repository myRepository) {
         this.myView = myView;
         this.myRepository = myRepository;
+        myRepository.setMyDelegation(this);
     }
 
 

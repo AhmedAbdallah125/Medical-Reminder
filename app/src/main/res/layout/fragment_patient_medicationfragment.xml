@@ -7,21 +7,37 @@
     android:layout_height="match_parent"
     tools:context=".medicationPatient.view.PatientMedFragment">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/connectionAnimation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_loop="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/noconnection" />
+
+
     <TextView
         android:id="@+id/txt_Patient"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:text="hellll"
         app:layout_constraintBottom_toTopOf="@+id/patient_med_screen_recycle_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
 
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="1"
         tools:text="ahmed Patient" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/patient_med_screen_recycle_view"
         android:layout_width="match_parent"
+
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
