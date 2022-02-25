@@ -172,6 +172,11 @@ public class Repository implements RepositoryInterface {
          myRemote.UserExistance(email);
     }
 
+    @Override
+    public void deleteTaker(String takerEmail, String patientEmail) {
+        myRemote.deleteTaker(takerEmail,patientEmail);
+    }
+
 
     @Override
     public void sendRequest(RequestPojo requestPojo) {

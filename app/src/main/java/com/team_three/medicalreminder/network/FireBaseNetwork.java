@@ -246,22 +246,19 @@ public class FireBaseNetwork implements NetworkInterface {
     public void onAccept(TakerPOJO takerPOJO, PatientPojo patientPojo) {
 
         String[] uid = takerPOJO.getPatientEmail().split("\\.");
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid[0]);
-        String key = databaseReference.child("taker").push().getKey();
-        databaseReference.child("taker").child(key).setValue(takerPOJO);
-
-
-        String[] takerId = takerPOJO.getEmail().split("\\.");
-        String[] senderId = takerPOJO.getPatientEmail().split("\\.");
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(takerId[0]);
-        reference.child("request").child(senderId[0]).child("acceptance").setValue(1);
-
-
         String[] myId = patientPojo.getEmail().split(("\\."));
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid[0]);
+        databaseReference.child("taker").child(myId[0]).setValue(takerPOJO);
+
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(myId[0]);
+        reference.child("request").child(uid[0]).child("acceptance").setValue(1);
+
+
+
         DatabaseReference patientReference = FirebaseDatabase.getInstance().getReference().child("users").child(myId[0]);
-        String key1 = databaseReference.child("patient").push().getKey();
-        patientPojo.setId(key1);
-        patientReference.child("patient").child(key1).setValue(patientPojo);
+        patientReference.child("patient").child(uid[0]).setValue(patientPojo);
     }
 
     @Override
@@ -291,7 +288,6 @@ public class FireBaseNetwork implements NetworkInterface {
                                 , dataSnapshot.child("name").getValue().toString()
                         );
 
-                        patient.setId(dataSnapshot.child("id").getValue().toString());
                         patients.add(patient);
                     }
 
@@ -320,7 +316,7 @@ public class FireBaseNetwork implements NetworkInterface {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     TakerPOJO taker =new TakerPOJO(dataSnapshot.child("patientEmail").getValue().toString()
                             ,dataSnapshot.child("name").getValue().toString()
-                            , dataSnapshot.child("email").getKey().toString()
+                            , dataSnapshot.child("email").getValue().toString()
                             ,(Integer.parseInt(String.valueOf(dataSnapshot.child("img").getValue())))
 
                     );
@@ -355,8 +351,6 @@ public class FireBaseNetwork implements NetworkInterface {
             String key =String.valueOf(meds.getId());
             databaseReference.child("medications").child(key).setValue(meds);
         }
-        // String key = databaseReference.child("medications").push().getKey();
-        // taker=new RequestPojo(binding.txtEmail.getEditableText().toString(),R.drawable.one,binding.txtName.getEditableText().toString(),id);
 
 
 
@@ -388,6 +382,21 @@ public class FireBaseNetwork implements NetworkInterface {
             }
         });
 
+    }
+
+    @Override
+    public void deleteTaker(String takerEmail, String patientEmail) {
+        String patientKey = patientEmail.split("\\.")[0];
+        String takerKey = takerEmail.split("\\.")[0];
+
+
+        DatabaseReference deletTakerRefrenec = FirebaseDatabase.getInstance().getReference().child("users").child(patientKey);
+        deletTakerRefrenec.child("taker").child(takerKey).removeValue();
+
+        DatabaseReference deletePatientRefrenec = FirebaseDatabase.getInstance().getReference().child("users").child(takerKey);
+        deletePatientRefrenec.child("patient").child(patientKey).removeValue();
+
+        deletePatientRefrenec.child("request").child(patientKey).removeValue();
     }
 
     private void addRegisterInDB(User user){

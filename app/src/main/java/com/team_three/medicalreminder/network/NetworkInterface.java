@@ -45,5 +45,6 @@ public interface NetworkInterface {
     void loadPatientMedicationList(String email);
     void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS,String email);
     void UserExistance(String email);
+    public void deleteTaker(String takerEmail,String patientEmail);
 
 }
