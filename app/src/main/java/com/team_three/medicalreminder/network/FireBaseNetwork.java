@@ -351,13 +351,11 @@ public class FireBaseNetwork implements NetworkInterface {
     }
 
     @Override
-    public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String
-            email) {
+    public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String email) {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(email);
         for (MedicationPOJO meds : medicationPOJOS) {
             String key = String.valueOf(meds.getId());
-            meds.setLeftNumber(6);
             databaseReference.child("medications").child(key).setValue(meds);
         }
 
