@@ -49,4 +49,6 @@ public interface NetworkInterface {
 
     void deleteInPatientMedicationList(String email, String medicationID);
     void updateMedicationToRoomFromFirebase(String email);
+
+    void updatePatientMedicationList(String email,MedicationPOJO medicationPOJO);
 }

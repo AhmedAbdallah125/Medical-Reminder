@@ -188,6 +188,7 @@ public class Repository implements RepositoryInterface {
         myRemote.updateMedicationToRoomFromFirebase(email);
     }
 
+
     @Override
     public void sendRequest(RequestPojo requestPojo) {
         myRemote.sendRequest(requestPojo);
@@ -230,6 +231,7 @@ public class Repository implements RepositoryInterface {
     public void deleteInPatientMedicationList(String email, String medicationID) {
         myRemote.deleteInPatientMedicationList(email, medicationID);
     }
+
     // get medication Patient List
     @Override
     public void loadMedicationListOFPatient(String email) {
@@ -237,6 +239,10 @@ public class Repository implements RepositoryInterface {
 
     }
 
+    @Override
+    public void updatePatientMedicationList(String email, MedicationPOJO medicationPOJO) {
+        myRemote.updatePatientMedicationList(email, medicationPOJO);
+    }
 
 
 }

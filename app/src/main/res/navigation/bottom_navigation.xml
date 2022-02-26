@@ -137,6 +137,9 @@
         <action
             android:id="@+id/action_patientMedicationfragment_to_patientMedDetailsFragment"
             app:destination="@id/patientMedDetailsFragment" />
+        <action
+            android:id="@+id/action_patientMedicationfragment_to_patientList"
+            app:destination="@id/patientList" />
     </fragment>
     <fragment
         android:id="@+id/patientMedDetailsFragment"

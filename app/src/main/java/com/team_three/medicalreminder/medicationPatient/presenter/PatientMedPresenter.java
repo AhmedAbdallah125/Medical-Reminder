@@ -37,10 +37,15 @@ public class PatientMedPresenter implements PatientMedPresenterInterface, Networ
         myRepository.loadMedicationListOFPatient(email);
     }
 
-    // must do
     @Override
-    public void deleteMedication(MedicationPOJO medicationPOJO) {
+    public void deleteMedication(String email, String medicationId) {
+        myRepository.deleteInPatientMedicationList(email, medicationId);
+    }
 
+    @Override
+    public void updateMedication(String email,MedicationPOJO medicationPOJO) {
+        // update firebase
+        myRepository.updatePatientMedicationList(email,medicationPOJO);
     }
 
 

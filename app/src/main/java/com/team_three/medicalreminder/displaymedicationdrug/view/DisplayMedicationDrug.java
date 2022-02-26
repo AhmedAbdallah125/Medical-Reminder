@@ -139,6 +139,7 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
     @Override
     public void deleteMedication(MedicationPOJO medication) {
         presenterInterface.deleteMedication(medication);
+        presenterInterface.deleteMedication(medication);
     }
 
     @Override
