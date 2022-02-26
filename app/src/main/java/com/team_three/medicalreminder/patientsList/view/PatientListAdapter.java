@@ -80,7 +80,7 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
 //        });
         // add
         Bundle bundle = new Bundle();
-        bundle.putString("email", patients.get(position).getEmail());
+        bundle.putString("email", patients.get(position).getPatientEmail());
         holder.binding.patientImage.setOnClickListener(v->{
             Navigation.findNavController(v).navigate(R.id.action_patientList_to_patientMedicationfragment,bundle);
         });

@@ -26,10 +26,12 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:text="hellll"
+        android:textAlignment="center"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/patient_med_screen_recycle_view"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="1"
         tools:text="ahmed Patient" />

@@ -37,6 +37,12 @@ public class PatientMedPresenter implements PatientMedPresenterInterface, Networ
         myRepository.loadMedicationListOFPatient(email);
     }
 
+    // must do
+    @Override
+    public void deleteMedication(MedicationPOJO medicationPOJO) {
+
+    }
+
 
     @Override
     public void onSuccessReturnMedicationList(List<MedicationPOJO> medicationPOJOList) {

@@ -344,6 +344,7 @@ public class FireBaseNetwork implements NetworkInterface {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                myDelegation.onFailure(error.getMessage());
 
             }
         });
