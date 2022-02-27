@@ -357,7 +357,6 @@ public class FireBaseNetwork implements NetworkInterface {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(email);
         for (MedicationPOJO meds : medicationPOJOS) {
             String key = String.valueOf(meds.getId());
-            meds.setLeftNumber(6);
             databaseReference.child("medications").child(key).setValue(meds);
         }
 

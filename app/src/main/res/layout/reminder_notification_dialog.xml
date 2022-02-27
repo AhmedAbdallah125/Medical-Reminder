@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/grayBG"
     android:paddingBottom="16dp">
 
@@ -12,11 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/white"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/buttonCornerRadius"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,32 +27,32 @@
             android:paddingStart="8dp"
             android:paddingTop="8dp"
             android:paddingEnd="8dp"
-            android:paddingBottom="8dp">
+            android:paddingBottom="16dp">
 
             <ImageView
                 android:id="@+id/imgMedNotification"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:contentDescription="@string/todo"
                 android:textAlignment="gravity"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTime"
                 app:srcCompat="@drawable/ic_baseline_home_24" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:textSize="@dimen/buttonFontSize"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imgMedNotification"
+                app:layout_constraintBottom_toBottomOf="@+id/imgMedNotification"
+                app:layout_constraintStart_toStartOf="@+id/txtMedTimeNotification"
+                app:layout_constraintTop_toTopOf="@+id/imgMedNotification"
                 tools:text="Panadol" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/imgSchedule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -63,13 +63,13 @@
                 app:srcCompat="@drawable/ic_baseline_date_range_24" />
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/imgDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:contentDescription="@string/todo"
-                app:layout_constraintStart_toStartOf="@+id/imageView3"
-                app:layout_constraintTop_toBottomOf="@+id/imageView3"
+                app:layout_constraintStart_toStartOf="@+id/imgSchedule"
+                app:layout_constraintTop_toBottomOf="@+id/imgSchedule"
                 app:srcCompat="@drawable/ic_baseline_error_outline_24" />
 
             <TextView
@@ -78,9 +78,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                app:layout_constraintStart_toEndOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="@+id/imageView3"
+                app:layout_constraintBottom_toBottomOf="@+id/imgSchedule"
+                app:layout_constraintStart_toEndOf="@+id/imgSchedule"
+                app:layout_constraintTop_toTopOf="@+id/imgSchedule"
                 app:layout_constraintVertical_bias="1.0"
                 tools:text="Schedule for 8:00 AM, today" />
 
@@ -89,12 +89,81 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView7"
                 app:layout_constraintStart_toStartOf="@+id/txtMedTimeNotification"
-                app:layout_constraintTop_toTopOf="@+id/imageView7"
+                app:layout_constraintTop_toTopOf="@+id/imgDetails"
                 tools:text="take 1 pill, 50g" />
+
+            <TextView
+                android:id="@+id/txtTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="8:00 AM" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/imgClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_clear_24" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgAccept"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="60dp"
+        android:src="@drawable/ic_baseline_done_24"
+        app:civ_circle_background_color="@color/secondaryColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NotificationCard"
+        tools:ignore="ImageContrastCheck" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgSkip"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_baseline_clear_24"
+        app:civ_circle_background_color="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NotificationCard"
+        tools:ignore="ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/skip"
+        android:textColor="@color/primaryText"
+        app:layout_constraintEnd_toEndOf="@+id/imgSkip"
+        app:layout_constraintStart_toStartOf="@+id/imgSkip"
+        app:layout_constraintTop_toBottomOf="@+id/imgSkip" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/take"
+        android:textColor="@color/primaryText"
+        app:layout_constraintEnd_toEndOf="@+id/imgAccept"
+        app:layout_constraintStart_toStartOf="@+id/imgAccept"
+        app:layout_constraintTop_toTopOf="@+id/textView12" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

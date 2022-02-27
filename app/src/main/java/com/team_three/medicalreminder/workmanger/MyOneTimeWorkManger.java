@@ -1,119 +1,56 @@
 package com.team_three.medicalreminder.workmanger;
 
+import static androidx.core.content.ContextCompat.startForegroundService;
+
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Toast;
+import android.content.Intent;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
-import androidx.room.TypeConverter;
 import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.team_three.medicalreminder.R;
-import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
-import com.team_three.medicalreminder.databinding.ReminderNotificationDialogBinding;
-import com.team_three.medicalreminder.model.MedicationPOJO;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 public class MyOneTimeWorkManger extends Worker {
-    MedicationPOJO myMedicine;
     String key;
     int count;
+    Data data;
+    public final static String KEY_TAG = "INDEX";
+    public final static String VALUE_TAG = "COUNT";
+    public final static String MEDICINE_TAG = "MED";
 
-    //for dialogs
-    private MaterialAlertDialogBuilder dialogBuilder;
-    private View customAlertDialogView;
-    private Context context;
-    ReminderNotificationDialogBinding binding;
-    private Drawable check;
-    private Drawable skip;
 
     public MyOneTimeWorkManger(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
-        this.context = context;
     }
 
     @NonNull
     @Override
     public Result doWork() {
         getData();
-        lunchCustomDialog();
+//        lunchCustomDialog();
+        lunchDialogOverApps();
         return Result.success();
-    }
-
-    public MedicationPOJO fomStringPojo(String pojoString) {
-
-        Gson gson = new Gson();
-        return gson.fromJson(pojoString, MedicationPOJO.class);
     }
 
     // getting DataFirst
     private void getData() {
-        Data data = getInputData();
-        myMedicine = fomStringPojo(data.getString("MED"));
-        key = data.getString("INDEX");
-        count = data.getInt("COUNT", 1);
+        data = getInputData();
+        key = data.getString(KEY_TAG);
+        count = data.getInt(VALUE_TAG, 1);
     }
 
-    private void lunchCustomDialog() {
-        customAlertDialogView = LayoutInflater.from(context).inflate(R.layout.reminder_notification_dialog, null, false);
-        binding = ReminderNotificationDialogBinding.bind(customAlertDialogView);
-        dialogBuilder = new MaterialAlertDialogBuilder(context);
-        bindView();
-        setDrawable();
-        dialogBuilder.setView(customAlertDialogView)
-                .setTitle("Medication Reminder")
-                .setPositiveButtonIcon(check)
-                .setPositiveButton("Take", (dialog, i) -> {
-                    List<Boolean> list = myMedicine.getIsTakenList();
-                    list.set(getHashMapIndex(), true);
-                    myMedicine.setIsTakenList(list);
-                    updateMedication(myMedicine);
-                    dialog.dismiss();
-                    Toast.makeText(context, "Successfully Added!", Toast.LENGTH_SHORT).show();
-                })
-                .setNegativeButtonIcon(skip)
-                .setNegativeButton("Skip", (dialog, i) -> dialog.dismiss())
-                .show();
-    }
 
-    private void setDrawable(){
-        check = context.getResources().getDrawable(
-                R.drawable.ic_outline_check_24);
-        skip = context.getResources().getDrawable(
-                R.drawable.ic_baseline_clear_24);
-    }
-
-    private void bindView() {
-        binding.imgMedNotification.setImageResource(myMedicine.getImageID());
-        binding.txtMedTimeNotification.setText("Schedule for " + key + ", today");
-        binding.txtMedDoseNotification.setText("take " + count + " " + myMedicine.getFormat() + ", " + myMedicine.getStrength() + myMedicine.getWeight());
-    }
-
-    private int getHashMapIndex() {
-        List keys = new ArrayList(myMedicine.getTimeAndDose().keySet());
-        for (int i = 0; i < keys.size(); i++) {
-            if (keys.get(i) == key) {
-                return i;
-            }
+    private void lunchDialogOverApps() {
+        Intent intent = new Intent(getApplicationContext(), ReminderService.class);
+        intent.putExtra(MEDICINE_TAG, data.getString(MEDICINE_TAG));
+        intent.putExtra(KEY_TAG, key);
+        intent.putExtra(VALUE_TAG, count);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(getApplicationContext(), intent);
+        } else {
+            getApplicationContext().startService(intent);
         }
-        return 0;
-    }
-
-    private void updateMedication(MedicationPOJO medication) {
-        ConcreteLocalClass concreteLocalClass = ConcreteLocalClass.getConcreteLocalClassInstance(context);
-        concreteLocalClass.updateMedications(medication);
     }
 }
