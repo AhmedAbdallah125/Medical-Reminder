@@ -67,8 +67,6 @@ public class MyPeriodicWorkManger extends Worker {
 
         if (hour == 0) {
             hour += 12;
-        } else if (hour > 12) {
-            hour -= 12;
         }
 
         timeNow = hour;
@@ -96,7 +94,7 @@ public class MyPeriodicWorkManger extends Worker {
             @Override
             public void onSuccess(List<MedicationPOJO> medicationPOJOS) {
                 medicationListForMedicationReminder = medicationPOJOS;
-                Log.i("zoooooz", "onSuccess: 5555555555");
+                Log.i("zoooooz", "onSuccess: sssssss");
             }
 
             @Override
