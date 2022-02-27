@@ -2,6 +2,7 @@ package com.team_three.medicalreminder.workmanger;
 
 import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.util.Log;
@@ -28,14 +29,12 @@ public class ReminderWindowManger {
     Repository repository;
     int count;
     String key;
-    Service service;
 
-    public ReminderWindowManger(Context context, MedicationPOJO medication,String key, int count, Service service) {
+    public ReminderWindowManger(Context context, MedicationPOJO medication, String key, int count) {
         this.context = context;
         this.myMedicine = medication;
         this.key = key;
         this.count = count;
-        this.service = service;
         repository = Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(context), context);
     }
 
@@ -82,14 +81,12 @@ public class ReminderWindowManger {
             myMedicine.setLeftNumber(n);
             myMedicine.setIsTakenList(list);
             updateMedication(myMedicine);
-            service.stopSelf();
-//            stopSelf();
+            context.stopService(new Intent(context, ReminderService.class));
             windowManager.removeView(customNotificationDialogView);
         });
 
         binding.imgSkip.setOnClickListener(v -> {
-            service.stopSelf();
-//            stopSelf();
+            context.stopService(new Intent(context, ReminderService.class));
             windowManager.removeView(customNotificationDialogView);
         });
     }

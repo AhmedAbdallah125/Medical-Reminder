@@ -27,12 +27,6 @@ import com.team_three.medicalreminder.model.Repository;
 
 public class ReminderService extends Service {
 
-    private View customAlertDialogView;
-
-    ReminderNotificationDialogBinding binding;
-
-    private WindowManager windowManager;
-
     private MedicationPOJO myMedicine;
 
     String key;
@@ -53,9 +47,7 @@ public class ReminderService extends Service {
         myMedicine = fomStringPojo(intent.getStringExtra(MyOneTimeWorkManger.MEDICINE_TAG));
         key = intent.getStringExtra(MyOneTimeWorkManger.KEY_TAG);
         count = intent.getIntExtra(MyOneTimeWorkManger.VALUE_TAG, 1);
-        reminderWindowManger = new ReminderWindowManger(getApplicationContext(),myMedicine,key,count,this);
-
-//        lunchCustomDialog();
+        reminderWindowManger = new ReminderWindowManger(getApplicationContext(),myMedicine,key,count);
 
         notificationChannel();
         startForeground(FOREGROUND_ID, makeNotification());
@@ -69,79 +61,11 @@ public class ReminderService extends Service {
         return null;
     }
 
-/*
-    private void lunchCustomDialog() {
-        LayoutInflater inflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        customAlertDialogView = inflater.inflate(R.layout.reminder_notification_dialog, null);
-        binding = ReminderNotificationDialogBinding.bind(customAlertDialogView);
-        bindView();
-        int LAYOUT_FLAG;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-        } else {
-            LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_PHONE;
-        }
-        windowManager = (WindowManager) getBaseContext().getSystemService(Context.WINDOW_SERVICE);
-        WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT,
-                LAYOUT_FLAG,
-                attr.showWhenLocked | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | WindowManager.LayoutParams.FLAG_LOCAL_FOCUS_MODE,
-                PixelFormat.TRANSLUCENT);
-        windowManager.addView(customAlertDialogView, params);
-        Log.i("zoooooz", "getCurrentAlarms: " + count);
-    }
-*/
 
     public MedicationPOJO fomStringPojo(String pojoString) {
         Gson gson = new Gson();
         return gson.fromJson(pojoString, MedicationPOJO.class);
     }
-
-    /*private void bindView() {
-        binding.imgMedNotification.setImageResource(myMedicine.getImageID());
-        binding.textView.setText(myMedicine.getMedicationName());
-        binding.txtTime.setText(key);
-        binding.txtMedTimeNotification.setText("Schedule for " + key + ", today");
-        description = "take " + count + " " + myMedicine.getFormat() + "(s), " +
-                myMedicine.getStrength() + myMedicine.getWeight() + myMedicine.getInstruction();
-        binding.txtMedDoseNotification.setText(description);
-        handleButtons();
-    }
-
-    private void handleButtons() {
-        binding.imgClose.setOnClickListener(v -> windowManager.removeView(customAlertDialogView));
-        binding.imgAccept.setOnClickListener(v -> {
-            List<Boolean> list = myMedicine.getIsTakenList();
-            list.set(getHashMapIndex(), true);
-            int n = myMedicine.getLeftNumber() - count;
-            if (n < 0)
-                n = 0;
-            myMedicine.setLeftNumber(n);
-            myMedicine.setIsTakenList(list);
-            updateMedication(myMedicine);
-            stopSelf();
-            windowManager.removeView(customAlertDialogView);
-        });
-
-        binding.imgSkip.setOnClickListener(v -> {
-            stopSelf();
-            windowManager.removeView(customAlertDialogView);
-        });
-    }
-
-    private int getHashMapIndex() {
-        List keys = new ArrayList(myMedicine.getTimeAndDose().keySet());
-        for (int i = 0; i < keys.size(); i++) {
-            if (keys.get(i) == key) {
-                return i;
-            }
-        }
-        return 0;
-    }
-
-    private void updateMedication(MedicationPOJO medication) {
-        repository.updateMedications(medication);
-    }*/
 
     private Notification makeNotification() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
