@@ -214,14 +214,15 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         binding.btnEndDate.setOnClickListener(v -> showDatePicker(binding.endDateSelected, "end"));
     }
 
-    private void lunchExitDialog(){
+    private void lunchExitDialog() {
+        dialogBuilder = new MaterialAlertDialogBuilder(this.getContext());
         dialogBuilder.setTitle("Do you want to cancel ?")
-                .setMessage("Your changes will not be saved!")
-                .setPositiveButton("Yes",(dialog, i)->{
+                .setMessage("Your changes will not be save!")
+                .setPositiveButton("Yes", (dialog, i) -> {
                     dialog.dismiss();
                     Navigation.findNavController(binding.getRoot()).navigate(R.id.action_fragment_add_Medication_to_fragment_home);
                 })
-                .setNegativeButton("No",(dialog, i)->{
+                .setNegativeButton("No", (dialog, i) -> {
                     dialog.dismiss();
                 }).show();
     }
@@ -246,7 +247,9 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
                 setDateAndTimeResultToPOJO();
                 setBooleanResultToPOJO();
                 onClick(medication);
-                Navigation.findNavController(v).navigate(R.id.action_fragment_add_Medication_to_fragment_home);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(DisplayMedicationDrug.displayTag, medication);
+                Navigation.findNavController(v).navigate(R.id.action_fragment_add_Medication_to_displayMedicationDrug, bundle);
                 Toast.makeText(this.getContext(), "Successfully Updated!", Toast.LENGTH_SHORT).show();
             }
         });
