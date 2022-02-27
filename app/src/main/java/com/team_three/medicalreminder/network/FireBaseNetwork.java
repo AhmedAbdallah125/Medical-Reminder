@@ -351,8 +351,7 @@ public class FireBaseNetwork implements NetworkInterface {
     }
 
     @Override
-    public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String
-            email) {
+    public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String email) {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(email);
         for (MedicationPOJO meds : medicationPOJOS) {
