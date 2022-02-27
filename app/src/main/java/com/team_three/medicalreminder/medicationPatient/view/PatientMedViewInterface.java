@@ -10,6 +10,13 @@ public interface PatientMedViewInterface {
 
 
     void onFailure(String errorMessage);
+    // for deleting AND Update
+    default void deleteMedPatientFromFireBase(MedicationPOJO medicationPOJO){
+
+    }
+    default void updateMedPatientFromFireBase(MedicationPOJO medicationPOJO){
+
+    }
 
 
 }

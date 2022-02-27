@@ -344,6 +344,7 @@ public class FireBaseNetwork implements NetworkInterface {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                myDelegation.onFailure(error.getMessage());
 
             }
         });
@@ -532,6 +533,18 @@ public class FireBaseNetwork implements NetworkInterface {
 
             }
         });
+    }
+
+    @Override
+    public void updatePatientMedicationList(String email, MedicationPOJO medicationPOJO) {
+        String emailId = email.split("\\.")[0];
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+        databaseReference.child(emailId)
+                .child("medications").child(String.valueOf(medicationPOJO.getId()))
+                .setValue(medicationPOJO);
+        // may be check if failed
+
     }
 
 }

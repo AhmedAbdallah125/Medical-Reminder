@@ -133,5 +133,21 @@
         android:id="@+id/patientMedicationfragment"
         android:name="com.team_three.medicalreminder.medicationPatient.view.PatientMedFragment"
         android:label="fragment_patient_medicationfragment"
-        tools:layout="@layout/fragment_patient_medicationfragment" />
+        tools:layout="@layout/fragment_patient_med" >
+        <action
+            android:id="@+id/action_patientMedicationfragment_to_patientMedDetailsFragment"
+            app:destination="@id/patientMedDetailsFragment" />
+        <action
+            android:id="@+id/action_patientMedicationfragment_to_patientList"
+            app:destination="@id/patientList" />
+    </fragment>
+    <fragment
+        android:id="@+id/patientMedDetailsFragment"
+        android:name="com.team_three.medicalreminder.medicationPatient.view.PatientMedDetailsFragment"
+        android:label="fragment_patient_med_details"
+        tools:layout="@layout/fragment_patient_med_details" >
+        <action
+            android:id="@+id/action_patientMedDetailsFragment_to_patientMedicationfragment"
+            app:destination="@id/patientMedicationfragment" />
+    </fragment>
 </navigation>

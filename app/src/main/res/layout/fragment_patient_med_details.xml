@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".medicationPatient.view.PatientMedDetailsFragment" >
+
+
+    <ProgressBar
+        android:id="@+id/progressBarPMedDetails"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardPatientView" />
+
+    <androidx.cardview.widget.CardView
+    android:id="@+id/cardPatientView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primaryColor">
+
+
+        <ImageView
+            android:id="@+id/imageBack"
+            android:layout_width="@dimen/iconWidth"
+            android:layout_height="@dimen/iconHeight"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/backPhoto"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_24"
+            tools:ignore="ImageContrastCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
+
+<TextView
+    android:id="@+id/time_txt_medicationName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="sans-serif"
+    android:paddingLeft="16dp"
+
+    android:textSize="16sp"
+    app:layout_constraintStart_toEndOf="@+id/icon_time_medication"
+    app:layout_constraintTop_toTopOf="@+id/icon_time_medication"
+    tools:text="pandol" />
+
+<ImageView
+    android:id="@+id/icon_time_medication"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    android:src="@drawable/ic_baseline_person_24"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/cardPatientView"
+    app:srcCompat="@drawable/ic_pill" />
+
+<TextView
+    android:id="@+id/time_txt_strength"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16sp"
+    android:layout_marginTop="16dp"
+    android:fontFamily="sans-serif"
+    android:textSize="16sp"
+    app:layout_constraintStart_toStartOf="@+id/time_txt_medicationName"
+    app:layout_constraintTop_toBottomOf="@+id/time_txt_medicationName"
+    tools:text="32 pills" />
+
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/time_recycleView"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginStart="1dp"
+    android:layout_marginTop="32dp"
+    android:layout_marginEnd="1dp"
+    android:layout_marginBottom="1dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/time_txt_strength" />
+
+<TextView
+    android:id="@+id/txt_instruction"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="16dp"
+    android:text=" "
+    app:layout_constraintBottom_toBottomOf="@+id/time_txt_strength"
+    app:layout_constraintEnd_toEndOf="parent"
+    tools:text="after Eating" />
+
+<ImageView
+    android:id="@+id/imgDeleteMed"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="16dp"
+    android:src="@drawable/ic_baseline_delete_forever_24"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/time_txt_medicationName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

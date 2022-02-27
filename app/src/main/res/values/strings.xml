@@ -130,6 +130,8 @@
     <string name="clickToShowDetails">Click To Show Times</string>
     <string name="untake">UN-Take</string>
     <string name="unSkip">UN-Skip</string>
+    <string name="PatientDetails">Patient Details</string>
+    <string name="there_is_no_medicine">There is no Medicine</string>
     <string name="channel_name">MedicalReminder</string>
     <string name="channel_description">MedicalDescription</string>
 </resources>
