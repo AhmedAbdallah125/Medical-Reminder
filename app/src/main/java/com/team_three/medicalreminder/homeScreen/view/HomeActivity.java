@@ -64,8 +64,10 @@ public class HomeActivity extends AppCompatActivity {
         handleDrawerMenu();
 //        setSignOut(true);
         ///
-        if (savedInstanceState == null) {
+        if (isFirstLaunch()) {
             checkDrawOverlayPermission();
+        } else {
+            initLaunch();
         }
         setWorkTimer();
 
@@ -222,6 +224,17 @@ public class HomeActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    private boolean isFirstLaunch() {
+        sharedPref = getSharedPreferences(RegisterFragment.SHAREDfILE, MODE_PRIVATE);
+        return (sharedPref.getInt("LAUNCH", 3) != 0);
+    }
+
+    private void initLaunch() {
+        sharedPref = getSharedPreferences(RegisterFragment.SHAREDfILE, MODE_PRIVATE);
+        editor = sharedPref.edit();
+        editor.putInt("LAUNCH", 0);
+
+    }
     // return after requesting Permission
 
     private void setWorkTimer() {
@@ -267,20 +280,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.v("App", "OnActivity Result.");
-        //check if received result code
-        //  is equal our requested code for draw permission
-        /*if (requestCode == REQUEST_CODE) {
-            if (Settings.canDrawOverlays(this)) {
-                // Permission Granted by Overlay
-                // Do your Stuff
-                setWorkTimer();
-            }
-        }*/
-    }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {

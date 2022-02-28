@@ -31,6 +31,7 @@ import com.team_three.medicalreminder.homeScreen.view.OnClickListener;
 import com.team_three.medicalreminder.medicationPatient.presenter.PatientMedPresenter;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.model.Utility;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
 import com.team_three.medicalreminder.network.NetworkInterface;
 
@@ -78,7 +79,7 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
         initRepository();
         // should get email
         // should ask whn internet exist first
-        if (isOnline()) {
+        if (Utility.isOnline(this.getContext())) {
             binding.patientMedScreenRecycleView.setVisibility(View.VISIBLE);
             binding.connectionAnimation.setVisibility(View.GONE);
             binding.PatTxtEmail.setText(email);
@@ -125,12 +126,7 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
 
     }
 
-    private boolean isOnline() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
-    }
+
 
 
     @Override
@@ -140,6 +136,7 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
             Toast.makeText(this.getContext(), "there is no medication for this patient", Toast.LENGTH_SHORT).show();
         } else {
             homeAdapter.setMedicines(medicationPOJOList);
+            // call Work manager
 
             homeAdapter.notifyDataSetChanged();
         }
@@ -155,7 +152,7 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
     // for responding
     @Override
     public void onClick(View view, int position) {
-        if (isOnline()) {
+        if (Utility.isOnline(this.getContext())) {
             Bundle bundle = new Bundle();
             bundle.putString("email", email);
             bundle.putInt("index", position);
