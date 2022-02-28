@@ -51,7 +51,6 @@ public class HomeActivity extends AppCompatActivity {
     //
     private static final int REQUEST_PERMISSION = 14;
     public final static int REQUEST_CODE = -1010101;
-    private boolean firstTimeFlag = true;
 
     // synchronisation when network is connected
     @Override
