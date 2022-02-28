@@ -224,7 +224,6 @@ public class HomeActivity extends AppCompatActivity {
         return (name.equals("null") && email.equals("null"));
     }
 
-
     private void setSignOut() {
         if(Utility.isOnline(this)){
             Log.i("TAG", "setSignOut:Activty ");
