@@ -53,7 +53,7 @@ public class MyPeriodicWorkManger extends Worker {
         medicationSingleList = repository.getMedicationDayWorkManger(calendar.getTimeInMillis());
         medicationSingleListForRefillReminder = repository.getRefilReminderList(calendar.getTimeInMillis());
         subscribeOnSingleForMedicationReminder();
-        subscribeOnSingleForRefilReminder();
+        subscribeOnSingleForRefillReminder();
         getTimePeriod();
         getCurrentAlarms();
         return Result.success();
@@ -74,8 +74,8 @@ public class MyPeriodicWorkManger extends Worker {
         timeNow = (timeNow + minute) * 60 * 1000;
         timeNowPlusThreeHours = timeNow + (3 * 60 * 60 * 1000);
 
-        Log.i("zoooooz", "getTimeNow: "+timeNow);
-        Log.i("zoooooz", "getTimeNow+6: "+ timeNowPlusThreeHours);
+        Log.i("zoooooz", "getTimeNow: " + timeNow);
+        Log.i("zoooooz", "getTimeNow+6: " + timeNowPlusThreeHours);
 
     }
 
@@ -104,7 +104,7 @@ public class MyPeriodicWorkManger extends Worker {
         });
     }
 
-    private void subscribeOnSingleForRefilReminder(){
+    private void subscribeOnSingleForRefillReminder() {
         medicationSingleListForRefillReminder.subscribe(new SingleObserver<List<MedicationPOJO>>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -115,7 +115,6 @@ public class MyPeriodicWorkManger extends Worker {
             public void onSuccess(List<MedicationPOJO> medicationPOJOS) {
                 medicationListForRefillReminder = medicationPOJOS;
                 loopOnRefileMedicationList();
-
             }
 
             @Override
@@ -128,22 +127,16 @@ public class MyPeriodicWorkManger extends Worker {
     private void getCurrentAlarms() {
         if (medicationListForMedicationReminder != null) {
             for (int i = 0; i < medicationListForMedicationReminder.size(); i++) {
-//                while (medicationList.get(i).getTimeAndDose().entrySet().iterator().hasNext()) {
-                if(medicationListForMedicationReminder.get(i).getTimeAndDose()!=null){
-
-
-                for(Map.Entry<String,Integer> entry: medicationListForMedicationReminder.get(i).getTimeAndDose().entrySet()) {
-                    Log.i("zoooooz", "getCurrentAlarms: " + medicationListForMedicationReminder.get(i).getMedicationName());
-                    if (checkPeriod(entry.getKey())){
-
-                        Log.i("zoooooz", "getCurrentAlarmsperiod: " + alarmTimePeriod);
-                        setDurationTimes(timeNow, alarmTimePeriod);
-                        setOnTimeWorkManger(periodBeforeRunning, medicationListForMedicationReminder.get(i),entry.getKey(),entry.getValue());
+                if (medicationListForMedicationReminder.get(i).getTimeAndDose() != null) {
+                    for (Map.Entry<String, Integer> entry : medicationListForMedicationReminder.get(i).getTimeAndDose().entrySet()) {
+                        Log.i("zoooooz", "getCurrentAlarms: " + medicationListForMedicationReminder.get(i).getMedicationName());
+                        if (checkPeriod(entry.getKey())) {
+                            Log.i("zoooooz", "getCurrentAlarmsperiod: " + alarmTimePeriod);
+                            setDurationTimes(timeNow, alarmTimePeriod);
+                            setOnTimeWorkManger(periodBeforeRunning, medicationListForMedicationReminder.get(i), entry.getKey(), entry.getValue());
+                        }
                     }
                 }
-                }
-//                }
-
             }
         }
     }
@@ -161,22 +154,22 @@ public class MyPeriodicWorkManger extends Worker {
         long t = 0;
         t = Long.parseLong(time.split(" ")[0].split(":")[0]) * 60;
         t = (t + Long.parseLong(time.split(" ")[0].split(":")[1])) * 60;
-        Log.i("zoooooz", "setTime1: "+t*1000);
+        Log.i("zoooooz", "setTime1: " + t * 1000);
         if (time.split(" ")[1].equals("PM")) {
             t = t + (12 * 60 * 60);
         }
-        Log.i("zoooooz", "setTime2: "+t*1000);
+        Log.i("zoooooz", "setTime2: " + t * 1000);
         return t * 1000;
     }
 
-    private void setOnTimeWorkManger(long time, MedicationPOJO medicationPOJO,String index,int pillsCount) {
-        Log.i("zoooooz", "setOnTimeWorkManger: "+time);
+    private void setOnTimeWorkManger(long time, MedicationPOJO medicationPOJO, String index, int pillsCount) {
+        Log.i("zoooooz", "setOnTimeWorkManger: " + time);
         // pass medication POJO
         Data data = new Data.Builder()
-                .putString("MED",serializeToJason(medicationPOJO))
+                .putString("MED", serializeToJason(medicationPOJO))
 //                .putString("Medication",medicationPOJO.getMedicationName())
-                .putString("INDEX",index)
-                .putInt("COUNT",pillsCount)
+                .putString("INDEX", index)
+                .putInt("COUNT", pillsCount)
                 .build();
         Constraints constraints = new Constraints.Builder()
                 .setRequiresBatteryNotLow(true)
@@ -189,28 +182,31 @@ public class MyPeriodicWorkManger extends Worker {
                 .build();
         WorkManager.getInstance(context).enqueue(oneTimeWorkRequest);
     }
+
     private String serializeToJason(MedicationPOJO pojo) {
         Gson gson = new Gson();
         return gson.toJson(pojo);
     }
-    private void callOneTimeRefillReminder(MedicationPOJO medicationPOJO){
+
+    private void callOneTimeRefillReminder(MedicationPOJO medicationPOJO) {
 
         Data data = new Data.Builder()
-                .putString("MedReminderList",serializeToJason(medicationPOJO)).build();
+                .putString("MedReminderList", serializeToJason(medicationPOJO)).build();
         Constraints constraints = new Constraints.Builder()
                 .setRequiresBatteryNotLow(true)
                 .build();
         OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(RefileReminderWorkManagerForOneTime.class)
                 .setInputData(data)
                 .setConstraints(constraints)
-                .setInitialDelay(10,TimeUnit.SECONDS)
+                .setInitialDelay(10, TimeUnit.SECONDS)
                 .addTag("downloadReminder")
                 .build();
         WorkManager.getInstance(context).enqueue(oneTimeWorkRequest);
     }
-    private  void loopOnRefileMedicationList(){
-        for (MedicationPOJO medicationPOJO :medicationListForMedicationReminder){
-            if(medicationPOJO.getLeftNumber() <= medicationPOJO.getLeftNumberReminder()){
+
+    private void loopOnRefileMedicationList() {
+        for (MedicationPOJO medicationPOJO : medicationListForMedicationReminder) {
+            if (medicationPOJO.getLeftNumber() <= medicationPOJO.getLeftNumberReminder()) {
                 callOneTimeRefillReminder(medicationPOJO);
             }
         }

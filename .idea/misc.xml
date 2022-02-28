@@ -37,19 +37,12 @@
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.2115" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/drawable/ic_baseline_done_24.xml" value="0.2115" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/drawable/ic_baseline_replay_24.xml" value="0.2115" />
-        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/layout/activity_login.xml" value="0.17572463768115942" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/layout/fragment_display_medication_drug.xml" value="0.15489130434782608" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/layout/fragment_medication_time.xml" value="0.33" />
-        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/layout/fragment_patient_list.xml" value="0.12864583333333332" />
-        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/layout/fragment_patient_med.xml" value="0.2" />
-        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/layout/fragment_patient_med_details.xml" value="0.1" />
-        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/layout/fragment_patient_med_time.xml" value="0.14221014492753623" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/layout/fragment_patient_medicationfragment.xml" value="0.15489130434782608" />
-        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/layout/fragment_taker_list.xml" value="0.12864583333333332" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/layout/home_screen_recycle_view_layout.xml" value="0.1" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/layout/patient_med_recycle_view_layout.xml" value="0.16" />
-        <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/layout/patient_medication_details_time.xml" value="0.14221014492753623" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/layout/time_card.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.1575" />
@@ -61,6 +54,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/activity_medication_drug_display.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_medication_drug_edit.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/choose_time_card.xml" value="0.1598731884057971" />
         <entry key="app/src/main/res/layout/fragment_add_medication.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_add_taker.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_display_medication_drug.xml" value="0.33" />
