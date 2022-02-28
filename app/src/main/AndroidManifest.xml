@@ -24,6 +24,10 @@
             android:enabled="true"
             android:exported="true"></service>
 
+        <service android:name=".workmanger.ForeGroundService"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
             android:name=".Registeration.view.LoginActivity"
             android:exported="false"></activity>

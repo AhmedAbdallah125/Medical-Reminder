@@ -36,14 +36,46 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/refilNumber"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Refill"
-                android:inputType="textPersonName" />
-        <LinearLayout
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/decreaseRefill"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_baseline_exposure_neg_1_24"
+                    app:civ_border_color="@color/secondaryColor"
+                    app:civ_border_width="2dp"
+                    app:civ_circle_background_color="@color/secondaryColor"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:id="@+id/refillNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="28dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center"
+                    android:text="@string/_1"
+                    android:textSize="16sp"
+                    android:layout_weight="1"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/increaseRefill"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center|center_horizontal"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_baseline_exposure_plus_1_24"
+                    app:civ_border_color="@color/secondaryColor"
+                    app:civ_border_width="2dp"
+                    app:civ_circle_background_color="@color/secondaryColor"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"

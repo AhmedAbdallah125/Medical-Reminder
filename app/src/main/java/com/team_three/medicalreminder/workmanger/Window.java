@@ -45,6 +45,8 @@ public class Window {
         this.medicationPOJO = fromStringPojo(data);
         this.context=context;
         this.data =data;
+        repository = Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(context),context);
+
         Log.i("Reminder", "Window: "+ medicationPOJO.getMedicationName());
        setWindowManager();
         setBinding();
@@ -95,18 +97,34 @@ public class Window {
 
     private void setBinding(){
         binding = RefillReminderDialogBinding.bind(mView);
-
         binding.titleText.setText("Refill "+medicationPOJO.getMedicationName() +" before finish!");
+
+       binding.refillNumber.setText(String.valueOf(medicationPOJO.getLeftNumber()));
+
+       binding.decreaseRefill.setOnClickListener(view -> {
+           if(Integer.parseInt(binding.refillNumber.getText().toString()) > medicationPOJO.getLeftNumber()){
+               int number = Integer.parseInt(binding.refillNumber.getText().toString())-1;
+               binding.refillNumber.setText(String.valueOf(number));
+           }
+
+       });
+
+       binding.increaseRefill.setOnClickListener(view -> {
+           int number = Integer.parseInt(binding.refillNumber.getText().toString())+1;
+           binding.refillNumber.setText(String.valueOf(number));
+       });
+
         binding.windowClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                medicationPOJO.setFillReminder(false);
+                repository.updateMedications(medicationPOJO);
                 close();
             }
         });
         binding.windowRefill.setOnClickListener(view -> {
-            int leftNumber = medicationPOJO.getLeftNumber()  +  Integer.parseInt( binding.refilNumber.getEditableText().toString());
+            int leftNumber =  Integer.parseInt( binding.refillNumber.getText().toString());
             medicationPOJO.setLeftNumber(leftNumber);
-            repository = Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(context),context);
             repository.updateMedications(medicationPOJO);
             close();
         });
@@ -115,6 +133,8 @@ public class Window {
             callOneTimeRefillReminder(data);
             close();
         });
+
+
     }
 
     private void setWindowManager(){
@@ -128,10 +148,10 @@ public class Window {
 
                 WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT,
                 layoutFlage,
-                WindowManager.LayoutParams.FLAG_LOCAL_FOCUS_MODE|WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+                android.R.attr.showWhenLocked | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | WindowManager.LayoutParams.FLAG_LOCAL_FOCUS_MODE,
                 PixelFormat.TRANSLUCENT);
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mView = layoutInflater.inflate(R.layout.refill_reminder_dialog, null);
+        mView = layoutInflater.inflate(R.layout.refill_reminder_dialog, null,false);
 
 
 
