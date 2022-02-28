@@ -46,7 +46,7 @@
     <string name="btnChooseTime">Choose Time</string>
 
     <string-array name="Medication_Type">
-        <item>choose medication type</item>
+        <item>choose type</item>
         <item>Pill</item>
         <item>Solution</item>
         <item>Injection</item>
