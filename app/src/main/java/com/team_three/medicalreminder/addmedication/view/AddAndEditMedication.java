@@ -161,8 +161,10 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         binding.spinneMedicationType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i != 0)
+                if (i != 0) {
                     format = binding.spinneMedicationType.getSelectedItem().toString();
+                    setFormatImage(i);
+                }
             }
 
             @Override
@@ -213,6 +215,29 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         binding.btnStartDate.setOnClickListener(v -> showDatePicker(binding.startDateSelected, "start"));
 
         binding.btnEndDate.setOnClickListener(v -> showDatePicker(binding.endDateSelected, "end"));
+    }
+
+    private void setFormatImage(int i) {
+        switch (i) {
+            case 1:
+                binding.imgType.setImageResource(R.drawable.pill);
+                break;
+            case 2:
+                binding.imgType.setImageResource(R.drawable.solution);
+                break;
+            case 3:
+                binding.imgType.setImageResource(R.drawable.injection);
+                break;
+            case 4:
+                binding.imgType.setImageResource(R.drawable.powder);
+                break;
+            case 5:
+                binding.imgType.setImageResource(R.drawable.drops);
+                break;
+            case 6:
+                binding.imgType.setImageResource(R.drawable.inhaler);
+                break;
+        }
     }
 
     private void lunchExitDialog() {
@@ -381,8 +406,8 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         medication.setActive(!timeAndDoseAdapter.getTimeAndDose().isEmpty());
     }
 
-    private void setImage(String format){
-        switch(format){
+    private void setImage(String format) {
+        switch (format) {
             case "Pill":
                 medication.setImageID(R.drawable.pill);
                 break;
