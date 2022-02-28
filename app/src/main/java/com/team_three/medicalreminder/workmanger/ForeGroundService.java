@@ -1,7 +1,6 @@
 package com.team_three.medicalreminder.workmanger;
 
 
-
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -11,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
@@ -39,23 +39,24 @@ public class ForeGroundService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-         super.onStartCommand(intent, flags, startId);
+        super.onStartCommand(intent, flags, startId);
         Log.i("Reminder", "onStartCommand: ");
 
         startMyOwnForeground();
         createNotification();
 
-        Window window=new Window(this,intent.getStringExtra("refill"));
-        window.open();
+        if (!Settings.canDrawOverlays(this)) {
+            Window window = new Window(this, intent.getStringExtra("refill"));
+            window.open();
+        }
         return START_NOT_STICKY;
     }
 
     // for android version >=O we need to create
     // custom notification stating
     // foreground service is running
-    private void startMyOwnForeground()
-    {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+    private void startMyOwnForeground() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_DEFAULT);
 
             NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -63,12 +64,12 @@ public class ForeGroundService extends Service {
         }
 
 
-
     }
-    private  void  createNotification(){
-        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),0,intent,0);
+
+    private void createNotification() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
         Notification notification = notificationBuilder.setOngoing(true)
                 .setContentTitle("Service running")

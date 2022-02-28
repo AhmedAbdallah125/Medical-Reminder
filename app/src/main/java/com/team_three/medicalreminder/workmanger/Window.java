@@ -1,6 +1,7 @@
 package com.team_three.medicalreminder.workmanger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.util.Log;
@@ -41,36 +42,36 @@ public class Window {
     String data;
 
 
-    public Window(Context context ,String data ){
+    public Window(Context context, String data) {
         this.medicationPOJO = fromStringPojo(data);
-        this.context=context;
-        this.data =data;
-        repository = Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(context),context);
+        this.context = context;
+        this.data = data;
+        repository = Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(context), context);
 
-        Log.i("Reminder", "Window: "+ medicationPOJO.getMedicationName());
-       setWindowManager();
+        Log.i("Reminder", "Window: " + medicationPOJO.getMedicationName());
+        setWindowManager();
         setBinding();
     }
 
     public void open() {
         try {
-            if(mView.getWindowToken()==null) {
-                if(mView.getParent()==null) {
+            if (mView.getWindowToken() == null) {
+                if (mView.getParent() == null) {
                     mWindowManager.addView(mView, mParams);
                 }
             }
         } catch (Exception e) {
-            Log.d("Error1",e.toString());
+            Log.d("Error1", e.toString());
         }
     }
 
     public void close() {
         try {
-            ((WindowManager)context.getSystemService(WINDOW_SERVICE)).removeView(mView);
+            ((WindowManager) context.getSystemService(WINDOW_SERVICE)).removeView(mView);
             mView.invalidate();
-            ((ViewGroup)mView.getParent()).removeAllViews();
+            ((ViewGroup) mView.getParent()).removeAllViews();
         } catch (Exception e) {
-            Log.d("Error2",e.toString());
+            Log.d("Error2", e.toString());
         }
     }
 
@@ -79,10 +80,10 @@ public class Window {
         return gson.fromJson(pojoString, MedicationPOJO.class);
     }
 
-    private void callOneTimeRefillReminder(String pojo){
+    private void callOneTimeRefillReminder(String pojo) {
 
         Data data = new Data.Builder()
-                .putString("MedReminderList",pojo).build();
+                .putString("MedReminderList", pojo).build();
         Constraints constraints = new Constraints.Builder()
                 .setRequiresBatteryNotLow(true)
                 .build();
@@ -95,53 +96,58 @@ public class Window {
         WorkManager.getInstance(context).enqueue(oneTimeWorkRequest);
     }
 
-    private void setBinding(){
+    private void setBinding() {
         binding = RefillReminderDialogBinding.bind(mView);
-        binding.titleText.setText("Refill "+medicationPOJO.getMedicationName() +" before finish!");
+        binding.titleText.setText("Refill " + medicationPOJO.getMedicationName() + " before finish!");
 
-       binding.refillNumber.setText(String.valueOf(medicationPOJO.getLeftNumber()));
+        binding.refillNumber.setText(String.valueOf(medicationPOJO.getLeftNumber()));
 
-       binding.decreaseRefill.setOnClickListener(view -> {
-           if(Integer.parseInt(binding.refillNumber.getText().toString()) > medicationPOJO.getLeftNumber()){
-               int number = Integer.parseInt(binding.refillNumber.getText().toString())-1;
-               binding.refillNumber.setText(String.valueOf(number));
-           }
+        binding.decreaseRefill.setOnClickListener(view -> {
+            if (Integer.parseInt(binding.refillNumber.getText().toString()) > medicationPOJO.getLeftNumber()) {
+                int number = Integer.parseInt(binding.refillNumber.getText().toString()) - 1;
+                binding.refillNumber.setText(String.valueOf(number));
+            }
 
-       });
+        });
 
-       binding.increaseRefill.setOnClickListener(view -> {
-           int number = Integer.parseInt(binding.refillNumber.getText().toString())+1;
-           binding.refillNumber.setText(String.valueOf(number));
-       });
+        binding.increaseRefill.setOnClickListener(view -> {
+            int number = Integer.parseInt(binding.refillNumber.getText().toString()) + 1;
+            binding.refillNumber.setText(String.valueOf(number));
+        });
 
         binding.windowClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 medicationPOJO.setFillReminder(false);
                 repository.updateMedications(medicationPOJO);
+                stopMyService();
                 close();
             }
         });
         binding.windowRefill.setOnClickListener(view -> {
-            int leftNumber =  Integer.parseInt( binding.refillNumber.getText().toString());
+            int leftNumber = Integer.parseInt(binding.refillNumber.getText().toString());
             medicationPOJO.setLeftNumber(leftNumber);
             repository.updateMedications(medicationPOJO);
+            stopMyService();
             close();
         });
 
         binding.windowSnoze.setOnClickListener(view -> {
             callOneTimeRefillReminder(data);
+            stopMyService();
             close();
         });
-
-
     }
 
-    private void setWindowManager(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            layoutFlage =  WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+    private void stopMyService() {
+        context.stopService(new Intent(context, ForeGroundService.class));
+    }
 
-        }else{
+    private void setWindowManager() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            layoutFlage = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+
+        } else {
             layoutFlage = WindowManager.LayoutParams.TYPE_PHONE;
         }
         mParams = new WindowManager.LayoutParams(
@@ -151,12 +157,11 @@ public class Window {
                 android.R.attr.showWhenLocked | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | WindowManager.LayoutParams.FLAG_LOCAL_FOCUS_MODE,
                 PixelFormat.TRANSLUCENT);
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mView = layoutInflater.inflate(R.layout.refill_reminder_dialog, null,false);
-
+        mView = layoutInflater.inflate(R.layout.refill_reminder_dialog, null, false);
 
 
         mParams.gravity = Gravity.CENTER;
-        mWindowManager = (WindowManager)context.getSystemService(WINDOW_SERVICE);
+        mWindowManager = (WindowManager) context.getSystemService(WINDOW_SERVICE);
     }
 
 

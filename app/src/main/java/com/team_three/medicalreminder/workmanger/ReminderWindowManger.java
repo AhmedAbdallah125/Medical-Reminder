@@ -1,5 +1,7 @@
 package com.team_three.medicalreminder.workmanger;
 
+import static android.content.Context.WINDOW_SERVICE;
+
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -8,8 +10,17 @@ import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+
+import com.google.gson.Gson;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.databinding.ReminderNotificationDialogBinding;
@@ -18,6 +29,7 @@ import com.team_three.medicalreminder.model.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ReminderWindowManger {
     private Context context;
@@ -71,7 +83,10 @@ public class ReminderWindowManger {
     }
 
     private void handleButtons() {
-        binding.imgClose.setOnClickListener(v -> windowManager.removeView(customNotificationDialogView));
+        binding.imgClose.setOnClickListener(v -> {
+            stopMyService();
+            close();
+        });
         binding.imgAccept.setOnClickListener(v -> {
             List<Boolean> list = myMedicine.getIsTakenList();
             list.set(getHashMapIndex(), true);
@@ -81,13 +96,21 @@ public class ReminderWindowManger {
             myMedicine.setLeftNumber(n);
             myMedicine.setIsTakenList(list);
             updateMedication(myMedicine);
-            context.stopService(new Intent(context, ReminderService.class));
-            windowManager.removeView(customNotificationDialogView);
+            stopMyService();
+            close();
         });
 
         binding.imgSkip.setOnClickListener(v -> {
             context.stopService(new Intent(context, ReminderService.class));
-            windowManager.removeView(customNotificationDialogView);
+            stopMyService();
+            close();
+        });
+
+        binding.imgSnooze.setOnClickListener(v -> {
+            setOnTimeWorkManger(myMedicine, key, count);
+            Toast.makeText(context, "Snoozed for 1 hour", Toast.LENGTH_SHORT).show();
+            stopMyService();
+            close();
         });
     }
 
@@ -103,5 +126,44 @@ public class ReminderWindowManger {
 
     private void updateMedication(MedicationPOJO medication) {
         repository.updateMedications(medication);
+    }
+
+    private void setOnTimeWorkManger(MedicationPOJO medicationPOJO, String index, int pillsCount) {
+        // pass medication POJO
+        Data data = new Data.Builder()
+                .putString("MED", serializeToJason(medicationPOJO))
+//                .putString("Medication",medicationPOJO.getMedicationName())
+                .putString("INDEX", index)
+                .putInt("COUNT", pillsCount)
+                .build();
+        Constraints constraints = new Constraints.Builder()
+                .setRequiresBatteryNotLow(true)
+                .build();
+        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(MyOneTimeWorkManger.class).
+                setInputData(data)
+                .setConstraints(constraints)
+                .setInitialDelay(1, TimeUnit.HOURS)
+                .addTag("download")
+                .build();
+        WorkManager.getInstance(context).enqueue(oneTimeWorkRequest);
+    }
+
+    private String serializeToJason(MedicationPOJO pojo) {
+        Gson gson = new Gson();
+        return gson.toJson(pojo);
+    }
+
+    private void close() {
+        try {
+            ((WindowManager) context.getSystemService(WINDOW_SERVICE)).removeView(customNotificationDialogView);
+            customNotificationDialogView.invalidate();
+            ((ViewGroup) customNotificationDialogView.getParent()).removeAllViews();
+        } catch (Exception e) {
+            Log.d("Error2", e.toString());
+        }
+    }
+
+    private void stopMyService(){
+        context.stopService(new Intent(context, ReminderService.class));
     }
 }

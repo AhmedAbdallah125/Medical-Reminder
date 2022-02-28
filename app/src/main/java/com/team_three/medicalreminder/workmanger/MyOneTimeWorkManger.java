@@ -30,7 +30,7 @@ public class MyOneTimeWorkManger extends Worker {
     public Result doWork() {
         getData();
 //        lunchCustomDialog();
-        lunchDialogOverApps();
+        startMyService();
         return Result.success();
     }
 
@@ -42,7 +42,7 @@ public class MyOneTimeWorkManger extends Worker {
     }
 
 
-    private void lunchDialogOverApps() {
+    private void startMyService() {
         Intent intent = new Intent(getApplicationContext(), ReminderService.class);
         intent.putExtra(MEDICINE_TAG, data.getString(MEDICINE_TAG));
         intent.putExtra(KEY_TAG, key);
