@@ -27,53 +27,33 @@
 //import io.reactivex.SingleObserver;
 //import io.reactivex.disposables.Disposable;
 //
-//public class TakerPeriodicWorkManager {
-//    package com.team_three.medicalreminder.workmanger;
+//public class TakerPeriodicWorkManager extends Worker{
+//    long timeNow;
+//    long timeNowPlusThreeHours;
+//   List<MedicationPOJO> medicationSingleList;
+//    Context context;
 //
-//import android.content.Context;
-//import android.util.Log;
+//    public TakerPeriodicWorkManager(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+//        super(context, workerParams);
+//        this.context=context;
+//    }
 //
-//import androidx.annotation.NonNull;
-//import androidx.work.Constraints;
-//import androidx.work.Data;
-//import androidx.work.OneTimeWorkRequest;
-//import androidx.work.WorkManager;
-//import androidx.work.Worker;
-//import androidx.work.WorkerParameters;
+//    public void setMedicationSingleList(List<MedicationPOJO> medicationSingleList) {
+//        this.medicationSingleList = medicationSingleList;
+//    }
 //
-//import com.google.gson.Gson;
-//import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
-//import com.team_three.medicalreminder.model.MedicationPOJO;
-//import com.team_three.medicalreminder.model.Repository;
+//    @NonNull
+//    @Override
+//    public Result doWork() {
+//        return null;
+//    }
+//}
 //
-//import java.util.Calendar;
-//import java.util.List;
-//import java.util.Map;
-//import java.util.concurrent.TimeUnit;
 //
-//import io.reactivex.Single;
-//import io.reactivex.SingleObserver;
-//import io.reactivex.disposables.Disposable;
 //
-//    public class MyPeriodicWorkManger extends Worker {
-//        long timeNow;
-//        long timeNowPlusThreeHours;
-//        Repository repository;
-//        Single<List<MedicationPOJO>> medicationSingleList;
-//        Single<List<MedicationPOJO>> medicationSingleListForRefillReminder;
-//        Calendar calendar;
-//        long alarmTimePeriod;
-//        // period before running
-//        long periodBeforeRunning;
-//        List<MedicationPOJO> medicationListForMedicationReminder;
-//        List<MedicationPOJO> medicationListForRefillReminder;
-//        Context context;
 //
-//        public MyPeriodicWorkManger(@NonNull Context context, @NonNull WorkerParameters workerParams) {
-//            super(context, workerParams);
-//            repository = Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(context), context);
-//            this.context = context;
-//        }
+//
+//
 //
 //        @NonNull
 //        @Override
