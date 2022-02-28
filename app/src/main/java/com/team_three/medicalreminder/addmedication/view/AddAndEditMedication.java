@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -361,6 +362,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
 
     private void setSpinnerResultToPOJO() {
         medication.setFormat(format);
+        setImage(format);
         medication.setWeight(weight);
         medication.setTakeTimePerDay(dosePerDay);
         medication.setInstruction(instruction);
@@ -377,7 +379,31 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         medication.setFillReminder(isFillReminder);
         medication.setIsTakenList(isTakenList(timeAndDoseAdapter.getTimeAndDose().size()));
         medication.setActive(!timeAndDoseAdapter.getTimeAndDose().isEmpty());
-        medication.setImageID(R.drawable.ic_pill);
+    }
+
+    private void setImage(String format){
+        switch(format){
+            case "Pill":
+                medication.setImageID(R.drawable.pill);
+                break;
+            case "Solution":
+                medication.setImageID(R.drawable.solution);
+                break;
+            case "Injection":
+                medication.setImageID(R.drawable.injection);
+                break;
+            case "Powder":
+                medication.setImageID(R.drawable.powder);
+                break;
+            case "Drops":
+                medication.setImageID(R.drawable.drops);
+                break;
+            case "Inhaler":
+                medication.setImageID(R.drawable.inhaler);
+                break;
+            default:
+                medication.setImageID(-1);
+        }
     }
 
     private List<Boolean> isTakenList(int length) {
