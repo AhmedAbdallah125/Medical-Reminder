@@ -13,8 +13,10 @@
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/activity_medication_drug_display.xml" value="0.21" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/activity_medication_drug_edit.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/activty_sign_up.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/choose_time_card.xml" value="0.17980072463768115" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragmenet_register.xml" value="0.1" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_acrtive_meds.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_add_medication.xml" value="0.33" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_add_taker.xml" value="0.18" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_help_requist_list.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_inactive_meds.xml" value="0.1015625" />
@@ -23,9 +25,13 @@
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_taker_list.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_taker_profile_screen.xml" value="0.21" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/inactive_meds_row.xml" value="0.5" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/patient_med_recycle_view_layout.xml" value="0.17980072463768115" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/patient_row.xml" value="0.1852355072463768" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/refill_dialog.xml" value="0.17980072463768115" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/refill_reminder_dialog.xml" value="0.17980072463768115" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/taker_request_row.xml" value="0.2" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/taker_row.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/time_card.xml" value="0.17980072463768115" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/menu/menu_drawer.xml" value="0.20416666666666666" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.2115" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.2115" />
@@ -48,9 +54,6 @@
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.1575" />
         <entry key="app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1865" />
-        <entry key="app/src/main/res/drawable/ic_baseline_date_range_24.xml" value="0.1575" />
-        <entry key="app/src/main/res/drawable/ic_baseline_done_24.xml" value="0.1575" />
-        <entry key="app/src/main/res/drawable/ic_baseline_error_outline_24.xml" value="0.1575" />
         <entry key="app/src/main/res/drawable/ic_outline_check_24.xml" value="0.1575" />
         <entry key="app/src/main/res/drawable/ic_pill.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.18489583333333334" />
@@ -63,8 +66,7 @@
         <entry key="app/src/main/res/layout/fragment_display_medication_drug.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/fragment_taker_profile_screen.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/home_screen_recycle_view_layout.xml" value="0.1598731884057971" />
-        <entry key="app/src/main/res/layout/reminder_notification_dialog.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/reminder_notification_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.18489583333333334" />
       </map>
     </option>

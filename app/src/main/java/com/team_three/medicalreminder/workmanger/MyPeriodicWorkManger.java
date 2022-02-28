@@ -94,7 +94,7 @@ public class MyPeriodicWorkManger extends Worker {
             @Override
             public void onSuccess(List<MedicationPOJO> medicationPOJOS) {
                 medicationListForMedicationReminder = medicationPOJOS;
-                Log.i("zoooooz", "onSuccess: 5555555555");
+                Log.i("zoooooz", "onSuccess: sssssss");
             }
 
             @Override
