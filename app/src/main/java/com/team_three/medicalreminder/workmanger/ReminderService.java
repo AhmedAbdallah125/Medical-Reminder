@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,12 +48,13 @@ public class ReminderService extends Service {
         myMedicine = fomStringPojo(intent.getStringExtra(MyOneTimeWorkManger.MEDICINE_TAG));
         key = intent.getStringExtra(MyOneTimeWorkManger.KEY_TAG);
         count = intent.getIntExtra(MyOneTimeWorkManger.VALUE_TAG, 1);
-        reminderWindowManger = new ReminderWindowManger(getApplicationContext(),myMedicine,key,count);
 
         notificationChannel();
         startForeground(FOREGROUND_ID, makeNotification());
-        reminderWindowManger.setMyWindowManger();
-
+        if (!Settings.canDrawOverlays(this)) {
+            reminderWindowManger = new ReminderWindowManger(getApplicationContext(),myMedicine,key,count);
+            reminderWindowManger.setMyWindowManger();
+        }
         return START_NOT_STICKY;
     }
 

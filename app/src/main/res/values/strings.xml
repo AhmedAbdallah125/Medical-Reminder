@@ -59,7 +59,14 @@
         <item>g</item>
         <item>IU</item>
         <item>mcg</item>
-        <item>m</item>
+        <item>mcg/ml</item>
+        <item>mEq</item>
+        <item>mL</item>
+        <item>%</item>
+        <item>mg/g</item>
+        <item>mg/cm2</item>
+        <item>mg/ml</item>
+        <item>mcg/hr</item>
     </string-array>
     <string-array name="Medication_Instructions">
         <item>choose instruction</item>
@@ -134,4 +141,5 @@
     <string name="there_is_no_medicine">There is no Medicine</string>
     <string name="channel_name">MedicalReminder</string>
     <string name="channel_description">MedicalDescription</string>
+    <string name="snooze">Snooze</string>
 </resources>

@@ -1,58 +1,43 @@
 package com.team_three.medicalreminder.homeScreen.view;
 
 
-import android.Manifest;
 import android.annotation.TargetApi;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
+import androidx.work.Constraints;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
-import com.team_three.medicalreminder.MainActivity;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.Registeration.view.LoginActivity;
 import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.databinding.ActivityHomeBinding;
 import com.team_three.medicalreminder.databinding.HomeDrawerBinding;
 import com.team_three.medicalreminder.model.Repository;
-import com.team_three.medicalreminder.model.Utility;
-import com.team_three.medicalreminder.network.FireBaseNetwork;
-import com.team_three.medicalreminder.network.NetworkInterface;
 import com.team_three.medicalreminder.workmanger.MyPeriodicWorkManger;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
-import androidx.work.Constraints;
-import androidx.work.ExistingPeriodicWorkPolicy;
-import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkManager;
-import androidx.work.impl.model.Preference;
-
 import java.util.concurrent.TimeUnit;
-
 
 public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding homeBinding;
@@ -66,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
     //
     private static final int REQUEST_PERMISSION = 14;
     public final static int REQUEST_CODE = -1010101;
+    private boolean firstTimeFlag = true;
 
     // synchronisation when network is connected
     @Override
@@ -79,7 +65,10 @@ public class HomeActivity extends AppCompatActivity {
         handleDrawerMenu();
 //        setSignOut(true);
         ///
-        checkDrawOverlayPermission();
+        if (savedInstanceState == null) {
+            checkDrawOverlayPermission();
+        }
+        setWorkTimer();
 
         //2
         //
@@ -101,8 +90,6 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     @Override
@@ -161,8 +148,6 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(outComing);
             });
         }
-
-
     }
 
     private void handleDrawerMenu() {
@@ -176,7 +161,7 @@ public class HomeActivity extends AppCompatActivity {
                     if (item.getItemId() == R.id.nav_logout) {
                         setSignOut();
                         return true;
-                    }else if(item.getItemId() == R.id.patients){
+                    } else if (item.getItemId() == R.id.patients) {
 
                         return true;
                     }
@@ -184,10 +169,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 }
             });
-        } else {
-
         }
-
     }
 
     private void handleToolBar() {
@@ -212,7 +194,6 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     private boolean checkShared() {
@@ -224,21 +205,15 @@ public class HomeActivity extends AppCompatActivity {
         return (name.equals("null") && email.equals("null"));
     }
 
+
     private void setSignOut() {
-        if(Utility.isOnline(this)){
-            Log.i("TAG", "setSignOut:Activty ");
-            // sign out
-            handleSignOutCondition();
-            Toast.makeText(this, "logout successfully", Toast.LENGTH_SHORT).show();
-            // update all
-        }else
-            Toast.makeText(this, "You must connect to Network first", Toast.LENGTH_SHORT).show();
-
-
+        Log.i("TAG", "setSignOut:Activty ");
+        // sign out
+        handleSignOutCondition();
+        // update all
         handleDrawer();
         handleToolBar();
     }
-
 
 
     private void handleSignOutCondition() {
@@ -268,16 +243,12 @@ public class HomeActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int permissionRequestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(permissionRequestCode, permissions, grantResults);
         if (permissionRequestCode == REQUEST_PERMISSION) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                setWorkTimer();
-            } else {
-                // Ask the user to grant the permission
+            if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "please we need your permission to have all our features", Toast.LENGTH_LONG).show();
             }
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public void checkDrawOverlayPermission() {
         // Check if we already  have permission to draw over other apps
         if (!Settings.canDrawOverlays(this)) {
@@ -294,31 +265,29 @@ public class HomeActivity extends AppCompatActivity {
                     }).setNegativeButton("Cancel", (dialog, i) -> {
                 dialog.dismiss();
             }).show();
-        } else {
-            setWorkTimer();
-            // disablePullNotificationTouch();
-            // Do your stuff, we got permission captain
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.v("App", "OnActivity Result.");
         //check if received result code
         //  is equal our requested code for draw permission
-        if (requestCode == REQUEST_CODE) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (Settings.canDrawOverlays(this)) {
-                    // Permission Granted by Overlay
-                    // Do your Stuff
-                    setWorkTimer();
-                }
+        /*if (requestCode == REQUEST_CODE) {
+            if (Settings.canDrawOverlays(this)) {
+                // Permission Granted by Overlay
+                // Do your Stuff
+                setWorkTimer();
             }
-        }
+        }*/
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("firstTime", false);
+    }
 }
 
 

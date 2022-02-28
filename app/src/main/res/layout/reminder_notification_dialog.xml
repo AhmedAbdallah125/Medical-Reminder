@@ -166,4 +166,28 @@
         app:layout_constraintStart_toStartOf="@+id/imgAccept"
         app:layout_constraintTop_toTopOf="@+id/textView12" />
 
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgSnooze"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_baseline_access_time_24"
+        app:civ_circle_background_color="@color/primaryColor"
+        app:layout_constraintEnd_toStartOf="@+id/imgAccept"
+        app:layout_constraintStart_toEndOf="@+id/imgSkip"
+        app:layout_constraintTop_toBottomOf="@+id/NotificationCard"
+        tools:ignore="ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/snooze"
+        android:textColor="@color/primaryText"
+        app:layout_constraintEnd_toEndOf="@+id/imgSnooze"
+        app:layout_constraintStart_toStartOf="@+id/imgSnooze"
+        app:layout_constraintTop_toTopOf="@+id/textView13" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
