@@ -1,6 +1,5 @@
 package com.team_three.medicalreminder.workmanger;
 
-import static androidx.core.content.ContextCompat.startForegroundService;
 import android.content.Context;
 import android.content.Intent;
 
@@ -27,11 +26,11 @@ Context context;
         Data data = getInputData();
 
         Log.i("Reminder", "doWork: momomom");
-        startService(data.getString("MedReminderList"));
+        startMyService(data.getString("MedReminderList"));
         return Result.success();
     }
 
-    public void startService(String data){
+    public void startMyService(String data){
         Intent intent = new Intent(context, ForeGroundService.class);
         intent.putExtra("refill",data);
         if(Settings.canDrawOverlays(context)) {

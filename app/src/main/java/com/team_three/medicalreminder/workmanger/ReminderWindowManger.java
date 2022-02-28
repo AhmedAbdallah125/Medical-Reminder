@@ -68,7 +68,6 @@ public class ReminderWindowManger {
                 android.R.attr.showWhenLocked | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | WindowManager.LayoutParams.FLAG_LOCAL_FOCUS_MODE,
                 PixelFormat.TRANSLUCENT);
         windowManager.addView(customNotificationDialogView, params);
-        Log.i("zoooooz", "getCurrentAlarms: " + count);
     }
 
     private void bindView() {

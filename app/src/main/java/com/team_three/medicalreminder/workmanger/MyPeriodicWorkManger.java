@@ -48,7 +48,6 @@ public class MyPeriodicWorkManger extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        Log.i("zoooooz", "doWork: firsttttttt");
         calendar = Calendar.getInstance();
         medicationSingleList = repository.getMedicationDayWorkManger(calendar.getTimeInMillis());
         medicationSingleListForRefillReminder = repository.getRefilReminderList(calendar.getTimeInMillis());
@@ -74,9 +73,6 @@ public class MyPeriodicWorkManger extends Worker {
         timeNow = (timeNow + minute) * 60 * 1000;
         timeNowPlusThreeHours = timeNow + (3 * 60 * 60 * 1000);
 
-        Log.i("zoooooz", "getTimeNow: " + timeNow);
-        Log.i("zoooooz", "getTimeNow+6: " + timeNowPlusThreeHours);
-
     }
 
     //setting for period before running alarm
@@ -94,7 +90,6 @@ public class MyPeriodicWorkManger extends Worker {
             @Override
             public void onSuccess(List<MedicationPOJO> medicationPOJOS) {
                 medicationListForMedicationReminder = medicationPOJOS;
-                Log.i("zoooooz", "onSuccess: sssssss");
             }
 
             @Override
@@ -129,9 +124,7 @@ public class MyPeriodicWorkManger extends Worker {
             for (int i = 0; i < medicationListForMedicationReminder.size(); i++) {
                 if (medicationListForMedicationReminder.get(i).getTimeAndDose() != null) {
                     for (Map.Entry<String, Integer> entry : medicationListForMedicationReminder.get(i).getTimeAndDose().entrySet()) {
-                        Log.i("zoooooz", "getCurrentAlarms: " + medicationListForMedicationReminder.get(i).getMedicationName());
                         if (checkPeriod(entry.getKey())) {
-                            Log.i("zoooooz", "getCurrentAlarmsperiod: " + alarmTimePeriod);
                             setDurationTimes(timeNow, alarmTimePeriod);
                             setOnTimeWorkManger(periodBeforeRunning, medicationListForMedicationReminder.get(i), entry.getKey(), entry.getValue());
                         }
