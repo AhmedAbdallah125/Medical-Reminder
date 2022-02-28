@@ -66,7 +66,6 @@ public class HomeActivity extends AppCompatActivity {
         ///
         if (isFirstLaunch()) {
             checkDrawOverlayPermission();
-        } else {
             initLaunch();
         }
         setWorkTimer();
@@ -233,7 +232,7 @@ public class HomeActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences(RegisterFragment.SHAREDfILE, MODE_PRIVATE);
         editor = sharedPref.edit();
         editor.putInt("LAUNCH", 0);
-
+        editor.apply();
     }
     // return after requesting Permission
 
