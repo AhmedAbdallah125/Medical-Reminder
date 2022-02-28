@@ -24,6 +24,7 @@ import com.team_three.medicalreminder.databinding.FragmenetRegisterBinding;
 import com.team_three.medicalreminder.databinding.FragmentLoginBinding;
 import com.team_three.medicalreminder.Registeration.presenter.NetworkPresenter;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.model.Utility;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
 import com.team_three.medicalreminder.network.NetworkInterface;
 
@@ -72,7 +73,7 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
         });
         // handle back button
 
-        binding.imageRegisterBackArrow.setOnClickListener(v->{
+        binding.imageRegisterBackArrow.setOnClickListener(v -> {
             Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_fragment_home);
 
         });
@@ -80,10 +81,14 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
     }
 
     private void makeRegisterRequest(String email, String password, String name) {
-        if (checkEmail(email) && checkPassword(password) && checkName(name)) {
-            request(email, password, name);
-            handleVisibility(true);
-        }
+        if (Utility.isOnline(this.getContext())) {
+            if (checkEmail(email) && checkPassword(password) && checkName(name)) {
+                request(email, password, name);
+                handleVisibility(true);
+            }
+        } else
+            Toast.makeText(this.getContext(), "You must connect to Network first", Toast.LENGTH_SHORT).show();
+
     }
 
 

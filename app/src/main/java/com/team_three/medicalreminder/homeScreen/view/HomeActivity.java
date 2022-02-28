@@ -27,6 +27,7 @@ import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.databinding.ActivityHomeBinding;
 import com.team_three.medicalreminder.databinding.HomeDrawerBinding;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.model.Utility;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
 import com.team_three.medicalreminder.network.NetworkInterface;
 import com.team_three.medicalreminder.workmanger.MyPeriodicWorkManger;
@@ -225,10 +226,16 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void setSignOut() {
-        Log.i("TAG", "setSignOut:Activty ");
-        // sign out
-        handleSignOutCondition();
-        // update all
+        if(Utility.isOnline(this)){
+            Log.i("TAG", "setSignOut:Activty ");
+            // sign out
+            handleSignOutCondition();
+            Toast.makeText(this, "logout successfully", Toast.LENGTH_SHORT).show();
+            // update all
+        }else
+            Toast.makeText(this, "You must connect to Network first", Toast.LENGTH_SHORT).show();
+
+
         handleDrawer();
         handleToolBar();
     }
