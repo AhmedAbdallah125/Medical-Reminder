@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.team_three.medicalreminder.Registeration.presenter.NetworkPresenter;
 import com.team_three.medicalreminder.databinding.ActivityLoginBinding;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.model.Utility;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
 import com.team_three.medicalreminder.network.NetworkInterface;
 
@@ -77,14 +78,19 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
     }
 
     private void makeLoginRequest(String email, String password, int log) {
-        if (log == 2) {
-            loginRequestUsingGoogle();
-        } else if (log == 1) {
-            if (checkEmail(email) && checkPassword(password)) {
-                loginRequestUsingEmail(email, password);
-                handleVisibility(true);
+        if(Utility.isOnline(this)){
+            if (log == 2) {
+                loginRequestUsingGoogle();
+            } else if (log == 1) {
+                if (checkEmail(email) && checkPassword(password)) {
+                    loginRequestUsingEmail(email, password);
+                    handleVisibility(true);
+                }
             }
+        }else {
+            Toast.makeText(this, "You must connect to Network first", Toast.LENGTH_SHORT).show();
         }
+
 //        handleVisibility(true);
     }
 
