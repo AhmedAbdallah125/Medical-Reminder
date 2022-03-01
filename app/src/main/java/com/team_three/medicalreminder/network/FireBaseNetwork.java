@@ -30,6 +30,7 @@ import com.team_three.medicalreminder.model.TakerPOJO;
 import com.team_three.medicalreminder.model.User;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class FireBaseNetwork implements NetworkInterface {
@@ -319,6 +320,7 @@ public class FireBaseNetwork implements NetworkInterface {
 
     @Override
     public void loadPatientMedicationList(String email) {
+        Long timeNow = Calendar.getInstance().getTimeInMillis();
         String takerEmail = email.split("\\.")[0];
         Log.i("AAA", "loadPatientMedicationList: " + email);
         List<MedicationPOJO> medicationPOJOS = new ArrayList<>();
@@ -331,7 +333,11 @@ public class FireBaseNetwork implements NetworkInterface {
                 if (snapshot.exists()) {
                     Log.i("AAA", "Eexits: ");
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        medicationPOJOS.add(dataSnapshot.getValue(MedicationPOJO.class));
+                        MedicationPOJO medicationPOJO = dataSnapshot.getValue(MedicationPOJO.class);
+                        if (timeNow <= medicationPOJO.getEndDate()
+                        ) {
+                            medicationPOJOS.add(medicationPOJO);
+                        }
                     }
                 } else {
                     Log.i("AAA", "NotEexits: ");
