@@ -98,9 +98,10 @@ public class Window {
     }
 
     private void setBinding() {
+
         binding = RefillReminderDialogBinding.bind(mView);
         binding.titleText.setText("Refill " + medicationPOJO.getMedicationName() + " before finish!");
-
+        binding.medIcon.setImageResource(medicationPOJO.getImageID());
         binding.refillNumber.setText(String.valueOf(medicationPOJO.getLeftNumber()));
 
         binding.decreaseRefill.setOnClickListener(view -> {

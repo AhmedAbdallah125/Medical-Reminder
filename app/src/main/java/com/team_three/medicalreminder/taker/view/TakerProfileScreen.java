@@ -64,6 +64,7 @@ public class TakerProfileScreen extends Fragment {
                 if(!myEmail.equals("null")){
 
                     takerProfilePresenterInterface.deleteTaker(taker.getEmail(),myEmail);
+                    Navigation.findNavController(view).navigate(R.id.action_takerProfileScreen_to_fragment_taker_list);
 
                 }
             });

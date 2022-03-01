@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.1" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.1" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/ic_baseline_family_restroom_24.xml" value="0.151" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/drawable/ic_baseline_gender_24.xml" value="0.151" />
@@ -25,8 +26,12 @@
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/fragment_taker_profile_screen.xml" value="0.21" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/inactive_meds_row.xml" value="0.5" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/patient_row.xml" value="0.1852355072463768" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/refill_dialog.xml" value="0.1734375" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/refill_reminder_dialog.xml" value="0.22" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/reminder_notification_dialog.xml" value="0.17980072463768115" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/taker_request_row.xml" value="0.2" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/taker_row.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/layout/time_card.xml" value="0.1734375" />
         <entry key="..\:/Users/abdelrhman sayed/Desktop/projectAndroid/app/src/main/res/menu/menu_drawer.xml" value="0.20416666666666666" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.2115" />
         <entry key="..\:/ahmed engineering/ITI/Android/AndroidJavaProject/latest/MedicalRemindr/app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.2115" />
