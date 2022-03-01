@@ -7,10 +7,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-
-
-
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -20,20 +17,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalReminder">
         <service
+            android:name=".workmanger.takerManager.TakerReminderService"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
             android:name=".workmanger.ReminderService"
             android:enabled="true"
-            android:exported="true"></service>
-
-        <service android:name=".workmanger.ForeGroundService"
+            android:exported="true" />
+        <service
+            android:name=".workmanger.ForeGroundService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name=".Registeration.view.LoginActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".homeScreen.view.HomeActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
