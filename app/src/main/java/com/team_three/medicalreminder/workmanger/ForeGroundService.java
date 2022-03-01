@@ -45,7 +45,7 @@ public class ForeGroundService extends Service {
         startMyOwnForeground();
         createNotification();
 
-        if (!Settings.canDrawOverlays(this)) {
+        if (Settings.canDrawOverlays(this)) {
             Window window = new Window(this, intent.getStringExtra("refill"));
             window.open();
         }

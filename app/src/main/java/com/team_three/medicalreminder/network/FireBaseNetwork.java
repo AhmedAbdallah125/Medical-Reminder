@@ -45,6 +45,14 @@ public class FireBaseNetwork implements NetworkInterface {
     private FireBaseNetwork(Activity myActivity) {
         _activity = myActivity;
     }
+    private FireBaseNetwork(){}
+    public static FireBaseNetwork getInstance(){
+        if (myFireBase == null) {
+            mAuth = FirebaseAuth.getInstance();
+            myFireBase = new FireBaseNetwork();
+        }
+        return myFireBase;
+    }
 
     public static FireBaseNetwork getInstance(Activity myActivity) {
         if (myFireBase == null) {

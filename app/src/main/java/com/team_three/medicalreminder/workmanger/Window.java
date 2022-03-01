@@ -24,6 +24,7 @@ import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.databinding.RefillReminderDialogBinding;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.network.FireBaseNetwork;
 
 import java.util.concurrent.TimeUnit;
 
@@ -46,7 +47,7 @@ public class Window {
         this.medicationPOJO = fromStringPojo(data);
         this.context = context;
         this.data = data;
-        repository = Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(context), context);
+        repository = Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(context),FireBaseNetwork.getInstance(), context);
 
         Log.i("Reminder", "Window: " + medicationPOJO.getMedicationName());
         setWindowManager();
@@ -120,6 +121,7 @@ public class Window {
             public void onClick(View view) {
                 medicationPOJO.setFillReminder(false);
                 repository.updateMedications(medicationPOJO);
+
                 stopMyService();
                 close();
             }
