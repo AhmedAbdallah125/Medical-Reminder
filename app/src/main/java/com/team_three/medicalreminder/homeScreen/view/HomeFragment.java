@@ -84,16 +84,14 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
         fragmentHomeBinding.secondfloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_fragment_home_to_patientList);
+                Navigation.findNavController(view).navigate(R.id.action_fragment_home_to_addMedication);
             }
         });
-//        fragmentHomeBinding.thirdfloatingActionButton2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.i("TAG", "onClick: ");
-//                Navigation.findNavController(view).navigate(R.id.action_fragment_home_to_patientList);
-//            }
-//        });
+
+        fragmentHomeBinding.thirdfloatingActionButton2.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.action_fragment_home_to_addTaker);
+        });
+
         return fragmentHomeBinding.getRoot();
     }
 
@@ -115,24 +113,28 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
         if (!clicked) {
             fragmentHomeBinding.secondfloatingActionButton.setVisibility(View.VISIBLE);
             fragmentHomeBinding.thirdfloatingActionButton2.setVisibility(View.VISIBLE);
-
+            fragmentHomeBinding.txtSecondFab.setVisibility(View.VISIBLE);
+            fragmentHomeBinding.txtThirdFab.setVisibility(View.VISIBLE);
         } else {
             fragmentHomeBinding.secondfloatingActionButton.setVisibility(View.GONE);
             fragmentHomeBinding.thirdfloatingActionButton2.setVisibility(View.GONE);
+            fragmentHomeBinding.txtSecondFab.setVisibility(View.GONE);
+            fragmentHomeBinding.txtThirdFab.setVisibility(View.GONE);
         }
-
-
     }
 
     private void setAnimation(boolean clicked) {
         if (!clicked) {
             fragmentHomeBinding.secondfloatingActionButton.startAnimation(fromBottom);
             fragmentHomeBinding.thirdfloatingActionButton2.startAnimation(fromBottom);
+            fragmentHomeBinding.txtSecondFab.startAnimation(fromBottom);
+            fragmentHomeBinding.txtThirdFab.startAnimation(fromBottom);
             fragmentHomeBinding.btnFabAddMedication.startAnimation(rotateOpen);
-
         } else {
             fragmentHomeBinding.secondfloatingActionButton.startAnimation(toBottom);
             fragmentHomeBinding.thirdfloatingActionButton2.startAnimation(toBottom);
+            fragmentHomeBinding.txtSecondFab.startAnimation(toBottom);
+            fragmentHomeBinding.txtThirdFab.startAnimation(toBottom);
             fragmentHomeBinding.btnFabAddMedication.startAnimation(rotateClose);
         }
 
@@ -159,8 +161,6 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
         notifyMedicationChangeFromFirebase();
 //        requestDataFromPresenter(timeNow);
         // make presenter
-        checkWorking();
-
 
     }
 
@@ -171,11 +171,6 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
         handleRegistration();
     }
 
-    private void checkWorking() {
-        fragmentHomeBinding.thirdfloatingActionButton2.setOnClickListener(v -> {
-//            Navigation.findNavController(v).navigate(R.id.action_fragment_home_to_loginFragment);
-        });
-    }
 
     private void initRecycleView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(HomeFragment.this.getContext());

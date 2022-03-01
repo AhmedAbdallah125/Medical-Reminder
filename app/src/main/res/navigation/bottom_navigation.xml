@@ -30,7 +30,13 @@
             app:destination="@id/registerFragment" />
         <action
             android:id="@+id/action_fragment_home_to_patientList"
-            app:destination="@id/patientList" />
+            app:destination="@id/fragment_patient_List" />
+        <action
+            android:id="@+id/action_fragment_home_to_addTaker"
+            app:destination="@id/addTaker" />
+        <action
+            android:id="@+id/action_fragment_home_to_addTaker2"
+            app:destination="@id/addTaker" />
     </fragment>
     <fragment
         android:id="@+id/fragment_medication_list"
@@ -120,7 +126,7 @@
             app:destination="@id/fragment_home" />
     </fragment>
     <fragment
-        android:id="@+id/patientList"
+        android:id="@+id/fragment_patient_List"
         android:name="com.team_three.medicalreminder.patientsList.view.PatientList"
         android:label="fragment_patient_list"
         tools:layout="@layout/fragment_patient_list" >
@@ -139,7 +145,7 @@
             app:destination="@id/patientMedDetailsFragment" />
         <action
             android:id="@+id/action_patientMedicationfragment_to_patientList"
-            app:destination="@id/patientList" />
+            app:destination="@id/fragment_patient_List" />
     </fragment>
     <fragment
         android:id="@+id/patientMedDetailsFragment"

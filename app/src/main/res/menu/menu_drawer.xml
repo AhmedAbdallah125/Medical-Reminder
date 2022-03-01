@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="HardcodedText">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-<!--    <item-->
-<!--        android:id="@+id/nav_account"-->
-<!--        android:title="My Account"-->
-<!--        />-->
-
-<!--    <item-->
-<!--        android:id="@+id/nav_settings"-->
-<!--        android:title="Settings" />-->
-
+    <item
+        android:id="@+id/fragment_patient_List"
+        android:checked="true"
+        android:icon="@drawable/ic_baseline_person_white"
+        android:title="@string/patients_list" />
     <item
         android:id="@+id/nav_logout"
-        android:title="Logout" />
-    <item
-        android:id="@+id/patients"
-        android:title="@string/patients_list" />
+        android:title="@string/logout" />
 
 </menu>

@@ -61,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
 
         handleToolBar();
         initNavigation();
-        handleDrawerMenu();
+//        handleDrawerMenu();
 //        setSignOut(true);
         ///
         if (isFirstLaunch()) {
@@ -69,7 +69,9 @@ public class HomeActivity extends AppCompatActivity {
             initLaunch();
         }
         setWorkTimer();
-
+        handleDrawer();
+        handleDrawerMenu();
+        handleToolBar();
         //2
         //
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
@@ -93,14 +95,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        handleDrawer();
-        handleDrawerMenu();
-        handleToolBar();
-    }
-
-    @Override
     public boolean onSupportNavigateUp() {
         navController.navigateUp();
         return super.onSupportNavigateUp();
@@ -110,7 +104,7 @@ public class HomeActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (homeBinding.homeActivityDrawer.isOpen()) {
             homeBinding.homeActivityDrawer.close();
-        } else {
+        }else{
             super.onBackPressed();
         }
     }
@@ -123,6 +117,9 @@ public class HomeActivity extends AppCompatActivity {
                 navHostFragment.getNavController();
 
         NavigationUI.setupWithNavController(homeBinding.navigatorViewHome,
+                navController);
+
+        NavigationUI.setupWithNavController(homeBinding.drawerNav,
                 navController);
     }
 
@@ -157,19 +154,28 @@ public class HomeActivity extends AppCompatActivity {
             homeBinding.drawerNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Log.i("TAG", "onNavigationItemSelected: abdddddddd");
                     if (item.getItemId() == R.id.nav_logout) {
                         setSignOut();
                         return true;
-                    } else if (item.getItemId() == R.id.patients) {
+                    } /*else if (item.getItemId() == R.id.patientList) {
 
                         return true;
-                    }
+                    }*/
                     return false;
 
                 }
             });
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+            if (homeBinding.homeActivityDrawer.isOpen()) {
+                homeBinding.homeActivityDrawer.close();
+            } else {
+                homeBinding.homeActivityDrawer.open();
+            }
+        return super.onOptionsItemSelected(item);
     }
 
     private void handleToolBar() {
@@ -191,7 +197,6 @@ public class HomeActivity extends AppCompatActivity {
                     homeBinding.homeActivityDrawer.openDrawer(GravityCompat.START);
                 }
 
-
             }
         });
     }
@@ -200,21 +205,16 @@ public class HomeActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences(RegisterFragment.SHAREDfILE, MODE_PRIVATE);
         email = sharedPref.getString(RegisterFragment.USER_EMAIL, "null");
         name = sharedPref.getString(RegisterFragment.USER_NAME, "null");
-        Log.i("TAG", "checkShared: " + name);
-        Log.i("TAG", "checkShared: " + email);
         return (name.equals("null") && email.equals("null"));
     }
 
-
     private void setSignOut() {
-        Log.i("TAG", "setSignOut:Activty ");
         // sign out
         handleSignOutCondition();
         // update all
         handleDrawer();
         handleToolBar();
     }
-
 
     private void handleSignOutCondition() {
         editor = sharedPref.edit();
@@ -279,12 +279,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean("firstTime", false);
-    }
 }
 
 

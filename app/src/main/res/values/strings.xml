@@ -142,4 +142,5 @@
     <string name="channel_name">MedicalReminder</string>
     <string name="channel_description">MedicalDescription</string>
     <string name="snooze">Snooze</string>
+    <string name="logout">Logout</string>
 </resources>

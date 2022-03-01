@@ -51,16 +51,18 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <!--    app:layout_constraintTop_toBottomOf="@+id/calendarView"-->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragmnt_home_screen_recycle_vie"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2"
         app:layout_constraintVertical_weight="3" />
-    <!--    app:layout_constraintTop_toBottomOf="@+id/calendarView"-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_fab_addMedication"
@@ -68,12 +70,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        android:layout_marginBottom="64dp"
         android:layout_marginEnd="64dp"
+        android:layout_marginBottom="64dp"
         android:backgroundTint="@color/primaryColor"
         android:contentDescription="@string/FAB_add"
-        android:tint="@color/white"
         android:src="@drawable/ic_baseline_add_24"
+        android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -82,11 +84,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:clickable="true"
         android:backgroundTint="@color/primaryColor"
-        android:tint="@color/white"
+        android:clickable="true"
+        android:src="@drawable/add_medicine"
 
-        android:src="@drawable/ic_baseline_color_lens"
+        android:tint="@color/white"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/btn_fab_addMedication"
         app:layout_constraintEnd_toEndOf="@+id/btn_fab_addMedication"
@@ -98,15 +100,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:tint="@color/white"
-
-        android:src="@drawable/ic_baseline_edit_24"
-        android:visibility="invisible"
         android:backgroundTint="@color/primaryColor"
+        android:clickable="true"
+
+        android:src="@drawable/add_taker"
+        android:tint="@color/white"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/secondfloatingActionButton"
         app:layout_constraintEnd_toEndOf="@+id/secondfloatingActionButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/secondfloatingActionButton" />
+
+    <TextView
+        android:id="@+id/txt_second_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="@string/add_medication"
+        android:textColor="@color/secondaryColor"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/secondfloatingActionButton"
+        app:layout_constraintEnd_toStartOf="@+id/secondfloatingActionButton"
+        app:layout_constraintTop_toTopOf="@+id/secondfloatingActionButton" />
+
+    <TextView
+        android:id="@+id/txt_third_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="@string/txtTitleOfAddTaker"
+        android:textColor="@color/secondaryColor"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/thirdfloatingActionButton2"
+        app:layout_constraintEnd_toStartOf="@+id/thirdfloatingActionButton2"
+        app:layout_constraintTop_toTopOf="@+id/thirdfloatingActionButton2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

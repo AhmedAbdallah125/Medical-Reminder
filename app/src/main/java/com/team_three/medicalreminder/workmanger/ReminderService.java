@@ -51,7 +51,7 @@ public class ReminderService extends Service {
 
         notificationChannel();
         startForeground(FOREGROUND_ID, makeNotification());
-        if (!Settings.canDrawOverlays(this)) {
+        if (Settings.canDrawOverlays(this)) {
             reminderWindowManger = new ReminderWindowManger(getApplicationContext(),myMedicine,key,count);
             reminderWindowManger.setMyWindowManger();
         }
