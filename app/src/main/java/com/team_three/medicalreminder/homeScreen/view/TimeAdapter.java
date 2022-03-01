@@ -93,7 +93,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
             bindImagesBasedOnTaken(R.drawable.ic_baseline_done_24,R.drawable.ic_baseline_close_24,timeBinding);
             bindTextBasedOnTaken(R.string.take,R.string.skip,timeBinding);
         }else{
-            bindImagesBasedOnTaken(R.drawable.ic_baseline_replay_24,R.drawable.ic_baseline_replay_24,timeBinding);
+            bindImagesBasedOnTaken(R.drawable.ic_baseline_refresh_24,R.drawable.ic_baseline_replay_24,timeBinding);
             bindTextBasedOnTaken(R.string.untake,R.string.unSkip,timeBinding);
         }
 

@@ -56,28 +56,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_baseline_access_time_filled_24" />
-
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageTake"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginEnd="32dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageSkip"
+            app:civ_circle_background_color="@color/secondaryColor"
+            app:layout_constraintStart_toEndOf="@+id/imageSkip"
                 app:layout_constraintTop_toTopOf="@+id/imageSkip"
-                app:srcCompat="@drawable/ic_baseline_done_24" />
+            android:src="@drawable/ic_baseline_done_24" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageSkip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toStartOf="@+id/imageTake"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_pill_count"
-                app:srcCompat="@drawable/ic_baseline_close_24" />
+                android:src="@drawable/ic_baseline_clear_24"
+                app:civ_circle_background_color="@color/grayBG"/>
 
             <TextView
                 android:id="@+id/textTake"
