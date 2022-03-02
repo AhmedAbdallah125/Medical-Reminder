@@ -35,6 +35,9 @@ public class MedicationDrugDisplayPresenter implements MedicationDrugDisplayPres
     @Override
     public void updateMedication(MedicationPOJO medication) {
         repository.updateMedications(medication);
+        if(!isSharedPrefNull()){
+            repository.updatePatientMedicationList(email,medication);
+        }
     }
 
     @Override
@@ -46,8 +49,6 @@ public class MedicationDrugDisplayPresenter implements MedicationDrugDisplayPres
         sharedPref = context.getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
         email = sharedPref.getString(RegisterFragment.USER_EMAIL, "null");
         name = sharedPref.getString(RegisterFragment.USER_NAME, "null");
-        Log.i("TAG", "checkShared: " + name);
-        Log.i("TAG", "checkShared: " + email);
         return (name.equals("null") && email.equals("null"));
     }
 

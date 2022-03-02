@@ -23,11 +23,9 @@ public interface DAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertMedication(MedicationPOJO medication);
 
-
     //for specified medicine
     @Query("SELECT * FROM Medications WHERE id =:id")
     LiveData<MedicationPOJO> getMedications(int id);
-
 
     @Delete
     void deleteMedication(MedicationPOJO medicationPOJO);
@@ -49,6 +47,6 @@ public interface DAO {
     @Query("SELECT * FROM Medications WHERE (:data Between startDate AND endDate) AND isActive=1 ")
     Single<List<MedicationPOJO>> getMedicationDayWorkManger(long data);
 
-    @Query("SELECT * FROM Medications WHERE (:time Between startDate AND endDate) AND fillReminder =1 AND isActive=1")
+    @Query("SELECT * FROM Medications WHERE (:time Between startDate AND endDate) AND fillReminder=1 AND isActive=1")
     Single<List<MedicationPOJO>> getRefilReminderList(long time);
 }
