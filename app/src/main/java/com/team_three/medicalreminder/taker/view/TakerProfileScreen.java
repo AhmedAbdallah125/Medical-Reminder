@@ -7,12 +7,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.databinding.FragmentTakerProfileScreenBinding;
 import com.team_three.medicalreminder.model.Repository;
@@ -58,12 +60,17 @@ public class TakerProfileScreen extends Fragment {
             takerProfilePresenterInterface = new TakerProfilePresenter(this.getContext(),repository);
 
             binding.deleteTaker.setOnClickListener(view1 -> {
-                Log.i("TAG", "onViewCreated: delete");
+
                 if(!myEmail.equals("null")){
-                    Log.i("TAG", "onViewCreated: atms7");
+
                     takerProfilePresenterInterface.deleteTaker(taker.getEmail(),myEmail);
+                    Navigation.findNavController(view).navigate(R.id.action_takerProfileScreen_to_fragment_taker_list);
 
                 }
+            });
+            binding.icBackInProfileTaker.setOnClickListener(view1 -> {
+                Navigation.findNavController(view).navigate(R.id.action_takerProfileScreen_to_fragment_taker_list);
+
             });
         }
 

@@ -237,7 +237,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
     @Override
     public void showMedications(List<MedicationPOJO> storedMedications) {
         homeAdapter.setMedicines(storedMedications);
-        homeAdapter.notifyDataSetChanged();
+
         Log.i("TAG", "showMedications: " + storedMedications.size());
         // sned data to firebase
 //        sharedPref =getActivity().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
@@ -246,6 +246,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
             String[] mail = email.split("\\.");
             String myEmail = mail[0];
             myPresenter.addMedicationListViaNetwork(storedMedications, myEmail);
+            homeAdapter.notifyDataSetChanged();
         }
 
     }

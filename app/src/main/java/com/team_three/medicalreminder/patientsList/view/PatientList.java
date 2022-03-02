@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,6 +59,11 @@ public class PatientList extends Fragment implements PatientListViewInterface{
         layoutManager.setOrientation(RecyclerView.VERTICAL);
 
         binding.patientRecylerView.setLayoutManager(layoutManager);
+
+        binding.backBtnPatientFragment.setOnClickListener(view1 -> {
+            Navigation.findNavController(view).navigate(R.id.action_patientList_to_fragment_home);
+
+        });
 
         sharedPreferences = this.getContext().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
         String[] email = sharedPreferences.getString(RegisterFragment.USER_EMAIL,"null").split("\\.");

@@ -143,4 +143,7 @@
     <string name="channel_description">MedicalDescription</string>
     <string name="snooze">Snooze</string>
     <string name="logout">Logout</string>
+    <string name="ignore">ignore</string>
+    <string name="takeText">take</string>
+    <string name="taker_profile">Taker Profile</string>
 </resources>

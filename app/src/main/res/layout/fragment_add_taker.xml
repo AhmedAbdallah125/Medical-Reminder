@@ -78,14 +78,14 @@
 
     <ImageView
         android:id="@+id/icBackInAddTaker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="16dp"
+        android:layout_height="22dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
+        android:contentDescription="@string/todo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_baseline_arrow_back_24"
-        android:contentDescription="@string/todo" />
+        android:src="@drawable/ic_baseline_arrow_back_24" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView"

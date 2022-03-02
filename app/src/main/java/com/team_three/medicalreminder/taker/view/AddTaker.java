@@ -34,6 +34,8 @@ public class AddTaker extends Fragment implements AddTakerViewInterface{
     AddTakerPresenerInterface addTakerPresenerInterface;
     Repository repository;
     SharedPreferences sharedPreferences;
+    private int previousDestination;
+
 
     boolean response;
     @Override
@@ -54,7 +56,18 @@ public class AddTaker extends Fragment implements AddTakerViewInterface{
         super.onViewCreated(view, savedInstanceState);
 
         repository = Repository.getInstance(FireBaseNetwork.getInstance(this.getActivity()),this.getContext());
+
         addTakerPresenerInterface = new AddTakerPresenter(this.getContext(),this,repository);
+
+        previousDestination = Navigation.findNavController(view).getPreviousBackStackEntry().getDestination().getId();
+        binding.icBackInAddTaker.setOnClickListener(view1 -> {
+            if(previousDestination==R.id.fragment_taker_list){
+                Navigation.findNavController(view).navigate(R.id.action_addTaker_to_fragment_taker_list);
+            }else {
+                Navigation.findNavController(view).navigate(R.id.action_addTaker_to_fragment_home);
+            }
+        });
+
         binding.btnTakerAdded.setOnClickListener(view1 -> {
             if(checkEmail(binding.txtEmail.getEditableText().toString())){
                 addTakerPresenerInterface.isLoggedIn();
