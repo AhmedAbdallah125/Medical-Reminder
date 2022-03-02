@@ -63,6 +63,7 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
 
 
     String email;
+    String name;
 
 
     public PatientMedFragment() {
@@ -82,9 +83,13 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
         // Inflate the layout for this fragment
         binding = FragmentPatientMedBinding.inflate(inflater, container, false);
         email = getArguments().getString("email");
+        name=getArguments().getString("name");
+
+        // get name first
         // check
         return binding.getRoot();
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -172,9 +177,9 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
                 .setConstraints(constraints)
                 .addTag(tag)
                 .build();
-
+        Log.i("BBB", "setPeriodicWorkManager: Run Perioc in Fragment");
         WorkManager.getInstance(this.getContext()).
-                enqueueUniquePeriodicWork("Counter", ExistingPeriodicWorkPolicy.REPLACE,
+                enqueueUniquePeriodicWork(tag, ExistingPeriodicWorkPolicy.REPLACE,
                         periodicWorkRequest);
     }
 
@@ -183,6 +188,7 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
                 .putString("MED", serializeToJason(medicationPOJOList))
 //                .putString("Medication",medicationPOJO.getMedicationName())
                 .putString("EMAIL", email)
+//                .putString("NAME",name)
                 .build();
 
     }

@@ -28,6 +28,7 @@ public class TakerReminderService extends Service {
     final static int FOREGROUND_ID = 10;
     NotificationManager notificationManager;
     String description;
+    private String name;
 
     public TakerReminderService() {
     }
@@ -38,6 +39,7 @@ public class TakerReminderService extends Service {
         key = intent.getStringExtra(TakerOneTmeWorkManager.KEY_TAG);
         count = intent.getIntExtra(TakerOneTmeWorkManager.VALUE_TAG, 1);
         email = intent.getStringExtra(TakerOneTmeWorkManager.EMAIL_TAG);
+//        name=intent.getStringExtra(TakerOneTmeWorkManager.NAME_TAG);
         createNotificationChannel();
         startForeground(FOREGROUND_ID, makeNotification());
         if (Settings.canDrawOverlays(this)) {

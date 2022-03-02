@@ -2,6 +2,7 @@ package com.team_three.medicalreminder.workmanger.takerManager;
 
 import android.content.Context;
 import android.media.session.MediaSession;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.work.Constraints;
@@ -33,6 +34,7 @@ public class TakerPeriodicWorkManager extends Worker {
     long alarmTimePeriod;
     // period before running
     long periodBeforeRunning;
+    private String name;
 
     public TakerPeriodicWorkManager(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -47,6 +49,7 @@ public class TakerPeriodicWorkManager extends Worker {
     @NonNull
     @Override
     public Result doWork() {
+        Log.i("BBB", "doWork: inperidioc");
         getPatientData();
         getTimePeriod();
         getCurrentAlarms();
@@ -56,6 +59,7 @@ public class TakerPeriodicWorkManager extends Worker {
     private void getPatientData() {
         Data data = getInputData();
         email = data.getString("EMAIL");
+//        name=data.getString("NAME");
         medicationSingleList = listFromJason(data.getString("MED"));
     }
 
@@ -125,6 +129,7 @@ public class TakerPeriodicWorkManager extends Worker {
                 .putString("INDEX", index)
                 .putInt("COUNT", pillsCount)
                 .putString("EMAIL", email)
+//                .putString("NAME",name)
                 .build();
         Constraints constraints = new Constraints.Builder()
                 .setRequiresBatteryNotLow(true)
@@ -136,6 +141,7 @@ public class TakerPeriodicWorkManager extends Worker {
                 .addTag(tag)
                 .build();
         //
+        Log.i("BBB", "setOnTimeWorkManger: " + time);
         WorkManager.getInstance(context).enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, oneTimeWorkRequest);
     }
 

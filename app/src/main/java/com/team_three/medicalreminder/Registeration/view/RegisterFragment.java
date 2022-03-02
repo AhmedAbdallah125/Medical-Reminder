@@ -66,9 +66,9 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
 
 
         binding.btnSignUp.setOnClickListener(v -> {
-            email = binding.textInputEditEmailSignUp.getEditableText().toString();
-            password = binding.textInputEditPasswordSignUp.getEditableText().toString();
-            name = binding.textInputEditNameSignUp.getEditableText().toString();
+            email = binding.textInputEditEmailSignUp.getEditableText().toString().trim();
+            password = binding.textInputEditPasswordSignUp.getEditableText().toString().trim();
+            name = binding.textInputEditNameSignUp.getEditableText().toString().trim();
             makeRegisterRequest(email, password, name);
         });
         // handle back button
@@ -166,7 +166,8 @@ public class RegisterFragment extends Fragment implements NetworkViewInterface {
         return myRepository.getCurrentUser();
     }
 
-    private void initShared() {
+    private void
+    initShared() {
         Context context = getActivity();
         sharedPref = context.getSharedPreferences(
                 SHAREDfILE, Context.MODE_PRIVATE);
