@@ -12,7 +12,6 @@ import androidx.work.WorkerParameters;
 
 import com.google.gson.Gson;
 import com.team_three.medicalreminder.model.MedicationPOJO;
-import com.team_three.medicalreminder.workmanger.MyOneTimeWorkManger;
 
 import java.util.Calendar;
 import java.util.List;

@@ -1,30 +1,21 @@
-package com.team_three.medicalreminder.workmanger;
+package com.team_three.medicalreminder.workmanger.medicalremindermanger;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.WindowManager;
-import android.R.attr;
 
 import androidx.core.app.NotificationCompat;
 
 import com.google.gson.Gson;
 import com.team_three.medicalreminder.MainActivity;
 import com.team_three.medicalreminder.R;
-import com.team_three.medicalreminder.databinding.ReminderNotificationDialogBinding;
 import com.team_three.medicalreminder.model.MedicationPOJO;
-import com.team_three.medicalreminder.model.Repository;
 
 public class ReminderService extends Service {
 

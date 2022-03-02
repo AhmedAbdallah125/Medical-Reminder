@@ -1,8 +1,7 @@
-package com.team_three.medicalreminder.workmanger;
+package com.team_three.medicalreminder.workmanger.medicalremindermanger;
 
 import static android.content.Context.WINDOW_SERVICE;
 
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.work.Constraints;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;

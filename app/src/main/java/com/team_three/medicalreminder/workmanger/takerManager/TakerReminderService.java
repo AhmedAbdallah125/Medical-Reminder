@@ -16,7 +16,6 @@ import com.google.gson.Gson;
 import com.team_three.medicalreminder.MainActivity;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.model.MedicationPOJO;
-import com.team_three.medicalreminder.workmanger.ReminderWindowManger;
 
 public class TakerReminderService extends Service {
     private MedicationPOJO myMedicine;

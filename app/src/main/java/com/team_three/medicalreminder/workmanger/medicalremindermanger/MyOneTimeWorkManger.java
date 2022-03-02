@@ -1,10 +1,11 @@
-package com.team_three.medicalreminder.workmanger;
+package com.team_three.medicalreminder.workmanger.medicalremindermanger;
 
 import static androidx.core.content.ContextCompat.startForegroundService;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.work.Data;
@@ -39,6 +40,7 @@ public class MyOneTimeWorkManger extends Worker {
         data = getInputData();
         key = data.getString(KEY_TAG);
         count = data.getInt(VALUE_TAG, 1);
+        Log.i("ahmaaaad", "setOnTimeWorkManger: "+key);
     }
 
 

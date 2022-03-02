@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
@@ -15,6 +16,7 @@ import com.google.gson.Gson;
 import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.workmanger.medicalremindermanger.MyOneTimeWorkManger;
 
 import java.util.Calendar;
 import java.util.List;
@@ -167,13 +169,15 @@ public class MyPeriodicWorkManger extends Worker {
         Constraints constraints = new Constraints.Builder()
                 .setRequiresBatteryNotLow(true)
                 .build();
+        String tag = medicationPOJO.getId()+medicationPOJO.getMedicationName()+index;
         OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(MyOneTimeWorkManger.class).
                 setInputData(data)
                 .setConstraints(constraints)
                 .setInitialDelay(time, TimeUnit.MINUTES)
-                .addTag("download")
+                .addTag(tag)
                 .build();
-        WorkManager.getInstance(context).enqueue(oneTimeWorkRequest);
+        Log.i("ahmaaaad", "setOnTimeWorkManger: "+tag+" "+time);
+        WorkManager.getInstance(context).enqueueUniqueWork(tag,ExistingWorkPolicy.REPLACE,oneTimeWorkRequest);
     }
 
     private String serializeToJason(MedicationPOJO pojo) {

@@ -9,6 +9,10 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.Constraints;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.dataBase.LocalSourceInterface;
@@ -23,10 +28,12 @@ import com.team_three.medicalreminder.databinding.FragmentMedicationTimeBinding;
 import com.team_three.medicalreminder.homeScreen.presenter.HomeScreenPresenter;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.workmanger.MyPeriodicWorkManger;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 
 public class MedicationTimeFragment extends Fragment implements HomeFragmentInterface, OnMedicationTimeListener {
@@ -35,6 +42,7 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
     Repository myRepository;
     FragmentMedicationTimeBinding binding;
     MedicationPOJO medicationPOJO;
+    private MaterialAlertDialogBuilder dialogBuilder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,11 +79,36 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
         binding.timeTxtStrength.setText(medicationPOJO.getStrength() + " :" + medicationPOJO.getWeight());
         // handling delete medication
         binding.imgDeleteMed.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_medicationTimeFragment_to_fragment_home);
-            myPresenter.deleteMedication(medicationPOJO);
-            Toast.makeText(this.getContext(), medicationPOJO.getMedicationName() + " is Deleted", Toast.LENGTH_SHORT).show();
-
+            lunchDeleteDialog();
         });
+    }
+
+    private void lunchDeleteDialog() {
+        dialogBuilder.setTitle("Delete Medication")
+                .setMessage("Do you want to delete " + medicationPOJO.getMedicationName() + "!")
+                .setPositiveButton("DELETE", (dialog, i) -> {
+                    deleteMedication(medicationPOJO);
+                    cancelWorkManger(medicationPOJO);
+                    Toast.makeText(this.getContext(), medicationPOJO.getMedicationName() + " is Deleted", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    Navigation.findNavController(binding.getRoot()).navigate(R.id.action_medicationTimeFragment_to_fragment_home);
+                })
+                .setNegativeButton("cancel", (dialog, i) -> {
+                    dialog.dismiss();
+                }).show();
+    }
+
+    private void cancelWorkManger(MedicationPOJO medicationPOJO) {
+        if (medicationPOJO.getTimeAndDose() != null) {
+            for (Map.Entry<String, Integer> entry : medicationPOJO.getTimeAndDose().entrySet()) {
+                String tag = medicationPOJO.getId() + medicationPOJO.getMedicationName() + entry.getKey();
+                WorkManager.getInstance(this.getContext()).cancelAllWorkByTag(tag);
+            }
+        }
+    }
+
+    private void deleteMedication(MedicationPOJO medicationPOJO) {
+        myPresenter.deleteMedication(medicationPOJO);
     }
 
     private void initRecycleView() {
@@ -117,10 +150,25 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
 
         handleTakeClick(position, take, medicationPOJO);
         myPresenter.updateMedication(medicationPOJO);
+        setWorkTimer();
         // back to home
 
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_medicationTimeFragment_to_fragment_home);
 
+    }
+
+    private void setWorkTimer() {
+        Constraints constraints = new Constraints.Builder()
+                .setRequiresBatteryNotLow(true)
+                .build();
+
+        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(MyPeriodicWorkManger.class,
+                3, TimeUnit.HOURS)
+                .setConstraints(constraints)
+                .build();
+
+        WorkManager.getInstance(this.getContext()).enqueueUniquePeriodicWork("Counter", ExistingPeriodicWorkPolicy.REPLACE, periodicWorkRequest);
+//        WorkManager.getInstance(this.getContext()).enqueue(periodicWorkRequest);
     }
 
     private void handleTakeClick(int position, boolean take, MedicationPOJO medicationPOJO) {
