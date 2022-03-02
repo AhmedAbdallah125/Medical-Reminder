@@ -17,8 +17,8 @@ public interface LocalSourceInterface {
     void deleteMedication(MedicationPOJO medication);
     LiveData<MedicationPOJO> getMedications(int id);
     void updateMedications(MedicationPOJO medicationPOJO);
-    LiveData<List<MedicationPOJO>> getActiveMedications();
-    LiveData<List<MedicationPOJO>> getInactiveMedications();
+    LiveData<List<MedicationPOJO>> getActiveMedications(long time);
+    LiveData<List<MedicationPOJO>> getInactiveMedications(long time);
 
     LiveData<List<MedicationPOJO>> getMedicationDay(long time);
 

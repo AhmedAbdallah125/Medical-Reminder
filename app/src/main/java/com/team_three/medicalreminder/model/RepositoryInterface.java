@@ -24,9 +24,9 @@ public interface RepositoryInterface {
 
     void updateMedications(MedicationPOJO medicationPOJO);
 
-    LiveData<List<MedicationPOJO>> getActiveMedications();
+    LiveData<List<MedicationPOJO>> getActiveMedications(long time);
 
-    LiveData<List<MedicationPOJO>> getInactiveMedications();
+    LiveData<List<MedicationPOJO>> getInactiveMedications(long time);
 
     // fireBase
     void isSignedIn();

@@ -102,13 +102,13 @@ public class Repository implements RepositoryInterface {
     }
 
     @Override
-    public LiveData<List<MedicationPOJO>> getActiveMedications() {
-        return localSourceInterface.getActiveMedications();
+    public LiveData<List<MedicationPOJO>> getActiveMedications(long time) {
+        return localSourceInterface.getActiveMedications(time);
     }
 
     @Override
-    public LiveData<List<MedicationPOJO>> getInactiveMedications() {
-        return localSourceInterface.getInactiveMedications();
+    public LiveData<List<MedicationPOJO>> getInactiveMedications(long time) {
+        return localSourceInterface.getInactiveMedications(time);
     }
 
     @Override
