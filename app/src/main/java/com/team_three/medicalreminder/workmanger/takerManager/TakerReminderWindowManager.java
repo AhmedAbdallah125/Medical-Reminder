@@ -26,8 +26,7 @@ import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
 import com.team_three.medicalreminder.network.NetworkInterface;
-import com.team_three.medicalreminder.workmanger.MyOneTimeWorkManger;
-import com.team_three.medicalreminder.workmanger.ReminderService;
+
 import com.team_three.medicalreminder.workmanger.Window;
 
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class TakerReminderWindowManager {
-    private  String name;
+    private String name;
     private Context context;
     private MedicationPOJO myMedicine;
     ReminderNotificationDialogBinding binding;
@@ -124,7 +123,7 @@ public class TakerReminderWindowManager {
         });
 
         binding.imgSkip.setOnClickListener(v -> {
-            context.stopService(new Intent(context, ReminderService.class));
+            context.stopService(new Intent(context, TakerReminderService.class));
             stopMyService();
             close();
         });

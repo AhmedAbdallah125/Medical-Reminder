@@ -43,7 +43,6 @@ import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.Utility;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
 import com.team_three.medicalreminder.network.NetworkInterface;
-import com.team_three.medicalreminder.workmanger.MyOneTimeWorkManger;
 import com.team_three.medicalreminder.workmanger.MyPeriodicWorkManger;
 import com.team_three.medicalreminder.workmanger.takerManager.TakerOneTmeWorkManager;
 import com.team_three.medicalreminder.workmanger.takerManager.TakerPeriodicWorkManager;

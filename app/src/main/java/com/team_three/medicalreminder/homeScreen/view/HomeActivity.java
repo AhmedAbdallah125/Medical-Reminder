@@ -240,6 +240,14 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handleDrawer();
+        handleDrawerMenu();
+        handleToolBar();
+    }
+
     public void checkDrawOverlayPermission() {
         // Check if we already  have permission to draw over other apps
         if (!Settings.canDrawOverlays(this)) {
