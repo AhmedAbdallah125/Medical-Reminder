@@ -1,6 +1,8 @@
 package com.team_three.medicalreminder.homeScreen.view;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,12 +19,17 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.team_three.medicalreminder.R;
+import com.team_three.medicalreminder.Registeration.view.NetworkViewInterface;
+import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.dataBase.LocalSourceInterface;
 import com.team_three.medicalreminder.databinding.FragmentMedicationTimeBinding;
 import com.team_three.medicalreminder.homeScreen.presenter.HomeScreenPresenter;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.model.Utility;
+import com.team_three.medicalreminder.network.FireBaseNetwork;
+import com.team_three.medicalreminder.network.NetworkInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +42,8 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
     Repository myRepository;
     FragmentMedicationTimeBinding binding;
     MedicationPOJO medicationPOJO;
+    private SharedPreferences sharedPref;
+    private String email;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,9 +82,20 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
         binding.imgDeleteMed.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.action_medicationTimeFragment_to_fragment_home);
             myPresenter.deleteMedication(medicationPOJO);
+            if (Utility.isOnline(this.getContext()) && checkShared()) {
+                myPresenter.deleteMedication(email, String.valueOf(medicationPOJO.getId()));
+            }
+            Toast.makeText(this.getContext(), medicationPOJO.getMedicationName() + " is Deleted", Toast.LENGTH_SHORT).show();
             Toast.makeText(this.getContext(), medicationPOJO.getMedicationName() + " is Deleted", Toast.LENGTH_SHORT).show();
 
         });
+    }
+
+    private boolean checkShared() {
+        sharedPref = getActivity().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
+        email = sharedPref.getString(RegisterFragment.USER_EMAIL, "null");
+
+        return (!email.equals("null"));
     }
 
     private void initRecycleView() {
@@ -91,7 +111,8 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
 
     private void initRepository() {
         LocalSourceInterface myLocal = ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext());
-        myRepository = Repository.getInstance(myLocal, this.getContext());
+        NetworkInterface myRemote = FireBaseNetwork.getInstance(getActivity());
+        myRepository = Repository.getInstance(myLocal, myRemote, this.getContext());
         myPresenter = new HomeScreenPresenter(this, myRepository);
     }
 

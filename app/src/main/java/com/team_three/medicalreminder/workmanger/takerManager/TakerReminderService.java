@@ -45,6 +45,7 @@ public class TakerReminderService extends Service {
             TakerReminderWindowManager myWorkManager = new TakerReminderWindowManager(
                     this, myMedicine, description, count
             );
+            myWorkManager.setWindowManager();
 
         }
         return START_NOT_STICKY;

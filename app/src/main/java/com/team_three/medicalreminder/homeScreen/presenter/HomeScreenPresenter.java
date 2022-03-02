@@ -26,14 +26,20 @@ public class HomeScreenPresenter implements HomePresenterInterface, NetworkDeleg
     private Repository myRepository;
     private HomeFragmentInterface myView;
     private LiveData<List<MedicationPOJO>> storedMedications;
-     static long timeSaved;
+    static long timeSaved;
     public static int position;
 
     public HomeScreenPresenter(HomeFragmentInterface myView, Repository myRepository) {
         this.myView = myView;
         this.myRepository = myRepository;
+        myRepository.setMyDelegation(this);
+
     }
 
+    @Override
+    public void deleteMedication(String email, String medicationId) {
+        myRepository.deleteInPatientMedicationList(email, medicationId);
+    }
 
     @Override
     public void getMedicationDay(LifecycleOwner owner, long time) {
@@ -51,7 +57,7 @@ public class HomeScreenPresenter implements HomePresenterInterface, NetworkDeleg
             @Override
             public void onChanged(List<MedicationPOJO> medicationPOJOS) {
                 // call to update there
-                Log.i("TAG", "onChanged: "+medicationPOJOS.size());
+                Log.i("TAG", "onChanged: " + medicationPOJOS.size());
                 myView.showMedications(medicationPOJOS);
             }
         });
@@ -64,12 +70,12 @@ public class HomeScreenPresenter implements HomePresenterInterface, NetworkDeleg
 
     @Override
     public void updateTime(long time) {
-        timeSaved=time;
+        timeSaved = time;
     }
 
     @Override
     public void addMedicationListViaNetwork(List<MedicationPOJO> medicationPOJOS, String email) {
-        myRepository.addMedicationListViaNetwork(medicationPOJOS,email);
+        myRepository.addMedicationListViaNetwork(medicationPOJOS, email);
     }
 
     @Override

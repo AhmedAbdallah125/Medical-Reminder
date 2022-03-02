@@ -1,6 +1,7 @@
 package com.team_three.medicalreminder.workmanger.takerManager;
 
 import android.content.Context;
+import android.media.session.MediaSession;
 
 import androidx.annotation.NonNull;
 import androidx.work.Constraints;
@@ -11,9 +12,11 @@ import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.workmanger.MyOneTimeWorkManger;
 
+import java.lang.reflect.Type;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -35,9 +38,6 @@ public class TakerPeriodicWorkManager extends Worker {
         this.context = context;
     }
 
-    public void setMedicationSingleList(List<MedicationPOJO> medicationSingleList) {
-        this.medicationSingleList = medicationSingleList;
-    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -46,10 +46,16 @@ public class TakerPeriodicWorkManager extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-
+        getPatientData();
         getTimePeriod();
         getCurrentAlarms();
         return Result.success();
+    }
+
+    private void getPatientData() {
+        Data data = getInputData();
+        email = data.getString("EMAIL");
+        medicationSingleList = listFromJason(data.getString("MED"));
     }
 
     // for periodic
@@ -68,6 +74,7 @@ public class TakerPeriodicWorkManager extends Worker {
         timeNowPlusThreeHours = timeNow + (3 * 60 * 60 * 1000);
 
     }
+
 
     //setting for period before running alarm
     private void setDurationTimes(long timeNow, long alarmPeriod) {
@@ -115,7 +122,7 @@ public class TakerPeriodicWorkManager extends Worker {
 //                .putString("Medication",medicationPOJO.getMedicationName())
                 .putString("INDEX", index)
                 .putInt("COUNT", pillsCount)
-                .putString("EMAIL",email)
+                .putString("EMAIL", email)
                 .build();
         Constraints constraints = new Constraints.Builder()
                 .setRequiresBatteryNotLow(true)
@@ -133,6 +140,13 @@ public class TakerPeriodicWorkManager extends Worker {
     private String serializeToJason(MedicationPOJO pojo) {
         Gson gson = new Gson();
         return gson.toJson(pojo);
+    }
+
+    private List<MedicationPOJO> listFromJason(String medListString) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<MedicationPOJO>>() {
+        }.getType();
+        return gson.fromJson(medListString, type);
     }
 
 }
