@@ -43,7 +43,7 @@ public class TakerReminderService extends Service {
         if (Settings.canDrawOverlays(this)) {
             // call window manager
             TakerReminderWindowManager myWorkManager = new TakerReminderWindowManager(
-                    this, myMedicine, description, count
+                    this, myMedicine, description, count, email
             );
             myWorkManager.setWindowManager();
 
@@ -64,7 +64,7 @@ public class TakerReminderService extends Service {
         return new NotificationCompat.Builder(getApplicationContext(),
                 String.valueOf(CHANNEL_ID))
                 .setSmallIcon(myMedicine.getImageID())
-                .setContentTitle("Medication Reminder")
+                .setContentTitle("Medication Reminder for patient" + email)
                 .setContentText(description)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)

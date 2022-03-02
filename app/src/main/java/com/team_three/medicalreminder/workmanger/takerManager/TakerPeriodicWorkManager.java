@@ -6,6 +6,7 @@ import android.media.session.MediaSession;
 import androidx.annotation.NonNull;
 import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
@@ -88,7 +89,8 @@ public class TakerPeriodicWorkManager extends Worker {
                     for (Map.Entry<String, Integer> entry : medicationSingleList.get(i).getTimeAndDose().entrySet()) {
                         if (checkPeriod(entry.getKey())) {
                             setDurationTimes(timeNow, alarmTimePeriod);
-                            setOnTimeWorkManger(periodBeforeRunning, medicationSingleList.get(i), entry.getKey(), entry.getValue());
+                            String tag = setTag(medicationSingleList.get(i), entry.getKey());
+                            setOnTimeWorkManger(tag, periodBeforeRunning, medicationSingleList.get(i), entry.getKey(), entry.getValue());
                         }
                     }
                 }
@@ -115,7 +117,7 @@ public class TakerPeriodicWorkManager extends Worker {
         return t * 1000;
     }
 
-    private void setOnTimeWorkManger(long time, MedicationPOJO medicationPOJO, String index, int pillsCount) {
+    private void setOnTimeWorkManger(String tag, long time, MedicationPOJO medicationPOJO, String index, int pillsCount) {
         // pass medication POJO
         Data data = new Data.Builder()
                 .putString("MED", serializeToJason(medicationPOJO))
@@ -131,10 +133,14 @@ public class TakerPeriodicWorkManager extends Worker {
                 setInputData(data)
                 .setConstraints(constraints)
                 .setInitialDelay(time, TimeUnit.MINUTES)
-                .addTag("download")
+                .addTag(tag)
                 .build();
         //
-        WorkManager.getInstance(context).enqueue(oneTimeWorkRequest);
+        WorkManager.getInstance(context).enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, oneTimeWorkRequest);
+    }
+
+    private String setTag(MedicationPOJO medicationPOJO, String key) {
+        return email + medicationPOJO.getId() + medicationPOJO.getMedicationName() + key;
     }
 
     private String serializeToJason(MedicationPOJO pojo) {

@@ -87,9 +87,10 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
                 Navigation.findNavController(view).navigate(R.id.action_fragment_home_to_addMedication);
             }
         });
-
+//// yyyyyyy
         fragmentHomeBinding.thirdfloatingActionButton2.setOnClickListener(v -> {
-            Navigation.findNavController(v).navigate(R.id.action_fragment_home_to_addTaker);
+            Navigation.findNavController(v).navigate(R.id.action_fragment_home_to_patientList);
+//            Navigation.findNavController(v).navigate(R.id.action_fragment_home_to_addTaker);
         });
 
         return fragmentHomeBinding.getRoot();

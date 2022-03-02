@@ -1,5 +1,6 @@
 package com.team_three.medicalreminder.workmanger.takerManager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.os.Build;
@@ -23,13 +24,15 @@ public class TakerReminderWindowManager {
     Repository repository;
     int count;
     String key;
+    String email;
 
 
-    public TakerReminderWindowManager(Context context, MedicationPOJO myMedicine, String description, int count) {
+    public TakerReminderWindowManager(Context context, MedicationPOJO myMedicine, String description, int count, String email) {
         this.context = context;
         this.myMedicine = myMedicine;
         this.key = key;
         this.count = count;
+        this.email = email;
     }
 
     // check connection first
@@ -64,10 +67,12 @@ public class TakerReminderWindowManager {
                 PixelFormat.TRANSLUCENT);
     }
 
+    @SuppressLint("SetTextI18n")
     private void bindViews() {
         // must contain email
         binding.imgMedNotification.setImageResource(myMedicine.getImageID());
-        binding.textView.setText(myMedicine.getMedicationName());
+        binding.textView.setText("Patient is : " + email + "\n" +
+                myMedicine.getMedicationName());
         binding.txtTime.setText(key);
         binding.txtMedTimeNotification.setText("Schedule for " + key + ", today");
         description = "take " + count + " " + myMedicine.getFormat() + "(s), " +
