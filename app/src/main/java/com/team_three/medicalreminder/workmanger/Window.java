@@ -15,6 +15,7 @@ import static android.content.Context.WINDOW_SERVICE;
 
 import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
@@ -88,13 +89,14 @@ public class Window {
         Constraints constraints = new Constraints.Builder()
                 .setRequiresBatteryNotLow(true)
                 .build();
+        String tag = medicationPOJO.getMedicationName()+medicationPOJO.getId();
         OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(RefileReminderWorkManagerForOneTime.class)
                 .setInputData(data)
                 .setConstraints(constraints)
                 .setInitialDelay(1, TimeUnit.HOURS)
-                .addTag("downloadReminder")
+                .addTag(tag)
                 .build();
-        WorkManager.getInstance(context).enqueue(oneTimeWorkRequest);
+        WorkManager.getInstance(context).enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE,oneTimeWorkRequest);
     }
 
     private void setBinding() {

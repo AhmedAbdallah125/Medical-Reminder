@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
@@ -188,13 +189,14 @@ public class MyPeriodicWorkManger extends Worker {
         Constraints constraints = new Constraints.Builder()
                 .setRequiresBatteryNotLow(true)
                 .build();
+        String tag = medicationPOJO.getMedicationName()+medicationPOJO.getId();
         OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(RefileReminderWorkManagerForOneTime.class)
                 .setInputData(data)
                 .setConstraints(constraints)
                 .setInitialDelay(10, TimeUnit.SECONDS)
-                .addTag("downloadReminder")
+                .addTag(tag)
                 .build();
-        WorkManager.getInstance(context).enqueue(oneTimeWorkRequest);
+        WorkManager.getInstance(context).enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE,oneTimeWorkRequest);
     }
 
     private void loopOnRefileMedicationList() {

@@ -158,7 +158,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
         initRecycleView();
         initRepository();
         requestDataFromPresenter(timeNow);
-        notifyMedicationChangeFromFirebase();
+     //   notifyMedicationChangeFromFirebase();
 //        requestDataFromPresenter(timeNow);
         // make presenter
 
