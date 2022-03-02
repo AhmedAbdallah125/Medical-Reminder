@@ -28,6 +28,8 @@ import com.team_three.medicalreminder.databinding.FragmentMedicationTimeBinding;
 import com.team_three.medicalreminder.homeScreen.presenter.HomeScreenPresenter;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.network.FireBaseNetwork;
+import com.team_three.medicalreminder.network.NetworkInterface;
 import com.team_three.medicalreminder.workmanger.MyPeriodicWorkManger;
 
 import java.util.ArrayList;
@@ -124,7 +126,9 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
 
     private void initRepository() {
         LocalSourceInterface myLocal = ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext());
-        myRepository = Repository.getInstance(myLocal, this.getContext());
+        NetworkInterface networkInterface = FireBaseNetwork.getInstance(this.getActivity());
+
+        myRepository = Repository.getInstance(myLocal, networkInterface,this.getContext());
         myPresenter = new HomeScreenPresenter(this, myRepository);
     }
 
@@ -209,9 +213,5 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
 
     }
 
-//    @Override
-//    public void onClick(View view, int position) {
-//        Navigation.findNavController(view).navigate(R.id.action_medicationTimeFragment_to_displayMedicationDrug);
-//
-//    }
+
 }

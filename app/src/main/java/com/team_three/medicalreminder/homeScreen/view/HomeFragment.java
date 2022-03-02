@@ -15,7 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarListener;
 import devs.mulham.horizontalcalendar.HorizontalCalendarView;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +43,7 @@ import com.team_three.medicalreminder.network.NetworkInterface;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class HomeFragment extends Fragment implements HomeFragmentInterface, OnClickListener {
@@ -56,6 +62,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
     String email;
+    private Handler handler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -158,8 +165,19 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
         initRecycleView();
         initRepository();
         requestDataFromPresenter(timeNow);
-//        requestDataFromPresenter(timeNow);
-        // make presenter
+
+
+
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("TAG", "run: ");
+                requestDataFromPresenter(timeNow);
+                Log.i("TAG", "run: ");
+            }
+        }, 10000);
+
 
     }
 
@@ -237,9 +255,6 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
     public void showMedications(List<MedicationPOJO> storedMedications) {
         homeAdapter.setMedicines(storedMedications);
         homeAdapter.notifyDataSetChanged();
-        Log.i("TAG", "showMedications: " + storedMedications.size());
-        // sned data to firebase
-//        sharedPref =getActivity().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
 
         if (storedMedications.size() > 0 && checkShared()) {
             String[] mail = email.split("\\.");
