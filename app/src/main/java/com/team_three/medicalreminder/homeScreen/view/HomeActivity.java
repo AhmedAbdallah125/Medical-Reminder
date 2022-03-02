@@ -1,22 +1,17 @@
 package com.team_three.medicalreminder.homeScreen.view;
 
-
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
@@ -68,7 +63,6 @@ public class HomeActivity extends AppCompatActivity {
             checkDrawOverlayPermission();
             initLaunch();
         }
-        setWorkTimer();
         handleDrawer();
         handleDrawerMenu();
         handleToolBar();
@@ -235,20 +229,6 @@ public class HomeActivity extends AppCompatActivity {
         editor.apply();
     }
     // return after requesting Permission
-
-    private void setWorkTimer() {
-        Constraints constraints = new Constraints.Builder()
-                .setRequiresBatteryNotLow(true)
-                .build();
-
-        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(MyPeriodicWorkManger.class,
-                3, TimeUnit.HOURS)
-                .setConstraints(constraints)
-                .build();
-
-//        WorkManager.getInstance(this).enqueueUniquePeriodicWork("Counter", ExistingPeriodicWorkPolicy.KEEP, periodicWorkRequest);
-        WorkManager.getInstance(this).enqueue(periodicWorkRequest);
-    }
 
     @Override
     public void onRequestPermissionsResult(int permissionRequestCode, String[] permissions, int[] grantResults) {

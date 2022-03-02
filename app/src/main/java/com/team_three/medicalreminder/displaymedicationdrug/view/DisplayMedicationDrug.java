@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.work.WorkManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -127,6 +128,7 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
                 .setMessage("Do you want to delete " + medication.getMedicationName() + "!")
                 .setPositiveButton("DELETE", (dialog, i) -> {
                     deleteMedication(medication);
+                    cancelWorkManger(medication);
                     Toast.makeText(this.getContext(), "Successfully Deleted!", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                     Navigation.findNavController(binding.getRoot()).navigate(R.id.action_displayMedicationDrug_to_fragment_home);
@@ -136,9 +138,17 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
                 }).show();
     }
 
+    private void cancelWorkManger(MedicationPOJO medicationPOJO) {
+        if (medicationPOJO.getTimeAndDose() != null) {
+            for (Map.Entry<String, Integer> entry : medicationPOJO.getTimeAndDose().entrySet()) {
+                String tag = medicationPOJO.getId()+medicationPOJO.getMedicationName()+entry.getKey();
+                WorkManager.getInstance(this.getContext()).cancelAllWorkByTag(tag);
+            }
+        }
+    }
+
     @Override
     public void deleteMedication(MedicationPOJO medication) {
-        presenterInterface.deleteMedication(medication);
         presenterInterface.deleteMedication(medication);
     }
 

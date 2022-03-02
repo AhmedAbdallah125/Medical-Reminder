@@ -2,13 +2,6 @@ package com.team_three.medicalreminder.addmedication.view;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +9,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.work.Constraints;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.team_three.medicalreminder.R;
@@ -29,6 +31,7 @@ import com.team_three.medicalreminder.databinding.FragmentAddMedicationBinding;
 import com.team_three.medicalreminder.displaymedicationdrug.view.DisplayMedicationDrug;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.workmanger.MyPeriodicWorkManger;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -38,6 +41,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class AddAndEditMedication extends Fragment implements onClickAddMedication, AddAndEditMedicationInterface {
 
@@ -273,6 +277,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
                 setDateAndTimeResultToPOJO();
                 setBooleanResultToPOJO();
                 onClick(medication);
+                setWorkTimer();
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(DisplayMedicationDrug.displayTag, medication);
                 Navigation.findNavController(v).navigate(R.id.action_fragment_add_Medication_to_displayMedicationDrug, bundle);
@@ -303,6 +308,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
                 setDateAndTimeResultToPOJO();
                 setBooleanResultToPOJO();
                 onClick(medication);
+                setWorkTimer();
                 Navigation.findNavController(v).navigate(R.id.action_fragment_add_Medication_to_fragment_home);
                 Toast.makeText(this.getContext(), "Successfully Added!", Toast.LENGTH_SHORT).show();
             }
@@ -363,11 +369,6 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
     public void updateMedication(MedicationPOJO medication) {
         presenterInterface.updateToDatabase(medication);
     }
-
-//    @Override
-//    public void showMedication() {
-//        medication = presenterInterface.showMedication();
-//    }
 
     @Override
     public void addMedication(MedicationPOJO medication) {
@@ -510,6 +511,20 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         binding.txtfillReminderPills.setText(medication.getLeftNumberReminder() + "");
         binding.reminderFillSwitch.setChecked(medication.isFillReminder());
         isFillReminder = medication.isFillReminder();
+    }
+
+    private void setWorkTimer() {
+        Constraints constraints = new Constraints.Builder()
+                .setRequiresBatteryNotLow(true)
+                .build();
+
+        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(MyPeriodicWorkManger.class,
+                3, TimeUnit.HOURS)
+                .setConstraints(constraints)
+                .build();
+
+        WorkManager.getInstance(this.getContext()).enqueueUniquePeriodicWork("Counter", ExistingPeriodicWorkPolicy.REPLACE, periodicWorkRequest);
+//        WorkManager.getInstance(this.getContext()).enqueue(periodicWorkRequest);
     }
 
 }
