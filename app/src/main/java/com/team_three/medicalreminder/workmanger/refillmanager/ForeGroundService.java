@@ -17,7 +17,6 @@ import androidx.core.app.NotificationCompat;
 
 import com.team_three.medicalreminder.MainActivity;
 import com.team_three.medicalreminder.R;
-import com.team_three.medicalreminder.workmanger.medicalremindermanger.Window;
 
 public class ForeGroundService extends Service {
     String NOTIFICATION_CHANNEL_ID = "example.permanence";

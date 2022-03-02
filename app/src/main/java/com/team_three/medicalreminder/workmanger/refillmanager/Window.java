@@ -1,4 +1,4 @@
-package com.team_three.medicalreminder.workmanger.medicalremindermanger;
+package com.team_three.medicalreminder.workmanger.refillmanager;
 
 import android.content.Context;
 import android.content.Intent;

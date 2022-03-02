@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
 import com.google.gson.Gson;
@@ -27,6 +29,7 @@ import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.Utility;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
+import com.team_three.medicalreminder.workmanger.MyPeriodicWorkManger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +104,7 @@ public class ReminderWindowManger {
                 repository.updatePatientMedicationList(email,myMedicine);
 
             }
+            setPeriodicWorkManger();
             stopMyService();
             close();
         });
@@ -152,6 +156,20 @@ public class ReminderWindowManger {
                 .addTag(tag)
                 .build();
         WorkManager.getInstance(context).enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, oneTimeWorkRequest);
+    }
+
+    private void setPeriodicWorkManger(){
+            Constraints constraints = new Constraints.Builder()
+                    .setRequiresBatteryNotLow(true)
+                    .build();
+
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(MyPeriodicWorkManger.class,
+                    3, TimeUnit.HOURS)
+                    .setConstraints(constraints)
+                    .build();
+
+            WorkManager.getInstance(context).enqueueUniquePeriodicWork("Counter", ExistingPeriodicWorkPolicy.REPLACE, periodicWorkRequest);
+//        WorkManager.getInstance(this.getContext()).enqueue(periodicWorkRequest);
     }
 
     private String serializeToJason(MedicationPOJO pojo) {
