@@ -25,6 +25,8 @@ import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.databinding.ReminderNotificationDialogBinding;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.model.Utility;
+import com.team_three.medicalreminder.network.FireBaseNetwork;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,13 +42,13 @@ public class ReminderWindowManger {
     Repository repository;
     int count;
     String key;
-
+    String email;
     public ReminderWindowManger(Context context, MedicationPOJO medication, String key, int count) {
         this.context = context;
         this.myMedicine = medication;
         this.key = key;
         this.count = count;
-        repository = Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(context), context);
+        repository = Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(context), FireBaseNetwork.getInstance(), context);
     }
 
     public void setMyWindowManger() {
@@ -94,6 +96,11 @@ public class ReminderWindowManger {
             myMedicine.setLeftNumber(n);
             myMedicine.setIsTakenList(list);
             updateMedication(myMedicine);
+            email = Utility.checkShared(context);
+            if (!email.equals("null")){
+                repository.updatePatientMedicationList(email,myMedicine);
+
+            }
             stopMyService();
             close();
         });

@@ -11,7 +11,6 @@ import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.databinding.ReminderNotificationDialogBinding;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
-import com.team_three.medicalreminder.workmanger.Window;
 
 public class TakerReminderWindowManager {
     private Context context;

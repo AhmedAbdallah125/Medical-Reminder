@@ -14,4 +14,7 @@ public interface HomePresenterInterface {
     void deleteMedication(MedicationPOJO medicationPOJO);
     void updateMedication(MedicationPOJO medicationPOJO);
     void notifyMedicationChangeFromFirebase(String email);
+    void deleteInPatientMedicationList(String email, String medicationID);
+    void updatePatientMedicationList(String email,MedicationPOJO medicationPOJO);
+
 }

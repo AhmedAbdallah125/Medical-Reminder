@@ -17,6 +17,7 @@ import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.workmanger.medicalremindermanger.MyOneTimeWorkManger;
+import com.team_three.medicalreminder.workmanger.refillmanager.RefileReminderWorkManagerForOneTime;
 
 import java.util.Calendar;
 import java.util.List;
@@ -91,6 +92,7 @@ public class MyPeriodicWorkManger extends Worker {
 
             @Override
             public void onSuccess(List<MedicationPOJO> medicationPOJOS) {
+
                 medicationListForMedicationReminder = medicationPOJOS;
             }
 
@@ -110,6 +112,9 @@ public class MyPeriodicWorkManger extends Worker {
 
             @Override
             public void onSuccess(List<MedicationPOJO> medicationPOJOS) {
+                for(MedicationPOJO medicationPOJO:medicationPOJOS){
+                    Log.i("AAAA", "onSuccess: "+medicationPOJO.getMedicationName()+medicationPOJO.isFillReminder());
+                }
                 medicationListForRefillReminder = medicationPOJOS;
                 loopOnRefileMedicationList();
             }
@@ -149,16 +154,14 @@ public class MyPeriodicWorkManger extends Worker {
         long t = 0;
         t = Long.parseLong(time.split(" ")[0].split(":")[0]) * 60;
         t = (t + Long.parseLong(time.split(" ")[0].split(":")[1])) * 60;
-        Log.i("zoooooz", "setTime1: " + t * 1000);
+
         if (time.split(" ")[1].equals("PM")) {
             t = t + (12 * 60 * 60);
         }
-        Log.i("zoooooz", "setTime2: " + t * 1000);
         return t * 1000;
     }
 
     private void setOnTimeWorkManger(long time, MedicationPOJO medicationPOJO, String index, int pillsCount) {
-        Log.i("zoooooz", "setOnTimeWorkManger: " + time);
         // pass medication POJO
         Data data = new Data.Builder()
                 .putString("MED", serializeToJason(medicationPOJO))
@@ -176,7 +179,7 @@ public class MyPeriodicWorkManger extends Worker {
                 .setInitialDelay(time, TimeUnit.MINUTES)
                 .addTag(tag)
                 .build();
-        Log.i("ahmaaaad", "setOnTimeWorkManger: "+tag+" "+time);
+
         WorkManager.getInstance(context).enqueueUniqueWork(tag,ExistingWorkPolicy.REPLACE,oneTimeWorkRequest);
     }
 
@@ -203,8 +206,11 @@ public class MyPeriodicWorkManger extends Worker {
     }
 
     private void loopOnRefileMedicationList() {
-        for (MedicationPOJO medicationPOJO : medicationListForMedicationReminder) {
+        for (MedicationPOJO medicationPOJO : medicationListForRefillReminder) {
+
             if (medicationPOJO.getLeftNumber() <= medicationPOJO.getLeftNumberReminder()) {
+                Log.i("AAAA", "onSuccess: "+medicationPOJO.getMedicationName()+medicationPOJO.isFillReminder());
+
                 callOneTimeRefillReminder(medicationPOJO);
             }
         }

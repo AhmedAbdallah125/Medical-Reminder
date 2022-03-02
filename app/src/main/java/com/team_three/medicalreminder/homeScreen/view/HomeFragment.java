@@ -259,7 +259,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
         if (storedMedications.size() > 0 && checkShared()) {
             String[] mail = email.split("\\.");
             String myEmail = mail[0];
-            myPresenter.addMedicationListViaNetwork(storedMedications, myEmail);
+        //    myPresenter.addMedicationListViaNetwork(storedMedications, myEmail);
 
 
         }

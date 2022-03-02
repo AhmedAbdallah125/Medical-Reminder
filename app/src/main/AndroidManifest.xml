@@ -26,7 +26,7 @@
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".workmanger.ForeGroundService"
+            android:name=".workmanger.refillmanager.ForeGroundService"
             android:enabled="true"
             android:exported="true" />
 
