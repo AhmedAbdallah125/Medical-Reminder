@@ -94,10 +94,9 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
                 Navigation.findNavController(view).navigate(R.id.action_fragment_home_to_addMedication);
             }
         });
-//// yyyyyyy
+
         fragmentHomeBinding.thirdfloatingActionButton2.setOnClickListener(v -> {
-            Navigation.findNavController(v).navigate(R.id.action_fragment_home_to_patientList);
-//            Navigation.findNavController(v).navigate(R.id.action_fragment_home_to_addTaker);
+            Navigation.findNavController(v).navigate(R.id.action_fragment_home_to_addTaker);
         });
 
         return fragmentHomeBinding.getRoot();
@@ -259,13 +258,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
         homeAdapter.setMedicines(storedMedications);
         homeAdapter.notifyDataSetChanged();
 
-//        if (storedMedications.size() > 0 && checkShared()) {
-//            String[] mail = email.split("\\.");
-//            String myEmail = mail[0];
-//            myPresenter.addMedicationListViaNetwork(storedMedications, myEmail);
-//
-//
-//        }
+
 
     }
 

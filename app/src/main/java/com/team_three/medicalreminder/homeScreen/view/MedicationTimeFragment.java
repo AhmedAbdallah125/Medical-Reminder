@@ -32,6 +32,7 @@ import com.team_three.medicalreminder.databinding.FragmentMedicationTimeBinding;
 import com.team_three.medicalreminder.homeScreen.presenter.HomeScreenPresenter;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.model.Utility;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
 import com.team_three.medicalreminder.network.NetworkInterface;
 import com.team_three.medicalreminder.workmanger.MyPeriodicWorkManger;
@@ -95,6 +96,8 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
     }
 
     private void lunchDeleteDialog() {
+        dialogBuilder = new MaterialAlertDialogBuilder(this.getContext());
+
         dialogBuilder.setTitle("Delete Medication")
                 .setMessage("Do you want to delete " + medicationPOJO.getMedicationName() + "!")
                 .setPositiveButton("DELETE", (dialog, i) -> {
@@ -123,6 +126,10 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
 
     private void deleteMedication(MedicationPOJO medicationPOJO) {
         myPresenter.deleteMedication(medicationPOJO);
+        String email = Utility.checkShared(this.getContext());
+        if (!email.equals("null")) {
+            myPresenter.deleteInPatientMedicationList(email, String.valueOf(medicationPOJO.getId()));
+        }
     }
 
     private boolean checkShared() {
@@ -145,8 +152,9 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
 
     private void initRepository() {
         LocalSourceInterface myLocal = ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext());
-        NetworkInterface myRemote = FireBaseNetwork.getInstance(getActivity());
-        myRepository = Repository.getInstance(myLocal, myRemote, this.getContext());
+        NetworkInterface networkInterface = FireBaseNetwork.getInstance(this.getActivity());
+
+        myRepository = Repository.getInstance(myLocal, networkInterface, this.getContext());
         myPresenter = new HomeScreenPresenter(this, myRepository);
     }
 
@@ -172,6 +180,10 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
 
         handleTakeClick(position, take, medicationPOJO);
         myPresenter.updateMedication(medicationPOJO);
+        String email = Utility.checkShared(this.getContext());
+        if (!email.equals("null")) {
+            myPresenter.updatePatientMedicationList(email, medicationPOJO);
+        }
         setWorkTimer();
         // back to home
 

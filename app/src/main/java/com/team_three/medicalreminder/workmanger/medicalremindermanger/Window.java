@@ -1,4 +1,4 @@
-package com.team_three.medicalreminder.workmanger;
+package com.team_three.medicalreminder.workmanger.medicalremindermanger;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +25,10 @@ import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.databinding.RefillReminderDialogBinding;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.model.Utility;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
+import com.team_three.medicalreminder.workmanger.refillmanager.ForeGroundService;
+import com.team_three.medicalreminder.workmanger.refillmanager.RefileReminderWorkManagerForOneTime;
 
 import java.util.concurrent.TimeUnit;
 
@@ -43,11 +46,12 @@ public class Window {
     Repository repository;
     String data;
 
-
+    String email;
     public Window(Context context, String data) {
         this.medicationPOJO = fromStringPojo(data);
         this.context = context;
         this.data = data;
+
         repository = Repository.getInstance(ConcreteLocalClass.getConcreteLocalClassInstance(context),FireBaseNetwork.getInstance(), context);
 
         Log.i("Reminder", "Window: " + medicationPOJO.getMedicationName());
@@ -125,6 +129,7 @@ public class Window {
                 medicationPOJO.setFillReminder(false);
                 repository.updateMedications(medicationPOJO);
 
+
                 stopMyService();
                 close();
             }
@@ -133,6 +138,10 @@ public class Window {
             int leftNumber = Integer.parseInt(binding.refillNumber.getText().toString());
             medicationPOJO.setLeftNumber(leftNumber);
             repository.updateMedications(medicationPOJO);
+            email = Utility.checkShared(context);
+            if (!email.equals("null")){
+                repository.updatePatientMedicationList(email,medicationPOJO);
+            }
             stopMyService();
             close();
         });

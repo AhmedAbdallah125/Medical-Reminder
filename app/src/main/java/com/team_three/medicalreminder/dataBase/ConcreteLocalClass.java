@@ -1,16 +1,13 @@
 package com.team_three.medicalreminder.dataBase;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
-import com.team_three.medicalreminder.medicationList.view.AcrtiveMedsFragment;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 
@@ -106,7 +103,7 @@ public class ConcreteLocalClass implements LocalSourceInterface {
 
     @Override
     public Single<List<MedicationPOJO>> getRefilReminderList(long time) {
-        return dao.getRefilReminderList(time);
+        return dao.getrefilreminderlist(time);
     }
 
 }

@@ -84,6 +84,16 @@ public class HomeScreenPresenter implements HomePresenterInterface, NetworkDeleg
         myRepository.notifyMedicationChangeFromFirebase(email);
     }
 
+    @Override
+    public void deleteInPatientMedicationList(String email, String medicationID) {
+        myRepository.deleteInPatientMedicationList(email,medicationID);
+    }
+
+    @Override
+    public void updatePatientMedicationList(String email, MedicationPOJO medicationPOJO) {
+        myRepository.updatePatientMedicationList(email,medicationPOJO);
+    }
+
     // handling delete
     @Override
     public void deleteMedication(MedicationPOJO medicationPOJO) {
