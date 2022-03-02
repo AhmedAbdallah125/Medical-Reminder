@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
@@ -136,13 +137,14 @@ public class ReminderWindowManger {
         Constraints constraints = new Constraints.Builder()
                 .setRequiresBatteryNotLow(true)
                 .build();
+        String tag = medicationPOJO.getId() + medicationPOJO.getMedicationName() + index;
         OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(MyOneTimeWorkManger.class).
                 setInputData(data)
                 .setConstraints(constraints)
                 .setInitialDelay(1, TimeUnit.HOURS)
-                .addTag("download")
+                .addTag(tag)
                 .build();
-        WorkManager.getInstance(context).enqueue(oneTimeWorkRequest);
+        WorkManager.getInstance(context).enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, oneTimeWorkRequest);
     }
 
     private String serializeToJason(MedicationPOJO pojo) {
@@ -160,7 +162,7 @@ public class ReminderWindowManger {
         }
     }
 
-    private void stopMyService(){
+    private void stopMyService() {
         context.stopService(new Intent(context, ReminderService.class));
     }
 }
