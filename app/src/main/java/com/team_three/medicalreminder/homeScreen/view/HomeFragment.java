@@ -179,6 +179,9 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
             }
         }, 10000);
 
+        notifyMedicationChangeFromFirebase();
+//        requestDataFromPresenter(timeNow);
+        // make presenter
 
     }
 
@@ -241,7 +244,6 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
 
     private void requestDataFromPresenter(long timeNow) {
         myPresenter.getMedicationDay(this, timeNow);
-
     }
 
     @Override
@@ -257,13 +259,13 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
         homeAdapter.setMedicines(storedMedications);
         homeAdapter.notifyDataSetChanged();
 
-        if (storedMedications.size() > 0 && checkShared()) {
-            String[] mail = email.split("\\.");
-            String myEmail = mail[0];
-            myPresenter.addMedicationListViaNetwork(storedMedications, myEmail);
-
-
-        }
+//        if (storedMedications.size() > 0 && checkShared()) {
+//            String[] mail = email.split("\\.");
+//            String myEmail = mail[0];
+//            myPresenter.addMedicationListViaNetwork(storedMedications, myEmail);
+//
+//
+//        }
 
     }
 

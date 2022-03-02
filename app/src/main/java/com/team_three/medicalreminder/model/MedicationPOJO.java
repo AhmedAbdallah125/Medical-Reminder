@@ -19,14 +19,15 @@ import java.util.Map;
 @SuppressLint("ParcelCreator")
 @Entity(tableName = "medications")
 public class MedicationPOJO implements Parcelable {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @NotNull
+    @PrimaryKey
+    private String id;
 
     public void setTimeAndDose(Map<String, Integer> timeAndDose) {
         this.timeAndDose = timeAndDose;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -69,7 +70,7 @@ public class MedicationPOJO implements Parcelable {
         this.recurrence = recurrence;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

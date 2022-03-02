@@ -46,8 +46,6 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
     private String dose;
     public static String displayTag = "displayMed";
     public static String editTag = "editMed";
-    private ConcreteLocalClass localClass;
-    private FireBaseNetwork fireBaseNetwork;
     private Repository repository;
     SharedPreferences sharedPref;
     String name = "";
@@ -60,8 +58,6 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
     private View customAlertDialogView;
     private TextInputEditText refillNumber;
     private TextView txtDoseTime;
-    private ImageView imgPlus1;
-    private ImageView imgMinus1;
     private TextView txtDoseNumber;
     int counter = 1;
 
@@ -235,8 +231,8 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
         customAlertDialogView = LayoutInflater.from(this.getContext()).inflate(R.layout.choose_time_card, null, false);
         txtDoseTime = customAlertDialogView.findViewById(R.id.txtDoseTime);
         txtDoseNumber = customAlertDialogView.findViewById(R.id.txtDoseNumber);
-        imgPlus1 = customAlertDialogView.findViewById(R.id.imgPlus1);
-        imgMinus1 = customAlertDialogView.findViewById(R.id.imgMinus1);
+        ImageView imgPlus1 = customAlertDialogView.findViewById(R.id.imgPlus1);
+        ImageView imgMinus1 = customAlertDialogView.findViewById(R.id.imgMinus1);
 
         txtDoseTime.setText("Choose Time");
 
@@ -311,11 +307,11 @@ public class DisplayMedicationDrug extends Fragment implements DisplayMedication
     }
 
     private void initRepository() {
-        localClass = ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext());
+        ConcreteLocalClass localClass = ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext());
         if (isSharedPrefNull()) {
             repository = Repository.getInstance(localClass, this.getContext());
         } else {
-            fireBaseNetwork = FireBaseNetwork.getInstance(this.getActivity());
+            FireBaseNetwork fireBaseNetwork = FireBaseNetwork.getInstance(this.getActivity());
             repository = Repository.getInstance(localClass, fireBaseNetwork, this.getContext());
         }
     }

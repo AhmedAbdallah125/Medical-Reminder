@@ -180,6 +180,7 @@ public class Repository implements RepositoryInterface {
     public void updateToRoomFromFirebase(List<MedicationPOJO> medications) {
         for (MedicationPOJO medication : medications) {
             localSourceInterface.updateMedications(medication);
+            Log.i("ahmed", "updateToRoomFromFirebase: "+medication.getStrength());
         }
     }
 

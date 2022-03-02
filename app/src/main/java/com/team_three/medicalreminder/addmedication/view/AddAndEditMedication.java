@@ -31,6 +31,9 @@ import com.team_three.medicalreminder.databinding.FragmentAddMedicationBinding;
 import com.team_three.medicalreminder.displaymedicationdrug.view.DisplayMedicationDrug;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
+import com.team_three.medicalreminder.model.Utility;
+import com.team_three.medicalreminder.network.FireBaseNetwork;
+import com.team_three.medicalreminder.network.NetworkInterface;
 import com.team_three.medicalreminder.workmanger.MyPeriodicWorkManger;
 
 import java.text.DateFormat;
@@ -78,6 +81,8 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
 
     private TimeAndDoseAdapter timeAndDoseAdapter;
 
+    private String email;
+
     //dialog
     MaterialAlertDialogBuilder dialogBuilder;
 
@@ -96,8 +101,14 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
         // Inflate the layout for this fragment
         binding = FragmentAddMedicationBinding.inflate(inflater, container, false);
         localClass = ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext());
-        repository = Repository.getInstance(localClass, this.getContext());
-        presenterInterface = new AddMedicationPresenter(repository, this);
+        email = Utility.checkShared(this.getContext());
+        if(email.equals("null")) {
+            repository = Repository.getInstance(localClass, this.getContext());
+        }else{
+            NetworkInterface networkInterface = FireBaseNetwork.getInstance(this.getActivity());
+            repository = Repository.getInstance(localClass,networkInterface,this.getContext());
+        }
+        presenterInterface = new AddMedicationPresenter(repository, this,this.getContext());
         return binding.getRoot();
     }
 
@@ -307,6 +318,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
                 setSpinnerResultToPOJO();
                 setDateAndTimeResultToPOJO();
                 setBooleanResultToPOJO();
+                medication.setId(medicationName+startDate+endDate);
                 onClick(medication);
                 setWorkTimer();
                 Navigation.findNavController(v).navigate(R.id.action_fragment_add_Medication_to_fragment_home);
