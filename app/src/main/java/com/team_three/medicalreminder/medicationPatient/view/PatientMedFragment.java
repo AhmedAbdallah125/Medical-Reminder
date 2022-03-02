@@ -13,6 +13,13 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +27,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.gson.Gson;
 import com.team_three.medicalreminder.R;
 import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.dataBase.LocalSourceInterface;
@@ -34,9 +43,15 @@ import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.Utility;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
 import com.team_three.medicalreminder.network.NetworkInterface;
+import com.team_three.medicalreminder.workmanger.MyOneTimeWorkManger;
+import com.team_three.medicalreminder.workmanger.MyPeriodicWorkManger;
+import com.team_three.medicalreminder.workmanger.takerManager.TakerOneTmeWorkManager;
+import com.team_three.medicalreminder.workmanger.takerManager.TakerPeriodicWorkManager;
 
+import java.io.DataInput;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class PatientMedFragment extends Fragment implements PatientMedViewInterface, OnClickListener {
@@ -48,6 +63,7 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
 
 
     String email;
+    String name;
 
 
     public PatientMedFragment() {
@@ -67,9 +83,13 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
         // Inflate the layout for this fragment
         binding = FragmentPatientMedBinding.inflate(inflater, container, false);
         email = getArguments().getString("email");
+        name=getArguments().getString("name");
+
+        // get name first
         // check
         return binding.getRoot();
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -92,7 +112,7 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
             Toast.makeText(getContext(), "You must connect to internet to see Patient'sMedications", Toast.LENGTH_SHORT).show();
             // asked for connect internet
         }
-        binding.imageBack.setOnClickListener(v->{
+        binding.imageBack.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_patientMedicationfragment_to_patientList);
         });
 
@@ -127,8 +147,6 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
     }
 
 
-
-
     @Override
     public void onSuccessReturnMedicationList(List<MedicationPOJO> medicationPOJOList) {
         if (medicationPOJOList.isEmpty()) {
@@ -136,10 +154,42 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
             Toast.makeText(this.getContext(), "there is no medication for this patient", Toast.LENGTH_SHORT).show();
         } else {
             homeAdapter.setMedicines(medicationPOJOList);
-            // call Work manager
 
             homeAdapter.notifyDataSetChanged();
+            // call Work manager
+            setPeriodicWorkManager(medicationPOJOList);
         }
+
+    }
+
+    private void setPeriodicWorkManager(List<MedicationPOJO> medicationPOJOList) {
+        Constraints constraints = new Constraints.Builder()
+                .setRequiresBatteryNotLow(true)
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
+        String tag = email;
+        Data data = setInputData(medicationPOJOList);
+        PeriodicWorkRequest
+                periodicWorkRequest = new PeriodicWorkRequest.Builder(TakerPeriodicWorkManager.class,
+                3, TimeUnit.HOURS)
+                .setInitialDelay(1, TimeUnit.MINUTES)
+                .setInputData(data)
+                .setConstraints(constraints)
+                .addTag(tag)
+                .build();
+        Log.i("BBB", "setPeriodicWorkManager: Run Perioc in Fragment");
+        WorkManager.getInstance(this.getContext()).
+                enqueueUniquePeriodicWork(tag, ExistingPeriodicWorkPolicy.REPLACE,
+                        periodicWorkRequest);
+    }
+
+    private Data setInputData(List<MedicationPOJO> medicationPOJOList) {
+        return new Data.Builder()
+                .putString("MED", serializeToJason(medicationPOJOList))
+//                .putString("Medication",medicationPOJO.getMedicationName())
+                .putString("EMAIL", email)
+//                .putString("NAME",name)
+                .build();
 
     }
 
@@ -167,5 +217,10 @@ public class PatientMedFragment extends Fragment implements PatientMedViewInterf
     public void onDestroy() {
         super.onDestroy();
         binding = null;
+    }
+
+    private String serializeToJason(List<MedicationPOJO> medicationPOJOList) {
+        Gson gson = new Gson();
+        return gson.toJson(medicationPOJOList);
     }
 }

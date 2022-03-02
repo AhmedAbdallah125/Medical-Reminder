@@ -1,18 +1,23 @@
 package com.team_three.medicalreminder.workmanger.takerManager;
 
 import android.content.Context;
+import android.media.session.MediaSession;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.team_three.medicalreminder.model.MedicationPOJO;
 
+import java.lang.reflect.Type;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -28,15 +33,13 @@ public class TakerPeriodicWorkManager extends Worker {
     long alarmTimePeriod;
     // period before running
     long periodBeforeRunning;
+    private String name;
 
     public TakerPeriodicWorkManager(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
         this.context = context;
     }
 
-    public void setMedicationSingleList(List<MedicationPOJO> medicationSingleList) {
-        this.medicationSingleList = medicationSingleList;
-    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -45,10 +48,18 @@ public class TakerPeriodicWorkManager extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-
+        Log.i("BBB", "doWork: inperidioc");
+        getPatientData();
         getTimePeriod();
         getCurrentAlarms();
         return Result.success();
+    }
+
+    private void getPatientData() {
+        Data data = getInputData();
+        email = data.getString("EMAIL");
+//        name=data.getString("NAME");
+        medicationSingleList = listFromJason(data.getString("MED"));
     }
 
     // for periodic
@@ -68,6 +79,7 @@ public class TakerPeriodicWorkManager extends Worker {
 
     }
 
+
     //setting for period before running alarm
     private void setDurationTimes(long timeNow, long alarmPeriod) {
         periodBeforeRunning = (alarmPeriod - timeNow) / 60000;
@@ -80,7 +92,8 @@ public class TakerPeriodicWorkManager extends Worker {
                     for (Map.Entry<String, Integer> entry : medicationSingleList.get(i).getTimeAndDose().entrySet()) {
                         if (checkPeriod(entry.getKey())) {
                             setDurationTimes(timeNow, alarmTimePeriod);
-                            setOnTimeWorkManger(periodBeforeRunning, medicationSingleList.get(i), entry.getKey(), entry.getValue());
+                            String tag = setTag(medicationSingleList.get(i), entry.getKey());
+                            setOnTimeWorkManger(tag, periodBeforeRunning, medicationSingleList.get(i), entry.getKey(), entry.getValue());
                         }
                     }
                 }
@@ -107,14 +120,15 @@ public class TakerPeriodicWorkManager extends Worker {
         return t * 1000;
     }
 
-    private void setOnTimeWorkManger(long time, MedicationPOJO medicationPOJO, String index, int pillsCount) {
+    private void setOnTimeWorkManger(String tag, long time, MedicationPOJO medicationPOJO, String index, int pillsCount) {
         // pass medication POJO
         Data data = new Data.Builder()
                 .putString("MED", serializeToJason(medicationPOJO))
 //                .putString("Medication",medicationPOJO.getMedicationName())
                 .putString("INDEX", index)
                 .putInt("COUNT", pillsCount)
-                .putString("EMAIL",email)
+                .putString("EMAIL", email)
+//                .putString("NAME",name)
                 .build();
         Constraints constraints = new Constraints.Builder()
                 .setRequiresBatteryNotLow(true)
@@ -123,15 +137,27 @@ public class TakerPeriodicWorkManager extends Worker {
                 setInputData(data)
                 .setConstraints(constraints)
                 .setInitialDelay(time, TimeUnit.MINUTES)
-                .addTag("download")
+                .addTag(tag)
                 .build();
         //
-        WorkManager.getInstance(context).enqueue(oneTimeWorkRequest);
+        Log.i("BBB", "setOnTimeWorkManger: " + time);
+        WorkManager.getInstance(context).enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, oneTimeWorkRequest);
+    }
+
+    private String setTag(MedicationPOJO medicationPOJO, String key) {
+        return email + medicationPOJO.getId() + medicationPOJO.getMedicationName() + key;
     }
 
     private String serializeToJason(MedicationPOJO pojo) {
         Gson gson = new Gson();
         return gson.toJson(pojo);
+    }
+
+    private List<MedicationPOJO> listFromJason(String medListString) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<MedicationPOJO>>() {
+        }.getType();
+        return gson.fromJson(medListString, type);
     }
 
 }

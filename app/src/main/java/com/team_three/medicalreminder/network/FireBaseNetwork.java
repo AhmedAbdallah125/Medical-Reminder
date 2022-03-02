@@ -38,22 +38,31 @@ public class FireBaseNetwork implements NetworkInterface {
     Activity _activity;
     public static FirebaseAuth mAuth;
     private static FireBaseNetwork myFireBase;
+    private static FireBaseNetwork takerFireBase;
+    private static FirebaseAuth takerAuth;
+
     private NetworkDelegation myDelegation;
     private boolean exist = false;
     private boolean listenToUpdates = false;
     private List<MedicationPOJO> updatedMedicationList;
 
+
     private FireBaseNetwork(Activity myActivity) {
         _activity = myActivity;
     }
-    private FireBaseNetwork(){}
-    public static FireBaseNetwork getInstance(){
-        if (myFireBase == null) {
-            mAuth = FirebaseAuth.getInstance();
-            myFireBase = new FireBaseNetwork();
+
+    private FireBaseNetwork() {
+
+    }
+
+    public static FireBaseNetwork getInstance() {
+        if (takerFireBase == null) {
+            takerAuth = FirebaseAuth.getInstance();
+            takerFireBase = new FireBaseNetwork();
         }
         return myFireBase;
     }
+
 
     public static FireBaseNetwork getInstance(Activity myActivity) {
         if (myFireBase == null) {
@@ -62,6 +71,7 @@ public class FireBaseNetwork implements NetworkInterface {
         }
         return myFireBase;
     }
+
 
     @Override
     public void setNetworkDelegation(NetworkDelegation networkDelegation) {

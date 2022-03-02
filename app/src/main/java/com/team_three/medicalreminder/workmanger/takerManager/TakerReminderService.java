@@ -27,6 +27,7 @@ public class TakerReminderService extends Service {
     final static int FOREGROUND_ID = 10;
     NotificationManager notificationManager;
     String description;
+    private String name;
 
     public TakerReminderService() {
     }
@@ -37,13 +38,15 @@ public class TakerReminderService extends Service {
         key = intent.getStringExtra(TakerOneTmeWorkManager.KEY_TAG);
         count = intent.getIntExtra(TakerOneTmeWorkManager.VALUE_TAG, 1);
         email = intent.getStringExtra(TakerOneTmeWorkManager.EMAIL_TAG);
+//        name=intent.getStringExtra(TakerOneTmeWorkManager.NAME_TAG);
         createNotificationChannel();
         startForeground(FOREGROUND_ID, makeNotification());
         if (Settings.canDrawOverlays(this)) {
             // call window manager
             TakerReminderWindowManager myWorkManager = new TakerReminderWindowManager(
-                    this, myMedicine, description, count
+                    this, myMedicine, description, count, email
             );
+            myWorkManager.setWindowManager();
 
         }
         return START_NOT_STICKY;
@@ -62,7 +65,7 @@ public class TakerReminderService extends Service {
         return new NotificationCompat.Builder(getApplicationContext(),
                 String.valueOf(CHANNEL_ID))
                 .setSmallIcon(myMedicine.getImageID())
-                .setContentTitle("Medication Reminder")
+                .setContentTitle("Medication Reminder for patient" + email)
                 .setContentText(description)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)

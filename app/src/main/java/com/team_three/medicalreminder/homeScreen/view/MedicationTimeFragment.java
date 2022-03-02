@@ -1,6 +1,8 @@
 package com.team_three.medicalreminder.homeScreen.view;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +24,8 @@ import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.team_three.medicalreminder.R;
+import com.team_three.medicalreminder.Registeration.view.NetworkViewInterface;
+import com.team_three.medicalreminder.Registeration.view.RegisterFragment;
 import com.team_three.medicalreminder.dataBase.ConcreteLocalClass;
 import com.team_three.medicalreminder.dataBase.LocalSourceInterface;
 import com.team_three.medicalreminder.databinding.FragmentMedicationTimeBinding;
@@ -31,6 +35,9 @@ import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
 import com.team_three.medicalreminder.network.NetworkInterface;
 import com.team_three.medicalreminder.workmanger.MyPeriodicWorkManger;
+import com.team_three.medicalreminder.model.Utility;
+import com.team_three.medicalreminder.network.FireBaseNetwork;
+import com.team_three.medicalreminder.network.NetworkInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +52,8 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
     FragmentMedicationTimeBinding binding;
     MedicationPOJO medicationPOJO;
     private MaterialAlertDialogBuilder dialogBuilder;
+    private SharedPreferences sharedPref;
+    private String email;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,6 +100,9 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
                 .setPositiveButton("DELETE", (dialog, i) -> {
                     deleteMedication(medicationPOJO);
                     cancelWorkManger(medicationPOJO);
+                    if (Utility.isOnline(this.getContext()) && checkShared()) {
+                        myPresenter.deleteMedication(email, String.valueOf(medicationPOJO.getId()));
+                    }
                     Toast.makeText(this.getContext(), medicationPOJO.getMedicationName() + " is Deleted", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                     Navigation.findNavController(binding.getRoot()).navigate(R.id.action_medicationTimeFragment_to_fragment_home);
@@ -113,6 +125,13 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
         myPresenter.deleteMedication(medicationPOJO);
     }
 
+    private boolean checkShared() {
+        sharedPref = getActivity().getSharedPreferences(RegisterFragment.SHAREDfILE, Context.MODE_PRIVATE);
+        email = sharedPref.getString(RegisterFragment.USER_EMAIL, "null");
+
+        return (!email.equals("null"));
+    }
+
     private void initRecycleView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(MedicationTimeFragment.this.getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -126,9 +145,8 @@ public class MedicationTimeFragment extends Fragment implements HomeFragmentInte
 
     private void initRepository() {
         LocalSourceInterface myLocal = ConcreteLocalClass.getConcreteLocalClassInstance(this.getContext());
-        NetworkInterface networkInterface = FireBaseNetwork.getInstance(this.getActivity());
-
-        myRepository = Repository.getInstance(myLocal, networkInterface,this.getContext());
+        NetworkInterface myRemote = FireBaseNetwork.getInstance(getActivity());
+        myRepository = Repository.getInstance(myLocal, myRemote, this.getContext());
         myPresenter = new HomeScreenPresenter(this, myRepository);
     }
 

@@ -20,6 +20,9 @@ public class TakerOneTmeWorkManager extends Worker {
     public final static String VALUE_TAG = "COUNT";
     public final static String MEDICINE_TAG = "MED";
     public final static String EMAIL_TAG = "EMAIL";
+    public static final String NAME_TAG = "NAMe";
+
+    private String name;
 
 
     public TakerOneTmeWorkManager(@NonNull Context context, @NonNull WorkerParameters workerParams) {
@@ -40,6 +43,7 @@ public class TakerOneTmeWorkManager extends Worker {
         key = data.getString(KEY_TAG);
         count = data.getInt(VALUE_TAG, 1);
         email = data.getString("EMAIL");
+//        name=data.getString("NAME");
     }
 
 
@@ -49,6 +53,7 @@ public class TakerOneTmeWorkManager extends Worker {
         intent.putExtra(KEY_TAG, key);
         intent.putExtra(VALUE_TAG, count);
         intent.putExtra(EMAIL_TAG, email);
+//        intent.putExtra(NAME_TAG,name);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(getApplicationContext(), intent);
         } else {

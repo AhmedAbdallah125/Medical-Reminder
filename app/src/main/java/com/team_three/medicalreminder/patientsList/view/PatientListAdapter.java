@@ -24,7 +24,6 @@ import com.team_three.medicalreminder.model.TakerPOJO;
 import java.util.List;
 
 
-
 public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.ViewHolder> {
     final private Context _context;
     private List<PatientPojo> patients;
@@ -42,6 +41,7 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         PatientRowBinding binding;
+
         public ViewHolder(PatientRowBinding sbinding) {
             super(sbinding.getRoot());
             binding = sbinding;
@@ -81,8 +81,9 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
         // add
         Bundle bundle = new Bundle();
         bundle.putString("email", patients.get(position).getPatientEmail());
-        holder.binding.patientImage.setOnClickListener(v->{
-            Navigation.findNavController(v).navigate(R.id.action_patientList_to_patientMedicationfragment,bundle);
+        bundle.getString("name", patients.get(position).getName());
+        holder.binding.patientImage.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.action_patientList_to_patientMedicationfragment, bundle);
         });
 
     }
