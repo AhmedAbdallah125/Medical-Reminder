@@ -166,18 +166,6 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
         initRepository();
         requestDataFromPresenter(timeNow);
 
-
-
-        final Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Log.i("TAG", "run: ");
-                requestDataFromPresenter(timeNow);
-                Log.i("TAG", "run: ");
-            }
-        }, 10000);
-
         notifyMedicationChangeFromFirebase();
 //        requestDataFromPresenter(timeNow);
         // make presenter

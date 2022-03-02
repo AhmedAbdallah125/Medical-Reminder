@@ -67,7 +67,6 @@ public class ConcreteLocalClass implements LocalSourceInterface {
 
     @Override
     public void updateMedications(MedicationPOJO medicationPOJO) {
-        Log.i("ahmed", "updateMedications: "+medicationPOJO.getStrength());
         new Thread() {
             @Override
             public void run() {
@@ -103,7 +102,7 @@ public class ConcreteLocalClass implements LocalSourceInterface {
 
     @Override
     public Single<List<MedicationPOJO>> getRefilReminderList(long time) {
-        return dao.getrefilreminderlist(time);
+        return dao.getRefilReminderList(time);
     }
 
 }

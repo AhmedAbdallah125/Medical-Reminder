@@ -318,7 +318,7 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
                 setSpinnerResultToPOJO();
                 setDateAndTimeResultToPOJO();
                 setBooleanResultToPOJO();
-                medication.setId(medicationName+startDate+endDate);
+                medication.setId(Calendar.getInstance().getTimeInMillis()+medicationName+endDate);
                 onClick(medication);
                 setWorkTimer();
                 Navigation.findNavController(v).navigate(R.id.action_fragment_add_Medication_to_fragment_home);
