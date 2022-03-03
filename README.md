@@ -35,16 +35,18 @@ The android app lets you:
  
 <img src="https://drive.google.com/uc?export=view&id=1Qnw-X94LU0Y1rVBHBiUt6mwk-OaMjOGO" width="200" align="right"
     hspace="10" vspace="10">
+  <br>
   </p>
- <br>
+ 
  <p align="center">
 <img src="https://drive.google.com/uc?export=view&id=1wkmpUpHwS5nczN0X7OdgapcG_O6bGcpg" width="200" align="left"
     hspace="10" vspace="10">
 
 <img src="https://drive.google.com/uc?export=view&id=1dCDis7Obw-jxtkPmscceajCquUnFN_H-" width="200" align="right"
     hspace="10" vspace="10">
+  <br>
   </p>
- <br>
+ 
  <p align="center">
  <img src="https://drive.google.com/uc?export=view&id=19Nz44OYabLHaEUcn1vep_t2JQAHoh2Es" width="200" align="left"
     hspace="10" vspace="10">
