@@ -6,6 +6,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.IBinder;
 import android.provider.Settings;
@@ -43,7 +45,7 @@ public class ReminderService extends Service {
         notificationChannel();
         startForeground(FOREGROUND_ID, makeNotification());
         if (Settings.canDrawOverlays(this)) {
-            reminderWindowManger = new ReminderWindowManger(getApplicationContext(),myMedicine,key,count);
+            reminderWindowManger = new ReminderWindowManger(getApplicationContext(), myMedicine, key, count);
             reminderWindowManger.setMyWindowManger();
         }
         return START_NOT_STICKY;
@@ -63,16 +65,27 @@ public class ReminderService extends Service {
     private Notification makeNotification() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),
-                0, intent, 0);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), myMedicine.getImageID());
+
+//        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),
+//                0, intent, 0);
+        description = "take " + count + " " + myMedicine.getFormat() + "(s), " +
+                myMedicine.getStrength() + myMedicine.getWeight() + myMedicine.getInstruction();
         return new NotificationCompat.Builder(getApplicationContext(),
                 String.valueOf(CHANNEL_ID))
                 .setSmallIcon(myMedicine.getImageID())
+                .setContentText("Schedule for " + key + ", today")
+
                 .setContentTitle("Medication Reminder")
-                .setContentText(description)
+                .setLargeIcon(bitmap)
+
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true).build();
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(description))
+//                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .build();
+
     }
 
     private void notificationChannel() {
