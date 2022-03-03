@@ -26,6 +26,8 @@ import com.team_three.medicalreminder.model.Utility;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
 import com.team_three.medicalreminder.network.NetworkInterface;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginActivity extends AppCompatActivity implements NetworkViewInterface {
     ActivityLoginBinding binding;
     NetworkPresenter myPresenter;
@@ -33,7 +35,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
     Repository myRepository;
     String email = "";
     String password = "";
-    String idToken="";
+    String idToken = "";
 
     private static final int RC_SIGN_IN = 258120;
     private static final int EMAIL_LOGIN = 1;
@@ -55,8 +57,8 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
         setContentView(binding.getRoot());
         initPresenter();
         binding.btnLogin.setOnClickListener(v -> {
-            email = binding.textInputEditEmailLogIn.getEditableText().toString();
-            password = binding.textInputEditPasswordLogIn.getEditableText().toString();
+            email = binding.textInputEditEmailLogIn.getEditableText().toString().trim();
+            password = binding.textInputEditPasswordLogIn.getEditableText().toString().trim();
             makeLoginRequest(email, password, EMAIL_LOGIN);
         });
         // handle GoogleCard
@@ -78,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
     }
 
     private void makeLoginRequest(String email, String password, int log) {
-        if(Utility.isOnline(this)){
+        if (Utility.isOnline(this)) {
             if (log == 2) {
                 loginRequestUsingGoogle();
             } else if (log == 1) {
@@ -87,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
                     handleVisibility(true);
                 }
             }
-        }else {
+        } else {
             Toast.makeText(this, "You must connect to Network first", Toast.LENGTH_SHORT).show();
         }
 
@@ -155,8 +157,10 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
         email = getCurrentUser().getEmail();
 //        initShared();
 //        if (userName == null) {
-            myPresenter.getUserFromDB(getCurrentUser().getEmail());
-            Log.d("TAG", "request: User");
+
+
+        myPresenter.getUserFromDB(getCurrentUser().getEmail());
+        Log.d("TAG", "request: User");
 //        } else {
 //            storeUserInformation(email, userName);
 //            finish();
@@ -202,7 +206,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
 //            finish();
 //        }
 //        else {
-            myPresenter.signWithGoogle(idToken);
+        myPresenter.signWithGoogle(idToken);
 //        }
     }
 
@@ -232,7 +236,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkViewInter
 //                Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
 
                 // check first if already exist or not
-                idToken=account.getIdToken();
+                idToken = account.getIdToken();
                 myPresenter.isAlreadySignedWithGoogle(account.getEmail());
 //                myRepository.signInUsingGoogle(account.getEmail(),account.getIdToken());
 
