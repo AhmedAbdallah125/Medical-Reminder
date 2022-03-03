@@ -29,16 +29,16 @@ The android app lets you:
 ## ScreenShots
 [<img src="https://drive.google.com/uc?export=view&id=14ySzxxnaNCv5JO2lUZfZZlYKbcam-h8f" align="left"
 width="200"
-    hspace="10" vspace="10">](https://drive.google.com/uc?export=view&id=14ySzxxnaNCv5JO2lUZfZZlYKbcam-h8f)
+    hspace="10" vspace="10">]
 <!-- <img align="left" width=40% height="200" src="https://drive.google.com/uc?export=view&id=14ySzxxnaNCv5JO2lUZfZZlYKbcam-h8f"> -->
 <!-- ![image](https://drive.google.com/uc?export=view&id=14ySzxxnaNCv5JO2lUZfZZlYKbcam-h8f) -->
 [<img src="https://drive.google.com/uc?export=view&id=1Qnw-X94LU0Y1rVBHBiUt6mwk-OaMjOGO" align="center"
 width="200"
-    hspace="10" vspace="10">](https://drive.google.com/uc?export=view&id=1Qnw-X94LU0Y1rVBHBiUt6mwk-OaMjOGO)
+    hspace="10" vspace="10">]
     
 [<img src="https://drive.google.com/uc?export=view&id=1wkmpUpHwS5nczN0X7OdgapcG_O6bGcpg" align="right"
 width="200"
-    hspace="10" vspace="10">](https://drive.google.com/uc?export=view&id=1wkmpUpHwS5nczN0X7OdgapcG_O6bGcpg)   
+    hspace="10" vspace="10">]
 
 
 <!-- ![image](https://drive.google.com/uc?export=view&id=1Qnw-X94LU0Y1rVBHBiUt6mwk-OaMjOGO) -->
