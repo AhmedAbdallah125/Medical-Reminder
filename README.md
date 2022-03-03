@@ -26,7 +26,7 @@ The android app lets you:
 * Overlay Permission.
 * Network Permission.
 
-## ScreenShot:
+<!-- ## ScreenShot:
 <div>
   <img src ="https://drive.google.com/file/d/14ySzxxnaNCv5JO2lUZfZZlYKbcam-h8f/view?usp=sharing" width=40%>
 <img src = "https://user-images.githubusercontent.com/31763341/148643872-cf9c2785-afbc-4a21-923d-9e417289ef2a.png" width = 40%>
@@ -35,4 +35,4 @@ The android app lets you:
 <img src= "https://user-images.githubusercontent.com/31763341/148644166-5cfb0a28-86dc-4cb9-a354-b866d980dc14.png" width =40%>
  <img src="https://user-images.githubusercontent.com/31763341/148653431-c5bb3c91-e6bf-47e1-92d9-6ffc787a9dd8.png" width=40%>
  <img src="https://user-images.githubusercontent.com/31763341/148653646-6bf0f87c-4b77-488e-a7a2-29c49447784b.png" width=50%> 
-</div>
+</div> -->
