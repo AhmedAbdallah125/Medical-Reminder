@@ -165,6 +165,7 @@ public class ReminderWindowManger {
 
             PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(MyPeriodicWorkManger.class,
                     3, TimeUnit.HOURS)
+                    .setInitialDelay(2,TimeUnit.MINUTES)
                     .setConstraints(constraints)
                     .build();
 

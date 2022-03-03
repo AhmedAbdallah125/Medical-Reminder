@@ -104,6 +104,7 @@
         android:layout_marginEnd="16dp"
         android:src="@drawable/ic_baseline_delete_forever_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/time_txt_medicationName" />
+        app:layout_constraintTop_toTopOf="@+id/time_txt_medicationName"
+        app:srcCompat="@drawable/delete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

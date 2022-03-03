@@ -15,8 +15,10 @@ import static android.content.Context.WINDOW_SERVICE;
 
 import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
 import com.google.gson.Gson;
@@ -27,6 +29,7 @@ import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.model.Utility;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
+import com.team_three.medicalreminder.workmanger.MyPeriodicWorkManger;
 import com.team_three.medicalreminder.workmanger.refillmanager.ForeGroundService;
 import com.team_three.medicalreminder.workmanger.refillmanager.RefileReminderWorkManagerForOneTime;
 
@@ -86,6 +89,20 @@ public class Window {
         return gson.fromJson(pojoString, MedicationPOJO.class);
     }
 
+    private void setPeriodicWorkManger(){
+        Constraints constraints = new Constraints.Builder()
+                .setRequiresBatteryNotLow(true)
+                .build();
+
+        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(MyPeriodicWorkManger.class,
+                3, TimeUnit.HOURS)
+                .setConstraints(constraints)
+                .build();
+
+        WorkManager.getInstance(context).enqueueUniquePeriodicWork("Counter", ExistingPeriodicWorkPolicy.REPLACE, periodicWorkRequest);
+//        WorkManager.getInstance(this.getContext()).enqueue(periodicWorkRequest);
+    }
+
     private void callOneTimeRefillReminder(String pojo) {
 
         Data data = new Data.Builder()
@@ -142,6 +159,7 @@ public class Window {
             if (!email.equals("null")){
                 repository.updatePatientMedicationList(email,medicationPOJO);
             }
+            setPeriodicWorkManger();
             stopMyService();
             close();
         });
