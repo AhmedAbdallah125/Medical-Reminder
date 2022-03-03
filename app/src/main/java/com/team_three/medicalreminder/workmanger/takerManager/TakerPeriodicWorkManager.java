@@ -16,6 +16,8 @@ import androidx.work.WorkerParameters;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.team_three.medicalreminder.model.MedicationPOJO;
+import com.team_three.medicalreminder.workmanger.refillmanager.RefileReminderWorkManagerForOneTime;
+import com.team_three.medicalreminder.workmanger.takerRefilReminder.TakerRefillOneTime;
 
 import java.lang.reflect.Type;
 import java.util.Calendar;
@@ -60,6 +62,7 @@ public class TakerPeriodicWorkManager extends Worker {
         email = data.getString("EMAIL");
 //        name=data.getString("NAME");
         medicationSingleList = listFromJason(data.getString("MED"));
+        loopOnRefileMedicationList();
     }
 
     // for periodic
@@ -158,6 +161,37 @@ public class TakerPeriodicWorkManager extends Worker {
         Type type = new TypeToken<List<MedicationPOJO>>() {
         }.getType();
         return gson.fromJson(medListString, type);
+    }
+
+
+    private void callOneTimeRefillReminder(MedicationPOJO medicationPOJO) {
+
+        Data data = new Data.Builder()
+                .putString("MedReminderList", serializeToJason(medicationPOJO)).putString("EMAIL", email).build();
+        Constraints constraints = new Constraints.Builder()
+                .setRequiresBatteryNotLow(true)
+                .build();
+        String tag = medicationPOJO.getMedicationName() + medicationPOJO.getId();
+        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(TakerRefillOneTime.class)
+                .setInputData(data)
+                .setConstraints(constraints)
+                .setInitialDelay(10, TimeUnit.SECONDS)
+                .addTag(tag)
+                .build();
+        WorkManager.getInstance(context).enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, oneTimeWorkRequest);
+    }
+
+    private void loopOnRefileMedicationList() {
+        for (MedicationPOJO medicationPOJO : medicationSingleList) {
+            if (medicationPOJO.isActive() == true && medicationPOJO.isFillReminder() == true) {
+
+                if (medicationPOJO.getLeftNumber() <= medicationPOJO.getLeftNumberReminder()) {
+                    Log.i("AAAA", "onSuccess: " + medicationPOJO.getMedicationName() + medicationPOJO.isFillReminder());
+
+                    callOneTimeRefillReminder(medicationPOJO);
+                }
+            }
+        }
     }
 
 }

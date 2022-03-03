@@ -18,6 +18,12 @@
 
     />
     <item
+        android:id="@+id/fragment_patient_List"
+        android:title="patient list"
+        android:icon="@drawable/ic_patient"/>
+
+    />
+    <item
         android:id="@+id/helpRequistList"
         android:title="@string/requestString"
         android:icon="@drawable/ic_baseline_medical_services_24"/>

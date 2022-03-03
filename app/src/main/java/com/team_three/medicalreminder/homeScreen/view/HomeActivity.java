@@ -74,6 +74,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (navDestination.getId() == R.id.fragment_medication_list ||
                         navDestination.getId() == R.id.fragment_home ||
                         navDestination.getId() == R.id.fragment_taker_list ||
+                        navDestination.getId() == R.id.fragment_patient_List||
                         navDestination.getId() == R.id.helpRequistList) {
                     homeBinding.toolbar.setVisibility(View.VISIBLE);
                     homeBinding.navigatorViewHome.setVisibility(View.VISIBLE);
