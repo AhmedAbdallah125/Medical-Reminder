@@ -46,6 +46,8 @@ public class FireBaseNetwork implements NetworkInterface {
     private boolean listenToUpdates = false;
     private List<MedicationPOJO> updatedMedicationList;
 
+    private static String userName="";
+
 
     private FireBaseNetwork(Activity myActivity) {
         _activity = myActivity;
@@ -472,7 +474,7 @@ public class FireBaseNetwork implements NetworkInterface {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                myDelegation.onSuccess();
+                                myDelegation.onSuccessReturn(user.getName());
                             } else {
                                 String errorMessage = handleFireBaseException(task);
                                 myDelegation.onFailure(errorMessage);
@@ -501,8 +503,10 @@ public class FireBaseNetwork implements NetworkInterface {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
-
-                    myDelegation.onSuccessReturn(task.getResult().getValue().toString());
+                    if(task.getResult().getValue() != null){
+                      userName= task.getResult().getValue().toString();
+                    }
+                    myDelegation.onSuccessReturn(userName);
                 } else {
                     myDelegation.onFailure(task.getException().getMessage());
                     Log.i("TAG", "problem in getting name: " + task.getException().getMessage());
