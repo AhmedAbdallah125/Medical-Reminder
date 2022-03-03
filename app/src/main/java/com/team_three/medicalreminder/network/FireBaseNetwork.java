@@ -206,7 +206,6 @@ public class FireBaseNetwork implements NetworkInterface {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid[0]);
         databaseReference.child("request").child(senderEmail).setValue(requestPojo);
 
-
     }
 
     @Override

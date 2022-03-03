@@ -24,6 +24,7 @@ public class TakerRefillOneTime extends Worker {
     @Override
     public Result doWork() {
         Data data = getInputData();
+        Log.i("V", "doWork: ");
         email =data.getString("EMAIL");
         startMyService(data.getString("MedReminderList"));
         return Result.success();

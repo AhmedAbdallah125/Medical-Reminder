@@ -61,7 +61,6 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull PatientListAdapter.ViewHolder holder, int position) {
-        Log.i("TAG", "onBindViewHolder:ABDOOOOOOOOOO ");
         holder.binding.patientImage.setImageResource(patients.get(position).getImage());
         holder.binding.patientName.setText(patients.get(position).getName());
 //        holder.binding.txtinvitorName.setText(patients.get(position).getName());
