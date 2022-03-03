@@ -503,7 +503,7 @@ public class FireBaseNetwork implements NetworkInterface {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
 
-                    myDelegation.onSuccessReturn(task.getResult().getValue().toString());
+                    myDelegation.onSuccessReturn(task.getResult().getValue().);
                 } else {
                     myDelegation.onFailure(task.getException().getMessage());
                     Log.i("TAG", "problem in getting name: " + task.getException().getMessage());

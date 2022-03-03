@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
@@ -26,7 +27,7 @@ import com.team_three.medicalreminder.model.MedicationPOJO;
 import com.team_three.medicalreminder.model.Repository;
 import com.team_three.medicalreminder.network.FireBaseNetwork;
 import com.team_three.medicalreminder.network.NetworkInterface;
-
+import com.team_three.medicalreminder.workmanger.refillmanager.RefileReminderWorkManagerForOneTime;
 
 
 import java.util.ArrayList;
@@ -118,6 +119,8 @@ public class TakerReminderWindowManager {
             myMedicine.setLeftNumber(n);
             myMedicine.setIsTakenList(list);
             updateMedication(myMedicine);
+            // call refill manager
+            loopOnRefileMedicationList(myMedicine);
             stopMyService();
             close();
         });
@@ -194,5 +197,32 @@ public class TakerReminderWindowManager {
 
     private void stopMyService() {
         context.stopService(new Intent(context, TakerReminderService.class));
+    }
+
+    // must call refill manager
+    private void callOneTimeRefillReminder(MedicationPOJO medicationPOJO) {
+
+        Data data = new Data.Builder()
+                .putString("MedReminderList", serializeToJason(medicationPOJO)).build();
+        Constraints constraints = new Constraints.Builder()
+                .setRequiresBatteryNotLow(true)
+                .build();
+        String tag = medicationPOJO.getMedicationName() + medicationPOJO.getId();
+        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(RefileReminderWorkManagerForOneTime.class)
+                .setInputData(data)
+                .setConstraints(constraints)
+                .setInitialDelay(10, TimeUnit.SECONDS)
+                .addTag(tag)
+                .build();
+        WorkManager.getInstance(context).enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, oneTimeWorkRequest);
+    }
+
+    private void loopOnRefileMedicationList(MedicationPOJO medicationPOJO) {
+
+        if (medicationPOJO.getLeftNumber() <= medicationPOJO.getLeftNumberReminder()) {
+            Log.i("AAAA", "onSuccess: " + medicationPOJO.getMedicationName() + medicationPOJO.isFillReminder());
+
+            callOneTimeRefillReminder(medicationPOJO);
+        }
     }
 }
