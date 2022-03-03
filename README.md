@@ -26,6 +26,9 @@ The android app lets you:
 * Overlay Permission.
 * Network Permission.
 
+## ScreenShot
+![image](https://drive.google.com/file/d/14ySzxxnaNCv5JO2lUZfZZlYKbcam-h8f/view?usp=sharing)
+
 <!-- ## ScreenShot:
 <div>
   <img src ="https://drive.google.com/file/d/14ySzxxnaNCv5JO2lUZfZZlYKbcam-h8f/view?usp=sharing" width=40%>
