@@ -27,9 +27,7 @@ The android app lets you:
 * Network Permission.
 
 ## ScreenShots
-[<img ![image](https://drive.google.com/uc?export=view&id=14ySzxxnaNCv5JO2lUZfZZlYKbcam-h8f) align="left"
-width="200"
-    hspace="10" vspace="10">]
+<![image](https://drive.google.com/uc?export=view&id=14ySzxxnaNCv5JO2lUZfZZlYKbcam-h8f) width=40%>
 ![image](https://drive.google.com/uc?export=view&id=1Qnw-X94LU0Y1rVBHBiUt6mwk-OaMjOGO)
 ![image](https://drive.google.com/uc?export=view&id=1wkmpUpHwS5nczN0X7OdgapcG_O6bGcpg)
 ![image](https://drive.google.com/uc?export=view&id=1dCDis7Obw-jxtkPmscceajCquUnFN_H-)
