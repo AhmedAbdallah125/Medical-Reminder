@@ -45,7 +45,6 @@ public class InactiveListAdapter extends RecyclerView.Adapter<InactiveListAdapte
             Bundle bundle = new Bundle();
             bundle.putParcelable("displayMed", medicines.get(position));
             Navigation.findNavController(view).navigate(R.id.action_fragment_medication_list_to_displayMedicationDrug,bundle);
-
         });
     }
 

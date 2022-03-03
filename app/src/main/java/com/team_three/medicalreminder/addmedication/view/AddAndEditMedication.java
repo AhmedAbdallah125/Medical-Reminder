@@ -421,9 +421,6 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
 
     private void setImage(String format) {
         switch (format) {
-            case "Pill":
-                medication.setImageID(R.drawable.pill);
-                break;
             case "Solution":
                 medication.setImageID(R.drawable.solution);
                 break;
@@ -439,8 +436,9 @@ public class AddAndEditMedication extends Fragment implements onClickAddMedicati
             case "Inhaler":
                 medication.setImageID(R.drawable.inhaler);
                 break;
+            case "Pill":
             default:
-                medication.setImageID(-1);
+                medication.setImageID(R.drawable.pill);
         }
     }
 
