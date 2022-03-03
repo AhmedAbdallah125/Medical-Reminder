@@ -18,6 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalReminder">
         <service
+            android:name=".workmanger.takerRefilReminder.TakerRefillService"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
             android:name=".workmanger.takerManager.TakerReminderService"
             android:enabled="true"
             android:exported="true" />
