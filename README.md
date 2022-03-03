@@ -31,9 +31,18 @@ The android app lets you:
 width="200"
     hspace="10" vspace="10">](https://drive.google.com/uc?export=view&id=14ySzxxnaNCv5JO2lUZfZZlYKbcam-h8f)
 <!-- <img align="left" width=40% height="200" src="https://drive.google.com/uc?export=view&id=14ySzxxnaNCv5JO2lUZfZZlYKbcam-h8f"> -->
-![image](https://drive.google.com/uc?export=view&id=14ySzxxnaNCv5JO2lUZfZZlYKbcam-h8f)
-![image](https://drive.google.com/uc?export=view&id=1Qnw-X94LU0Y1rVBHBiUt6mwk-OaMjOGO)
-![image](https://drive.google.com/uc?export=view&id=1wkmpUpHwS5nczN0X7OdgapcG_O6bGcpg)
+<!-- ![image](https://drive.google.com/uc?export=view&id=14ySzxxnaNCv5JO2lUZfZZlYKbcam-h8f) -->
+[<img src="https://drive.google.com/uc?export=view&id=1Qnw-X94LU0Y1rVBHBiUt6mwk-OaMjOGO" align="center"
+width="200"
+    hspace="10" vspace="10">](https://drive.google.com/uc?export=view&id=1Qnw-X94LU0Y1rVBHBiUt6mwk-OaMjOGO)
+    
+[<img src="https://drive.google.com/uc?export=view&id=1wkmpUpHwS5nczN0X7OdgapcG_O6bGcpg" align="right"
+width="200"
+    hspace="10" vspace="10">](https://drive.google.com/uc?export=view&id=1wkmpUpHwS5nczN0X7OdgapcG_O6bGcpg)   
+
+
+<!-- ![image](https://drive.google.com/uc?export=view&id=1Qnw-X94LU0Y1rVBHBiUt6mwk-OaMjOGO) -->
+<!-- ![image](https://drive.google.com/uc?export=view&id=1wkmpUpHwS5nczN0X7OdgapcG_O6bGcpg) -->
 ![image](https://drive.google.com/uc?export=view&id=1dCDis7Obw-jxtkPmscceajCquUnFN_H-)
 ![image](https://drive.google.com/uc?export=view&id=19Nz44OYabLHaEUcn1vep_t2JQAHoh2Es)
 ![image](https://drive.google.com/uc?export=view&id=1_pzOgMZSaaGttQU6fmVJCYlQRwcqdBqE)
