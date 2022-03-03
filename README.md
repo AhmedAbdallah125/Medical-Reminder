@@ -26,16 +26,18 @@ The android app lets you:
 * Overlay Permission.
 * Network Permission.
 
-## ScreenShot
+## ScreenShots
 ![image](https://drive.google.com/uc?export=view&id=14ySzxxnaNCv5JO2lUZfZZlYKbcam-h8f)
+![image](https://drive.google.com/uc?export=view&id=1Qnw-X94LU0Y1rVBHBiUt6mwk-OaMjOGO)
+![image](https://drive.google.com/uc?export=view&id=1wkmpUpHwS5nczN0X7OdgapcG_O6bGcpg)
+![image](https://drive.google.com/uc?export=view&id=1dCDis7Obw-jxtkPmscceajCquUnFN_H-)
+![image](https://drive.google.com/uc?export=view&id=19Nz44OYabLHaEUcn1vep_t2JQAHoh2Es)
+![image](https://drive.google.com/uc?export=view&id=1_pzOgMZSaaGttQU6fmVJCYlQRwcqdBqE)
+![image](https://drive.google.com/uc?export=view&id=14CbbsJkHNmM7nzVWHIGeJksU4P22JBNz)
+![image](https://drive.google.com/uc?export=view&id=1jIEYk566MXnLG8CVYV_GxnkAOXg0DgeY)
+![image](https://drive.google.com/uc?export=view&id=1ottjmQpim1VJzZ13HM7yWf2La3vMnygm)
+![image](https://drive.google.com/uc?export=view&id=1-_cUV5XGj2RlU5tG8BeWhC5d6TRdFZEt)
+![image](https://drive.google.com/uc?export=view&id=1ZZIS9rQLqe0gP5Q7PNHhI2bYchzr9pzs)
+![image](https://drive.google.com/uc?export=view&id=1ik2vd82P--FPCqCr7Ggtler36YyzmwHk)
+![image](https://drive.google.com/uc?export=view&id=1gVNv5ToUONmoLt499FpncS-DIz_JSqQJ)
 
-<!-- ## ScreenShot:
-<div>
-  <img src ="https://drive.google.com/file/d/14ySzxxnaNCv5JO2lUZfZZlYKbcam-h8f/view?usp=sharing" width=40%>
-<img src = "https://user-images.githubusercontent.com/31763341/148643872-cf9c2785-afbc-4a21-923d-9e417289ef2a.png" width = 40%>
- <img src="https://user-images.githubusercontent.com/31763341/148643879-783cea94-4d0f-4432-b5e3-728fefe73df3.png" width=40%>
- <img src="https://user-images.githubusercontent.com/31763341/148644044-64894c4f-6cab-46e5-9c6d-704ab3af0031.png" width=40%>
-<img src= "https://user-images.githubusercontent.com/31763341/148644166-5cfb0a28-86dc-4cb9-a354-b866d980dc14.png" width =40%>
- <img src="https://user-images.githubusercontent.com/31763341/148653431-c5bb3c91-e6bf-47e1-92d9-6ffc787a9dd8.png" width=40%>
- <img src="https://user-images.githubusercontent.com/31763341/148653646-6bf0f87c-4b77-488e-a7a2-29c49447784b.png" width=50%> 
-</div> -->
